@@ -1,0 +1,12 @@
+{
+  "general": {
+    "langName":"中文"
+  },
+  "meta": {
+    "title": "Hamster",
+    "description": "Hamster"
+  },
+  "home":{
+    "helloWorld": "你好，世界"
+  }
+}

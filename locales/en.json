@@ -1,0 +1,12 @@
+{
+  "general": {
+    "langName": "EN"
+  },
+  "meta": {
+    "title": "Hamster",
+    "description": "Hamster"
+  },
+  "home": {
+    "helloWorld": "Hello World"
+  }
+}

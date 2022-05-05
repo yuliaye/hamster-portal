@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "@intlify/nuxt3": "^0.1.10",
+    "@nuxtjs/eslint-config-typescript": "^9.0.0",
+    "@nuxtjs/eslint-module": "^3.1.0",
+    "@nuxtjs/tailwindcss": "^5.0.4",
+    "eslint": "^8.13.0",
+    "eslint-plugin-nuxt": "^3.2.0",
+    "floating-vue": "^2.0.0-beta.15",
+    "nuxt": "3.0.0-rc.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^2.0.6"
+  }
+}
