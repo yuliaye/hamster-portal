@@ -18,3 +18,11 @@
 import Header from "./-components/header.vue"
 import Footer from "./-components/footer.vue"
 </script>
+<style>
+body{
+  background-color: #141212;
+}
+.main-margin{
+  padding: 0 6%
+}
+</style>
