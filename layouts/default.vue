@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-white">
     <!-- <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />

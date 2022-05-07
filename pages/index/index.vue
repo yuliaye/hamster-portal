@@ -1,3 +1,3 @@
 <template>
-  <div>hello world</div>
+  <div class="main-margin">hello world</div>
 </template>
