@@ -5,7 +5,7 @@
     </div>
     <div class="flex flex-col-reverse gap-4 text-white md:flex-row md:justify-between">
       <div class="leading-8">
-        <div class="mb-8"><img class="h-[32px]" src="~/assets/images/header.png"></div>
+        <div class="mb-4"><img class="h-[32px]" src="~/assets/images/header.png"></div>
         <div>{{ $t("footer.email") }}: 1024 KY1-1002</div>
         <div class="mb-8">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
         <div class="flex">

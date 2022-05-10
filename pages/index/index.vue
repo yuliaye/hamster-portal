@@ -1,22 +1,24 @@
 <template>
-  <div class="main-margin">
-    <div class="flex flex-row justify-between mt-[164px]">
-      <div class="w-3/5 pl-[36px]">
-        <div class="font-bold text-[60px] leading-[83px] text-color">{{ $t("home.title") }}</div>
-        <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
-      </div>
-      <div class="w-2/5">
-        <div class="img-show-up img-center">
-          <img class="w-[80px]" src="~/assets/images/title-img2.png">
+  <div class="main-margin div-bg mt-[100px]">
+    <div class="">
+      <div class="flex flex-row justify-between pt-[51px]">
+        <div class="w-3/5 pl-[36px]">
+          <div class="font-bold text-[60px] leading-[83px] text-color">{{ $t("home.title") }}</div>
+          <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
+        </div>
+        <div class="w-2/5">
+          <div class="img-center" :class="[$i18n.locale =='en' ? 'img-show-up' : 'img-show-up2']">
+            <img class="w-[80px]" src="~/assets/images/title-img2.png">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flex flex-row">
-      <div class="mt-[32px] w-1/3 pl-[36px]">
-        <button class="text-btn">{{ $t("home.btnText") }}</button>
-      </div>
-      <div class="w-2/3 title-img">
-        <img class="absolute w-[600px]" src="~/assets/images/title-img.png">
+      <div class="flex flex-row">
+        <div class="mt-[32px] w-1/3 pl-[36px]">
+          <button class="text-btn">{{ $t("home.btnText") }}</button>
+        </div>
+        <div class="w-2/3 title-img">
+          <img class="absolute w-[600px]" src="~/assets/images/title-img.png">
+        </div>
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle") }}</div>
@@ -38,7 +40,7 @@
     <div class="area-desc">{{ $t("home.areaDesc21") }}</div>
     <div class="border-color mt-[80px]">
       <div class="bg-[#141212] rounded-[23px] p-[60px]">
-        <img src="~/assets/images/area2-img.png">
+        <img :src="getImageURL(`area2-img-${$i18n.locale}.png`)">
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle3") }}</div>
@@ -54,16 +56,16 @@
     <div class="img-center mt-[16px]">
       <div class="area-desc w-[640px]">{{ $t("home.sub3Desc") }}</div>
     </div>
-    <div class="flex flex-row justify-between mt-[164px]">
-      <div class="w-3/5 bg-img">
-        <div class="leading-[80px] text-[24px] pl-[32px]">{{ $t("home.sub4Title") }}</div>
-        <div class="img-center h-[500px]">
+    <div class="flex flex-row justify-between mt-[60px] pt-[100px] pl-[130px] div-bg2">
+      <div class="w-1/2 bg-img">
+        <div class="leading-[56px] text-[24px] pl-[32px]">{{ $t("home.sub4Title") }}</div>
+        <div class="img-center h-[370px]">
           <img class="h-[90%] w-[90%]" src="~/assets/images/area4-img2.png">
         </div>
         <div class="text-base text-center mt-[16px]">{{ $t("home.sub4Desc") }}</div>
       </div>
-      <div class="w-2/5 pl-[64px]">
-        <div class="text-left-style area-title">{{ $t("home.btnText") }}</div>
+      <div class="w-1/2 pl-[50px]">
+        <div class="text-[40px] leading-[47px] mt-[100px] mb-[16px]">{{ $t("home.btnText") }}</div>
         <div class="area-desc text-left-style">{{ $t("home.areaDesc4") }}</div>
         <div class="mt-[50px] flex">
           <button class="flex leading-[24px] text-btn">
@@ -99,10 +101,10 @@
     <div class="area-desc">{{ $t("home.areaDesc6") }}</div>
     <div class="mt-[80px]">
       <div class="grid grid-cols-3 gap-[16px]">
-        <div class="group h-[250px]" v-for="areaId in [1, 2, 3, 4, 5, 6]" :key="areaId">
-          <div class="box-border group-hover:bg-none">
+        <div class="group h-[200px]" v-for="areaId in [1, 2, 3, 4, 5, 6]" :key="areaId">
+          <div class="border-color2 group-hover:bg-none">
             <div class="bg-[#141212] rounded-[16px]">
-              <div class="box-bg group-hover:bg-none group-hover:bg-[#A05E1C] img-center rounded-[16px] h-[250px]">
+              <div class="box-bg group-hover:bg-none group-hover:bg-[#A05E1C] img-center rounded-[16px] h-[200px]">
                 <img class="w-[240px] hidden group-hover:block" :src="getImageURL(`area6-on-img${areaId}.png`)">
                 <img class="w-[240px] block group-hover:hidden" :src="getImageURL(`area6-img${areaId}.png`)">
               </div>
@@ -130,8 +132,19 @@
 </template>
 <script setup>
   const { getImageURL } = useAssets()
+  const { locale } = useI18n()
 </script>
 <style>
+  .div-bg {
+    background: url('~/assets/images/div-bg1.png') no-repeat;
+    background-origin: border-box;
+    background-size: 750px 500px;
+  }
+  .div-bg2 {
+    background: url('~/assets/images/div-bg2.png') no-repeat;
+    background-origin: border-box;
+    background-size: 450px 570px;
+  }
   .text-color {
     background: radial-gradient(
       72.05% 992.16% at 23.59% 37.95%,
@@ -176,6 +189,22 @@
       animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
     50% {
+      transform: translateY(150%);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  .img-show-up2 {
+    padding-right: 12%;
+    -webkit-animation: bounce2 5s infinite;
+    animation: bounce2 5s infinite;
+  }
+  @keyframes bounce2 {
+    0%,
+    100% {
+      transform: translateY(-50%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
       transform: translateY(0);
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
@@ -205,17 +234,17 @@
   .box-bg {
     background: linear-gradient(180deg, #2e2a28 0%, rgba(46, 42, 40, 0) 100%);
   }
-  .box-border {
+  .border-color2 {
     box-sizing: border-box;
     padding: 1px;
     border-radius: 16px;
     background-image: -webkit-linear-gradient(
       to bottom,
-      #bda48a 50%,
-      #141212 100%
+      #bda48a 0%,
+      #141212 90%
     );
-    background-image: -moz-linear-gradient(to bottom, #bda48a 50%, #141212 100%);
-    background-image: linear-gradient(to bottom, #bda48a 50%, #141212 100%);
+    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 9s0%);
+    background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
   }
   .text-ellipsis {
     text-overflow: -o-ellipsis-lastline;
