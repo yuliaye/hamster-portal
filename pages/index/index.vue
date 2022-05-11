@@ -31,7 +31,7 @@
         <div class="img-center py-[40px]">
           <img class="rounded-full w-[128px]" :src="getImageURL(`area-img${areaId}.png`)">
         </div>
-        <div class="text-base leading-[19px] text-center mb-[16px]">{{ $t(`home.subTitle${areaId}`) }}</div>
+        <div class="font-bold text-base leading-[19px] text-center mb-[16px]">{{ $t(`home.subTitle${areaId}`) }}</div>
         <div class="area-desc overflow-y-auto">{{ $t(`home.subDesc${areaId}`) }}</div>
       </div>
     </div>
@@ -52,7 +52,7 @@
     <div class="img-center">
       <img class="w-[700px]" src="~/assets/images/area3-img.png">
     </div>
-    <div class="text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
+    <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
     <div class="img-center mt-[16px]">
       <div class="area-desc w-[640px]">{{ $t("home.sub3Desc") }}</div>
     </div>
@@ -65,7 +65,7 @@
         <div class="text-base text-center mt-[16px]">{{ $t("home.sub4Desc") }}</div>
       </div>
       <div class="w-1/2 pl-[50px]">
-        <div class="text-[40px] leading-[47px] mt-[100px] mb-[16px]">{{ $t("home.btnText") }}</div>
+        <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px]">{{ $t("home.btnText") }}</div>
         <div class="area-desc text-left-style">{{ $t("home.areaDesc4") }}</div>
         <div class="mt-[50px] flex">
           <button class="flex leading-[24px] text-btn">
@@ -175,45 +175,45 @@
   .title-img {
     @apply flex items-center;
     justify-content: end;
-    margin-bottom: 6%;
+    margin-bottom: 5%;
   }
   .img-show-up {
-    padding-right: 12%;
-    -webkit-animation: bounce 5s infinite;
-    animation: bounce 5s infinite;
+    padding-right: 11%;
+    -webkit-animation: bounce 16s infinite;
+    animation: bounce 16s infinite;
   }
   @keyframes bounce {
     0%,
     100% {
       transform: translateY(-50%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      animation-timing-function: ease;
     }
     50% {
       transform: translateY(150%);
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      animation-timing-function: ease;
     }
   }
   .img-show-up2 {
-    padding-right: 12%;
-    -webkit-animation: bounce2 5s infinite;
-    animation: bounce2 5s infinite;
+    padding-right: 11%;
+    -webkit-animation: bounce2 8s infinite;
+    animation: bounce2 8s infinite;
   }
   @keyframes bounce2 {
     0%,
     100% {
       transform: translateY(-50%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      animation-timing-function: ease;
     }
     50% {
       transform: translateY(0);
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      animation-timing-function: ease;
     }
   }
   .text-left-style {
     @apply text-left !important;
   }
   .area-title {
-    @apply text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
+    @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
   }
   .area-desc {
     @apply text-[#807D7C] leading-[21px] text-center;
@@ -238,11 +238,7 @@
     box-sizing: border-box;
     padding: 1px;
     border-radius: 16px;
-    background-image: -webkit-linear-gradient(
-      to bottom,
-      #bda48a 0%,
-      #141212 90%
-    );
+    background-image: -webkit-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
     background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 9s0%);
     background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
   }

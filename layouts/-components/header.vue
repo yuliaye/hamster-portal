@@ -78,7 +78,7 @@
     border-radius: 4px;
   }
   .menu {
-    @apply cursor-pointer text-[#919AAD] pr-8 leading-[32px];
+    @apply cursor-pointer text-[#807D7C] pr-8 leading-[32px];
   }
   .menu-active {
     @apply text-white !important;
