@@ -1,5 +1,5 @@
 <template>
-  <div class="main-margin div-bg mt-[100px]">
+  <div class="main-margin div-bg mt-[160px]">
     <div class="">
       <div class="flex flex-row justify-between pt-[51px]">
         <div class="w-3/5 pl-[36px]">
@@ -36,33 +36,80 @@
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle2") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc2") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc21") }}</div>
+    <div class="img-center">
+      <div class="area-desc area-desc-with">{{ $t("home.areaDesc2") }}{{ $t("home.areaDesc21") }}</div>
+    </div>
     <div class="border-color mt-[80px]">
       <div class="bg-[#141212] rounded-[23px] p-[60px]">
         <img :src="getImageURL(`area2-img-${$i18n.locale}.png`)">
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle3") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc3") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc31") }}</div>
+    <div class="img-center">
+      <div class="area-desc area-desc-with">{{ $t("home.areaDesc3") }}{{ $t("home.areaDesc31") }}</div>
+    </div>
     <div class="text-center mt-[24px] mb-[72px]">
       <button class="text-btn">{{ $t("home.btnText3") }}</button>
     </div>
-    <div class="img-center">
-      <img class="w-[700px]" src="~/assets/images/area3-img.png">
-    </div>
-    <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
-    <div class="img-center mt-[16px]">
-      <div class="area-desc w-[640px]">{{ $t("home.sub3Desc") }}</div>
-    </div>
-    <div class="flex flex-row justify-between mt-[60px] pt-[100px] pl-[130px] div-bg2">
-      <div class="w-1/2 bg-img">
-        <div class="leading-[56px] text-[24px] pl-[32px]">{{ $t("home.sub4Title") }}</div>
-        <div class="img-center h-[370px]">
-          <img class="h-[90%] w-[90%]" src="~/assets/images/area4-img2.png">
+    <div class="border-color2">
+      <div class="bg-[#141212] rounded-[16px]">
+        <div class="box-bg img-center rounded-[16px] grid grid-cols-2 gap-[40px] p-[50px]">
+          <div class="img-center w-1/2">
+            <img src="~/assets/images/area3-img.png">
+          </div>
+          <div class="w-1/2">
+            <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
+            <div class="img-center mt-[16px] flex">
+              <div class="area-desc overflow-y-auto">{{ $t("home.sub3Desc") }}</div>
+            </div>
+          </div>
         </div>
-        <div class="text-base text-center mt-[16px]">{{ $t("home.sub4Desc") }}</div>
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-between mt-[60px] pt-[100px] div-bg2">
+      <div class="w-1/2">
+        <div class="leading-[60px] text-[20px] pl-[32px] border border-color3 rounded-t-[16px]">{{ $t("home.sub4Title") }}</div>
+        <div class="flex p-[24px] h-[450px] border border-color3 rounded-b-[16px] border-t-0">
+          <div class="overflow-y-auto div-box">
+            <pre>
+What are the newest DeFi projects?
+QUERY [ result
+categories(
+where:{name:"DeFi"} "name":"DeFi Prime",
+){ "description": "A source of DeFi data
+project analytios and market information."
+orderBy: createdAt,
+)
+{ name "name": "Opyn",
+desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
+}
+}，
+}
+{
+}1 "name":"Airswap",
+"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
+}
+What are the newest DeFi projects?
+QUERY [ result
+categories(
+where:{name:"DeFi"} "name":"DeFi Prime",
+){ "description": "A source of DeFi data
+project analytios and market information."
+orderBy: createdAt,
+)
+{ name "name": "Opyn",
+desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
+}
+}，
+}
+{
+}1 "name":"Airswap",
+"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
+}
+            </pre>
+          </div>
+        </div>
       </div>
       <div class="w-1/2 pl-[50px]">
         <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px]">{{ $t("home.btnText") }}</div>
@@ -75,10 +122,13 @@
             <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img2.png">{{ $t("home.btnText") }}
           </button>
         </div>
+        <div class="mt-[16px]">{{ $t("home.sub4Desc") }}</div>
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle5") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc5") }}</div>
+    <div class="img-center">
+      <div class="area-desc area-desc-with">{{ $t("home.areaDesc5") }}</div>
+    </div>
     <div class="mt-[80px]">
       <div class="grid grid-cols-2 gap-[8px]">
         <div class="bg-[#2E2A28] group hover:bg-[#A05E1C] h-[220px] p-[30px]" :class="[areaId == 1 || areaId == 3?'rounded-l-[16px]':'rounded-r-[16px]']" v-for="areaId in [1, 2, 3, 4]" :key="areaId">
@@ -120,19 +170,75 @@
         <div class="img-center">
           <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
         </div>
-        <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px]">{{ $t("home.sub7Title") }}{{areaId}}</div>
-        <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t("home.sub7Desc") }}</div>
-        <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t("home.sub7Date") }}</div>
+        <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px]">{{ $t(`home.sub7Title${areaId}`) }}</div>
+        <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t(`home.sub7Desc${areaId}`) }}</div>
+        <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
       </div>
     </div>
     <div class="text-center mt-[24px] mb-[80px]">
       <button class="text-btn">{{ $t("home.btnText5") }}</button>
+    </div>
+    <div class="aside">
+      <ul>
+        <li @click="setAside(`${asideId}`)" :class="{'aside-active' : curAsideId == asideId}" v-for="asideId in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="asideId"></li>
+      </ul>
     </div>
   </div>
 </template>
 <script setup>
   const { getImageURL } = useAssets()
   const { locale } = useI18n()
+  const curAsideId = ref(1)
+  const beforeTopVal = ref(0)
+  const checkDown = ref(false)
+  const topVal = ref(0)
+  const scrollList = ref([])
+  const scrollListDown = ref([0, 640, 1480, 2440, 3130, 3850, 4660, 5400, 5900])
+  const scrollListUp = ref([0, 560, 1420, 2370, 3040, 3790, 4560, 5330, 5900])
+  function setAside(asideId) {
+    curAsideId.value = asideId
+    topVal.value = scrollListDown.value[asideId - 1];
+    checkUpDown();
+    document.body.scrollTop = scrollList.value[asideId - 1];
+    document.documentElement.scrollTop = scrollList.value[asideId - 1];
+  }
+  function checkUpDown() {
+    if (beforeTopVal.value < topVal.value) { // 向下滚动  
+      scrollList.value = scrollListDown.value;
+    } else { //向上滚动
+      scrollList.value = scrollListUp.value;
+    }
+    beforeTopVal.value = topVal.value;
+  }
+  function handleScrolls() {
+    topVal.value = document.body.scrollTop || document.documentElement.scrollTop
+    checkUpDown();
+    if (topVal.value >= scrollList.value[8]) {
+      curAsideId.value = 9
+    } else if (topVal.value >= scrollList.value[7]) {
+      curAsideId.value = 8
+    } else if (topVal.value >= scrollList.value[6]) {
+      curAsideId.value = 7
+    } else if (topVal.value >= scrollList.value[5]) {
+      curAsideId.value = 6
+    } else if (topVal.value >= scrollList.value[4]) {
+      curAsideId.value = 5
+    } else if (topVal.value >= scrollList.value[3]) {
+      curAsideId.value = 4
+    } else if (topVal.value >= scrollList.value[2]) {
+      curAsideId.value = 3
+    } else if (topVal.value >= scrollList.value[1]) {
+      curAsideId.value = 2
+    } else {
+      curAsideId.value = 1
+    }
+  }
+  onMounted(() => {
+    window.addEventListener("scroll", handleScrolls)
+  })
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScrolls)
+  })
 </script>
 <style>
   .div-bg {
@@ -144,6 +250,7 @@
     background: url('~/assets/images/div-bg2.png') no-repeat;
     background-origin: border-box;
     background-size: 450px 570px;
+    background-position: 100% 10%;
   }
   .text-color {
     background: radial-gradient(
@@ -217,9 +324,9 @@
   }
   .area-desc {
     @apply text-[#807D7C] leading-[21px] text-center;
-    &::-webkit-scrollbar {
-      width: 0;
-    }
+  }
+  .area-desc-with {
+    @apply w-[910px];
   }
   .text-btn {
     @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px];
@@ -239,7 +346,7 @@
     padding: 1px;
     border-radius: 16px;
     background-image: -webkit-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 9s0%);
+    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
     background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
   }
   .text-ellipsis {
@@ -249,5 +356,41 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+  .aside {
+    @apply fixed top-[50%] right-[3%];
+    z-index: 100;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .aside li {
+    @apply w-[8px] h-[8px] bg-[#807D7C] rounded-[4px] mt-[8px] cursor-pointer;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .aside-active {
+    @apply h-[20px] bg-[#cc7219] !important;
+  }
+  .border-color3 {
+    @apply border-[#514F4E] !important;
+  }
+  .div-box {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+  }
+  * html pre {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  div {
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
 </style>

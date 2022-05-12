@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto fixed top-0 bg-[#141212] z-10" :class="{'hidden':scrollDown==true}">
     <div class="mx-4 my-8 2xl:mx-16 xl:mx-8">
       <div class="flex flex-row items-center justify-between text-white">
         <div class="logo">
@@ -47,7 +47,23 @@
 
   const focusVal = ref()
   const curMenuId = ref(1)
-
+  const scrollDown = ref(false)
+  const beforeTopVal = ref()
+  function handleScroll() {
+    const topVal = document.body.scrollTop || document.documentElement.scrollTop
+    if (beforeTopVal.value < topVal) { // 向下滚动  
+      scrollDown.value = true;
+    } else { //向上滚动
+      scrollDown.value = false;
+    }
+    beforeTopVal.value = topVal
+  }
+  onMounted(() => {
+    window.addEventListener("scroll", handleScroll)
+  })
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll)
+  })
 </script>
 
 <style>
