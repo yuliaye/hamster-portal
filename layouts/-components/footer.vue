@@ -22,7 +22,7 @@
           <div class="footer-sub">{{ $t("footer.resourceSub3") }}</div>
           <div class="footer-sub">{{ $t("footer.resourceSub4") }}</div>
         </div>
-        <div class="text-center">
+        <div>
           <div class="text-white leading-8">{{ $t("footer.other") }}</div>
           <div class="footer-sub">{{ $t("footer.otherSub1") }}</div>
           <div class="footer-sub">{{ $t("footer.otherSub2") }}</div>

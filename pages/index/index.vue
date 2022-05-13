@@ -170,7 +170,7 @@ desoription trading and risk management platform.""description": "A decentralize
         <div class="img-center">
           <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
         </div>
-        <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px]">{{ $t(`home.sub7Title${areaId}`) }}</div>
+        <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px] h-[38px] text-ellipsis">{{ $t(`home.sub7Title${areaId}`) }}</div>
         <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t(`home.sub7Desc${areaId}`) }}</div>
         <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
       </div>
@@ -188,27 +188,36 @@ desoription trading and risk management platform.""description": "A decentralize
 <script setup>
   const { getImageURL } = useAssets()
   const { locale } = useI18n()
+  const beforeAsideId = ref(1)
   const curAsideId = ref(1)
   const beforeTopVal = ref(0)
-  const checkDown = ref(false)
   const topVal = ref(0)
   const scrollList = ref([])
   const scrollListDown = ref([0, 640, 1480, 2440, 3130, 3850, 4660, 5400, 5900])
   const scrollListUp = ref([0, 560, 1420, 2370, 3040, 3790, 4560, 5330, 5900])
+  const scrollListDownEn = ref([0, 840, 1680, 2640, 3410, 4100, 4900, 5660, 6154])
+  const scrollListUpEn = ref([0, 760, 1620, 2570, 3350, 4020, 4830, 5560, 6154])
   function setAside(asideId) {
+    beforeAsideId.value = curAsideId.value
     curAsideId.value = asideId
-    topVal.value = scrollListDown.value[asideId - 1];
     checkUpDown();
     document.body.scrollTop = scrollList.value[asideId - 1];
     document.documentElement.scrollTop = scrollList.value[asideId - 1];
   }
   function checkUpDown() {
-    if (beforeTopVal.value < topVal.value) { // 向下滚动  
-      scrollList.value = scrollListDown.value;
-    } else { //向上滚动
-      scrollList.value = scrollListUp.value;
+    if (beforeAsideId.value < curAsideId.value || beforeTopVal.value < topVal.value) { // 向下滚动  
+      if (locale.value == 'en') { //英文
+        scrollList.value = scrollListDownEn.value;
+      } else {
+        scrollList.value = scrollListDown.value;
+      }
+    } else if (beforeAsideId.value > curAsideId.value || beforeTopVal.value > topVal.value) { //向上滚动
+      if (locale.value == 'en') { //英文
+        scrollList.value = scrollListUpEn.value;
+      } else {
+        scrollList.value = scrollListUp.value;
+      }
     }
-    beforeTopVal.value = topVal.value;
   }
   function handleScrolls() {
     topVal.value = document.body.scrollTop || document.documentElement.scrollTop
@@ -232,6 +241,7 @@ desoription trading and risk management platform.""description": "A decentralize
     } else {
       curAsideId.value = 1
     }
+    beforeTopVal.value = topVal.value;
   }
   onMounted(() => {
     window.addEventListener("scroll", handleScrolls)
@@ -360,8 +370,8 @@ desoription trading and risk management platform.""description": "A decentralize
   .aside {
     @apply fixed top-[50%] right-[3%];
     z-index: 100;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-40%);
+    transform: translateY(-40%);
   }
   .aside li {
     @apply w-[8px] h-[8px] bg-[#807D7C] rounded-[4px] mt-[8px] cursor-pointer;

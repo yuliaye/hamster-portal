@@ -48,7 +48,7 @@
   const focusVal = ref()
   const curMenuId = ref(1)
   const scrollDown = ref(false)
-  const beforeTopVal = ref()
+  const beforeTopVal = ref(0)
   function handleScroll() {
     const topVal = document.body.scrollTop || document.documentElement.scrollTop
     if (beforeTopVal.value < topVal) { // 向下滚动  
