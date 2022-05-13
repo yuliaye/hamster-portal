@@ -22,6 +22,9 @@
   body {
     @apply text-[14px];
     background-color: #141212;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
   .main-margin {
     padding: 0 6%;

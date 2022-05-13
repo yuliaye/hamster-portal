@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto fixed top-0 bg-[#141212] z-10" :class="{'hidden':scrollDown==true}">
+  <div class="container m-auto fixed inset-x-0 top-0 bg-[#141212] z-10" :class="{'hidden':scrollDown==true}">
     <div class="mx-4 my-8 2xl:mx-16 xl:mx-8">
       <div class="flex flex-row items-center justify-between text-white">
         <div class="logo">

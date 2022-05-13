@@ -2,8 +2,8 @@
   <div class="main-margin div-bg mt-[160px]">
     <div class="">
       <div class="flex flex-row justify-between pt-[51px]">
-        <div class="w-3/5 pl-[36px]">
-          <div class="font-bold text-[60px] leading-[83px] text-color">{{ $t("home.title") }}</div>
+        <div class="w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
+          <div class="font-bold text-[60px] leading-[83px] text-color" :class="{'tracking-tight' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
           <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
         </div>
         <div class="w-2/5">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="flex flex-row">
-        <div class="mt-[32px] w-1/3 pl-[36px]">
+        <div class="mt-[32px] w-1/3" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
           <button class="text-btn">{{ $t("home.btnText") }}</button>
         </div>
         <div class="w-2/3 title-img">
@@ -178,7 +178,7 @@ desoription trading and risk management platform.""description": "A decentralize
     <div class="text-center mt-[24px] mb-[80px]">
       <button class="text-btn">{{ $t("home.btnText5") }}</button>
     </div>
-    <div class="aside">
+    <div class="container aside">
       <ul>
         <li @click="setAside(`${asideId}`)" :class="{'aside-active' : curAsideId == asideId}" v-for="asideId in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="asideId"></li>
       </ul>
@@ -195,8 +195,8 @@ desoription trading and risk management platform.""description": "A decentralize
   const scrollList = ref([])
   const scrollListDown = ref([0, 640, 1480, 2440, 3130, 3850, 4660, 5400, 5900])
   const scrollListUp = ref([0, 560, 1420, 2370, 3040, 3790, 4560, 5330, 5900])
-  const scrollListDownEn = ref([0, 840, 1680, 2640, 3410, 4100, 4900, 5660, 6154])
-  const scrollListUpEn = ref([0, 760, 1620, 2570, 3350, 4020, 4830, 5560, 6154])
+  const scrollListDownEn = ref([0, 774, 1620, 2600, 3330, 4030, 4820, 5580, 6078])
+  const scrollListUpEn = ref([0, 660, 1520, 2470, 3250, 3920, 4730, 5460, 6078])
   function setAside(asideId) {
     beforeAsideId.value = curAsideId.value
     curAsideId.value = asideId
@@ -295,7 +295,7 @@ desoription trading and risk management platform.""description": "A decentralize
     margin-bottom: 5%;
   }
   .img-show-up {
-    padding-right: 11%;
+    padding-right: 9.6%;
     -webkit-animation: bounce 16s infinite;
     animation: bounce 16s infinite;
   }
@@ -306,12 +306,12 @@ desoription trading and risk management platform.""description": "A decentralize
       animation-timing-function: ease;
     }
     50% {
-      transform: translateY(150%);
+      transform: translateY(91.6%);
       animation-timing-function: ease;
     }
   }
   .img-show-up2 {
-    padding-right: 11%;
+    padding-right: 9.6%;
     -webkit-animation: bounce2 8s infinite;
     animation: bounce2 8s infinite;
   }
@@ -368,8 +368,9 @@ desoription trading and risk management platform.""description": "A decentralize
     -webkit-box-orient: vertical;
   }
   .aside {
-    @apply fixed top-[50%] right-[3%];
+    @apply fixed top-[50%] flex inset-x-0 m-auto pr-[2%];
     z-index: 100;
+    justify-content: end;
     -webkit-transform: translateY(-40%);
     transform: translateY(-40%);
   }
