@@ -178,7 +178,7 @@ desoription trading and risk management platform.""description": "A decentralize
     <div class="text-center mt-[24px] mb-[80px]">
       <button class="text-btn">{{ $t("home.btnText5") }}</button>
     </div>
-    <div class="container aside">
+    <div class="aside"><!-- container -->
       <ul>
         <li @click="setAside(`${asideId}`)" :class="{'aside-active' : curAsideId == asideId}" v-for="asideId in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="asideId"></li>
       </ul>
@@ -368,8 +368,8 @@ desoription trading and risk management platform.""description": "A decentralize
     -webkit-box-orient: vertical;
   }
   .aside {
-    @apply fixed top-[50%] flex justify-end inset-x-0 m-auto pr-[2%];
-    z-index: -1;
+    @apply fixed top-[50%] flex justify-end right-0 m-auto pr-[2%];
+    z-index: 100;
     /* justify-content: end; */
     -webkit-transform: translateY(-40%);
     transform: translateY(-40%);
