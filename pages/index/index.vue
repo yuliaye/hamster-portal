@@ -286,12 +286,12 @@ desoription trading and risk management platform.""description": "A decentralize
     @apply flex items-center justify-center;
   }
   .img-right {
-    @apply flex;
-    justify-content: end;
+    @apply flex justify-end;
+    /* justify-content: end; */
   }
   .title-img {
-    @apply flex items-center;
-    justify-content: end;
+    @apply flex items-center justify-end;
+    /* justify-content: end; */
     margin-bottom: 5%;
   }
   .img-show-up {
@@ -368,9 +368,9 @@ desoription trading and risk management platform.""description": "A decentralize
     -webkit-box-orient: vertical;
   }
   .aside {
-    @apply fixed top-[50%] flex inset-x-0 m-auto pr-[2%];
-    z-index: 100;
-    justify-content: end;
+    @apply fixed top-[50%] flex justify-end inset-x-0 m-auto pr-[2%];
+    z-index: -1;
+    /* justify-content: end; */
     -webkit-transform: translateY(-40%);
     transform: translateY(-40%);
   }
