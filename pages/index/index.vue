@@ -2,8 +2,8 @@
   <div class="main-margin div-bg mt-[160px]">
     <div class="">
       <div class="flex flex-row justify-between pt-[51px]">
-        <div class="w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
-          <div class="font-bold text-[60px] leading-[83px] text-color" :class="{'tracking-tight' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
+        <div class="w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] h-[370px]' : 'pl-[36px]']">
+          <div class="font-bold text-[60px] leading-[83px] text-color" :class="{'tracking-tight h-[249px]' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
           <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
         </div>
         <div class="w-2/5">
@@ -306,7 +306,8 @@ desoription trading and risk management platform.""description": "A decentralize
       animation-timing-function: ease;
     }
     50% {
-      transform: translateY(91.6%);
+      /* transform: translateY(91.6%); */
+      transform: translateY(85%);
       animation-timing-function: ease;
     }
   }
@@ -339,10 +340,10 @@ desoription trading and risk management platform.""description": "A decentralize
     @apply w-[910px];
   }
   .text-btn {
-    @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px];
+    @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px] hidden;
   }
   .text-btn2 {
-    @apply text-[#CC7219] border border-[#807D7C] text-base rounded-[45px] px-[24px] py-[10px];
+    @apply text-[#CC7219] border border-[#807D7C] text-base rounded-[45px] px-[24px] py-[10px] hidden;
   }
   .bg-img {
     background: url('~/assets/images/area4-img.png') no-repeat;

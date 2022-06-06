@@ -6,12 +6,14 @@
     <div class="flex flex-col-reverse gap-4 text-white md:flex-row md:justify-between">
       <div class="leading-8">
         <div class="mb-4"><img class="h-[32px]" src="~/assets/images/header.png"></div>
-        <div>{{ $t("footer.email") }}: 1024 KY1-1002</div>
+        <div>{{ $t("footer.email") }}: hamster@hamsternet.io</div>
         <div class="mb-8">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
         <div class="flex">
-          <img class="h-[24px] mr-[20px]" src="~/assets/images/wechat.png">
-          <img class="h-[24px] mr-[20px]" src="~/assets/images/weibo.png">
-          <img class="h-[24px]" src="~/assets/images/twitter.png">
+          <!-- <img class="h-[24px] mr-[20px]" src="~/assets/images/wechat.png">
+          <img class="h-[24px] mr-[20px]" src="~/assets/images/weibo.png"> -->
+          <nuxt-link target='_blank' to='https://github.com/hamster-shared'><img class="h-[24px] mr-[20px]" src="~/assets/images/github.png"></nuxt-link>
+          <nuxt-link target='_blank' to='https://twitter.com/Hamsternetio'><img class="h-[24px]" src="~/assets/images/twitter.png"></nuxt-link>
+          
         </div>
       </div>
       <div class="flex gap-20">

@@ -5,7 +5,7 @@
         <div class="logo">
           <img class="h-[24px]" src="~/assets/images/header.png">
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row hidden">
           <div v-for="menuId in [1, 2, 3, 4, 5, 6, 7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu">{{ $t(`header.menu${menuId}`) }}</div>
           <VDropdown v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
             <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">

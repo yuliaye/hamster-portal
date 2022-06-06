@@ -12,8 +12,8 @@ export default defineNuxtConfig({
     localeDir: "locales",
     vueI18n: {
       legacy: false,
-      locale: "zh",
-      fallbackLocale: "zh",
+      locale: "en",
+      fallbackLocale: "en",
       globalInjection: true
     }
   },
