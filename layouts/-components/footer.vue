@@ -1,10 +1,11 @@
 <template>
   <div class="container max-w-screen-xl mx-auto my-20 main-margin">
-    <div class="mb-10 logo">
+    <!-- <div class="mb-10 logo">
       <img :src="getImageURL(`logo-${$i18n.locale}.png`)" class="h-8">
-    </div>
-    <div class="flex flex-col-reverse gap-4 text-white md:flex-row md:justify-between">
-      <div class="leading-8">
+    </div> -->
+    <!-- <div class="flex flex-col-reverse gap-4 text-white md:flex-row md:justify-between"> -->
+    <div class="grid sm:grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px]">
+      <div class="leading-8 row-start-1">
         <div class="mb-4"><img class="h-[32px]" src="~/assets/images/header.png"></div>
         <div>{{ $t("footer.email") }}: hamster@hamsternet.io</div>
         <div class="mb-8">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
@@ -16,7 +17,7 @@
           
         </div>
       </div>
-      <div class="flex gap-20">
+      <div class="flex gap-20 sm:justify-start sm:mt-8 lg:justify-end">
         <div>
           <div class="text-white leading-8">{{ $t("footer.resource") }}</div>
           <div class="footer-sub">{{ $t("footer.resourceSub1") }}</div>

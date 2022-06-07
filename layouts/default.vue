@@ -1,11 +1,11 @@
 <template>
   <div class="text-white">
-    <!-- <Head>
+    <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <Link rel="shortcut icon" type="image/png" :href="getImageURL('favicon.png')" />
-    </Head> -->
+      <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
+    </Head>
     <Header />
     <div class="container max-w-screen-xl mx-auto">
       <slot />
@@ -17,6 +17,7 @@
 <script setup>
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
+  const { getImageURL } = useAssets()
 </script>
 <style>
   body {
