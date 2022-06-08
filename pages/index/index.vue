@@ -1,23 +1,23 @@
 <template>
-  <div class="main-margin div-bg mt-[160px]">
+  <div class="main-margin div-bg mt-[120px] sm:mt-[160px]">
     <div class="">
-      <div class="flex flex-row justify-between pt-[51px]">
-        <div class="w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] h-[370px]' : 'pl-[36px]']">
+      <div class="md:flex flex-row justify-between md:pt-[51px]">
+        <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
           <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
           <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
         </div>
-        <div class="w-2/5">
+        <div class="md:w-2/5">
           <div class="img-center" :class="[$i18n.locale === 'en' ? 'img-show-up' : 'img-show-up2']">
-            <img class="w-[80px]" src="~/assets/images/title-img2.png">
+            <img class="w-[40px] sm:w-[80px]" src="~/assets/images/title-img2.png">
           </div>
         </div>
       </div>
-      <div class="flex flex-row">
+      <div class="md:flex flex-row">
         <div class="mt-[32px] w-1/3" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
           <button class="text-btn">{{ $t("home.btnText") }}</button>
         </div>
-        <div class="w-2/3 title-img xl:mb-[5%]">
-          <img class="absolute img-w" src="~/assets/images/title-img.png">
+        <div class="md:w-2/3 title-img xl:mb-[5%]">
+          <img class="md:absolute img-w" src="~/assets/images/title-img.png">
         </div>
       </div>
     </div>
@@ -53,11 +53,11 @@
     </div>
     <div class="border-color2">
       <div class="bg-[#141212] rounded-[16px]">
-        <div class="box-bg img-center rounded-[16px] grid grid-cols-2 xl:gap-x-[40px] gap-x-[8px] p-[20px] xl:p-[50px]">
-          <div class="img-center w-1/2">
+        <div class="box-bg rounded-[16px] grid md:grid-cols-2 xl:gap-[40px] gap-[8px] p-[20px] xl:p-[50px]">
+          <div class="img-center">
             <img src="~/assets/images/area3-img.png">
           </div>
-          <div class="w-1/2">
+          <div>
             <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
             <div class="img-center mt-[16px] flex">
               <div class="area-desc overflow-y-auto">{{ $t("home.sub3Desc") }}</div>
@@ -67,9 +67,7 @@
       </div>
     </div>
 
-    <!-- <div class="flex flex-row justify-between mt-[60px] pt-[100px] div-bg2"> -->
-    <div class="grid sm:grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px] mt-[60px] pt-[100px] div-bg2">
-      <!-- <div class="w-1/2"> -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px] mt-[60px] pt-[100px] div-bg2">
       <div>
         <div class="leading-[60px] text-[20px] pl-[32px] border border-color3 rounded-t-[16px]">{{ $t("home.sub4Title") }}</div>
         <div class="flex p-[24px] h-[450px] border border-color3 rounded-b-[16px] border-t-0">
@@ -113,9 +111,9 @@ desoription trading and risk management platform.""description": "A decentralize
           </div>
         </div>
       </div>
-      <div class="sm:row-start-1 lg:col-start-2">
-        <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px]">{{ $t("home.btnText") }}</div>
-        <div class="area-desc !sm:text-center !lg:text-left">{{ $t("home.areaDesc4") }}</div>
+      <div class="row-start-1 lg:col-start-2">
+        <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px] text-center lg:text-left">{{ $t("home.btnText") }}</div>
+        <div class="area-desc !text-center lg:!text-left">{{ $t("home.areaDesc4") }}</div>
         <div class="mt-[50px] flex">
           <button class="flex leading-[24px] text-btn">
             <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img1.png">{{ $t("home.btnText4") }}
@@ -124,7 +122,7 @@ desoription trading and risk management platform.""description": "A decentralize
             <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img2.png">{{ $t("home.btnText") }}
           </button>
         </div>
-        <div class="mt-[16px]">{{ $t("home.sub4Desc") }}</div>
+        <div class="mb-[24px] lg:mb-0 lg:mt-[16px] text-center lg:text-left">{{ $t("home.sub4Desc") }}</div>
       </div>
     </div>
     <div class="area-title">{{ $t("home.areaTitle5") }}</div>
@@ -132,8 +130,8 @@ desoription trading and risk management platform.""description": "A decentralize
       <div class="area-desc area-desc-with">{{ $t("home.areaDesc5") }}</div>
     </div>
     <div class="mt-[80px]">
-      <div class="grid grid-cols-2 gap-[8px]">
-        <div class="bg-[#2E2A28] group hover:bg-[#A05E1C] h-[220px] p-[20px] xl:p-[30px]" :class="[areaId == 1 || areaId == 3?'rounded-l-[16px]':'rounded-r-[16px]']" v-for="areaId in [1, 2, 3, 4]" :key="areaId">
+      <div class="grid sm:grid-cols-2 gap-[8px]">
+        <div class="bg-[#2E2A28] group hover:bg-[#A05E1C] h-[220px] p-[20px] xl:p-[30px]" :class="[areaId == 1 || areaId == 3?'rounded-[16px] sm:rounded-r-none':'rounded-[16px] sm:rounded-l-none']" v-for="areaId in [1, 2, 3, 4]" :key="areaId">
           <div class="img-right">
             <img class="h-[20px]" src="~/assets/images/right.png">
           </div>
@@ -195,7 +193,7 @@ desoription trading and risk management platform.""description": "A decentralize
   const beforeTopVal = ref(0)
   const topVal = ref(0)
   const widthVal = ref(0)
-  const widthList = ref([1024,768,640]);
+  const widthList = ref([1280,1024,768,640]);
   const scrollList = ref([])
   const scrollListDown = ref([0, 640, 1480, 2440, 3130, 3850, 4660, 5400, 5900])
   const scrollListUp = ref([0, 560, 1420, 2370, 3040, 3790, 4560, 5330, 5900])
@@ -205,10 +203,12 @@ desoription trading and risk management platform.""description": "A decentralize
   const scrollListUpEn = ref([0, 700, 1480, 2460, 3150, 3830, 4640, 5390, 5830])
   const scrollListLgDownEn = ref([0, 750, 1520, 2400, 3100, 3800, 4600, 5350, 5760])
   const scrollListLgUpEn = ref([0, 680, 1480, 2340, 3050, 3740, 4550, 5290, 5760])
-  const scrollListMdDownEn = ref([0, 774, 1620, 2600, 3330, 4030, 4820, 5580, 6078])
-  const scrollListMdUpEn = ref([0, 660, 1520, 2470, 3250, 3920, 4730, 5460, 6078])
-  const scrollListSmDownEn = ref([0, 774, 1620, 2600, 3330, 4030, 4820, 5580, 6078])
-  const scrollListSmUpEn = ref([0, 660, 1520, 2470, 3250, 3920, 4730, 5460, 6078])
+  const scrollListMdDownEn = ref([0, 734, 1534, 2320, 3200, 4090, 4900, 5860, 5910])
+  const scrollListMdUpEn = ref([0, 640, 1440, 2240, 3130, 4010, 4810, 5790, 5910])
+  const scrollListSmDownEn = ref([0, 1100, 2500, 3230, 4240, 5140, 6030, 7010, 8320])
+  const scrollListSmUpEn = ref([0, 1010, 2410, 3160, 4180, 5030, 5920, 6920, 8320])
+  const scrollListXsDownEn = ref([0, 1040, 2770, 3510, 4670, 5590, 7030, 8710, 10230])
+  const scrollListXsUpEn = ref([0, 970, 2710, 3440, 4610, 5530, 6940, 8630, 10230])
   function setAside(asideId) {
     beforeAsideId.value = curAsideId.value
     curAsideId.value = asideId
@@ -223,28 +223,32 @@ desoription trading and risk management platform.""description": "A decentralize
   // const widthList = ref([1024,768,640])
     if (beforeAsideId.value < curAsideId.value || beforeTopVal.value < topVal.value) { // 向下滚动  
       if (locale.value === 'en') { //英文
-        if (widthVal.value === widthList.value[2]) {
-          scrollList.value = scrollListSmDownEn.value;
-        } else if (widthVal.value === widthList.value[1]) {
-          scrollList.value = scrollListMdDownEn.value;
-        } else if (widthVal.value === widthList.value[0]){
-          scrollList.value = scrollListLgDownEn.value;
-        } else {
+        if (widthVal.value >= widthList.value[0]) {
           scrollList.value = scrollListDownEn.value;
+        } else if (widthVal.value >= widthList.value[1]) {
+          scrollList.value = scrollListLgDownEn.value;
+        } else if (widthVal.value >= widthList.value[2]){
+          scrollList.value = scrollListMdDownEn.value;
+        } else if (widthVal.value >= widthList.value[3]){
+          scrollList.value = scrollListSmDownEn.value;
+        } else {
+          scrollList.value = scrollListXsDownEn.value;
         }
       } else {
         scrollList.value = scrollListDown.value;
       }
     } else if (beforeAsideId.value > curAsideId.value || beforeTopVal.value > topVal.value) { //向上滚动
       if (locale.value === 'en') { //英文
-        if (widthVal.value === widthList.value[2]) {
-          scrollList.value = scrollListSmUpEn.value;
-        } else if (widthVal.value === widthList.value[1]) {
-          scrollList.value = scrollListMdUpEn.value;
-        } else if (widthVal.value === widthList.value[0]){
-          scrollList.value = scrollListLgUpEn.value;
-        } else {
+        if (widthVal.value >= widthList.value[0]) {
           scrollList.value = scrollListUpEn.value;
+        } else if (widthVal.value >= widthList.value[1]) {
+          scrollList.value = scrollListLgUpEn.value;
+        } else if (widthVal.value >= widthList.value[2]){
+          scrollList.value = scrollListMdUpEn.value;
+        } else if (widthVal.value >= widthList.value[3]){
+          scrollList.value = scrollListSmUpEn.value;
+        } else {
+          scrollList.value = scrollListXsUpEn.value;
         }
       } else {
         scrollList.value = scrollListUp.value;
@@ -287,7 +291,7 @@ desoription trading and risk management platform.""description": "A decentralize
   .div-bg {
     background: url('~/assets/images/div-bg1.png') no-repeat;
     background-origin: border-box;
-    background-size: 750px 500px;
+    background-size: 130% 500px;
   }
   .div-bg2 {
     background: url('~/assets/images/div-bg2.png') no-repeat;
@@ -327,16 +331,17 @@ desoription trading and risk management platform.""description": "A decentralize
   .img-show-up {
     -webkit-animation: bounce 16s infinite;
     animation: bounce 16s infinite;
+    padding-right: 0;
+    padding-left: 17.5%;
   }
   @keyframes bounce {
     0%,
     100% {
-      transform: translateY(-50%);
+      transform: translateY(0%);
       animation-timing-function: ease;
     }
     50% {
-      /* transform: translateY(91.6%); */
-      transform: translateY(85%);
+      transform: translateY(105%);
       animation-timing-function: ease;
     }
   }
@@ -434,31 +439,38 @@ desoription trading and risk management platform.""description": "A decentralize
       width: 0;
     }
   }
+  .title-h{
+    @apply text-[40px] leading-[50px];
+  }
+  .title-h-en{
+    @apply h-auto;
+  }
   @screen sm {
-    .img-w{
-      @apply w-[200px];
+    @keyframes bounce {
+      50% {
+        transform: translateY(72%);
+      }
     }
-    .title-h{
-      @apply text-[40px] leading-[50px];
-    }
-    .title-h-en{
-      @apply h-[200px];
-    }
-    .img-show-up {
-      padding-right: 66.7%;
+    .div-bg {
+      background-size: 750px 500px;
     }
   }
   @screen md {
     .img-w{
       @apply w-[450px];
     }
-    .title-h{
-      @apply text-[40px] leading-[50px];
+    .title-h-en{
+      @apply h-[200px];
     }
     .img-show-up {
       padding-right: 37%;
+      padding-left: 0;
     }
     @keyframes bounce {
+      0%,
+      100% {
+        transform: translateY(-50%);
+      }
       50% {
         transform: translateY(118%);
       }
