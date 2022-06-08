@@ -206,27 +206,26 @@ desoription trading and risk management platform.""description": "A decentralize
   const asideIdList = ref([1,2,3,4,5,6,7,8,9])
   const beforeTopVal = ref(0)
   const topVal = ref(0)
-  const widthVal = ref(0)
-  const widthList = ref([1280,1024,768,640])
   const scrollList = ref([])
   const scrollListDown = ref([0])
   const scrollListUp = ref([0])
 
-  if (typeof window !== 'undefined') {
-    const headerTop = document.getElementById("area-div").offsetTop;
-    for (let i = 1; i < asideIdList.value.length - 1; i++) {
-      if (i == 4) {
-        scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop + 40);
-        scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop + 140 - headerTop);
-      } else {
-        scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop - 20);
-        scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop + 30 - headerTop);
+  onMounted(async () => {
+    if (typeof window !== 'undefined') {
+      for (let i = 1; i < asideIdList.value.length - 1; i++) {
+        if (i == 4) {
+          scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop + 65);
+          scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop - 20);
+        } else {
+          scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop - 40);
+          scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop - 130);
+        }
       }
+      const footerTop = document.documentElement.scrollHeight - document.documentElement.clientHeight - 5;
+      scrollListDown.value.push(footerTop);
+      scrollListUp.value.push(footerTop);
     }
-    const footerTop = document.documentElement.scrollHeight - document.documentElement.clientHeight - 5;
-    scrollListDown.value.push(footerTop);
-    scrollListUp.value.push(footerTop);
-  }
+  });
   
   function setAside(asideId) {
     beforeAsideId.value = curAsideId.value
