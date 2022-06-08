@@ -1,6 +1,6 @@
 <template>
   <div class="main-margin div-bg mt-[120px] sm:mt-[160px]">
-    <div class="">
+    <div id="area-div">
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
           <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
@@ -21,166 +21,179 @@
         </div>
       </div>
     </div>
-    <div class="area-title">{{ $t("home.areaTitle") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc") }}</div>
-    <div class="text-center mt-[24px] mb-[72px]">
-      <button class="text-btn">{{ $t("home.btnText2") }}</button>
-    </div>
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 xl:gap-[64px] gap-[8px]">
-      <div class="flex flex-col bg-[#2E2A28] rounded-[16px] h-[460px] sm:h-auto p-[20px] xl:p-[42px]" v-for="areaId in [1, 2, 3]" :key="areaId">
-        <div class="img-center py-[40px]">
-          <img class="rounded-full w-[128px]" :src="getImageURL(`area-img${areaId}.png`)">
-        </div>
-        <div class="font-bold text-base leading-[19px] text-center mb-[16px]">{{ $t(`home.subTitle${areaId}`) }}</div>
-        <div class="area-desc overflow-y-auto">{{ $t(`home.subDesc${areaId}`) }}</div>
+    <div id="area-div1">
+      <div class="area-title">{{ $t("home.areaTitle") }}</div>
+      <div class="area-desc">{{ $t("home.areaDesc") }}</div>
+      <div class="text-center mt-[24px] mb-[72px]">
+        <button class="text-btn">{{ $t("home.btnText2") }}</button>
       </div>
-    </div>
-    <div class="area-title">{{ $t("home.areaTitle2") }}</div>
-    <div class="img-center">
-      <div class="area-desc area-desc-with">{{ $t("home.areaDesc2") }}{{ $t("home.areaDesc21") }}</div>
-    </div>
-    <div class="border-color mt-[80px]">
-      <div class="bg-[#141212] rounded-[23px] p-[60px]">
-        <img :src="getImageURL(`area2-img-${$i18n.locale}.png`)">
-      </div>
-    </div>
-    <div class="area-title">{{ $t("home.areaTitle3") }}</div>
-    <div class="img-center">
-      <div class="area-desc area-desc-with">{{ $t("home.areaDesc3") }}{{ $t("home.areaDesc31") }}</div>
-    </div>
-    <div class="text-center mt-[24px] mb-[72px]">
-      <button class="text-btn">{{ $t("home.btnText3") }}</button>
-    </div>
-    <div class="border-color2">
-      <div class="bg-[#141212] rounded-[16px]">
-        <div class="box-bg rounded-[16px] grid md:grid-cols-2 xl:gap-[40px] gap-[8px] p-[20px] xl:p-[50px]">
-          <div class="img-center">
-            <img src="~/assets/images/area3-img.png">
+      <div class="grid sm:grid-cols-1 md:grid-cols-3 xl:gap-[64px] gap-[8px]">
+        <div class="flex flex-col bg-[#2E2A28] rounded-[16px] h-[460px] sm:h-auto p-[20px] xl:p-[42px]" v-for="areaId in [1, 2, 3]" :key="areaId">
+          <div class="img-center py-[40px]">
+            <img class="rounded-full w-[128px]" :src="getImageURL(`area-img${areaId}.png`)">
           </div>
-          <div>
-            <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
-            <div class="img-center mt-[16px] flex">
-              <div class="area-desc overflow-y-auto">{{ $t("home.sub3Desc") }}</div>
+          <div class="font-bold text-base leading-[19px] text-center mb-[16px]">{{ $t(`home.subTitle${areaId}`) }}</div>
+          <div class="area-desc overflow-y-auto">{{ $t(`home.subDesc${areaId}`) }}</div>
+        </div>
+      </div>
+    </div>
+    <div id="area-div2">
+      <div class="area-title">{{ $t("home.areaTitle2") }}</div>
+      <div class="img-center">
+        <div class="area-desc area-desc-with">{{ $t("home.areaDesc2") }}{{ $t("home.areaDesc21") }}</div>
+      </div>
+      <div class="border-color mt-[80px]">
+        <div class="bg-[#141212] rounded-[23px] p-[60px]">
+          <img :src="getImageURL(`area2-img-${$i18n.locale}.png`)">
+        </div>
+      </div>
+    </div>
+    <div id="area-div3">
+      <div class="area-title">{{ $t("home.areaTitle3") }}</div>
+      <div class="img-center">
+        <div class="area-desc area-desc-with">{{ $t("home.areaDesc3") }}{{ $t("home.areaDesc31") }}</div>
+      </div>
+      <div class="text-center mt-[24px] mb-[72px]">
+        <button class="text-btn">{{ $t("home.btnText3") }}</button>
+      </div>
+      <div class="border-color2">
+        <div class="bg-[#141212] rounded-[16px]">
+          <div class="box-bg rounded-[16px] grid md:grid-cols-2 xl:gap-[40px] gap-[8px] p-[20px] xl:p-[50px]">
+            <div class="img-center">
+              <img src="~/assets/images/area3-img.png">
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px] mt-[60px] pt-[100px] div-bg2">
-      <div>
-        <div class="leading-[60px] text-[20px] pl-[32px] border border-color3 rounded-t-[16px]">{{ $t("home.sub4Title") }}</div>
-        <div class="flex p-[24px] h-[450px] border border-color3 rounded-b-[16px] border-t-0">
-          <div class="overflow-y-auto div-box">
-            <pre>
-What are the newest DeFi projects?
-QUERY [ result
-categories(
-where:{name:"DeFi"} "name":"DeFi Prime",
-){ "description": "A source of DeFi data
-project analytios and market information."
-orderBy: createdAt,
-)
-{ name "name": "Opyn",
-desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
-}
-}，
-}
-{
-}1 "name":"Airswap",
-"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
-}
-What are the newest DeFi projects?
-QUERY [ result
-categories(
-where:{name:"DeFi"} "name":"DeFi Prime",
-){ "description": "A source of DeFi data
-project analytios and market information."
-orderBy: createdAt,
-)
-{ name "name": "Opyn",
-desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
-}
-}，
-}
-{
-}1 "name":"Airswap",
-"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
-}
-            </pre>
-          </div>
-        </div>
-      </div>
-      <div class="row-start-1 lg:col-start-2">
-        <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px] text-center lg:text-left">{{ $t("home.btnText") }}</div>
-        <div class="area-desc !text-center lg:!text-left">{{ $t("home.areaDesc4") }}</div>
-        <div class="mt-[50px] flex">
-          <button class="flex leading-[24px] text-btn">
-            <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img1.png">{{ $t("home.btnText4") }}
-          </button>
-          <button class="flex leading-[24px] text-btn2 ml-[24px]">
-            <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img2.png">{{ $t("home.btnText") }}
-          </button>
-        </div>
-        <div class="mb-[24px] lg:mb-0 lg:mt-[16px] text-center lg:text-left">{{ $t("home.sub4Desc") }}</div>
-      </div>
-    </div>
-    <div class="area-title">{{ $t("home.areaTitle5") }}</div>
-    <div class="img-center">
-      <div class="area-desc area-desc-with">{{ $t("home.areaDesc5") }}</div>
-    </div>
-    <div class="mt-[80px]">
-      <div class="grid sm:grid-cols-2 gap-[8px]">
-        <div class="bg-[#2E2A28] group hover:bg-[#A05E1C] h-[220px] p-[20px] xl:p-[30px]" :class="[areaId == 1 || areaId == 3?'rounded-[16px] sm:rounded-r-none':'rounded-[16px] sm:rounded-l-none']" v-for="areaId in [1, 2, 3, 4]" :key="areaId">
-          <div class="img-right">
-            <img class="h-[20px]" src="~/assets/images/right.png">
-          </div>
-          <div class="flex">
-            <div class="w-1/5 img-center">
-              <img class="w-[66px]" :src="getImageURL(`area5-img${areaId}.png`)">
-            </div>
-            <div class="w-4/5">
-              <div class="text-[20px] font-bold my-[12px] text-ellipsis">{{ $t(`home.sub5Title${areaId}`) }}</div>
-              <div class="overflow-y-auto text-[#807D7C] group-hover:text-white text-ellipsis">{{ $t(`home.sub5Desc${areaId}`) }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="area-title">{{ $t("home.areaTitle6") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc6") }}</div>
-    <div class="mt-[80px]">
-      <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-[16px]">
-        <div class="group h-[200px]" v-for="areaId in [1, 2, 3, 4, 5, 6]" :key="areaId">
-          <div class="border-color2 group-hover:bg-none">
-            <div class="bg-[#141212] rounded-[16px]">
-              <div class="box-bg group-hover:bg-none group-hover:bg-[#A05E1C] img-center rounded-[16px] h-[200px]">
-                <img class="w-[240px] hidden group-hover:block" :src="getImageURL(`area6-on-img${areaId}.png`)">
-                <img class="w-[240px] block group-hover:hidden" :src="getImageURL(`area6-img${areaId}.png`)">
+            <div>
+              <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
+              <div class="img-center mt-[16px] flex">
+                <div class="area-desc overflow-y-auto">{{ $t("home.sub3Desc") }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="area-title">{{ $t("home.areaTitle7") }}</div>
-    <div class="area-desc">{{ $t("home.areaDesc7") }}</div>
-    <div class="grid md:grid-cols-3 sm:grid-cols-1 xl:gap-[64px] gap-[8px] mt-[80px]">
-      <div class="flex flex-col bg-[#2E2A28] rounded-[16px] p-[16px]" v-for="areaId in [1, 2, 3]" :key="areaId">
-        <div class="img-center">
-          <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
+    <div id="area-div4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px] mt-[60px] lg:pt-[100px] pt-0 div-bg2">
+        <div>
+          <div class="leading-[60px] text-[20px] pl-[32px] border border-color3 rounded-t-[16px]">{{ $t("home.sub4Title") }}</div>
+          <div class="flex p-[24px] h-[450px] border border-color3 rounded-b-[16px] border-t-0">
+            <div class="overflow-y-auto div-box">
+              <pre>
+What are the newest DeFi projects?
+QUERY [ result
+categories(
+where:{name:"DeFi"} "name":"DeFi Prime",
+){ "description": "A source of DeFi data
+project analytios and market information."
+orderBy: createdAt,
+)
+{ name "name": "Opyn",
+desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
+}
+}，
+}
+{
+}1 "name":"Airswap",
+"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
+}
+What are the newest DeFi projects?
+QUERY [ result
+categories(
+where:{name:"DeFi"} "name":"DeFi Prime",
+){ "description": "A source of DeFi data
+project analytios and market information."
+orderBy: createdAt,
+)
+{ name "name": "Opyn",
+desoription trading and risk management platform.""description": "A decentralized optionsdesoription trading and risk
+}
+}，
+}
+{
+}1 "name":"Airswap",
+"description": "A decentralized exchange for peer-to-peer trading of crypto assets."
+}
+              </pre>
+            </div>
+          </div>
         </div>
-        <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px] h-[38px] text-ellipsis">{{ $t(`home.sub7Title${areaId}`) }}</div>
-        <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t(`home.sub7Desc${areaId}`) }}</div>
-        <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
+        <div class="row-start-1 lg:col-start-2">
+          <div class="font-bold text-[40px] leading-[47px] mt-[100px] mb-[16px] text-center lg:text-left">{{ $t("home.btnText") }}</div>
+          <div class="area-desc !text-center lg:!text-left">{{ $t("home.areaDesc4") }}</div>
+          <div class="mt-[50px] flex">
+            <button class="flex leading-[24px] text-btn">
+              <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img1.png">{{ $t("home.btnText4") }}
+            </button>
+            <button class="flex leading-[24px] text-btn2 ml-[24px]">
+              <img class="w-[24px] mr-[4px]" src="~/assets/images/btn-img2.png">{{ $t("home.btnText") }}
+            </button>
+          </div>
+          <div class="mb-[24px] lg:mb-0 lg:mt-[16px] text-center lg:text-left">{{ $t("home.sub4Desc") }}</div>
+        </div>
       </div>
     </div>
-    <div class="text-center mt-[24px] mb-[80px]">
-      <button class="text-btn">{{ $t("home.btnText5") }}</button>
+    <div id="area-div5">
+      <div class="area-title">{{ $t("home.areaTitle5") }}</div>
+      <div class="img-center">
+        <div class="area-desc area-desc-with">{{ $t("home.areaDesc5") }}</div>
+      </div>
+      <div class="mt-[80px]">
+        <div class="grid sm:grid-cols-2 gap-[8px]">
+          <div class="bg-[#2E2A28] group hover:bg-[#A05E1C] h-[220px] p-[20px] xl:p-[30px]" :class="[areaId == 1 || areaId == 3?'rounded-[16px] sm:rounded-r-none':'rounded-[16px] sm:rounded-l-none']" v-for="areaId in [1, 2, 3, 4]" :key="areaId">
+            <div class="img-right">
+              <img class="h-[20px]" src="~/assets/images/right.png">
+            </div>
+            <div class="flex">
+              <div class="w-1/5 img-center">
+                <img class="w-[66px]" :src="getImageURL(`area5-img${areaId}.png`)">
+              </div>
+              <div class="w-4/5">
+                <div class="text-[20px] font-bold my-[12px] text-ellipsis">{{ $t(`home.sub5Title${areaId}`) }}</div>
+                <div class="overflow-y-auto text-[#807D7C] group-hover:text-white text-ellipsis">{{ $t(`home.sub5Desc${areaId}`) }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="area-div6">
+      <div class="area-title">{{ $t("home.areaTitle6") }}</div>
+      <div class="area-desc">{{ $t("home.areaDesc6") }}</div>
+      <div class="mt-[80px]">
+        <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-[16px]">
+          <div class="group h-[200px]" v-for="areaId in [1, 2, 3, 4, 5, 6]" :key="areaId">
+            <div class="border-color2 group-hover:bg-none">
+              <div class="bg-[#141212] rounded-[16px]">
+                <div class="box-bg group-hover:bg-none group-hover:bg-[#A05E1C] img-center rounded-[16px] h-[200px]">
+                  <img class="w-[240px] hidden group-hover:block" :src="getImageURL(`area6-on-img${areaId}.png`)">
+                  <img class="w-[240px] block group-hover:hidden" :src="getImageURL(`area6-img${areaId}.png`)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="area-div7">
+      <div class="area-title">{{ $t("home.areaTitle7") }}</div>
+      <div class="area-desc">{{ $t("home.areaDesc7") }}</div>
+      <div class="grid md:grid-cols-3 sm:grid-cols-1 xl:gap-[64px] gap-[8px] mt-[80px]">
+        <div class="flex flex-col bg-[#2E2A28] rounded-[16px] p-[16px]" v-for="areaId in [1, 2, 3]" :key="areaId">
+          <div class="img-center">
+            <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
+          </div>
+          <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px] h-[38px] text-ellipsis">{{ $t(`home.sub7Title${areaId}`) }}</div>
+          <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t(`home.sub7Desc${areaId}`) }}</div>
+          <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
+        </div>
+      </div>
+      <div class="text-center mt-[24px] mb-[80px]">
+        <button class="text-btn">{{ $t("home.btnText5") }}</button>
+      </div>
     </div>
     <div class="aside"><!-- container  !hidden -->
       <ul>
-        <li @click="setAside(`${asideId}`)" :class="{'aside-active' : curAsideId == asideId}" v-for="asideId in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="asideId"></li>
+        <li @click="setAside(`${asideId}`)" :class="{'aside-active' : curAsideId == asideId}" v-for="asideId in asideIdList" :key="asideId"></li>
       </ul>
     </div>
   </div>
@@ -190,69 +203,45 @@ desoription trading and risk management platform.""description": "A decentralize
   const { locale } = useI18n()
   const beforeAsideId = ref(1)
   const curAsideId = ref(1)
+  const asideIdList = ref([1,2,3,4,5,6,7,8,9])
   const beforeTopVal = ref(0)
   const topVal = ref(0)
   const widthVal = ref(0)
-  const widthList = ref([1280,1024,768,640]);
+  const widthList = ref([1280,1024,768,640])
   const scrollList = ref([])
-  const scrollListDown = ref([0, 640, 1480, 2440, 3130, 3850, 4660, 5400, 5900])
-  const scrollListUp = ref([0, 560, 1420, 2370, 3040, 3790, 4560, 5330, 5900])
-  // const scrollListDownEn = ref([0, 774, 1620, 2600, 3330, 4030, 4820, 5580, 6078])
-  // const scrollListUpEn = ref([0, 660, 1520, 2470, 3250, 3920, 4730, 5460, 6078])
-  const scrollListDownEn = ref([0, 774, 1550, 2520, 3210, 3900, 4700, 5430, 5830])
-  const scrollListUpEn = ref([0, 700, 1480, 2460, 3150, 3830, 4640, 5390, 5830])
-  const scrollListLgDownEn = ref([0, 750, 1520, 2400, 3100, 3800, 4600, 5350, 5760])
-  const scrollListLgUpEn = ref([0, 680, 1480, 2340, 3050, 3740, 4550, 5290, 5760])
-  const scrollListMdDownEn = ref([0, 734, 1534, 2320, 3200, 4090, 4900, 5860, 5910])
-  const scrollListMdUpEn = ref([0, 640, 1440, 2240, 3130, 4010, 4810, 5790, 5910])
-  const scrollListSmDownEn = ref([0, 1100, 2500, 3230, 4240, 5140, 6030, 7010, 8320])
-  const scrollListSmUpEn = ref([0, 1010, 2410, 3160, 4180, 5030, 5920, 6920, 8320])
-  const scrollListXsDownEn = ref([0, 1040, 2770, 3510, 4670, 5590, 7030, 8710, 10230])
-  const scrollListXsUpEn = ref([0, 970, 2710, 3440, 4610, 5530, 6940, 8630, 10230])
+  const scrollListDown = ref([0])
+  const scrollListUp = ref([0])
+
+  if (typeof window !== 'undefined') {
+    const headerTop = document.getElementById("area-div").offsetTop;
+    for (let i = 1; i < asideIdList.value.length - 1; i++) {
+      if (i == 4) {
+        scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop + 40);
+        scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop + 140 - headerTop);
+      } else {
+        scrollListDown.value.push(document.getElementById("area-div" + i).offsetTop - 20);
+        scrollListUp.value.push(document.getElementById("area-div" + i).offsetTop + 30 - headerTop);
+      }
+    }
+    const footerTop = document.documentElement.scrollHeight - document.documentElement.clientHeight - 5;
+    scrollListDown.value.push(footerTop);
+    scrollListUp.value.push(footerTop);
+  }
+  
   function setAside(asideId) {
     beforeAsideId.value = curAsideId.value
     curAsideId.value = asideId
     checkUpDown();
-    document.body.scrollTop = scrollList.value[asideId - 1];
-    document.documentElement.scrollTop = scrollList.value[asideId - 1];
+    const scrollTop = scrollList.value[asideId - 1] + 1;
+    document.body.scrollTop = scrollTop;
+    document.documentElement.scrollTop = scrollTop;
   }
   function checkUpDown() {
-    widthVal.value = document.body.clientWidth || document.documentElement.clientWidth
-    console.log("top:",topVal.value);
-    console.log("width:",widthVal.value);
-  // const widthList = ref([1024,768,640])
+  
     if (beforeAsideId.value < curAsideId.value || beforeTopVal.value < topVal.value) { // 向下滚动  
-      if (locale.value === 'en') { //英文
-        if (widthVal.value >= widthList.value[0]) {
-          scrollList.value = scrollListDownEn.value;
-        } else if (widthVal.value >= widthList.value[1]) {
-          scrollList.value = scrollListLgDownEn.value;
-        } else if (widthVal.value >= widthList.value[2]){
-          scrollList.value = scrollListMdDownEn.value;
-        } else if (widthVal.value >= widthList.value[3]){
-          scrollList.value = scrollListSmDownEn.value;
-        } else {
-          scrollList.value = scrollListXsDownEn.value;
-        }
-      } else {
-        scrollList.value = scrollListDown.value;
-      }
+      scrollList.value = scrollListDown.value;
     } else if (beforeAsideId.value > curAsideId.value || beforeTopVal.value > topVal.value) { //向上滚动
-      if (locale.value === 'en') { //英文
-        if (widthVal.value >= widthList.value[0]) {
-          scrollList.value = scrollListUpEn.value;
-        } else if (widthVal.value >= widthList.value[1]) {
-          scrollList.value = scrollListLgUpEn.value;
-        } else if (widthVal.value >= widthList.value[2]){
-          scrollList.value = scrollListMdUpEn.value;
-        } else if (widthVal.value >= widthList.value[3]){
-          scrollList.value = scrollListSmUpEn.value;
-        } else {
-          scrollList.value = scrollListXsUpEn.value;
-        }
-      } else {
-        scrollList.value = scrollListUp.value;
-      }
+      scrollList.value = scrollListUp.value;
     }
   }
   function handleScrolls() {
