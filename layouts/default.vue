@@ -28,6 +28,19 @@
     }
   }
   .main-margin {
-    padding: 0 6%;
+    @apply sm:mt-[160px] mt-[120px] px-[6%];
+  }
+  .text-ellipsis {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  .text-line-2{
+    -webkit-line-clamp: 2;
+  }
+  .text-line-3{
+    -webkit-line-clamp: 3;
   }
 </style>
