@@ -1,13 +1,18 @@
 <template>
-  <div class="container m-auto fixed inset-x-0 top-0 bg-[#141212] z-10" :class="{'hidden':scrollDown==true}">
-    <div class="mx-4 my-8 2xl:mx-16 xl:mx-8">
+  <div class="container m-auto inset-x-0 top-0 " :class="{ 'hidden': scrollDown === true && path === '/' },{'bg-[#141212] fixed z-10': path === '/'}">
+    <div class="py-8 mx-4 2xl:mx-16 xl:mx-8">
       <div class="flex flex-row items-center justify-between text-white">
         <div class="logo">
+          <nuxt-link to="/" target="_blank">
           <img class="h-[24px]" src="~/assets/images/header.png">
+          </nuxt-link>
         </div>
         <div class="flex flex-row">
-          <div v-for="menuId in [1, 7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu" @click="setMenuId(menuId)">
-            <nuxt-link v-if="menuId === 1" to="/" @click="curSubMenu=false">
+          <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
+            <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
+            {{ $t(`header.menu${menuId}`) }}
+            </nuxt-link> -->
+            <nuxt-link v-if="menuId === 1" to="/">
             {{ $t(`header.menu${menuId}`) }}
             </nuxt-link>
             <VDropdown v-else v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
@@ -22,7 +27,7 @@
                 <div class="to-top" :class="[{'top-active' : curSubMenu === 'news'},{'top-focus' : focusVal === 'news'}]"></div>
                 <div class="h-[80px] drop-bg text-white cursor-pointer">
                   <div v-for="option in aboutUsOptions" :key="option.value" class="choose-locale px-4 text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': curSubMenu == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="curSubMenu = option.value; drodownShow7 = false;focusVal=false">
-                    <nuxt-link :to="`/${option.value}`">
+                    <nuxt-link :to="`/${option.value}`" target="_blank">
                     {{ option.label}}
                     </nuxt-link>
                   </div>
@@ -55,8 +60,10 @@
 <script setup>
   import { computed, ref } from "vue"
 
-  const { getImageURL } = useAssets()
+  const route = useRoute();
+  const path = ref(route.path);
 
+  const emits = defineEmits(['setSubMenu']);
   const { t, locale, availableLocales } = useI18n()
   const localeOptions = availableLocales.map((lang) => {
     const name = t("general.langName", null, { locale: lang })
@@ -76,14 +83,14 @@
   })
 
   const focusVal = ref()
-  const curMenuId = ref(1)
+  const curMenuId = ref(7)
   const curSubMenu = ref()
   const scrollDown = ref(false)
   const beforeTopVal = ref(0)
 
   function setMenuId(menuId) {
     curMenuId.value = menuId;
-  }
+}
   
   function handleScroll() {
     const topVal = document.body.scrollTop || document.documentElement.scrollTop
@@ -94,7 +101,7 @@
     }
     beforeTopVal.value = topVal
   }
-  onMounted(() => {
+onMounted(() => {
     window.addEventListener("scroll", handleScroll)
   })
   onUnmounted(() => {
@@ -130,7 +137,7 @@
     border-radius: 4px;
   }
   .menu {
-    @apply cursor-pointer text-[#807D7C] pr-8 leading-[32px];
+    @apply cursor-pointer text-[#807D7C] leading-[32px];
   }
   .menu-active {
     @apply text-white !important;

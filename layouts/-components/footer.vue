@@ -6,7 +6,11 @@
     <!-- <div class="flex flex-col-reverse gap-4 text-white md:flex-row md:justify-between"> -->
     <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-[64px] gap-[8px]">
       <div class="leading-8 row-start-1">
-        <div class="mb-4"><img class="h-[32px]" src="~/assets/images/header.png"></div>
+        <div class="mb-4">
+          <nuxt-link to="/" target="_blank">
+          <img class="h-[32px]" src="~/assets/images/header.png">
+          </nuxt-link>
+        </div>
         <div>{{ $t("footer.email") }}: hamster@hamsternet.io</div>
         <div class="mb-8">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
         <div class="flex">

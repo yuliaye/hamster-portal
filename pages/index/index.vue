@@ -1,5 +1,5 @@
 <template>
-  <div class="main-margin div-bg">
+  <div class="main-margin sm:mt-[160px] mt-[120px] div-bg">
     <div id="area-div">
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
@@ -202,7 +202,6 @@ desoription trading and risk management platform.""description": "A decentralize
 </template>
 <script setup>
   const { getImageURL } = useAssets()
-  const { locale } = useI18n()
   const beforeAsideId = ref(1)
   const curAsideId = ref(1)
   const asideIdList = ref([1,2,3,4,5,6,7,8,9])
@@ -228,13 +227,6 @@ desoription trading and risk management platform.""description": "A decentralize
       scrollListUp.value.push(footerTop);
     }
   });
-
-function toDetails(asideId) {
-  this.$router.push({
-    path: "/news/details",
-    query: { newsId: asideId}
-  });
-  }
   
   function setAside(asideId) {
     beforeAsideId.value = curAsideId.value
@@ -316,9 +308,6 @@ function toDetails(asideId) {
     background-image: -moz-linear-gradient(#807d7c 100%, #807d7c 48%);
     background-image: linear-gradient(#807d7c 100%, #807d7c 48%);
   }
-  .img-center {
-    @apply flex items-center justify-center;
-  }
   .img-right {
     @apply flex justify-end;
   }
@@ -361,9 +350,6 @@ function toDetails(asideId) {
   .text-left-style {
     @apply text-left !important;
   }
-  .area-title {
-    @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
-  }
   .area-desc {
     @apply text-[#807D7C] leading-[21px] text-center;
   }
@@ -382,14 +368,6 @@ function toDetails(asideId) {
   }
   .box-bg {
     background: linear-gradient(180deg, #2e2a28 0%, rgba(46, 42, 40, 0) 100%);
-  }
-  .border-color2 {
-    box-sizing: border-box;
-    padding: 1px;
-    border-radius: 16px;
-    background-image: -webkit-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-    background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
   }
   .aside {
     @apply fixed top-[50%] flex justify-end right-0 m-auto pr-[2%];

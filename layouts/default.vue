@@ -1,12 +1,12 @@
 <template>
-  <div class="text-white">
+  <div class="text-white" :class="{[path === '/news'?'news-top-bg': path === '/company'?'company-top-bg' :'news-detail-top-bg']:path != '/'}">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
     </Head>
-    <Header />
+    <Header  />
     <div class="container max-w-screen-xl mx-auto">
       <slot />
     </div>
@@ -18,6 +18,8 @@
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
   const { getImageURL } = useAssets()
+  const route = useRoute();
+  const path = ref(route.path);
 </script>
 <style>
   body {
@@ -26,9 +28,10 @@
     &::-webkit-scrollbar {
       width: 0;
     }
+    
   }
   .main-margin {
-    @apply sm:mt-[160px] mt-[120px] px-[6%];
+    @apply px-[6%];
   }
   .text-ellipsis {
     text-overflow: -o-ellipsis-lastline;
@@ -42,5 +45,31 @@
   }
   .text-line-3{
     -webkit-line-clamp: 3;
+  }
+  .news-top-bg{
+    background: url('~/assets/images/news-top.png') no-repeat top;
+    background-size: contain;
+  }
+  .news-detail-top-bg{
+    background: url('~/assets/images/news-details-top.png') no-repeat top;
+    background-size: contain;
+  }
+  .company-top-bg{
+    background: url('~/assets/images/company-top-bg.png') no-repeat top;
+    background-size: contain;
+  }
+  .border-color2 {
+    box-sizing: border-box;
+    padding: 1px;
+    border-radius: 16px;
+    background-image: -webkit-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
+    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
+    background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
+  }
+  .img-center {
+    @apply flex items-center justify-center;
+  }
+  .area-title {
+    @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
   }
 </style>

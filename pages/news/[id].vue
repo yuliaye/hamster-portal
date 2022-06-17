@@ -1,10 +1,10 @@
 <template>
-  <div  class="top-bg main-margin">
-    <div class="flex justify-center items-center h-[500px]">
-      <div class="text-center font-bold text-[72px] w-[550px]">NEWS hamsternet.io</div>
+  <div class="main-margin">
+    <div class="flex justify-center items-center h-[70px] sm:h-[200px] md:h-[270px] lg:h-[390px] xl:h-[500px]">
+      <div class="text-center font-bold text-[22px] md:text-[26px] lg:text-[36px] xl:text-[45px] leading-[30px] md:leading-[50px] w-[200px] lg:w-[350px] sm:-mt-[110px] md:-mt-[130px]">NEWS hamsternet.io</div>
     </div>
-    <div class="grid grid-cols-3 gap-[16px]">
-      <div class="col-span-2 bg-[#2E2A28] p-[32px] rounded-[16px]">
+    <div class="lg:grid lg:grid-cols-3 lg:gap-[16px] xl:mx-[60px]">
+      <div class="lg:col-span-2 bg-[#2E2A28] p-[32px] rounded-[16px] mt-[47px]">
         <div>
           <nuxt-link :to="{path:'/'}">{{ $t("header.menu1") }}</nuxt-link> > 
           <nuxt-link :to="{path:'/news'}">{{ $t("header.menu7-sub1") }}</nuxt-link> > 
@@ -21,7 +21,7 @@
           <div class="mt-[16px]" v-for="subId in newsSubList" :key="subId">{{ $t(`news.newsContent${newsId}-sub${subId}`) }}</div>
         </div>
       </div>
-      <div class="">
+      <div class="mt-[47px]">
         <div class="text-[24px] font-bold pl-[12px] border-[#CC7219] border-l-[4px] mb-[24px]">{{ $t("news.newsRecommend") }}</div>
         <div class="bg-[#2E2A28] px-[16px] py-[32px] rounded-[16px]">
           <div v-for="(newId,index) in [1, 2, 3, 4]" :key="newId" :class="{'hidden' : Number(newId) === Number(newsId)}">
@@ -61,10 +61,4 @@
 
 </script>
 <style scope>
-.top-bg{
-  background: url('~/assets/images/news-details-top.png') no-repeat;
-  background-origin: border-box;
-  background-size: contain;
-  background-position: 100% 10%;
-}
 </style>
