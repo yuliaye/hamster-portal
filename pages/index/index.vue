@@ -271,6 +271,7 @@ desoription trading and risk management platform.""description": "A decentralize
   }
   onMounted(() => {
     window.addEventListener("scroll", handleScrolls)
+    handleScrolls();
   })
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScrolls)

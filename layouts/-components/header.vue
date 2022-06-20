@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-auto inset-x-0 top-0 " :class="{ 'hidden': scrollDown === true && path === '/' },{'bg-[#141212] fixed z-10': path === '/'}">
+  <div class="container m-auto inset-x-0 top-0  bg-opacity-25 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-gray-50': topBgShow === true}">
     <div class="py-8 mx-4 2xl:mx-16 xl:mx-8">
       <div class="flex flex-row items-center justify-between text-white">
         <div class="logo">
@@ -28,7 +28,7 @@
                 <div class="h-[80px] drop-bg text-white cursor-pointer">
                   <div v-for="option in aboutUsOptions" :key="option.value" class="choose-locale px-4 text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': curSubMenu == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="curSubMenu = option.value; drodownShow7 = false;focusVal=false">
                     <nuxt-link :to="`/${option.value}`" target="_blank">
-                    {{ option.label}}
+                    <div>{{ option.label}}</div>
                     </nuxt-link>
                   </div>
                 </div>
@@ -60,10 +60,6 @@
 <script setup>
   import { computed, ref } from "vue"
 
-  const route = useRoute();
-  const path = ref(route.path);
-
-  const emits = defineEmits(['setSubMenu']);
   const { t, locale, availableLocales } = useI18n()
   const localeOptions = availableLocales.map((lang) => {
     const name = t("general.langName", null, { locale: lang })
@@ -82,27 +78,38 @@
     ]
   })
 
-  const focusVal = ref()
+const focusVal = ref()
+  const topVal = ref(0)
   const curMenuId = ref(7)
   const curSubMenu = ref()
   const scrollDown = ref(false)
   const beforeTopVal = ref(0)
+  const topBgShow = ref(false)
 
   function setMenuId(menuId) {
     curMenuId.value = menuId;
 }
   
   function handleScroll() {
-    const topVal = document.body.scrollTop || document.documentElement.scrollTop
-    if (beforeTopVal.value < topVal) { // 向下滚动  
+    topVal.value = document.body.scrollTop || document.documentElement.scrollTop
+    if (beforeTopVal.value < topVal.value) { // 向下滚动  
       scrollDown.value = true;
     } else { //向上滚动
       scrollDown.value = false;
     }
-    beforeTopVal.value = topVal
+    beforeTopVal.value = topVal.value
+    setTopBgValue();
   }
-onMounted(() => {
+  function setTopBgValue() {
+    if (topVal.value > 0) {
+      topBgShow.value = true
+    } else {
+      topBgShow.value = false
+    }
+  }
+  onMounted(() => {
     window.addEventListener("scroll", handleScroll)
+    handleScroll();
   })
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll)
