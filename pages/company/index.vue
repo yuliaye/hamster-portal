@@ -1,7 +1,7 @@
 <template>
-  <div class="main-margin">
-    <div class="flex justify-center items-center h-[70px] sm:h-[200px] md:h-[270px] lg:h-[390px] xl:h-[500px]">
-      <div class="text-center font-bold text-[22px] md:text-[26px] lg:text-[36px] xl:text-[45px] leading-[30px] md:leading-[50px] w-[200px] lg:w-[350px] sm:-mt-[110px] md:-mt-[130px]">About hamsternet.io</div>
+  <div class="company-top-bg main-margin">
+    <div class="bg-div-style">
+      <div class="bg-div-text-style">About hamsternet.io</div>
     </div>
     <div class="area-title !mt-[50px] md:!mt-[120px]">{{ $t("header.menu7-sub2") }}</div>
     <div class="border-color2 mt-[50px]">

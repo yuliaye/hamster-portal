@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white container mx-auto" :class="{[path === '/news'?'news-top-bg': path === '/company'?'company-top-bg' :'news-detail-top-bg']:path != '/'}">
+  <div class="text-white container mx-auto">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
@@ -57,6 +57,12 @@
   .company-top-bg{
     background: url('~/assets/images/company-top-bg.png') no-repeat top;
     background-size: contain;
+  }
+  .bg-div-style{
+    @apply flex justify-center items-center h-[180px] sm:h-[280px] md:h-[340px] lg:h-[480px] xl:h-[600px];
+  }
+  .bg-div-text-style{
+    @apply text-center font-bold text-[22px] md:text-[26px] lg:text-[36px] xl:text-[45px] leading-[30px] md:leading-[50px] w-[200px] lg:w-[350px] mt-[80px] sm:mt-0;
   }
   .border-color2 {
     box-sizing: border-box;

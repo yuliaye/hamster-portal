@@ -1,7 +1,7 @@
 <template>
-  <div class="main-margin">
-    <div class="flex justify-center items-center h-[70px] sm:h-[200px] md:h-[270px] lg:h-[390px] xl:h-[500px]">
-      <div class="text-center font-bold text-[22px] md:text-[26px] lg:text-[36px] xl:text-[45px] leading-[30px] md:leading-[50px] w-[200px] lg:w-[350px] sm:-mt-[110px] md:-mt-[130px]">NEWS hamsternet.io</div>
+  <div class="news-detail-top-bg main-margin">
+    <div class="bg-div-style">
+      <div class="bg-div-text-style">NEWS hamsternet.io</div>
     </div>
     <div class="lg:grid lg:grid-cols-3 lg:gap-[16px] xl:mx-[60px]">
       <div class="lg:col-span-2 bg-[#2E2A28] p-[32px] rounded-[16px] mt-[47px]">
