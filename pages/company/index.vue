@@ -11,7 +11,7 @@
             <img src="~/assets/images/company-profile.png">
           </div>
           <div class="flex items-center">
-            <div>
+            <div class="text-[#807D7C]">
               <div v-for="profileId in [1, 2, 3]" :key="profileId">{{ $t(`company.companyProfile${profileId}`) }}</div>
             </div>
           </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="area-title md:!mt-[120px] !mt-[50px]">{{ $t("company.companyAdvantage") }}</div>
-    <div class="mt-[16px] text-[#807D7C] text-[14px] leading-[21px] text-center md:px-16">
+    <div class="mt-[16px] text-[#807D7C] text-[14px] leading-[21px] text-left md:text-center md:px-16">
       <div v-for="advantageId in [1, 2, 3]" :key="advantageId">{{ $t(`company.advantage${advantageId}`) }}</div>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-[40px] mt-[50px]">

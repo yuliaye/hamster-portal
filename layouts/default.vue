@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white" :class="{[path === '/news'?'news-top-bg': path === '/company'?'company-top-bg' :'news-detail-top-bg']:path != '/'}">
+  <div class="text-white container mx-auto" :class="{[path === '/news'?'news-top-bg': path === '/company'?'company-top-bg' :'news-detail-top-bg']:path != '/'}">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
