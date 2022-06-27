@@ -18,8 +18,6 @@
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
   const { getImageURL } = useAssets()
-  const route = useRoute();
-  const path = ref(route.path);
 </script>
 <style>
   body {
