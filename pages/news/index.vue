@@ -15,7 +15,9 @@
               <img class="rounded-[8px] w-full" :src="getImageURL(`area7-img-detail${newId}.png`)" />
             </div>
             <div class="col-span-3">
-              <div class="text-[24px] font-bold mt-[16px] leading-[28px] text-[#FFFFFF] group-hover:text-[#CC7219] text-ellipsis text-line-2">{{ $t(`home.sub7Title${newId}`) }}</div>
+              <nuxt-link :to="{path:`/news/${newId}`}" target="_blank">
+                <div class="text-[24px] font-bold mt-[16px] leading-[28px] text-[#FFFFFF] group-hover:text-[#CC7219] text-ellipsis text-line-2">{{ $t(`home.sub7Title${newId}`) }}</div>
+              </nuxt-link>
               <div class="text-[#807D7C] mt-[24px] leading-[20px] h-[60px] text-ellipsis text-line-3">{{ $t(`home.sub7Desc${newId}`) }}</div>
               <div class="text-[#807D7C] mt-[24px] flex justify-between">
                 <div>{{ $t(`home.sub7Date${newId}`) }}</div>

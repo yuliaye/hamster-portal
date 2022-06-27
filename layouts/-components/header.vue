@@ -1,56 +1,58 @@
 <template>
-  <div class="container m-auto inset-x-0 top-0  bg-opacity-25 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-gray-50': topBgShow === true}">
-    <div class="py-8 mx-4 2xl:mx-16 xl:mx-8">
-      <div class="flex flex-row items-center justify-between text-white">
-        <div class="logo">
-          <nuxt-link to="/" target="_blank">
-          <img class="h-[24px]" src="~/assets/images/header.png">
-          </nuxt-link>
-        </div>
-        <div class="flex flex-row">
-          <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
-            <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
-            {{ $t(`header.menu${menuId}`) }}
-            </nuxt-link> -->
-            <nuxt-link v-if="menuId === 1" to="/">
-            {{ $t(`header.menu${menuId}`) }}
+  <div class="inset-x-0 top-0  bg-opacity-50 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
+    <div class="m-auto">
+      <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
+        <div class="flex flex-row items-center justify-between text-white">
+          <div class="logo">
+            <nuxt-link to="/" target="_blank">
+            <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
-            <VDropdown v-else v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
-              <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
-                <div class="px-[16px] h-[32px] flex justify-center items-center">
-                  <div> {{ $t(`header.menu${menuId}`) }}</div>
-                  <img v-if="menuId === curMenuId" src="~/assets/images/menu-down-hover.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
-                  <img v-else src="~/assets/images/menu-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
+          </div>
+          <div class="flex flex-row">
+            <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
+              <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
+              {{ $t(`header.menu${menuId}`) }}
+              </nuxt-link> -->
+              <nuxt-link v-if="menuId === 1" to="/">
+              {{ $t(`header.menu${menuId}`) }}
+              </nuxt-link>
+              <VDropdown v-else v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
+                <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
+                  <div class="px-[16px] h-[32px] flex justify-center items-center">
+                    <div> {{ $t(`header.menu${menuId}`) }}</div>
+                    <img v-if="menuId === curMenuId" src="~/assets/images/menu-down-hover.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
+                    <img v-else src="~/assets/images/menu-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
+                  </div>
+                </div>
+                <template #popper>
+                  <div class="to-top" :class="[{'top-active' : curSubMenu === 'news'},{'top-focus' : focusVal === 'news'}]"></div>
+                  <div class="h-[80px] drop-bg text-white cursor-pointer">
+                    <div v-for="option in aboutUsOptions" :key="option.value" class="choose-locale px-4 text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': curSubMenu == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="curSubMenu = option.value; drodownShow7 = false;focusVal=false">
+                      <nuxt-link :to="`/${option.value}`" target="_blank">
+                      <div>{{ option.label}}</div>
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </template>
+              </VDropdown>
+            </div>
+            <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
+              <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">
+                <div class="px-[16px] h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
+                  <div>{{ selectedLocale.name }}</div>
+                  <img src="~/assets/images/drop-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
                 </div>
               </div>
               <template #popper>
-                <div class="to-top" :class="[{'top-active' : curSubMenu === 'news'},{'top-focus' : focusVal === 'news'}]"></div>
-                <div class="h-[80px] drop-bg text-white cursor-pointer">
-                  <div v-for="option in aboutUsOptions" :key="option.value" class="choose-locale px-4 text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': curSubMenu == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="curSubMenu = option.value; drodownShow7 = false;focusVal=false">
-                    <nuxt-link :to="`/${option.value}`" target="_blank">
-                    <div>{{ option.label}}</div>
-                    </nuxt-link>
+                <div class="to-top" :class="[{'top-active' : selectedLocale.value == 'en'},{'top-focus' : focusVal == 'en'}]"></div>
+                <div class="w-[90px] h-[80px] drop-bg text-white cursor-pointer">
+                  <div v-for="option in localeOptions" :key="option.value" class="choose-locale text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': selectedLocale.value == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="locale = option.value; drodownShow = false;focusVal=false">
+                    {{ option.label || option.name }}
                   </div>
                 </div>
               </template>
             </VDropdown>
           </div>
-          <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
-            <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">
-              <div class="px-[16px] h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
-                <div>{{ selectedLocale.name }}</div>
-                <img src="~/assets/images/drop-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
-              </div>
-            </div>
-            <template #popper>
-              <div class="to-top" :class="[{'top-active' : selectedLocale.value == 'en'},{'top-focus' : focusVal == 'en'}]"></div>
-              <div class="w-[90px] h-[80px] drop-bg text-white cursor-pointer">
-                <div v-for="option in localeOptions" :key="option.value" class="choose-locale text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white" :class="{'choose-locale-active': selectedLocale.value == option.value}" @mouseover="focusVal = option.value" @mouseleave="focusVal=false" @click="locale = option.value; drodownShow = false;focusVal=false">
-                  {{ option.label || option.name }}
-                </div>
-              </div>
-            </template>
-          </VDropdown>
         </div>
       </div>
     </div>
