@@ -18,8 +18,8 @@
           <img class="h-[24px] mr-[20px]" src="~/assets/images/weibo.png"> -->
           <nuxt-link target='_blank' to='https://github.com/hamster-shared'><img class="h-[24px] mr-[20px]" src="~/assets/images/github.png"></nuxt-link>
           <nuxt-link target='_blank' to='https://twitter.com/Hamsternetio'><img class="h-[24px] mr-[20px]" src="~/assets/images/twitter.png"></nuxt-link>
+          <nuxt-link target='_blank' to='https://discord.gg/MrJWxRwXpb'><img class="h-[24px] mr-[20px]" src="~/assets/images/discord.png"></nuxt-link>
           <nuxt-link target='_blank' to='https://medium.com/@Hamsternetio'><img class="h-[24px] mr-[20px]" src="~/assets/images/medium.png"></nuxt-link>
-          <nuxt-link target='_blank' to='https://discord.gg/MrJWxRwXpb'><img class="h-[24px]" src="~/assets/images/discord.png"></nuxt-link>
           
         </div>
       </div>
