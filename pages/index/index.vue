@@ -1,5 +1,5 @@
 <template>
-  <div class="main-margin div-bg mt-[120px] sm:mt-[160px]">
+  <div class="main-margin sm:mt-[160px] mt-[120px] div-bg">
     <div id="area-div">
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
@@ -148,8 +148,8 @@ desoription trading and risk management platform.""description": "A decentralize
                 <img class="w-[66px]" :src="getImageURL(`area5-img${areaId}.png`)">
               </div>
               <div class="w-4/5">
-                <div class="text-[20px] font-bold my-[12px] text-ellipsis">{{ $t(`home.sub5Title${areaId}`) }}</div>
-                <div class="overflow-y-auto text-[#807D7C] group-hover:text-white text-ellipsis">{{ $t(`home.sub5Desc${areaId}`) }}</div>
+                <div class="text-[20px] font-bold my-[12px] text-ellipsis text-line-2">{{ $t(`home.sub5Title${areaId}`) }}</div>
+                <div class="overflow-y-auto text-[#807D7C] group-hover:text-white text-ellipsis text-line-2">{{ $t(`home.sub5Desc${areaId}`) }}</div>
               </div>
             </div>
           </div>
@@ -179,12 +179,14 @@ desoription trading and risk management platform.""description": "A decentralize
       <div class="area-desc">{{ $t("home.areaDesc7") }}</div>
       <div class="grid md:grid-cols-3 sm:grid-cols-1 xl:gap-[64px] gap-[8px] mt-[80px]">
         <div class="flex flex-col bg-[#2E2A28] rounded-[16px] p-[16px]" v-for="areaId in [1, 2, 3]" :key="areaId">
-          <div class="img-center">
-            <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
-          </div>
-          <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px] h-[38px] text-ellipsis">{{ $t(`home.sub7Title${areaId}`) }}</div>
-          <div class="text-[#807D7C] leading-[21px] text-ellipsis">{{ $t(`home.sub7Desc${areaId}`) }}</div>
-          <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
+           <nuxt-link :to="{path:`/news/${areaId}`}" target="_blank">
+            <div class="img-center">
+              <img class="rounded-[16px]" :src="getImageURL(`area7-img${areaId}.png`)">
+            </div>
+            <div class="text-base font-bold leading-[19px] mb-[16px] mt-[24px] h-[38px] text-ellipsis text-line-2">{{ $t(`home.sub7Title${areaId}`) }}</div>
+            <div class="text-[#807D7C] leading-[21px] text-ellipsis text-line-2">{{ $t(`home.sub7Desc${areaId}`) }}</div>
+            <div class="text-[#807D7C] leading-[21px] text-right mt-[16px]">{{ $t(`home.sub7Date${areaId}`) }}</div>
+          </nuxt-link>
         </div>
       </div>
       <div class="text-center mt-[24px] mb-[80px]">
@@ -200,7 +202,6 @@ desoription trading and risk management platform.""description": "A decentralize
 </template>
 <script setup>
   const { getImageURL } = useAssets()
-  const { locale } = useI18n()
   const beforeAsideId = ref(1)
   const curAsideId = ref(1)
   const asideIdList = ref([1,2,3,4,5,6,7,8,9])
@@ -270,6 +271,7 @@ desoription trading and risk management platform.""description": "A decentralize
   }
   onMounted(() => {
     window.addEventListener("scroll", handleScrolls)
+    handleScrolls();
   })
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScrolls)
@@ -306,9 +308,6 @@ desoription trading and risk management platform.""description": "A decentralize
     background-image: -webkit-linear-gradient(#807d7c 100%, #807d7c 48%);
     background-image: -moz-linear-gradient(#807d7c 100%, #807d7c 48%);
     background-image: linear-gradient(#807d7c 100%, #807d7c 48%);
-  }
-  .img-center {
-    @apply flex items-center justify-center;
   }
   .img-right {
     @apply flex justify-end;
@@ -352,9 +351,6 @@ desoription trading and risk management platform.""description": "A decentralize
   .text-left-style {
     @apply text-left !important;
   }
-  .area-title {
-    @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
-  }
   .area-desc {
     @apply text-[#807D7C] leading-[21px] text-center;
   }
@@ -373,22 +369,6 @@ desoription trading and risk management platform.""description": "A decentralize
   }
   .box-bg {
     background: linear-gradient(180deg, #2e2a28 0%, rgba(46, 42, 40, 0) 100%);
-  }
-  .border-color2 {
-    box-sizing: border-box;
-    padding: 1px;
-    border-radius: 16px;
-    background-image: -webkit-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-    background-image: -moz-linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-    background-image: linear-gradient(to bottom, #bda48a 0%, #141212 90%);
-  }
-  .text-ellipsis {
-    text-overflow: -o-ellipsis-lastline;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
   .aside {
     @apply fixed top-[50%] flex justify-end right-0 m-auto pr-[2%];
