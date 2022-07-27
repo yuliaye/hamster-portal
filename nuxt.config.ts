@@ -1,4 +1,7 @@
 import { defineNuxtConfig } from "nuxt"
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -19,5 +22,25 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // apiProxyTarget: ""
-  }
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        plugins: [nodePolyfills()]
+      },
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        // Node.js global to browser globalThis
+        define: {
+          global: 'globalThis',
+        },
+        // Enable esbuild polyfill plugins
+        plugins: [
+          NodeGlobalsPolyfillPlugin({ buffer: true, process: true }),
+          NodeModulesPolyfillPlugin(),
+        ],
+      },
+    }
+  },
 })
