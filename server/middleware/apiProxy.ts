@@ -4,7 +4,7 @@ const { apiProxyTarget } = useRuntimeConfig()
 const apiProxy = apiProxyTarget && createProxyMiddleware("/api/**", {
   target: apiProxyTarget,
   changeOrigin: true,
-  pathRewrite: path => path.replace(/^\/api/, "")
+  // pathRewrite: path => path.replace(/^\/api/, "")
 })
 
 export default defineEventHandler(async ({ req, res }) => {

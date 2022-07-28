@@ -4,7 +4,12 @@
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
           <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
-          <div class="text-[#807D7C] leading-[21px] mt-[16px]">{{ $t("home.titleDesc") }}</div>
+          <div class="text-[#807D7C] leading-[21px] mt-[16px] mb-10">{{ $t("home.titleDesc") }}</div>
+          <nuxt-link to="/faucet" target="_blank">
+            <button 
+              class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl ml-[200px]"
+            >Faucet >></button>
+          </nuxt-link>
         </div>
         <div class="md:w-2/5">
           <div class="img-center" :class="[$i18n.locale === 'en' ? 'img-show-up' : 'img-show-up2']">
@@ -12,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="md:flex flex-row">
+      <div class="flex-row md:flex">
         <div class="mt-[32px] w-1/3" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
           <button class="text-btn">{{ $t("home.btnText") }}</button>
         </div>
@@ -20,7 +25,7 @@
           <img class="md:absolute img-w" src="~/assets/images/title-img.png">
         </div>
       </div>
-    </div>
+    </div>   
     <div id="area-div1">
       <div class="area-title">{{ $t("home.areaTitle") }}</div>
       <div class="area-desc">{{ $t("home.areaDesc") }}</div>
@@ -33,7 +38,7 @@
             <img class="rounded-full w-[128px]" :src="getImageURL(`area-img${areaId}.png`)">
           </div>
           <div class="font-bold text-base leading-[19px] text-center mb-[16px]">{{ $t(`home.subTitle${areaId}`) }}</div>
-          <div class="area-desc overflow-y-auto">{{ $t(`home.subDesc${areaId}`) }}</div>
+          <div class="overflow-y-auto area-desc">{{ $t(`home.subDesc${areaId}`) }}</div>
         </div>
       </div>
     </div>
@@ -65,7 +70,7 @@
             <div>
               <div class="font-bold text-[20px] text-center mt-[16px]">{{ $t("home.sub3Title") }}</div>
               <div class="img-center mt-[16px] flex">
-                <div class="area-desc overflow-y-auto">{{ $t("home.sub3Desc") }}</div>
+                <div class="overflow-y-auto area-desc">{{ $t("home.sub3Desc") }}</div>
               </div>
             </div>
           </div>
