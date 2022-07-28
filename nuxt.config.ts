@@ -2,6 +2,9 @@ import { defineNuxtConfig } from "nuxt"
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
+import path from "path"
+
+const pathResolve = (dir: string) => path.resolve(process.cwd(), '.', dir);
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -21,9 +24,14 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    // apiProxyTarget: ""
+    apiProxyTarget: "https://cross-chain.authright-test.newtouch.com"
   },
   vite: {
+    resolve: {
+      alias: {
+        "web3": pathResolve("vendor/web3/index.js"),
+      }
+    },
     build: {
       rollupOptions: {
         plugins: [nodePolyfills()]
@@ -43,5 +51,4 @@ export default defineNuxtConfig({
       },
     }
   },
-    apiProxyTarget: "https://cross-chain.authright-test.newtouch.com"
 })

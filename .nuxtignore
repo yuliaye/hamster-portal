@@ -1,2 +1,4 @@
 # This file is to let Nuxt ignore layout, page and middleware files during the build phase. 
 # Learn more: https://v3.nuxtjs.org/guide/directory-structure/nuxtignore#nuxt-ignore-file
+
+/pages/**/-components/*
