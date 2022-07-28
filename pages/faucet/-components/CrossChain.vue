@@ -3,13 +3,15 @@
     <h1 class="text-2xl mb-14 pt-14">Cross Chain</h1>
     <div>
       <h3 class="mb-10 text-xl">Hamster Polkadot Token To Hamster ERC20 Token</h3>
-      <input type="text" placeholder="amount"
+      <input type="text" placeholder="amount"  v-model="ercAmount"
         class="mr-5 w-48 h-16 border border-solid border-[#514F4E] rounded-[40px]"
       />
-      <input type="text" placeholder="address"
+      <input type="text" placeholder="address" v-model="ercAddress"
         class="mr-5 w-[378px] h-16 border border-solid border-[#514F4E] rounded-[32px]"
       />
-      <button class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]">Submit</button>
+      <button @click="handlerPolkadot"
+        class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]"
+      >Submit</button>
     </div>
     <div>
       <h3 class="mt-10 mb-10 text-xl">Hamster ERC20 Token To Hamster Polkadot Token</h3>
@@ -32,14 +34,43 @@ import Web3 from 'web3'
 import { ABI } from './contract.ts'
 import { ApiPromise, WsProvider } from '@polkadot/api'
 
+const ercAmount = ref('')
+const ercAddress = ref('')
+
+const {
+  web3Accounts,
+  web3Enable,
+  web3FromAddress,
+} = await import('@polkadot/extension-dapp')
+
+const handlerPolkadot = async function () {
+  const wsProvider = new WsProvider('wss://ws.test.hamsternet.io')
+  const api = await ApiPromise.create({ provider: wsProvider })
+
+  const allInjected = await web3Enable('my cool dapp')
+  const allAccounts = await web3Accounts()
+  console.log('allAccounts',allAccounts)
+  if (allAccounts.length === 0) {
+    alert('you need init an polkadot account')
+    return
+  }
+  const SENDER = allAccounts[0].address
+
+  const injector = await web3FromAddress(SENDER);
+  api.tx.burn.burn(ercAmount.value*1, ercAddress.value).signAndSend(
+    SENDER, {signer: injector.signer}, (result) => {
+      if (result.status.isInBlock) {
+        console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
+      } else if (result.status.isFinalized) {
+        console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+      }
+    }
+  )
+}
+
 const connected = ref(false)
 const polkaAmount = ref('')
 const polkaAddress = ref('')
-
-const connectPolkadot = async function() {
-  const wsProvider = new WsProvider('wss://polkadot.authright-test.newtouch.com')
-  const api = await ApiPromise.create({ provider: wsProvider })
-}
 
 const hookWeb3 = function () {
   if (window.ethereum) {
@@ -53,15 +84,14 @@ const hookWeb3 = function () {
 }
 
 const transformPolkadot = async function() {
-  // await connectPolkadot()
+  const wsProvider = new WsProvider('wss://polkadot.authright-test.newtouch.com')
+  const api = await ApiPromise.create({ provider: wsProvider })
   await hookWeb3()
 
   const web3 = new Web3(window.ethereum)
   console.log("web3",web3)
-  web3.eth.getAccounts().then(data => {
-    console.log("getAccount: ", data)
-  })
-  const accounts = await web3.eth.getAccounts()
+  const accounts = web3.eth.accounts
+  // const accounts = await web3.eth.getAccounts()
   console.log('accounts', accounts)
   const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
   console.log('contract',contract)
