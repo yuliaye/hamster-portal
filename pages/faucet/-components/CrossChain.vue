@@ -64,7 +64,7 @@ export default {
       const SENDER = allAccounts[0].address
 
       const injector = await web3FromAddress(SENDER);
-      api.tx.burn.burn(ercAmount.value*1, ercAddress.value).signAndSend(
+      api.tx.burn.burn(ercAmount.value+'000000000000', ercAddress.value).signAndSend(
         SENDER, {signer: injector.signer}, (result) => {
           if (result.status.isInBlock) {
             console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
@@ -91,22 +91,15 @@ export default {
     }
 
     const transformPolkadot = async function() {
-      const wsProvider = new WsProvider('wss://polkadot.authright-test.newtouch.com')
-      const api = await ApiPromise.create({ provider: wsProvider })
       await hookWeb3()
 
       const web3 = new Web3(window.ethereum)
-      console.log("web3",web3)
       const accounts = await web3.eth.getAccounts()
-      console.log('accounts', accounts)
       const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
-      console.log('contract',contract)
-      contract.methods.burn(polkaAmount.value*1, polkaAddress.value).send({
+      contract.methods.burn(polkaAmount.value+'000000000000', polkaAddress.value).send({
         from: accounts[0]
       }).on('transactionHash', function (hash) {
         console.log('transactionHash:', hash)
-      }).on('confirmation', function (confirmationNumber, receipt) {
-        console.log('confirmation:', confirmationNumber)
       }).on('receipt', function (receipt) {
         // receipt example
         console.log('receipt:', receipt)
