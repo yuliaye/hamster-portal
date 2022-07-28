@@ -43,4 +43,5 @@ export default defineNuxtConfig({
       },
     }
   },
+    apiProxyTarget: "https://cross-chain.authright-test.newtouch.com"
 })
