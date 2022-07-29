@@ -11,7 +11,9 @@
       />
       <button @click="handlerPolkadot"
         class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]"
-      >Submit</button>
+      >
+        <LoadingOutlined v-if="isLoadingHandler" />Submit
+      </button>
     </div>
     <div>
       <h3 class="mt-10 mb-10 text-xl">Hamster ERC20 Token To Hamster Polkadot Token</h3>
@@ -23,7 +25,9 @@
       />
       <button @click="transformPolkadot"
         class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]"
-      >Submit</button>
+      >
+        <LoadingOutlined v-if="isLoadingTransform" />Submit
+      </button>
     </div>
   </div>
 </template>
@@ -32,13 +36,17 @@
 import { ref } from 'vue'
 import Web3 from 'web3'
 import { ABI } from './contract.ts'
+import { LoadingOutlined } from '@ant-design/icons-vue';
 
 export default {
+  components: { LoadingOutlined },
+
   async setup() {
     if (!process.client) return {}
 
     const ercAmount = ref('')
     const ercAddress = ref('')
+    const isLoadingHandler = ref(false)
 
     const {
       web3Accounts,
@@ -51,6 +59,7 @@ export default {
     } = await import('@polkadot/api')
 
     const handlerPolkadot = async function () {
+      isLoadingHandler.value = true
       const wsProvider = new WsProvider('wss://ws.test.hamsternet.io')
       const api = await ApiPromise.create({ provider: wsProvider })
 
@@ -59,6 +68,7 @@ export default {
       console.log('allAccounts',allAccounts)
       if (allAccounts.length === 0) {
         alert('you need init an polkadot account')
+        isLoadingHandler.value = false
         return
       }
       const SENDER = allAccounts[0].address
@@ -70,6 +80,7 @@ export default {
             console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
           } else if (result.status.isFinalized) {
             console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+            isLoadingHandler.value = false
           }
         }
       )
@@ -78,6 +89,7 @@ export default {
     const connected = ref(false)
     const polkaAmount = ref('')
     const polkaAddress = ref('')
+    const isLoadingTransform = ref(false)
 
     const hookWeb3 = function () {
       if (window.ethereum) {
@@ -91,6 +103,7 @@ export default {
     }
 
     const transformPolkadot = async function() {
+      isLoadingTransform.value = true
       await hookWeb3()
 
       const web3 = new Web3(window.ethereum)
@@ -103,13 +116,16 @@ export default {
       }).on('receipt', function (receipt) {
         // receipt example
         console.log('receipt:', receipt)
+        isLoadingTransform.value = false
       }).on('error', function (error) {
+        isLoadingTransform.value = false
         console.log('error:', error)
       })
     }
 
     return {
-      handlerPolkadot,transformPolkadot,ercAmount,ercAddress,polkaAmount,polkaAddress
+      handlerPolkadot,transformPolkadot,ercAmount,ercAddress,polkaAmount,polkaAddress,
+      isLoadingTransform,isLoadingHandler
     }
 
   }
@@ -129,5 +145,8 @@ export default {
 input{
   background: unset;
   @apply text-xl pl-6 text-[#807D7C]
+}
+:deep(.anticon svg){
+  @apply mb-2 mr-2;
 }
 </style>

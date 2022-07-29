@@ -7,7 +7,7 @@
           <div class="text-[#807D7C] leading-[21px] mt-[16px] mb-10">{{ $t("home.titleDesc") }}</div>
           <nuxt-link to="/faucet" target="_blank">
             <button 
-              class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl ml-[200px]"
+              class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl"
             >Faucet >></button>
           </nuxt-link>
         </div>
