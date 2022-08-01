@@ -1,15 +1,18 @@
 <template>
-  <div class="w-[1024px] h-[622px] mt-[80px] rounded-[31px] cross-chain mx-auto">
+  <div class="w-[1024px] h-[622px] mt-[60px] rounded-[31px] cross-chain mx-auto">
     <h1 class="text-2xl mb-14 pt-14">Cross Chain</h1>
     <div>
       <h3 class="mb-10 text-xl">Hamster Polkadot Token To Hamster ERC20 Token</h3>
-      <input type="text" placeholder="amount"  v-model="ercAmount"
+      <input type="number" placeholder="amount"  v-model="ercAmount"
         class="mr-5 w-48 h-16 border border-solid border-[#514F4E] rounded-[40px]"
       />
       <input type="text" placeholder="address" v-model="ercAddress"
+        @input="ercAddress = ercAddress.replace(/\s+/g, '')"
         class="mr-5 w-[378px] h-16 border border-solid border-[#514F4E] rounded-[32px]"
       />
-      <button @click="handlerPolkadot"
+      <button
+        @click="handlerPolkadot"
+        :disabled="!ercAmount || !ercAddress || isLoadingHandler"
         class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]"
       >
         <LoadingOutlined v-if="isLoadingHandler" />Submit
@@ -17,16 +20,20 @@
     </div>
     <div>
       <h3 class="mt-10 mb-10 text-xl">Hamster ERC20 Token To Hamster Polkadot Token</h3>
-      <input type="text" placeholder="amount" v-model="polkaAmount"
+      <input type="number" placeholder="amount" v-model="polkaAmount"
         class="mr-5 w-48 h-16 border border-solid border-[#514F4E] rounded-[32px]"
       />
       <input type="text" placeholder="address" v-model="polkaAddress"
+        @input="polkaAddress = polkaAddress.replace(/\s+/g, '')"
         class="mr-5 w-[378px] h-16 border border-solid border-[#514F4E] rounded-[32px]"
       />
-      <button @click="transformPolkadot"
+      <button
+        @click="transformPolkadot"
+        :disabled="!polkaAmount || !polkaAddress || isLoadingTransform"
         class="w-[200px] h-16 rounded-[32px] bg-[#2E2A28] text-xl text-[#CC7219]"
       >
-        <LoadingOutlined v-if="isLoadingTransform" />Submit
+        <LoadingOutlined v-if="isLoadingTransform" />
+        Submit
       </button>
     </div>
   </div>
@@ -74,16 +81,19 @@ export default {
       const SENDER = allAccounts[0].address
 
       const injector = await web3FromAddress(SENDER);
-      api.tx.burn.burn(ercAmount.value+'000000000000', ercAddress.value).signAndSend(
+      api.tx.burn.burn(ercAmount.value*1000000000000, ercAddress.value).signAndSend(
         SENDER, {signer: injector.signer}, (result) => {
           if (result.status.isInBlock) {
             console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
           } else if (result.status.isFinalized) {
             console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
             isLoadingHandler.value = false
-          }
+          } 
         }
-      )
+      ).catch((error) => { 
+        console.log('err',error)
+        isLoadingHandler.value = false
+      })
     }
 
     const connected = ref(false)
@@ -109,7 +119,7 @@ export default {
       const web3 = new Web3(window.ethereum)
       const accounts = await web3.eth.getAccounts()
       const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
-      contract.methods.burn(polkaAmount.value+'000000000000', polkaAddress.value).send({
+      contract.methods.burn(polkaAmount.value*1000000000000, polkaAddress.value).send({
         from: accounts[0]
       }).on('transactionHash', function (hash) {
         console.log('transactionHash:', hash)
@@ -124,8 +134,14 @@ export default {
     }
 
     return {
-      handlerPolkadot,transformPolkadot,ercAmount,ercAddress,polkaAmount,polkaAddress,
-      isLoadingTransform,isLoadingHandler
+      handlerPolkadot,
+      transformPolkadot,
+      ercAmount,
+      ercAddress,
+      polkaAmount,
+      polkaAddress,
+      isLoadingTransform,
+      isLoadingHandler
     }
 
   }
@@ -145,6 +161,14 @@ export default {
 input{
   background: unset;
   @apply text-xl pl-6 text-[#807D7C]
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 :deep(.anticon svg){
   @apply mb-2 mr-2;

@@ -6,20 +6,20 @@
       </div>
       <div class="mt-8 text-2xl">You will receive 1000 Hamster Token to your account, only once per day</div>
     </div>
-    <div class="mt-14">
-      <input type="text" placeholder="Please enter the account address" v-model="addressValue"
-        class="w-[716px] h-20 border border-solid border-[#807D7C] mr-5 rounded-[40px]"
-      />
+    <div class="flex justify-center mt-14">
+      <div class="h-4 w-[716px] mr-5">
+        <input type="text" placeholder="Please enter the account address" v-model="addressValue"
+          class="w-[716px] h-20 border border-solid border-[#807D7C] rounded-[40px]"
+        />
+        <div class="block text-xl text-left text-red-500 error-message">{{ errorMessage }}</div>
+      </div>
       <button
         class="w-[292px] h-20 bg-[#CC7219] rounded-[40px] text-2xl" @click="handleAddress"
       >
         <LoadingOutlined v-if="isLoading" />Confirm
       </button>
-      <div class="block text-xl text-red-500 error-message">{{ errorMessage }}</div>
     </div>
-    <client-only>
-      <CrossChain />
-    </client-only>
+    <CrossChain />
   </div>
 </template>
 
@@ -68,7 +68,6 @@ input{
   @apply text-xl pl-6 text-[#807D7C]
 }
 .error-message{
-  margin-left: -620px;
   margin-top: 8px;
 }
 :deep(.anticon svg){
