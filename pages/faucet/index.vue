@@ -28,6 +28,10 @@ import { ref } from 'vue'
 import CrossChain from './-components/CrossChain.vue'
 import { LoadingOutlined } from '@ant-design/icons-vue';
 
+definePageMeta({
+  layout: "no-ssr"
+})
+
 const addressValue = ref('')
 const errorMessage = ref('')
 const isLoading = ref(false)
@@ -63,14 +67,14 @@ const handleAddress =()=>{
 </script>
 
 <style scoped>
-input{
-  background: unset;
-  @apply text-xl pl-6 text-[#807D7C]
-}
-.error-message{
-  margin-top: 8px;
-}
-:deep(.anticon svg){
-  @apply mb-2 mr-2;
-}
+  input{
+    background: unset;
+    @apply text-xl pl-6 text-[#807D7C]
+  }
+  .error-message{
+    margin-top: 8px;
+  }
+  :deep(.anticon svg){
+    @apply mb-2 mr-2;
+  }
 </style>

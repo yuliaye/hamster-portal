@@ -2,6 +2,7 @@ import { defineNuxtConfig } from "nuxt"
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
+import { configStyleImportPlugin } from './vite/plugins/styleImport';
 import path from "path"
 
 const pathResolve = (dir: string) => path.resolve(process.cwd(), '.', dir);
@@ -29,13 +30,24 @@ export default defineNuxtConfig({
   vite: {
     resolve: {
       alias: {
-        "web3": pathResolve("vendor/web3/index.js"),
+        "web3": pathResolve("node_modules/web3/dist/web3.min.js"),
+      }
+    },
+    plugins: [configStyleImportPlugin()],
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true
+        }
       }
     },
     build: {
       rollupOptions: {
         plugins: [nodePolyfills()]
       },
+      transpile: [
+        ["ant-design-vue", "@ant-design/icons-vue"],
+      ],
     },
     optimizeDeps: {
       esbuildOptions: {
@@ -49,6 +61,6 @@ export default defineNuxtConfig({
           NodeModulesPolyfillPlugin(),
         ],
       },
-    }
+    },
   },
 })
