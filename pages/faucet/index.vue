@@ -24,46 +24,45 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import CrossChain from './-components/CrossChain.vue'
-import { LoadingOutlined } from '@ant-design/icons-vue';
+  import { ref } from 'vue'
+  import CrossChain from './-components/CrossChain.vue'
+  import { LoadingOutlined } from '@ant-design/icons-vue';
 
-definePageMeta({
-  layout: "no-ssr"
-})
+  definePageMeta({
+    layout: "no-ssr"
+  })
 
-const addressValue = ref('')
-const errorMessage = ref('')
-const isLoading = ref(false)
+  const addressValue = ref('')
+  const errorMessage = ref('')
+  const isLoading = ref(false)
 
-const handleAddress =()=>{
-  isLoading.value = true
+  const handleAddress = () =>{
+    isLoading.value = true
 
-  if(!addressValue.value){
-    errorMessage.value = 'this cannot be empty'
-    isLoading.value = false
+    if(!addressValue.value){
+      errorMessage.value = 'this cannot be empty'
+      isLoading.value = false
 
-  } else{
-    errorMessage.value = ''
+    } else{
+      errorMessage.value = ''
 
-    const url = '/api/v1/facuet/request'
-    const data = {
-      address: addressValue.value
+      const url = '/api/v1/facuet/request'
+      const data = {
+        address: addressValue.value
+      }
+
+      $fetch(url, {
+        method: "POST",
+        body: data
+      }).then((res) => {
+        console.log(res)
+        isLoading.value = false
+      }).catch((err) => {
+        errorMessage.value = err.data.message
+        isLoading.value = false
+      })
     }
-
-    $fetch(url, {
-      method: "POST",
-      body: data
-    }).then((res) => {
-      console.log(res)
-      isLoading.value = false
-    }).catch((err) => {
-      errorMessage.value = err.data.message
-      isLoading.value = false
-    })
   }
-
-}
 </script>
 
 <style scoped>

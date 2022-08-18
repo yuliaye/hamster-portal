@@ -39,138 +39,110 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-import Web3 from 'web3'
-import { ABI } from './contract.ts'
-import { LoadingOutlined } from '@ant-design/icons-vue';
+<script setup>
+  import { ref } from 'vue'
+  import { ABI } from './contract.ts'
+  import { LoadingOutlined } from '@ant-design/icons-vue'
 
-export default {
-  components: { LoadingOutlined },
+  const { default: Web3 } = await import("web3")
+  const { web3Accounts, web3Enable, web3FromAddress } = await import('@polkadot/extension-dapp')
+  const { ApiPromise, WsProvider } = await import('@polkadot/api')
 
-  async setup() {
-    if (!process.client) return {}
+  const ercAmount = ref('')
+  const ercAddress = ref('')
+  const isLoadingHandler = ref(false)
 
-    const ercAmount = ref('')
-    const ercAddress = ref('')
-    const isLoadingHandler = ref(false)
+  const handlerPolkadot = async function () {
+    isLoadingHandler.value = true
+    const wsProvider = new WsProvider('wss://ws.test.hamsternet.io')
+    const api = await ApiPromise.create({ provider: wsProvider })
 
-    const {
-      web3Accounts,
-      web3Enable,
-      web3FromAddress,
-    } = await import('@polkadot/extension-dapp')
-    const {
-      ApiPromise,
-      WsProvider
-    } = await import('@polkadot/api')
+    const allInjected = await web3Enable('my cool dapp')
+    const allAccounts = await web3Accounts()
+    console.log('allAccounts',allAccounts)
+    if (allAccounts.length === 0) {
+      alert('you need init an polkadot account')
+      isLoadingHandler.value = false
+      return
+    }
+    const SENDER = allAccounts[0].address
 
-    const handlerPolkadot = async function () {
-      isLoadingHandler.value = true
-      const wsProvider = new WsProvider('wss://ws.test.hamsternet.io')
-      const api = await ApiPromise.create({ provider: wsProvider })
-
-      const allInjected = await web3Enable('my cool dapp')
-      const allAccounts = await web3Accounts()
-      console.log('allAccounts',allAccounts)
-      if (allAccounts.length === 0) {
-        alert('you need init an polkadot account')
-        isLoadingHandler.value = false
-        return
-      }
-      const SENDER = allAccounts[0].address
-
-      const injector = await web3FromAddress(SENDER);
-      api.tx.burn.burn(ercAmount.value*1000000000000, ercAddress.value).signAndSend(
-        SENDER, {signer: injector.signer}, (result) => {
-          if (result.status.isInBlock) {
-            console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
-          } else if (result.status.isFinalized) {
-            console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
-            isLoadingHandler.value = false
-          } 
+    const injector = await web3FromAddress(SENDER);
+    api.tx.burn.burn(ercAmount.value*1000000000000, ercAddress.value).signAndSend(
+      SENDER, {signer: injector.signer}, (result) => {
+        if (result.status.isInBlock) {
+          console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
+        } else if (result.status.isFinalized) {
+          console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+          isLoadingHandler.value = false
         }
-      ).catch((error) => { 
-        console.log('err',error)
-        isLoadingHandler.value = false
-      })
-    }
-
-    const connected = ref(false)
-    const polkaAmount = ref('')
-    const polkaAddress = ref('')
-    const isLoadingTransform = ref(false)
-
-    const hookWeb3 = function () {
-      if (window.ethereum) {
-        window.ethereum.request({ method: 'eth_requestAccounts' })
-          .then(() => {
-            connected.value = true
-          })
-      } else {
-        alert('请安装MateMask')
       }
-    }
-
-    const transformPolkadot = async function() {
-      isLoadingTransform.value = true
-      await hookWeb3()
-
-      const web3 = new Web3(window.ethereum)
-      const accounts = await web3.eth.getAccounts()
-      const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
-      contract.methods.burn(polkaAmount.value*1000000000000, polkaAddress.value).send({
-        from: accounts[0]
-      }).on('transactionHash', function (hash) {
-        console.log('transactionHash:', hash)
-      }).on('receipt', function (receipt) {
-        // receipt example
-        console.log('receipt:', receipt)
-        isLoadingTransform.value = false
-      }).on('error', function (error) {
-        isLoadingTransform.value = false
-        console.log('error:', error)
-      })
-    }
-
-    return {
-      handlerPolkadot,
-      transformPolkadot,
-      ercAmount,
-      ercAddress,
-      polkaAmount,
-      polkaAddress,
-      isLoadingTransform,
-      isLoadingHandler
-    }
-
+    ).catch((error) => {
+      console.log('err',error)
+      isLoadingHandler.value = false
+    })
   }
-}
 
+  const connected = ref(false)
+  const polkaAmount = ref('')
+  const polkaAddress = ref('')
+  const isLoadingTransform = ref(false)
+
+  const hookWeb3 = function () {
+    if (window.ethereum) {
+      window.ethereum.request({ method: 'eth_requestAccounts' })
+        .then(() => {
+          connected.value = true
+        })
+    } else {
+      alert('请安装MateMask')
+    }
+  }
+
+  const transformPolkadot = async function() {
+    isLoadingTransform.value = true
+    await hookWeb3()
+
+    const web3 = new Web3(window.ethereum)
+    const accounts = await web3.eth.getAccounts()
+    const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
+    contract.methods.burn(polkaAmount.value*1000000000000, polkaAddress.value).send({
+      from: accounts[0]
+    }).on('transactionHash', function (hash) {
+      console.log('transactionHash:', hash)
+    }).on('receipt', function (receipt) {
+      // receipt example
+      console.log('receipt:', receipt)
+      isLoadingTransform.value = false
+    }).on('error', function (error) {
+      isLoadingTransform.value = false
+      console.log('error:', error)
+    })
+  }
 </script>
 
 <style scoped>
-.cross-chain{
-  border: double 1px transparent;
-  background-image: linear-gradient(180deg, rgba(46,42,40,0.9900) 0%, #141212 100%), 
-                    linear-gradient(180deg, rgba(254, 201, 122, 1), rgba(20, 18, 18, 0));
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  border-bottom: 0;
-}
-input{
-  background: unset;
-  @apply text-xl pl-6 text-[#807D7C]
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-:deep(.anticon svg){
-  @apply mb-2 mr-2;
-}
+  .cross-chain{
+    border: double 1px transparent;
+    background-image: linear-gradient(180deg, rgba(46,42,40,0.9900) 0%, #141212 100%),
+                      linear-gradient(180deg, rgba(254, 201, 122, 1), rgba(20, 18, 18, 0));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-bottom: 0;
+  }
+  input{
+    background: unset;
+    @apply text-xl pl-6 text-[#807D7C]
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  :deep(.anticon svg){
+    @apply mb-2 mr-2;
+  }
 </style>
