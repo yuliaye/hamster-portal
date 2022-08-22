@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white container mx-auto">
+  <div :class="[showContent===true?'inline':'hidden']" class="text-white container mx-auto">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
@@ -15,9 +15,14 @@
 </template>
 
 <script setup>
+  import { onMounted } from "vue"
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
   const { getImageURL } = useAssets()
+  const showContent = ref(false)
+  onMounted(() => {
+    showContent.value = true;
+  })
 </script>
 <style>
   body {
