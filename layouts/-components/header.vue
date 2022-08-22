@@ -1,5 +1,5 @@
 <template>
-  <div class="inset-x-0 top-0  bg-opacity-50 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
+  <div class="inset-x-0 top-0 bg-opacity-50 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
       <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
         <div class="flex flex-row items-center justify-between text-white">
@@ -9,14 +9,10 @@
             </nuxt-link>
           </div>
           <div class="flex flex-row">
-            <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
-              <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
-              {{ $t(`header.menu${menuId}`) }}
-              </nuxt-link> -->
-              <nuxt-link v-if="menuId === 1" to="/">
-              {{ $t(`header.menu${menuId}`) }}
-              </nuxt-link>
-              <VDropdown v-else v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
+            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
+            <div v-else v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
+              <nuxt-link class="px-[16px]" to="/faucet" target="_blank">{{ $t('header.faucet') }}</nuxt-link>
+              <VDropdown v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
                   <div class="px-[16px] h-[32px] flex justify-center items-center">
                     <div> {{ $t(`header.menu${menuId}`) }}</div>
@@ -40,7 +36,7 @@
               <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">
                 <div class="px-[16px] h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
                   <div>{{ selectedLocale.name }}</div>
-                  <img src="~/assets/images/drop-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
+                  <img src="~/assets/images/drop-down.png" class="w-4 h-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
                 </div>
               </div>
               <template #popper>
@@ -57,10 +53,33 @@
       </div>
     </div>
   </div>
+  <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }" class="inset-x-0 top-0 fixed z-[300] p-[20px] bg-black">
+    <div class="justify-between flex">
+      <div class="flex items-center" @click="showPhoneMenu = false;"><img class="h-[24px] mr-2" src="~/assets/images/menu-close.png"/>close</div>
+      <img class="h-[24px]" src="~/assets/images/header.png">
+    </div>
+    <div class="my-[20px]">
+      <nuxt-link to="/" target="_blank">
+        <div class="phone-menu ml-[25px]">{{ $t('header.menu1') }}</div>
+      </nuxt-link>
+      <nuxt-link to="/faucet" target="_blank">
+        <div class="phone-menu ml-[25px]">{{ $t('header.faucet') }}</div>
+      </nuxt-link>
+      <div class="phone-menu flex items-center"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
+      <div class="ml-[25px]">
+        <nuxt-link to="/news" target="_blank">
+          <label>{{ $t('header.menu7-sub1') }}</label>
+        </nuxt-link>
+        <nuxt-link to="/company" target="_blank">
+          <label class="ml-6">{{ $t('header.menu7-sub2') }}</label>
+        </nuxt-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-  import { computed, ref } from "vue"
+import { computed, ref } from "vue"
 
   const { t, locale, availableLocales } = useI18n()
   const localeOptions = availableLocales.map((lang) => {
@@ -80,13 +99,15 @@
     ]
   })
 
-const focusVal = ref()
+  const focusVal = ref()
   const topVal = ref(0)
   const curMenuId = ref(7)
   const curSubMenu = ref()
   const scrollDown = ref(false)
   const beforeTopVal = ref(0)
   const topBgShow = ref(false)
+  const isPhone = ref(false);
+  const showPhoneMenu = ref(false);
 
   function setMenuId(menuId) {
     curMenuId.value = menuId;
@@ -112,6 +133,13 @@ const focusVal = ref()
   onMounted(() => {
     window.addEventListener("scroll", handleScroll)
     handleScroll();
+
+    const flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+    console.log("flag:",flag)
+    if (flag) {
+      isPhone.value = true;
+    }
+    console.log("isPhone.value:",isPhone.value);
   })
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll)
@@ -146,7 +174,7 @@ const focusVal = ref()
     border-radius: 4px;
   }
   .menu {
-    @apply cursor-pointer text-[#807D7C] leading-[32px];
+    @apply cursor-pointer text-[#807D7C] leading-[32px] flex;
   }
   .menu-active {
     @apply text-white !important;
@@ -164,5 +192,8 @@ const focusVal = ref()
   }
   .top-focus {
     border-bottom-color: #a05e1c;
+  }
+  .phone-menu{
+    @apply text-[20px] my-[20px];
   }
 </style>
