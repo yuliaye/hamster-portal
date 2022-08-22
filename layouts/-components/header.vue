@@ -10,13 +10,8 @@
           </div>
           <div class="flex flex-row">
             <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
-              <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
-              {{ $t(`header.menu${menuId}`) }}
-              </nuxt-link> -->
-              <nuxt-link v-if="menuId === 1" to="/">
-              {{ $t(`header.menu${menuId}`) }}
-              </nuxt-link>
-              <VDropdown v-else v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
+              <nuxt-link class="px-[16px]" to="/faucet" target="_blank">Faucet</nuxt-link>
+              <VDropdown v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
                   <div class="px-[16px] h-[32px] flex justify-center items-center">
                     <div> {{ $t(`header.menu${menuId}`) }}</div>
@@ -40,7 +35,7 @@
               <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">
                 <div class="px-[16px] h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
                   <div>{{ selectedLocale.name }}</div>
-                  <img src="~/assets/images/drop-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
+                  <img src="~/assets/images/drop-down.png" class="w-4 h-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow}">
                 </div>
               </div>
               <template #popper>
@@ -52,6 +47,12 @@
                 </div>
               </template>
             </VDropdown>
+            <!-- <nuxt-link to="/download" target="_blank">
+              <div class="px-[16px] h-[32px] flex justify-center items-center rounded-[4px] border border-solid hover:bg-[#cc7219]">
+                <img src="~/assets/images/download.png" class="w-4 h-4 mr-2">
+                {{ $t('header.download') }}
+              </div>
+            </nuxt-link> -->
           </div>
         </div>
       </div>
@@ -60,7 +61,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from "vue"
+import { computed, ref } from "vue"
 
   const { t, locale, availableLocales } = useI18n()
   const localeOptions = availableLocales.map((lang) => {
@@ -146,7 +147,7 @@ const focusVal = ref()
     border-radius: 4px;
   }
   .menu {
-    @apply cursor-pointer text-[#807D7C] leading-[32px];
+    @apply cursor-pointer text-[#807D7C] leading-[32px] flex;
   }
   .menu-active {
     @apply text-white !important;

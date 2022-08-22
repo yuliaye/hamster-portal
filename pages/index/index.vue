@@ -5,10 +5,16 @@
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
           <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
           <div class="text-[#807D7C] leading-[21px] mt-[16px] mb-10">{{ $t("home.titleDesc") }}</div>
-          <nuxt-link to="/faucet" target="_blank">
+          <!-- <nuxt-link to="/faucet" target="_blank">
             <button 
               class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl"
             >Faucet >></button>
+          </nuxt-link> -->
+          <nuxt-link to="/download" target="_blank">
+            <button class="bg-[#cc7219] text-base rounded-[8px] px-[24px] py-[10px] flex justify-center items-center">
+              <img src="~/assets/images/download.png" class="w-4 h-4 mr-2">
+              {{ $t('header.download') }}
+            </button>
           </nuxt-link>
         </div>
         <div class="md:w-2/5">

@@ -56,6 +56,10 @@
     background: url('~/assets/images/company-top-bg.png') no-repeat top;
     background-size: contain;
   }
+  .download-top-bg{
+    background: url('~/assets/images/download-top.png') no-repeat top;
+    background-size: contain;
+  }
   .bg-div-style{
     @apply flex justify-center items-center h-[180px] sm:h-[280px] md:h-[340px] lg:h-[480px] xl:h-[600px];
   }

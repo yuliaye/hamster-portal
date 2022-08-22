@@ -70,7 +70,8 @@
     "menu6": "Use Hamster",
     "menu7": "About Us",
     "menu7-sub1": "News",
-    "menu7-sub2": "Company Profile"
+    "menu7-sub2": "Company Profile",
+    "download": "Download"
   },
   "footer": {
     "email": "Email",
@@ -140,5 +141,20 @@
     "companyProfile1": "Hamster was established in March 2021, focusing on blockchain technology and product innovation, and has a high-performance blockchain basic service platform with independent intellectual property rights.",
     "companyProfile2": "Hamster blockchain has the ability to quickly build upper-layer application business, and is widely used in industrial finance, digital government affairs, digital assets, supply chain management and other industries.",
     "companyProfile3": "With multi-centralized trust as the core, it is committed to building a new generation of value circulation network, allowing digital assets to flow freely."
+  },
+  "download": {
+    "client": "Hamster-Client",
+    "provider": "Hamster-Provider",
+    "tabTitle1": "Windows",
+    "tabTitle2": "macOS",
+    "tabTitle3": "Linux",
+    "tabSubTitle1": "Hamster for Windows",
+    "tabSubTitle2": "Hamster for macOS",
+    "tabSubTitle3": "Hamster for Linux",
+    "clientTabContent1": "Deploy popular nodes and use Hamster computing network resources with one click through Windows",
+    "clientTabContent2": "Deploy popular nodes and use Hamster computing network resources with one click through macOS",
+    "clientTabContent3": "Deploy popular nodes and use Hamster computing network resources with one click through Linux",
+    "providerTabContent": "Providing computing resources for computing resources networks",
+    "versions": "V 1.2.0"
   }
 }
