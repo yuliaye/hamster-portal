@@ -42,6 +42,14 @@
   const { getImageURL } = useAssets()
   const { hamsterClientPackage, hamsterProviderPackage } = useRuntimeConfig()
 
+  useHead({
+    title: "Download Hasmter"
+  })
+
+  definePageMeta({
+    layout: "no-ssr",
+  })
+
   const activeType = ref('client');
   const activeKey = ref(1);
 

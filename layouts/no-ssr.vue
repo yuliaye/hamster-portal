@@ -1,9 +1,9 @@
 <template>
-  <client-only>
-    <DefaultLayout v-bind="$attrs">
+  <DefaultLayout v-bind="$attrs">
+    <client-only>
       <slot></slot>
-    </DefaultLayout>
-  </client-only>
+    </client-only>
+  </DefaultLayout>
 </template>
 
 <script setup>
