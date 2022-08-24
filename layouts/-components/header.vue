@@ -1,5 +1,5 @@
 <template>
-  <div class="inset-x-0 top-0 bg-opacity-50 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
+  <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
       <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
         <div class="flex flex-row items-center justify-between text-white">
@@ -8,10 +8,13 @@
             <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
+          
           <div class="flex flex-row">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
             <div v-else v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
               <nuxt-link class="px-[16px]" to="/faucet" target="_blank">{{ $t('header.faucet') }}</nuxt-link>
+              <nuxt-link class="px-[16px]" to="/stake" target="_blank">{{ $t('header.stake') }}</nuxt-link>
+              <nuxt-link class="px-[16px]" to="/cross_chain" target="_blank">{{ $t('header.cross_chain') }}</nuxt-link>
               <VDropdown v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
                   <div class="px-[16px] h-[32px] flex justify-center items-center">
@@ -54,7 +57,7 @@
     </div>
   </div>
   <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }" class="inset-x-0 top-0 fixed z-[300] p-[20px] bg-black">
-    <div class="justify-between flex">
+    <div class="flex justify-between">
       <div class="flex items-center" @click="showPhoneMenu = false;"><img class="h-[24px] mr-2" src="~/assets/images/menu-close.png"/>close</div>
       <img class="h-[24px]" src="~/assets/images/header.png">
     </div>
@@ -65,7 +68,13 @@
       <nuxt-link to="/faucet" target="_blank">
         <div class="phone-menu ml-[25px]">{{ $t('header.faucet') }}</div>
       </nuxt-link>
-      <div class="phone-menu flex items-center"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
+      <nuxt-link to="/cross_chain" target="_blank">
+        <div class="phone-menu ml-[25px]">{{ $t('header.cross_chain') }}</div>
+      </nuxt-link>
+      <nuxt-link to="/stake" target="_blank">
+        <div class="phone-menu ml-[25px]">{{ $t('header.stake') }}</div>
+      </nuxt-link>
+      <div class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
       <div class="ml-[25px]">
         <nuxt-link to="/news" target="_blank">
           <label>{{ $t('header.menu7-sub1') }}</label>

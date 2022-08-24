@@ -72,7 +72,9 @@
     "menu7-sub1": "News",
     "menu7-sub2": "Company Profile",
     "download": "Download",
-    "faucet": "Faucet"
+    "faucet": "Faucet",
+    "stake": "Stake",
+    "cross_chain": "Cross Chain"
   },
   "footer": {
     "email": "Email",
