@@ -1,3 +1,3 @@
 export function formatmetaMaskBalance(balance:number){
-  return balance/1000000000000
+  return Math.round(balance/100000000000000)
 }

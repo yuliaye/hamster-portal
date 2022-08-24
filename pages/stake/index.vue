@@ -232,12 +232,12 @@
         value: item.address
       } 
       accountOptions.value.push(account)
+      showConnectWallet.value = false
+      showHamsterStake.value = true
     })
-    showConnectWallet.value = false
-    showHamsterStake.value = true
 
     if (allAccounts.length === 0) {
-      alert('you need init an polkadot account')
+      showConnectWallet.value = false
       showInstallWallet.value = true
       return
     }

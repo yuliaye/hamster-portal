@@ -59,9 +59,12 @@
                   />
                 </FormItem>
                 <span class="mb-6">Transfer Out Wallet</span>
-                <div class="flex">
-                  <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
-                  <span class="text-sm">{{ metaAccount }}</span>
+                <div>
+                  <LoadingOutlined v-if="!metaAccount" />
+                  <div class="flex" v-if="metaAccount">
+                    <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
+                    <span class="text-sm">{{ metaAccount }}</span>
+                  </div>
                 </div>
                 <hr class="mt-6" />
                 <div class="flex justify-between my-6">
@@ -183,7 +186,8 @@
     const web3 = new Web3(window.ethereum)
 
     web3.eth.getBalance(metaAccount.value).then( res => {
-      metaBalance.value = formatmetaMaskBalance(res*1)
+    
+      metaBalance.value = web3.utils.fromWei(res, 'micro')
       metaBalance.loading = false
       tabTransferOutDisabled.value = false
     })
@@ -204,18 +208,20 @@
     })
 
     if (allAccounts.length === 0) {
-      alert('you need init an polkadot account')
       return
     }
   }
 
   const getMetaAccounts = async function() {
-    const web3 = new Web3(window.ethereum)
-    const accounts = await web3.eth.getAccounts()
+    try {
+      const web3 = new Web3(window.ethereum)
+      const accounts = await web3.eth.getAccounts()
+      metaAccount.value = accounts[0]
 
-    metaAccount.value = accounts[0]
-
-    getMetaBalance()
+      getMetaBalance()
+    } catch(error) {
+      console.log('error',error)
+    }
   }
   
   const checkIfMetaWalletInstalled = async() => {
@@ -227,7 +233,6 @@
           showHamsterCross.value = true;
         })
     } else {
-      alert('请安装MateMask')
       showConnectWallet.value = false;
       showInstallWallet.value = true;
     }

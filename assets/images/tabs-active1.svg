@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>windows</title>
+    <defs>
+        <linearGradient x1="17.6610345%" y1="22.8545077%" x2="79.2467755%" y2="64.6217983%" id="linearGradient-1">
+            <stop stop-color="#A16835" offset="0%"></stop>
+            <stop stop-color="#F6A85E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="download-apps" transform="translate(-451.000000, -1056.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="内容" transform="translate(320.000000, 1056.000000)">
+                <g id="windows" transform="translate(63.000000, 0.000000)">
+                    <g transform="translate(69.000000, 1.000000)" id="形状">
+                        <path d="M0,18.8679245 L0,7.86163522 L13.8687308,5.09433962 L13.8687308,18.6792453 L0,18.8679245 M39.2947374,0 L39.2947374,18.3438155 L16.180186,18.6582809 L16.180186,4.63312367 L39.2947374,0 M0,20.9643606 L13.8687308,21.1530398 L13.8687308,35.4297694 L0,33.0188679 L0,20.9643606 M39.2947374,21.4884696 L39.2947374,39.8322851 L16.180186,35.8280922 L16.180186,21.1740042 L39.2947374,21.4884696 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
