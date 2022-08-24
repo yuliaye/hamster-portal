@@ -1,5 +1,5 @@
 <template>
-  <div class="inset-x-0 top-0  bg-opacity-50 fixed z-10" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
+  <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50" :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
       <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
         <div class="flex flex-row items-center justify-between text-white">
@@ -8,7 +8,22 @@
             <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
+          
           <div class="flex flex-row">
+            <div>
+              <nuxt-link to="/stake" target="_blank">
+                <button class="text-[#CC7219] w-28 h-8 border border-solid border-[#807D7C] rounded-3xl">
+                  stake
+                </button>
+              </nuxt-link>
+            </div>
+            <div class="ml-4">
+              <nuxt-link to="/cross_chain" target="_blank">
+                <button class="text-[#CC7219] w-28 h-8 border border-solid border-[#807D7C] rounded-3xl">
+                  cross_chain
+                </button>
+              </nuxt-link>
+            </div>
             <div v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
               <!-- <nuxt-link v-if="menuId === 1" to="/" target="_self" @click="curSubMenu=false">
               {{ $t(`header.menu${menuId}`) }}

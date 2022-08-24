@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img src="~/assets/images/stake-cross-banner.png" class="relative w-full" />
+  <div class="relative">
+    <img src="~/assets/images/stake-cross-banner.png" class="w-full" />
     <div class="flex banner-contain">
       <img src="~/assets/images/stake-cross-banner.svg" class="h-60">
       <div class="mt-20 ml-6 text-center">
@@ -16,14 +16,17 @@
         <span class="hamster-cross-chain">Hamster Cross Chain(Goerli)</span>
         <div class="h-[800px] rounded-2xl contain-part">
           <div class="px-8 pt-8">
-            <FormItem name="selectValue">
-              <Select class="w-full" :options="accountOptions" v-model:value="formData.selectValue"></Select>
+            <FormItem name="polkadotAddress">
+              <Select class="w-full" :options="accountOptions" v-model:value="formData.polkadotAddress" @change="handleSelectChange"></Select>
             </FormItem>
             <div class="flex justify-between my-6 text-base top-wallet-balance">
               <span>Wallet Balance</span>
               <div>
-                <span>1,000.000000000000</span>
-                <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                <LoadingOutlined v-if="polkaBalance.loading" />
+                <div v-if="!polkaBalance.loading">
+                  <span>{{ polkaBalance.value }}</span>
+                  <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                </div>
               </div>
             </div>
             <hr />
@@ -34,12 +37,12 @@
               <div class="bg-color-[#141212] pt-12" v-if="!showHamsterCross">
                 <div class="mx-auto text-center">
                   <img src="~/assets/images/stake-meta.png" class="w-12 h-12 mx-auto mt-20 mb-8" />
-                  <button class="text-color-[#fff] text-2xl" @click="installMetaWallet" v-if="showInstallWallet"
+                  <button class="text-color-[#fff] text-2xl" v-if="showInstallWallet"
                     >Please Install MetaMask Wallet
                   </button>
                   <button
                     class="text-2xl text-color-[#fff]"
-                    @click="connectMetaWallet"
+                    @click="checkIfMetaWalletInstalled"
                     v-if="showConnectWallet"
                     >Please Connect To MetaMask Wallet
                   </button>
@@ -47,7 +50,7 @@
               </div>
 
               <div v-if="showHamsterCross" class="flex flex-col text-color-[#fff] text-base">
-                <span class="mt-1 mb-6">Transer Amount</span>
+                <span class="mt-1 mb-6">Transfer Amount</span>
                 <FormItem name="intoAmount">
                   <Input
                     type="number"
@@ -58,48 +61,60 @@
                 <span class="mb-6">Transfer Out Wallet</span>
                 <div class="flex">
                   <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
-                  <span class="text-sm">666666666</span>
+                  <span class="text-sm">{{ metaAccount }}</span>
                 </div>
                 <hr class="mt-6" />
                 <div class="flex justify-between my-6">
                   <span>Wallet Balance</span>
                   <div>
-                    <span>1,000.000000000000</span>
-                    <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                    <LoadingOutlined v-if="metaBalance.loading" />
+                    <div v-if="!metaBalance.loading">
+                      <span>{{ metaBalance.value }}</span>
+                      <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                    </div>
                   </div>
                 </div>
                 <hr />
                 <FormItem class="text-center">
-                  <Button class="w-32 mx-auto mt-8 h-9" @click="handleTransferIntoAmount">Submit</Button>
+                  <Button class="w-32 mx-auto mt-8 h-9" @click="handleTransferIntoAmount" :disabled="isLoadingInto">
+                    <LoadingOutlined v-if="isLoadingInto" class="loading-button" />
+                    Submit
+                  </Button>
                 </FormItem>
               </div>
             </TabPane>
-            <TabPane tab="Transfer Out" key="2" class="px-8">
+            <TabPane tab="Transfer Out" key="2" class="px-8" :disabled="tabTransferOutDisabled">
               <div class="flex flex-col text-color-[#fff] text-base">
-                <span class="mt-1 mb-6">Transer Amount</span>
+                <span class="mt-1 mb-6">Transfer Amount</span>
                 <FormItem name="outAmount">
                   <Input
                     type="number"
                     placeholder="Please enter the amount to be transferred"
-                    v-model="formData.outAmount"
+                    v-model:value="formData.outAmount"
                   />
                 </FormItem>
                 <span class="mb-6">Transfer Into Wallet</span>
                 <div class="flex">
                   <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
-                  <span class="text-sm">666666666</span>
+                  <span class="text-sm">{{ metaAccount }}</span>
                 </div>
                 <hr class="mt-6" />
                 <div class="flex justify-between my-6">
                   <span>Wallet Balance</span>
                   <div>
-                    <span>1,000.000000000000</span>
-                    <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                    <LoadingOutlined v-if="metaBalance.loading" />
+                    <div v-if="!metaBalance.loading">
+                      <span>{{ metaBalance.value }}</span>
+                      <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                    </div>
                   </div>
                 </div>
                 <hr />
                 <FormItem class="text-center">
-                  <Button class="w-32 mx-auto mt-8 h-9 transferout-button" @click="handleTransferOutAamount">Submit</Button>
+                  <Button class="w-32 mx-auto mt-8 h-9 transferout-button" @click="handleTransferOutAmount" :disabled="isLoadingOut">
+                    <LoadingOutlined v-if="isLoadingOut" class="loading-button"/>
+                    Submit
+                  </Button>
                 </FormItem>
               </div>
             </TabPane>
@@ -111,133 +126,187 @@
   
 </template>
 
-<script>
+<script setup>
   import { ref, reactive, onMounted } from 'vue';
-  import Web3 from 'web3'
-  // import { ABI } from '../faucet/-components/contract.ts'
+  import { ABI } from '../faucet/-components/contract.ts'
+  import { formatmetaMaskBalance } from '../../utils/web3Util/metaMask'
+  import { LoadingOutlined } from '@ant-design/icons-vue'
   import { Select, Tabs, Button, Input, TabPane, Form, FormItem } from 'ant-design-vue';
 
   definePageMeta({
     layout: "no-ssr"
   });
 
-  export default {
+  const { default: Web3 } = await import("web3")
+  const { web3Accounts, web3Enable, web3FromAddress } = await import('@polkadot/extension-dapp')
+  const { createPolkadotApi, formatBalance } = await import ('../../utils/polkadotUtil')
+
+  const formData = reactive({})
+  const formRef = ref();
+
+  const accountOptions = ref([])
+  const metaAccount = ref('');
+  const isLoadingInto = ref(false)
+  const isLoadingOut = ref(false)
+  const polkaBalance = reactive({ loading: false, value: '0' });
+  const metaBalance = reactive({ loading: false, value: '0' });
+  const tabTransferOutDisabled = ref(true)
+  const showInstallWallet = ref(false);
+  const showConnectWallet = ref(true);
+  const showHamsterCross = ref(false);
+  const connected = ref(false)
+
+  const formRules = computed(() => ({
+    polkadotAddress: [{ message: 'this is can not empty', trigger: 'change', required: true }],
+    intoAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
+    outAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
+  }));
+
+
+  // create apis
+  // const polkadotApi = ref();
+  let polkadotApi;
+  const buildPolkadotApi = async () => {
+    if (!polkadotApi) {
+      polkadotApi = await createPolkadotApi('wss://ws.test.hamsternet.io');
+    }
+
+    if (!polkadotApi.isConnected) {
+      await polkadotApi.connect()
+    }
     
-    components: { Select, Tabs, Button, Input, TabPane, Form, FormItem },
-    
-    async setup() {
-      if (!process.client) return {}
+    return polkadotApi
+  }
 
-      const {
-      web3Accounts,
-      web3Enable,
-      web3FromAddress,
-      } = await import('@polkadot/extension-dapp')
-      const {
-        ApiPromise,
-        WsProvider
-      } = await import('@polkadot/api')
+  const getMetaBalance = ()=>{
+    metaBalance.loading = true
+    const web3 = new Web3(window.ethereum)
 
-      const formData = reactive({})
-      const formRef = ref();
+    web3.eth.getBalance(metaAccount.value).then( res => {
+      metaBalance.value = formatmetaMaskBalance(res*1)
+      metaBalance.loading = false
+      tabTransferOutDisabled.value = false
+    })
+  }
 
-      const accountOptions = ref([
-        {
-          label:'11111',
-          value:'11111',
-        },
-        {
-          label:'22222',
-          value:'22222',
-        }
-      ])
-      const showInstallWallet = ref(true);
-      const showConnectWallet = ref(false);
-      const showHamsterCross = ref(false);
-      const connected = ref(false)
+  const getPolkaAccounts = async () => {
+    const allInjected = await web3Enable('my cool dapp')
 
-      const hookWeb3 = function () {
-        if (window.ethereum) {
-          window.ethereum.request({ method: 'eth_requestAccounts' })
-            .then(() => {
-              connected.value = true
-            })
-        } else {
-          alert('请安装MateMask')
-        }
-      }
+    const allAccounts = await web3Accounts()
+    console.log('polkaAccounts', allAccounts)
 
-      const getPolkaAccounts = async () => {
-        const wsProvider = new WsProvider('wss://ws.test.hamsternet.io')
-        const api = await ApiPromise.create({ provider: wsProvider })
+    allAccounts.map( item => {
+      const account = {
+        label: item.meta.name+'('+item.address+')',
+        value: item.address
+      } 
+      accountOptions.value.push(account)
+    })
 
-        const allInjected = await web3Enable('my cool dapp')
-        const allAccounts = await web3Accounts()
-        console.log('allAccounts', allAccounts)
-        if (allAccounts.length === 0) {
-          alert('you need init an polkadot account')
-          return
-        }
-      }
-      
-      const installMetaWallet = async() => {
-        showInstallWallet.value = false;
-        showConnectWallet.value = true;
-        await hookWeb3()
-      };
-      const connectMetaWallet = () => {
-        showConnectWallet.value = false;
-        showHamsterCross.value = true;
-      };
-
-      const formRules = computed(() => ({
-        selectValue: [{ message: 'this is can not empty', trigger: 'change', required: true }],
-        intoAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
-        outAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
-      }));
-
-      const handleTransferIntoAmount = async() => {
-        console.log(formData,formData.intoAmount,formData.selectValue)
-        await formRef.value?.validate(['selectValue', 'intoAmount']);
-
-      }
-
-      const handleTransferOutAamount = async function() {
-        const web3 = new Web3(window.ethereum)
-        const accounts = await web3.eth.getAccounts()
-        const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
-        contract.methods.burn(polkaAmount.value*1000000000000, polkaAddress.value).send({
-          from: accounts[0]
-        }).on('transactionHash', function (hash) {
-          console.log('transactionHash:', hash)
-        }).on('receipt', function (receipt) {
-          // receipt example
-          console.log('receipt:', receipt)
-        }).on('error', function (error) {
-          console.log('error:', error)
-        })
-      }
-
-      onMounted(()=>{
-        console.log('test mounted')
-        getPolkaAccounts()
-      })
-
-      return{
-        installMetaWallet,
-        connectMetaWallet,
-        handleTransferIntoAmount,
-        handleTransferOutAamount,
-        formData,
-        formRef,
-        formRules,
-        showInstallWallet,
-        showConnectWallet,
-        showHamsterCross,
-        accountOptions
-      }
+    if (allAccounts.length === 0) {
+      alert('you need init an polkadot account')
+      return
     }
   }
+
+  const getMetaAccounts = async function() {
+    const web3 = new Web3(window.ethereum)
+    const accounts = await web3.eth.getAccounts()
+
+    metaAccount.value = accounts[0]
+
+    getMetaBalance()
+  }
+  
+  const checkIfMetaWalletInstalled = async() => {
+    if (window.ethereum) {
+      window.ethereum.request({ method: 'eth_requestAccounts' })
+        .then(() => {
+          connected.value = true
+          showConnectWallet.value = false;
+          showHamsterCross.value = true;
+        })
+    } else {
+      alert('请安装MateMask')
+      showConnectWallet.value = false;
+      showInstallWallet.value = true;
+    }
+    await getMetaAccounts()
+  };
+
+  // transfer amount from meta to polka
+  const handleTransferIntoAmount = async function() {
+    await formRef.value?.validate(['polkadotAddress', 'intoAmount']);
+    isLoadingInto.value = true
+
+    const web3 = new Web3(window.ethereum)
+
+    const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
+    contract.methods.burn(formData.intoAmount*1000000000000, accountOptions.value[0].value).send({
+      from: metaAccount.value
+    }).on('transactionHash', function (hash) {
+      console.log('transactionHash:', hash)
+    }).on('receipt', function (receipt) {
+      // receipt example
+      console.log('receipt:', receipt)
+      isLoadingInto.value = false
+    }).on('error', function (error) {
+      isLoadingInto.value = false
+      console.log('error:', error)
+    })
+    await handleSelectChange()
+    getMetaBalance()
+  }
+  
+  // transfer amount from polka to meta
+  const handleTransferOutAmount = async() => {
+    await formRef.value?.validate(['polkadotAddress', 'outAmount']);
+    isLoadingOut.value = true
+
+    try {
+      const { polkadotAddress, outAmount } = formData
+      const SENDER = polkadotAddress
+
+      const injector = await web3FromAddress(SENDER);
+      const polkadotApi = await buildPolkadotApi();
+      polkadotApi.tx.burn.burn(outAmount*1000000000000, metaAccount.value).signAndSend(
+        SENDER, {signer: injector.signer}, (result) => {
+          if (result.status.isInBlock) {
+            console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
+          } else if (result.status.isFinalized) {
+            console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+            isLoadingOut.value = false
+          }
+        }
+      )
+      await handleSelectChange()
+      getMetaBalance()
+    } catch(error) {
+      console.log('err',error)
+    } finally {
+      isLoadingOut.value = false
+    }
+  }
+
+  const handleSelectChange = async () => {
+    polkaBalance.loading = true
+    console.log('polkaBalance.loading = true')
+
+    try {
+      const { polkadotAddress } = formData
+      const polkadotApi = await buildPolkadotApi();
+      const { data: balanceData } = await polkadotApi.query.system.account(polkadotAddress);
+      polkaBalance.value = formatBalance(balanceData.free);
+    } catch (error) {
+      console.log("Error", error)
+    } finally {
+      polkaBalance.loading = false;
+    }
+  }
+
+  onMounted(async () => {
+    getPolkaAccounts()
+  })
 </script>
 
 <style scoped>
@@ -256,8 +325,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -300px;
-    margin-top: -160px;
+    transform: translate(-50%, -50%);
+    width: max-content;
   }
   .pub-goerli{
     font-size: 12px;
@@ -287,6 +356,10 @@
   }
   :deep(.anticon svg) {
     color: white;
+  }
+  :deep(.anticon-spin){
+    color: #807D7C !important;
+    margin-bottom: 6px;
   }
   hr {
     border: none;

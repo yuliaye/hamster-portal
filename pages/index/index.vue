@@ -10,11 +10,6 @@
               class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl"
             >Faucet >></button>
           </nuxt-link>
-          <nuxt-link to="/stack" target="_blank">
-            <button 
-              class="text-[#CC7219] w-32 h-12 border border-solid border-[#807D7C] rounded-3xl ml-6"
-            >Stack >></button>
-          </nuxt-link>
         </div>
         <div class="md:w-2/5">
           <div class="img-center" :class="[$i18n.locale === 'en' ? 'img-show-up' : 'img-show-up2']">
