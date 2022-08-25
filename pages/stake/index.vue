@@ -89,11 +89,11 @@
                   </FormItem>
                 </div>
                 <div class="flex">
-                  <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
+                  <span class="mr-1 text-xs text-center rounded-full serial-number">1</span>
                   <span class="text-sm">Allow HAT to Be Staked</span>
                   <Tooltip
-                    placement="topLeft"
-                    title="Prompt Text"
+                    placement="bottomLeft"
+                    title="By performing the authorization operation, you will use your Hamster in the same way as our contract."
                     arrowPointAtCenter
                     class="tooltip-button"
                   >
@@ -107,11 +107,11 @@
                   </Button>
                 </FormItem>
                 <div class="flex">
-                  <img src="~/assets/images/stake-meta.png" class="w-4 h-4 mr-2 mt-0.5" />
+                  <span class="mr-1 text-xs text-center rounded-full serial-number">2</span>
                   <span class="text-sm">Stake HAT</span>
                   <Tooltip
-                    placement="topLeft"
-                    title="Prompt Text"
+                    placement="bottomLeft"
+                    title="After stake, all the current stakeing amount will be frozen for 20 minutes and you can get back the whole amount after it is unfrozen."
                     arrowPointAtCenter
                     class="tooltip-button"
                   >
@@ -119,26 +119,29 @@
                   </Tooltip>
                 </div>
                 <FormItem name="stakeHatButton" class="text-center">
-                  <Button class="w-5/6 mx-auto my-6 h-9 stake-button" @click="handleStakeButton" :disabled="stakeButtonDisabled||isLoadingControl.isLoadingStakeButton">
+                  <Button class="w-5/6 mx-auto my-6 h-9" :class="{'stake-button': isStakeSuccess}" @click="handleStakeButton" :disabled="stakeButtonDisabled||isLoadingControl.isLoadingStakeButton">
                     <LoadingOutlined v-if="isLoadingControl.isLoadingStakeButton" />
                     Stake
                   </Button>
                 </FormItem>
               </div>
             </TabPane>
-            <TabPane tab="Receive Benefits" key="2" class="px-8 text-center">
-              <Button class="w-5/6 my-6 h-9" @click="handleReceiveButton" :disabled="isLoadingControl.isLoadingReceiveButton">
-                <LoadingOutlined v-if="isLoadingControl.isLoadingReceiveButton" />
-                Receive
-              </Button>
+            <TabPane tab="Receive Benefits" key="2" class="w-full px-8">
+              <div class="flex flex-col items-center mx-auto">
+                <Button class="w-5/6 mt-6 mb-2 h-9" @click="handleReceiveButton" :disabled="isLoadingControl.isLoadingReceiveButton||disabledReceiveButton">
+                  <LoadingOutlined v-if="isLoadingControl.isLoadingReceiveButton" />
+                  Receive
+                </Button>
+                <span class="inline-block w-5/6 text-red-500" v-if="showReceive">The amount is 0, can't receive！</span>
+              </div>
             </TabPane>
             <TabPane tab="Withdraw" key="3" class="px-8">
               <div class="flex flex-col text-color-[#fff] text-base">
                 <div class="mb-6">
                   <span class="text-color-[#fff] text-base bold">Withdraw Amount</span>
-                  <span class="text-xs contain-color-super">
+                  <!-- <span class="text-xs contain-color-super">
                     （Pledge amount can be retrieved：300）
-                  </span>
+                  </span> -->
                 </div>
                 <FormItem name="withdrawAmount">
                   <Input
@@ -147,11 +150,14 @@
                     v-model:value="formData.withdrawAmount"
                   />
                 </FormItem>
-                <FormItem name="retrieveButton" class="text-center">
-                  <Button class="w-5/6 mx-auto mt-8 h-9" @click="handleRetrieveButton" :disabled="isLoadingControl.isLoadingRetrieveButton">
-                    <LoadingOutlined v-if="isLoadingControl.isLoadingRetrieveButton" />
-                    Retrieve
-                  </Button>
+                <FormItem name="retrieveButton" class="w-full">
+                  <div class="flex flex-col items-center mx-auto">
+                    <Button class="w-5/6 mt-6 mb-2" @click="handleRetrieveButton" :disabled="isLoadingControl.isLoadingRetrieveButton">
+                      <LoadingOutlined v-if="isLoadingControl.isLoadingRetrieveButton" />
+                      Retrieve
+                    </Button>
+                    <span class="inline-block w-5/6 text-red-500" v-if="errRetrieveMessage">Can't withdraw at the moment, please withdraw after unfreezing</span>
+                  </div>
                 </FormItem>
               </div>
             </TabPane>
@@ -186,6 +192,10 @@
   const incomeAmount = ref(0)
   
   const connected = ref(false)
+  const isStakeSuccess = ref(true)
+  const showReceive = ref(false)
+  const disabledReceiveButton = ref(false)
+  const errRetrieveMessage = ref(false)
   const showInstallWallet = ref(false)
   const showConnectWallet = ref(true)
   const showHamsterStake = ref(false)
@@ -251,9 +261,9 @@
         validator: async (_, newStakingAmount) => {
           const val = +newStakingAmount
           if (val <= 0) {
-            return Promise.reject('输入金额必须大于0')
+            return Promise.reject('The input amount must be greater than 0')
           } else if (val > walletBalance.value) {
-            return Promise.reject('输入金额不能大于余额')
+            return Promise.reject('The input amount cannot be greater than the balance')
           } else {
             Promise.resolve()
           }
@@ -349,7 +359,9 @@
       const api = buildWeb3Api()
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
       const staking = await contract.methods.staking(formatToWei(formData.stakingAmount)).send({ from: metaAccount.value })
+      isStakeSuccess.value = false
       await getStakingAmount()
+      await getWalletBalance()
     } catch(error) {
       console.log('error',error)
     } finally {
@@ -359,17 +371,23 @@
 
   // Get the benefits
   const handleReceiveButton = async() => {
-    isLoadingControl.isLoadingReceiveButton = true
+    if (!+incomeAmount.value) {
+      showReceive.value = true
+      disabledReceiveButton.value = true
 
-    try {
-      const api = buildWeb3Api()
-      const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
-      const getBenefits = await contract.methods.withdrawGrt().send({ from: metaAccount.value })
-      await getIncome()
-    } catch(error) {
-      console.log('error',error)
-    } finally {
-      isLoadingControl.isLoadingReceiveButton = false
+    } else {
+      isLoadingControl.isLoadingReceiveButton = true
+
+      try {
+        const api = buildWeb3Api()
+        const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
+        const getBenefits = await contract.methods.withdrawGrt().send({ from: metaAccount.value })
+        await getIncome()
+      } catch(error) {
+        console.log('error',error)
+      } finally {
+        isLoadingControl.isLoadingReceiveButton = false
+      }
     }
   }
 
@@ -383,8 +401,11 @@
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
       const retrieveResult = await contract.methods.withdraw(formatToWei(formData.withdrawAmount)).send({ from: metaAccount.value })
       await getStakingAmount()
+      await getWalletBalance()
+      await getIncome()
     } catch(error) {
       console.log('error',error)
+      errRetrieveMessage.value = true
     } finally {
       isLoadingControl.isLoadingRetrieveButton = false
     }
@@ -438,6 +459,13 @@
       .ant-select-selection-placeholder) {
     color: white;
     margin-top: 3px;
+  }
+  .serial-number{
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    border: 1px solid #CC7219;
+    background: #CC7219;
   }
   :deep(.anticon svg) {
     width: 4px;
