@@ -11,15 +11,15 @@
           
           <div class="flex flex-row">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
-            <div v-else v-for="menuId in [7]" :key="menuId" :class="{'menu-active' : curMenuId == menuId}" class="menu sm:pr-8" @click="setMenuId(menuId)">
-              <nuxt-link class="px-[16px]" to="/faucet" target="_blank">{{ $t('header.faucet') }}</nuxt-link>
-              <nuxt-link class="px-[16px]" to="/stake" target="_blank">{{ $t('header.stake') }}</nuxt-link>
-              <nuxt-link class="px-[16px]" to="/cross_chain" target="_blank">{{ $t('header.cross_chain') }}</nuxt-link>
-              <VDropdown v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
+            <div v-else class="menu sm:pr-8">
+              <nuxt-link :class="{'menu-active' : curMenu === 'faucet'}" class="px-[16px]" to="/faucet" target="_blank">{{ $t('header.faucet') }}</nuxt-link>
+              <nuxt-link :class="{'menu-active' : curMenu === 'stake'}" class="px-[16px]" to="/stake" target="_blank">{{ $t('header.stake') }}</nuxt-link>
+              <nuxt-link :class="{'menu-active' : curMenu === 'cross_chain'}" class="px-[16px]" to="/cross_chain" target="_blank">{{ $t('header.cross_chain') }}</nuxt-link>
+              <VDropdown :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}" v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
                   <div class="px-[16px] h-[32px] flex justify-center items-center">
-                    <div> {{ $t(`header.menu${menuId}`) }}</div>
-                    <img v-if="menuId === curMenuId" src="~/assets/images/menu-down-hover.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
+                    <div> {{ $t('header.menu7') }}</div>
+                    <img v-if="curMenu === 'news' || curMenu === 'company'" src="~/assets/images/menu-down-hover.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
                     <img v-else src="~/assets/images/menu-down.png" class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
                   </div>
                 </div>
@@ -63,24 +63,24 @@
     </div>
     <div class="my-[20px]">
       <nuxt-link to="/" target="_blank">
-        <div class="phone-menu ml-[25px]">{{ $t('header.menu1') }}</div>
+        <div :class="{'menu-active' : curMenu === ''}" class="phone-menu ml-[25px]">{{ $t('header.menu1') }}</div>
       </nuxt-link>
       <nuxt-link to="/faucet" target="_blank">
-        <div class="phone-menu ml-[25px]">{{ $t('header.faucet') }}</div>
+        <div :class="{'menu-active' : curMenu === 'faucet'}" class="phone-menu ml-[25px]">{{ $t('header.faucet') }}</div>
       </nuxt-link>
       <nuxt-link to="/cross_chain" target="_blank">
-        <div class="phone-menu ml-[25px]">{{ $t('header.cross_chain') }}</div>
+        <div :class="{'menu-active' : curMenu === 'cross_chain'}" class="phone-menu ml-[25px]">{{ $t('header.cross_chain') }}</div>
       </nuxt-link>
       <nuxt-link to="/stake" target="_blank">
-        <div class="phone-menu ml-[25px]">{{ $t('header.stake') }}</div>
+        <div :class="{'menu-active' : curMenu === 'stake'}" class="phone-menu ml-[25px]">{{ $t('header.stake') }}</div>
       </nuxt-link>
-      <div class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
-      <div class="ml-[25px]">
+      <div :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}" class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
+      <div class="ml-[25px] menu-color">
         <nuxt-link to="/news" target="_blank">
-          <label>{{ $t('header.menu7-sub1') }}</label>
+          <label :class="{'menu-active' : curMenu === 'news'}">{{ $t('header.menu7-sub1') }}</label>
         </nuxt-link>
         <nuxt-link to="/company" target="_blank">
-          <label class="ml-6">{{ $t('header.menu7-sub2') }}</label>
+          <label :class="{'menu-active' : curMenu === 'company'}" class="ml-6">{{ $t('header.menu7-sub2') }}</label>
         </nuxt-link>
       </div>
     </div>
@@ -90,6 +90,7 @@
 <script setup>
 import { computed, ref } from "vue"
 
+  const route = useRoute();
   const { t, locale, availableLocales } = useI18n()
   const localeOptions = availableLocales.map((lang) => {
     const name = t("general.langName", null, { locale: lang })
@@ -110,7 +111,7 @@ import { computed, ref } from "vue"
 
   const focusVal = ref()
   const topVal = ref(0)
-  const curMenuId = ref(7)
+  const curMenu = ref('')
   const curSubMenu = ref()
   const scrollDown = ref(false)
   const beforeTopVal = ref(0)
@@ -118,9 +119,6 @@ import { computed, ref } from "vue"
   const isPhone = ref(false);
   const showPhoneMenu = ref(false);
 
-  function setMenuId(menuId) {
-    curMenuId.value = menuId;
-}
   
   function handleScroll() {
     topVal.value = document.body.scrollTop || document.documentElement.scrollTop
@@ -144,11 +142,11 @@ import { computed, ref } from "vue"
     handleScroll();
 
     const flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-    console.log("flag:",flag)
     if (flag) {
       isPhone.value = true;
     }
-    console.log("isPhone.value:",isPhone.value);
+
+    curMenu.value = route.path.substring(1);
   })
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll)
@@ -203,6 +201,9 @@ import { computed, ref } from "vue"
     border-bottom-color: #a05e1c;
   }
   .phone-menu{
-    @apply text-[20px] my-[20px];
+    @apply text-[20px] my-[20px] text-[#807D7C];
+  }
+  .menu-color{
+    @apply text-[#807D7C];
   }
 </style>
