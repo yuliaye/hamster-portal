@@ -82,7 +82,7 @@
   @apply w-[300px] h-[60px] leading-[60px] cursor-pointer;
 }
 .ant-tabs{
-  @apply text-white;
+  @apply !text-white;
 }
 .ant-tabs-nav-list{
   @apply w-full;
@@ -91,12 +91,12 @@
   @apply justify-center w-1/3;
 }
 .ant-tabs-tab:hover{
-  @apply text-[#CC731A]
+  @apply !text-[#CC731A]
 }
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
-  @apply text-[#CC731A]
+  @apply !text-[#CC731A]
 }
 .ant-tabs-ink-bar{
-  @apply bg-[#CC731A]
+  @apply !bg-[#CC731A]
 }
 </style>
