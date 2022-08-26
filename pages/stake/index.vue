@@ -13,17 +13,16 @@
   <div class="bg-color-[#141212] pt-12" v-if="!showHamsterStake">
     <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl contain-part">
       <div class="pt-20">
-        <img src="~/assets/images/stake-polka.png" class="w-12 h-12 mx-auto mb-8" />
+        <img src="~/assets/images/stake-meta.png" class="w-12 h-12 mx-auto mb-8" />
         <button
           class="text-2xl text-color-[#fff]"
           v-if="showInstallWallet"
-          >Please Install Polkadot wallet</button
+          >Please Install MetaMask wallet</button
         >
         <button
           class="text-2xl text-color-[#fff]"
-          @click="checkIfPolkaWalletInstalled"
           v-if="showConnectWallet"
-          >Please Connect To Polkadot Wallet</button
+          >Please Connect To MetaMask Wallet</button
         >
       </div>
     </div>
@@ -96,6 +95,7 @@
                     title="By performing the authorization operation, you will use your Hamster in the same way as our contract."
                     arrowPointAtCenter
                     class="tooltip-button"
+                    color="#807D7C"
                   >
                     <ExclamationOutlined class="w-3 h-3 border-0 border-solid rounded-full"/>
                   </Tooltip>
@@ -114,6 +114,7 @@
                     title="After stake, all the current stakeing amount will be frozen for 20 minutes and you can get back the whole amount after it is unfrozen."
                     arrowPointAtCenter
                     class="tooltip-button"
+                    color="#807D7C"
                   >
                     <ExclamationOutlined class="w-3 h-3 border-0 border-solid rounded-full"/>
                   </Tooltip>
@@ -181,11 +182,9 @@
   });
 
   const { default: Web3 } = await import("web3")
-  const { web3Accounts, web3Enable } = await import('@polkadot/extension-dapp')
 
   const formData = reactive({})
   const formRef = ref();
-  const accountOptions = ref([])
   const metaAccount = ref('');
   const walletBalance = ref(0)
   const stakingAmount = ref(0)
@@ -201,6 +200,7 @@
   const showHamsterStake = ref(false)
   const stakeButtonDisabled = ref(true)
   const isLoadingControl = reactive({
+    isLoadingContainer: true,
     isLoadingAllowButton: false,
     isLoadingStakeButton: false,
     isLoadingReceiveButton: false,
@@ -230,28 +230,12 @@
     return api.utils.toWei(val, 'micro')
   }
 
-  const checkIfPolkaWalletInstalled = async() => {
-    const allInjected = await web3Enable('my cool dapp')
-
-    const allAccounts = await web3Accounts()
-    console.log('polkaAccounts', allAccounts)
-
-    allAccounts.map( item => {
-      const account = {
-        label: item.meta.name+'('+item.address+')',
-        value: item.address
-      } 
-      accountOptions.value.push(account)
-      showConnectWallet.value = false
-      showHamsterStake.value = true
-    })
-
-    if (allAccounts.length === 0) {
-      showConnectWallet.value = false
-      showInstallWallet.value = true
-      return
-    }
-  };
+  const refreshCount = async() =>{
+    await getMetaAccounts()
+    await getWalletBalance()
+    await getIncome()
+    await getStakingAmount()
+  }
 
   const formRules = computed(() => ({
     stakingAmount: [
@@ -273,20 +257,34 @@
     withdrawAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
   }));
 
-  const getMetaAccounts = async function() {
+  const checkIfInstalledAndConnected = () =>{
     if (window.ethereum) {
       window.ethereum.request({ method: 'eth_requestAccounts' })
         .then(() => {
           connected.value = true
+          showInstallWallet.value = false
+          showConnectWallet.value = false
+          showHamsterStake.value = true
+
+          refreshCount()
+        }).catch( error => {
+          console.log('error',error)
+          showInstallWallet.value = false
+          showConnectWallet.value = true
+          showHamsterStake.value = false
         })
     } else {
-      alert('请安装MateMask')
+      showInstallWallet.value = true
+      showConnectWallet.value = false
+      showHamsterStake.value = false
     }
+  }
+
+  const getMetaAccounts = async function() {
     const api = buildWeb3Api()
     const accounts = await api.eth.getAccounts()
 
     metaAccount.value = accounts[0]
-    console.log('metaAccount',accounts[0])
   }
 
   const getWalletBalance = async function(){
@@ -360,8 +358,7 @@
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
       const staking = await contract.methods.staking(formatToWei(formData.stakingAmount)).send({ from: metaAccount.value })
       isStakeSuccess.value = false
-      await getStakingAmount()
-      await getWalletBalance()
+      await refreshCount()
     } catch(error) {
       console.log('error',error)
     } finally {
@@ -400,9 +397,7 @@
       const api = buildWeb3Api()
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
       const retrieveResult = await contract.methods.withdraw(formatToWei(formData.withdrawAmount)).send({ from: metaAccount.value })
-      await getStakingAmount()
-      await getWalletBalance()
-      await getIncome()
+      await refreshCount()
     } catch(error) {
       console.log('error',error)
       errRetrieveMessage.value = true
@@ -411,11 +406,8 @@
     }
   }
 
-  onMounted(async () => {
-    await getMetaAccounts()
-    await getWalletBalance()
-    await getIncome()
-    await getStakingAmount()
+  onMounted(() => {
+    checkIfInstalledAndConnected()
   })
 </script>
 
