@@ -12,9 +12,16 @@
           <div class="flex flex-row">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
             <div v-else class="menu sm:pr-8">
-              <nuxt-link :class="{'menu-active' : curMenu === 'faucet'}" class="px-[16px]" to="/faucet" target="_blank">{{ $t('header.faucet') }}</nuxt-link>
-              <nuxt-link :class="{'menu-active' : curMenu === 'stake'}" class="px-[16px]" to="/stake" target="_blank">{{ $t('header.stake') }}</nuxt-link>
-              <nuxt-link :class="{'menu-active' : curMenu === 'cross_chain'}" class="px-[16px]" to="/cross_chain" target="_blank">{{ $t('header.cross_chain') }}</nuxt-link>
+              <nuxt-link
+                v-for="link in navLinks"
+                :key="link.path"
+                :class="{'menu-active' : `/${curMenu}` === link.path}"
+                class="px-[16px]"
+                :to="link.path"
+                target="_blank"
+              >
+                {{ link.title }}
+              </nuxt-link>
               <VDropdown :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}" v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10" popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
                   <div class="px-[16px] h-[32px] flex justify-center items-center">
@@ -62,17 +69,11 @@
       <img class="h-[24px]" src="~/assets/images/header.png">
     </div>
     <div class="my-[20px]">
-      <nuxt-link to="/" target="_blank">
+      <nuxt-link to="/" target="_blank" >
         <div :class="{'menu-active' : curMenu === ''}" class="phone-menu ml-[25px]">{{ $t('header.menu1') }}</div>
       </nuxt-link>
-      <nuxt-link to="/faucet" target="_blank">
-        <div :class="{'menu-active' : curMenu === 'faucet'}" class="phone-menu ml-[25px]">{{ $t('header.faucet') }}</div>
-      </nuxt-link>
-      <nuxt-link to="/cross_chain" target="_blank">
-        <div :class="{'menu-active' : curMenu === 'cross_chain'}" class="phone-menu ml-[25px]">{{ $t('header.cross_chain') }}</div>
-      </nuxt-link>
-      <nuxt-link to="/stake" target="_blank">
-        <div :class="{'menu-active' : curMenu === 'stake'}" class="phone-menu ml-[25px]">{{ $t('header.stake') }}</div>
+      <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
+        <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu ml-[25px]">{{ link.title }}</div>
       </nuxt-link>
       <div :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}" class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png"/>{{ $t('header.menu7') }}</div>
       <div class="ml-[25px] menu-color">
@@ -96,6 +97,13 @@ import { computed, ref } from "vue"
     const name = t("general.langName", null, { locale: lang })
     return { name, value: lang }
   })
+
+  const navLinks = computed(() => [
+    { title: t('header.faucet'), path: "/faucet" },
+    // { title: t('header.stake'), path: "/stake" },
+    // { title: t('header.cross_chain'), path: "/cross_chain" },
+    { title: t('header.docs'), path: "https://hamsternet.io/gitbook/" },
+  ])
 
   const drodownShow = ref(false)
   const drodownShow7 = ref(false)
