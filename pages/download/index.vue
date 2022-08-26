@@ -7,7 +7,7 @@
     </div>
     <div class="mt-[50px] lg:mx-[100px]">
       <Tabs v-model:activeKey="activeKey">
-        <TabPane v-for="i in 3" :key="i" :disabled="diableTab(i)">
+        <TabPane v-for="i in 3" :key="i" :disabled="disableTab(i)">
           <template #tab>
             <span class="flex">
               <img v-if="activeKey===i" :src="getImageURL(`tabs-active${i}.svg`)" class="w-4 mr-2">
@@ -78,7 +78,7 @@
     }
   }
 
-  function diableTab(key) {
+  function disableTab(key) {
     // Disable client linux download
     return activeType.value === 'client' && key == 3;
   }
