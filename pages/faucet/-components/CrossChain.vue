@@ -88,8 +88,18 @@
   const polkaAddress = ref('')
   const isLoadingTransform = ref(false)
 
-  const hookWeb3 = function () {
+  const hookWeb3 = async function () {
     if (window.ethereum) {
+      try {
+        await (window.ethereum).request({
+          method: 'wallet_switchEthereumChain',
+          params: [{
+            chainId: Web3.utils.numberToHex(5)
+          }]
+        })
+      } catch(error){
+        console.log('error',error)
+      }
       window.ethereum.request({ method: 'eth_requestAccounts' })
         .then(() => {
           connected.value = true
@@ -105,7 +115,7 @@
 
     const web3 = new Web3(window.ethereum)
     const accounts = await web3.eth.getAccounts()
-    const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
+    const contract = new web3.eth.Contract(ABI, '0x83BF7FB708dA62E14768c745512680B51d28be4b')
     contract.methods.burn(polkaAmount.value*1000000000000, polkaAddress.value).send({
       from: accounts[0]
     }).on('transactionHash', function (hash) {
