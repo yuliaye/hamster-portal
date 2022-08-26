@@ -74,7 +74,8 @@
     "download": "Download",
     "faucet": "Faucet",
     "stake": "Stake",
-    "cross_chain": "Cross Chain"
+    "cross_chain": "Cross Chain",
+    "docs": "Docs"
   },
   "footer": {
     "email": "Email",
