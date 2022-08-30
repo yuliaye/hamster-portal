@@ -9,21 +9,29 @@
       </div>
     </div>
   </div>
+
+  <Button @click="successButton"></Button>
+  <Button @click="errorButton"></Button>
   
   <div class="bg-color-[#141212] pt-12" v-if="!showHamsterStake">
-    <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl contain-part">
+    <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl">
       <div class="pt-20">
         <img src="~/assets/images/stake-meta.png" class="w-12 h-12 mx-auto mb-8" />
         <button
           class="text-2xl text-color-[#fff]"
           v-if="showInstallWallet"
-          >Please Install MetaMask wallet</button
-        >
+          >
+          <a href="https://metamask.io/download/" target="_blank">Please Install MetaMask wallet</a>
+          <hr class="hr-install-connect"/>
+        </button>
         <button
           class="text-2xl text-color-[#fff]"
+          @click="handleConnectWallet"
           v-if="showConnectWallet"
-          >Please Connect To MetaMask Wallet</button
-        >
+          >
+          Please Connect To MetaMask Wallet
+          <hr class="hr-install-connect"/>
+        </button>
       </div>
     </div>
   </div>
@@ -84,6 +92,7 @@
                       type="number"
                       placeholder="Please enter the amount to be transferred"
                       v-model:value="formData.stakingAmount"
+                      :disabled="stakingInputDisabled"
                     />
                   </FormItem>
                 </div>
@@ -120,7 +129,7 @@
                   </Tooltip>
                 </div>
                 <FormItem name="stakeHatButton" class="text-center">
-                  <Button class="w-5/6 mx-auto my-6 h-9" :class="{'stake-button': isStakeSuccess}" @click="handleStakeButton" :disabled="stakeButtonDisabled||isLoadingControl.isLoadingStakeButton">
+                  <Button class="w-5/6 mx-auto mt-6 h-9" :class="{'stake-button': isActiveStakeButton}" @click="handleStakeButton" :disabled="isActiveStakeButton||isLoadingControl.isLoadingStakeButton">
                     <LoadingOutlined v-if="isLoadingControl.isLoadingStakeButton" />
                     Stake
                   </Button>
@@ -133,7 +142,7 @@
                   <LoadingOutlined v-if="isLoadingControl.isLoadingReceiveButton" />
                   Receive
                 </Button>
-                <span class="inline-block w-5/6 text-red-500" v-if="showReceive">The amount is 0, can't receive！</span>
+                <span class="inline-block w-5/6 text-red-500" v-if="errReceiveMessage">{{ errReceiveMessage }}</span>
               </div>
             </TabPane>
             <TabPane tab="Withdraw" key="3" class="px-8">
@@ -151,14 +160,11 @@
                     v-model:value="formData.withdrawAmount"
                   />
                 </FormItem>
-                <FormItem name="retrieveButton" class="w-full">
-                  <div class="flex flex-col items-center mx-auto">
-                    <Button class="w-5/6 mt-6 mb-2" @click="handleRetrieveButton" :disabled="isLoadingControl.isLoadingRetrieveButton">
-                      <LoadingOutlined v-if="isLoadingControl.isLoadingRetrieveButton" />
-                      Retrieve
-                    </Button>
-                    <span class="inline-block w-5/6 text-red-500" v-if="errRetrieveMessage">Can't withdraw at the moment, please withdraw after unfreezing</span>
-                  </div>
+                <FormItem name="retrieveButton" class="text-center">
+                  <Button class="w-5/6 mt-6" @click="handleRetrieveButton" :disabled="isLoadingControl.isLoadingRetrieveButton">
+                    <LoadingOutlined v-if="isLoadingControl.isLoadingRetrieveButton" />
+                    Retrieve
+                  </Button>
                 </FormItem>
               </div>
             </TabPane>
@@ -175,7 +181,7 @@
   import { ERCABI } from '../../utils/abi/erc20'
   import { HAMABI } from '../../utils/abi/hamsterPool'
   import { LoadingOutlined } from '@ant-design/icons-vue'
-  import { Tabs, Button, Input, Tooltip, TabPane, Form, FormItem } from 'ant-design-vue';
+  import { Tabs, Button, Input, Tooltip, TabPane, Form, FormItem, message } from 'ant-design-vue';
 
   definePageMeta({
     layout: "no-ssr"
@@ -188,13 +194,13 @@
   const metaAccount = ref('');
   const walletBalance = ref(0)
   const stakingAmount = ref(0)
+  const stakingInputDisabled = ref(false)
+  const isActiveStakeButton = ref(true)
   const incomeAmount = ref(0)
   
   const connected = ref(false)
-  const isStakeSuccess = ref(true)
-  const showReceive = ref(false)
   const disabledReceiveButton = ref(false)
-  const errRetrieveMessage = ref(false)
+  const errReceiveMessage = ref('')
   const showInstallWallet = ref(false)
   const showConnectWallet = ref(true)
   const showHamsterStake = ref(false)
@@ -230,6 +236,13 @@
     return api.utils.toWei(val, 'micro')
   }
 
+  const successButton = ()=>{
+    message.success('This is a success message')
+  }
+  const errorButton = ()=>{
+    message.error('This is an error message')
+  }
+
   const refreshCount = async() =>{
     await getMetaAccounts()
     await getWalletBalance()
@@ -254,28 +267,47 @@
         }
       }
     ],
-    withdrawAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
+    withdrawAmount: [
+      {
+        trigger: 'change',
+        validator: async (_, newWithdrawAmount) => {
+          const val = +newWithdrawAmount
+          if (val <= 0) {
+            return Promise.reject('The input amount must be greater than 0')
+          } else if (val > stakingAmount.value) {
+            return Promise.reject('The input amount cannot be greater than the staking amount')
+          } else {
+            Promise.resolve()
+          }
+        }
+      },
+      { message: 'this is can not empty', trigger: 'change', required: true }
+    ],
   }));
 
   const checkIfInstalledAndConnected = () =>{
     if (window.ethereum) {
-      window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then(() => {
-          connected.value = true
-          showInstallWallet.value = false
-          showConnectWallet.value = false
-          showHamsterStake.value = true
-
-          refreshCount()
-        }).catch( error => {
-          console.log('error',error)
-          showInstallWallet.value = false
-          showConnectWallet.value = true
-          showHamsterStake.value = false
-        })
+      handleConnectWallet()
     } else {
       showInstallWallet.value = true
       showConnectWallet.value = false
+      showHamsterStake.value = false
+    }
+  }
+  
+  const handleConnectWallet = async() => {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' })
+      connected.value = true
+      showInstallWallet.value = false
+      showConnectWallet.value = false
+      showHamsterStake.value = true
+
+      refreshCount()
+    } catch(error) {
+      console.log('error',error)
+      showInstallWallet.value = false
+      showConnectWallet.value = true
       showHamsterStake.value = false
     }
   }
@@ -342,8 +374,12 @@
       const contract = new api.eth.Contract(ERCABI, '0x83BF7FB708dA62E14768c745512680B51d28be4b')
       const approveResult = await contract.methods.approve('0x75930F4bC45eacc658B6DC111Bbbc664f66449CC', formatToWei(formData.stakingAmount)).send({ from: metaAccount.value })
       stakeButtonDisabled.value = false
+      stakingInputDisabled.value = true
+      isActiveStakeButton.value = false
+      successButton()
     } catch(error) {
       console.log('error',error)
+      errorButton()
     } finally {
       isLoadingControl.isLoadingAllowButton = false
     }
@@ -357,20 +393,29 @@
       const api = buildWeb3Api()
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
       const staking = await contract.methods.staking(formatToWei(formData.stakingAmount)).send({ from: metaAccount.value })
-      isStakeSuccess.value = false
       await refreshCount()
+      successButton()
     } catch(error) {
       console.log('error',error)
+      errorButton()
     } finally {
       isLoadingControl.isLoadingStakeButton = false
+      formData.stakingAmount = ''
+      stakingInputDisabled.value = false
+      isActiveStakeButton.value = true
     }
   }
 
   // Get the benefits
   const handleReceiveButton = async() => {
     if (!+incomeAmount.value) {
-      showReceive.value = true
+      errReceiveMessage.value = 'The amount is 0, can not receive！'
       disabledReceiveButton.value = true
+
+      setTimeout(()=>{
+        errReceiveMessage.value = ''
+        disabledReceiveButton.value = false
+      },1000)
 
     } else {
       isLoadingControl.isLoadingReceiveButton = true
@@ -380,8 +425,10 @@
         const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
         const getBenefits = await contract.methods.withdrawGrt().send({ from: metaAccount.value })
         await getIncome()
+        successButton()
       } catch(error) {
         console.log('error',error)
+        errorButton()
       } finally {
         isLoadingControl.isLoadingReceiveButton = false
       }
@@ -396,13 +443,15 @@
     try {
       const api = buildWeb3Api()
       const contract = new api.eth.Contract(HAMABI, '0x75930F4bC45eacc658B6DC111Bbbc664f66449CC')
-      const retrieveResult = await contract.methods.withdraw(formatToWei(formData.withdrawAmount)).send({ from: metaAccount.value })
+      const retrieveResult = await contract.methods.withdraw(formatToWei(formData.withdrawAmount)).send({ from: metaAccount.value, gas: 5500000 })
       await refreshCount()
+      successButton()
     } catch(error) {
       console.log('error',error)
-      errRetrieveMessage.value = true
+      errorButton()
     } finally {
       isLoadingControl.isLoadingRetrieveButton = false
+      formData.withdrawAmount = ''
     }
   }
 
@@ -458,9 +507,10 @@
     margin-top: 2px;
     border: 1px solid #CC7219;
     background: #CC7219;
+    line-height: 1em;
   }
   :deep(.anticon svg) {
-    width: 4px;
+    width: 8px;
     height: 10px;
   }
   :deep(.anticon[tabindex]){
@@ -477,6 +527,9 @@
     border: none;
     height: 1px;
     background-color: #504b48;
+  }
+  .hr-install-connect{
+    border: 1px solid white;
   }
   :deep(.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn) {
     color: #fff;
