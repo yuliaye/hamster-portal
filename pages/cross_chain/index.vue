@@ -9,15 +9,43 @@
       </div>
     </div>
   </div> 
+
+  <div class="bg-color-[#141212] pt-12" v-if="!showHamsterCross">
+    <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl">
+      <div class="pt-20">
+        <img src="~/assets/images/stake-polka.png" class="w-12 h-12 mx-auto mb-8" />
+        <button
+          class="text-2xl text-color-[#fff]"
+          v-if="showPolkInstallWallet"
+          >
+          <a href="https://polkadot.js.org/extension/" target="_blank">Please Install Polkadot wallet</a>
+          <hr class="hr-install-connect"/>
+        </button>
+        <button
+          class="text-2xl text-color-[#fff]"
+          @click="handlePolkConnectWallet"
+          v-if="showPolkConnectWallet"
+          >
+          Please Connect To Polkadot Wallet
+          <hr class="hr-install-connect"/>
+        </button>
+      </div>
+    </div>
+  </div>
   
-  <Form :model="formData" ref="formRef" :rules="formRules">
+  <Form :model="formData" ref="formRef" :rules="formRules" v-if="showHamsterCross">
     <div class="bg-color-[#141212]">
       <div class="w-2/3 mx-auto">
         <span class="hamster-cross-chain">Hamster Cross Chain(Goerli)</span>
         <div class="h-[800px] rounded-2xl contain-part">
           <div class="px-8 pt-8">
             <FormItem name="polkadotAddress">
-              <Select class="w-full" :options="accountOptions" v-model:value="formData.polkadotAddress" @change="handleSelectChange"></Select>
+              <Select class="w-full" v-model:value="formData.polkadotAddress" option-label-prop="children" @change="handleSelectChange">
+                <SelectOption v-for="option in accountOptions" :key="option.value" class="flex">
+                  <img src="~/assets/images/pledge-cross-polka.svg" class="inline-block h-4 mr-1">
+                  <span>{{option.label}}</span>
+                </SelectOption>
+              </Select>
             </FormItem>
             <div class="flex justify-between my-6 text-base top-wallet-balance">
               <span>Wallet Balance</span>
@@ -34,22 +62,24 @@
 
           <Tabs defaultActiveKey="1">
             <TabPane tab="Transfer Into" key="1" class="px-8">
-              <div class="bg-color-[#141212] pt-12" v-if="!showHamsterCross">
+              <div class="bg-color-[#141212] pt-12" v-if="!showBodyContain">
                 <div class="mx-auto text-center">
                   <img src="~/assets/images/stake-meta.png" class="w-12 h-12 mx-auto mt-20 mb-8" />
-                  <button class="text-color-[#fff] text-2xl" v-if="showInstallWallet"
-                    >Please Install MetaMask Wallet
+                  <button class="text-color-[#fff] text-2xl" v-if="showMetaInstallWallet">
+                    <a href="https://metamask.io/download/" target="_blank">Please Install MetaMask wallet</a>
+                    <hr class="hr-install-connect"/>
                   </button>
                   <button
                     class="text-2xl text-color-[#fff]"
-                    @click="checkIfMetaWalletInstalled"
-                    v-if="showConnectWallet"
+                    @click="handleMetaConnectWallet"
+                    v-if="showMetaConnectWallet"
                     >Please Connect To MetaMask Wallet
+                    <hr class="hr-install-connect"/>
                   </button>
                 </div>
               </div>
 
-              <div v-if="showHamsterCross" class="flex flex-col text-color-[#fff] text-base">
+              <div v-if="showBodyContain" class="flex flex-col text-color-[#fff] text-base">
                 <span class="mt-1 mb-6">Transfer Amount</span>
                 <FormItem name="intoAmount">
                   <Input
@@ -114,7 +144,7 @@
                 </div>
                 <hr />
                 <FormItem class="text-center">
-                  <Button class="w-32 mx-auto mt-8 h-9 transferout-button" @click="handleTransferOutAmount" :disabled="isLoadingOut">
+                  <Button class="w-32 mx-auto mt-8 h-9" @click="handleTransferOutAmount" :disabled="isLoadingOut">
                     <LoadingOutlined v-if="isLoadingOut" class="loading-button"/>
                     Submit
                   </Button>
@@ -132,16 +162,16 @@
 <script setup>
   import { ref, reactive, onMounted } from 'vue';
   import { ABI } from '../faucet/-components/contract.ts'
-  import { formatmetaMaskBalance } from '../../utils/web3Util/metaMask'
+  import { ERCABI } from '../../utils/abi/erc20'
   import { LoadingOutlined } from '@ant-design/icons-vue'
-  import { Select, Tabs, Button, Input, TabPane, Form, FormItem } from 'ant-design-vue';
+  import { Select, SelectOption, Tabs, Button, Input, TabPane, Form, FormItem } from 'ant-design-vue';
 
   definePageMeta({
     layout: "no-ssr"
   });
 
   const { default: Web3 } = await import("web3")
-  const { web3Accounts, web3Enable, web3FromAddress } = await import('@polkadot/extension-dapp')
+  const { web3Accounts, web3Enable, web3FromAddress, isWeb3Injected } = await import('@polkadot/extension-dapp')
   const { createPolkadotApi, formatBalance } = await import ('../../utils/polkadotUtil')
 
   const formData = reactive({})
@@ -154,8 +184,11 @@
   const polkaBalance = reactive({ loading: false, value: '0' });
   const metaBalance = reactive({ loading: false, value: '0' });
   const tabTransferOutDisabled = ref(true)
-  const showInstallWallet = ref(false);
-  const showConnectWallet = ref(true);
+  const showPolkInstallWallet = ref(true)
+  const showPolkConnectWallet = ref(false)
+  const showMetaInstallWallet = ref(false);
+  const showMetaConnectWallet = ref(false);
+  const showBodyContain = ref(false)
   const showHamsterCross = ref(false);
   const connected = ref(false)
 
@@ -164,7 +197,6 @@
     intoAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
     outAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
   }));
-
 
   // create apis
   // const polkadotApi = ref();
@@ -181,34 +213,88 @@
     return polkadotApi
   }
 
-  const getMetaBalance = ()=>{
-    metaBalance.loading = true
-    const web3 = new Web3(window.ethereum)
+  // meta api
+  let web3Api
+  const buildWeb3Api = () => {
+    if (web3Api) {
+      return web3Api
+    }
 
-    web3.eth.getBalance(metaAccount.value).then( res => {
-    
-      metaBalance.value = web3.utils.fromWei(res, 'micro')
-      metaBalance.loading = false
-      tabTransferOutDisabled.value = false
-    })
+    web3Api = new Web3(window.ethereum)
+    return web3Api
+  }
+
+  const formatFromWei = (val) => {
+    const api = buildWeb3Api()
+    return api.utils.fromWei(val, 'micro')
+  }
+
+  const checkIfPolkWalletInstalled = () => {
+    if(isWeb3Injected){
+      showPolkInstallWallet.value = false
+      showPolkConnectWallet.value = true
+      handlePolkConnectWallet()
+    } else {
+      showPolkInstallWallet.value = true
+      showPolkConnectWallet.value = false
+    }
+  };
+
+  const handlePolkConnectWallet = async() =>{
+    const extensions = await web3Enable("Hamster");
+
+    if (extensions.length === 0) {
+      alert('Please go to Manage Website Access in the Settings of Polka wallet for manual authorization')
+    } else {
+      await getPolkaAccounts()
+      showPolkConnectWallet.value = false
+      showMetaInstallWallet.value = true
+      checkIfMetaWalletInstalled()
+    }
+  }
+
+  const checkIfMetaWalletInstalled = async() => {
+    showHamsterCross.value = true
+    if (window.ethereum) {
+      handleMetaConnectWallet()
+    } else {
+      showMetaInstallWallet.value = true
+      showMetaConnectWallet.value = false
+    }
+  };
+
+  const handleMetaConnectWallet = async() => {
+    try {
+      await ethereum.request({ method: 'eth_requestAccounts' })
+      connected.value = true
+      showMetaInstallWallet.value = false
+      showMetaConnectWallet.value = true
+      showBodyContain.value = true
+
+      getMetaAccounts()
+    } catch(error) {
+      console.log('error',error)
+      showMetaInstallWallet.value = false
+      showMetaConnectWallet.value = true
+    }
   }
 
   const getPolkaAccounts = async () => {
-    const allInjected = await web3Enable('my cool dapp')
-
     const allAccounts = await web3Accounts()
     console.log('polkaAccounts', allAccounts)
 
-    allAccounts.map( item => {
+    const accounts = allAccounts.map((item) => {
       const account = {
         label: item.meta.name+'('+item.address+')',
         value: item.address
       } 
-      accountOptions.value.push(account)
+      return account
     })
 
-    if (allAccounts.length === 0) {
-      return
+    accountOptions.value = accounts
+    
+    if (accounts.length > 0) {
+      formData.polkadotAddress = accounts[0].value
     }
   }
 
@@ -223,21 +309,21 @@
       console.log('error',error)
     }
   }
-  
-  const checkIfMetaWalletInstalled = async() => {
-    if (window.ethereum) {
-      window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then(() => {
-          connected.value = true
-          showConnectWallet.value = false;
-          showHamsterCross.value = true;
-        })
-    } else {
-      showConnectWallet.value = false;
-      showInstallWallet.value = true;
+
+  const getMetaBalance = async()=>{
+    metaBalance.loading = true
+    try {
+      const api = buildWeb3Api()
+      const contract = new api.eth.Contract(ERCABI, '0x83BF7FB708dA62E14768c745512680B51d28be4b')
+      const balance = await contract.methods.balanceOf(metaAccount.value).call()
+      metaBalance.value = formatFromWei(balance)
+      tabTransferOutDisabled.value = false
+    } catch(error){
+      console.log('error',error)
+    } finally {
+      metaBalance.loading = false
     }
-    await getMetaAccounts()
-  };
+  }
 
   // transfer amount from meta to polka
   const handleTransferIntoAmount = async function() {
@@ -309,8 +395,8 @@
     }
   }
 
-  onMounted(async () => {
-    getPolkaAccounts()
+  onMounted(() => {
+    checkIfPolkWalletInstalled()
   })
 </script>
 
@@ -371,6 +457,9 @@
     height: 1px;
     background-color: #504b48;
   }
+  .hr-install-connect{
+    border: 1px solid white;
+  }
   :deep(.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn) {
     color: #fff;
     font-size: 16px;
@@ -414,8 +503,9 @@
 
   .ant-btn {
     border-radius: 20px;
+    border: none;
   }
-  .transferout-button {
+  .ant-btn:hover, .ant-btn:focus {
     background: #cc7219;
     border: unset;
     color: #fff;
