@@ -556,6 +556,9 @@
   :deep(.ant-tabs-tab){
     color: #807d7c;
   }
+  :deep(.ant-message .anticon){
+    top: -3px !important;
+  }
 
   input {
     background: unset;
