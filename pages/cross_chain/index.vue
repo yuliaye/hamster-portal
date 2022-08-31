@@ -10,6 +10,9 @@
     </div>
   </div> 
 
+  <Button @click="successButton"></Button>
+  <Button @click="errorButton"></Button>
+
   <div class="bg-color-[#141212] pt-12" v-if="!showHamsterCross">
     <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl">
       <div class="pt-20">
@@ -53,7 +56,7 @@
                 <LoadingOutlined v-if="polkaBalance.loading" />
                 <div v-if="!polkaBalance.loading">
                   <span>{{ polkaBalance.value }}</span>
-                  <span class="ml-1 text-xs top-wallet-balance-hat">HAT</span>
+                  <span class="ml-1 text-xs top-wallet-balance-hat">Unit</span>
                 </div>
               </div>
             </div>
@@ -164,7 +167,7 @@
   import { ABI } from '../faucet/-components/contract.ts'
   import { ERCABI } from '../../utils/abi/erc20'
   import { LoadingOutlined } from '@ant-design/icons-vue'
-  import { Select, SelectOption, Tabs, Button, Input, TabPane, Form, FormItem } from 'ant-design-vue';
+  import { Select, SelectOption, Tabs, Button, Input, TabPane, Form, FormItem, message } from 'ant-design-vue';
 
   definePageMeta({
     layout: "no-ssr"
@@ -194,9 +197,46 @@
 
   const formRules = computed(() => ({
     polkadotAddress: [{ message: 'this is can not empty', trigger: 'change', required: true }],
-    intoAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
-    outAmount: [{ message: 'this is can not empty', trigger: 'change', required: true }],
+    intoAmount: [
+      { message: 'this is can not empty', trigger: 'change', required: true },
+      {
+        trigger: 'change',
+        validator: async (_, newIntoAmount) => {
+          const val = +newIntoAmount
+          if (val <= 0) {
+            return Promise.reject('The input amount must be greater than 0')
+          } else if (val > +polkaBalance.value) {
+            return Promise.reject('The input amount cannot be greater than the balance')
+          } else {
+            Promise.resolve()
+          }
+        }
+      }
+    ],
+    outAmount: [
+      { message: 'this is can not empty', trigger: 'change', required: true },
+      {
+        trigger: 'change',
+        validator: async (_, newOutAmount) => {
+          const val = +newOutAmount
+          if (val <= 0) {
+            return Promise.reject('The input amount must be greater than 0')
+          } else if (val > +metaBalance.value) {
+            return Promise.reject('The input amount cannot be greater than the balance')
+          } else {
+            Promise.resolve()
+          }
+        }
+      }
+    ],
   }));
+
+  const successButton = ()=>{
+    message.success('This is a success message')
+  }
+  const errorButton = ()=>{
+    message.error('This is an error message')
+  }
 
   // create apis
   // const polkadotApi = ref();
@@ -247,13 +287,14 @@
       alert('Please go to Manage Website Access in the Settings of Polka wallet for manual authorization')
     } else {
       await getPolkaAccounts()
+      handleSelectChange()
       showPolkConnectWallet.value = false
       showMetaInstallWallet.value = true
       checkIfMetaWalletInstalled()
     }
   }
 
-  const checkIfMetaWalletInstalled = async() => {
+  const checkIfMetaWalletInstalled = () => {
     showHamsterCross.value = true
     if (window.ethereum) {
       handleMetaConnectWallet()
@@ -300,7 +341,7 @@
 
   const getMetaAccounts = async function() {
     try {
-      const web3 = new Web3(window.ethereum)
+      const web3 = buildWeb3Api()
       const accounts = await web3.eth.getAccounts()
       metaAccount.value = accounts[0]
 
@@ -330,23 +371,25 @@
     await formRef.value?.validate(['polkadotAddress', 'intoAmount']);
     isLoadingInto.value = true
 
-    const web3 = new Web3(window.ethereum)
+    const web3 = buildWeb3Api()
 
-    const contract = new web3.eth.Contract(ABI, '0x58DC15156C520cB4d18Df8807419c1989B05c960')
+    const contract = new web3.eth.Contract(ABI, '0x83BF7FB708dA62E14768c745512680B51d28be4b')
     contract.methods.burn(formData.intoAmount*1000000000000, accountOptions.value[0].value).send({
       from: metaAccount.value
     }).on('transactionHash', function (hash) {
       console.log('transactionHash:', hash)
-    }).on('receipt', function (receipt) {
+    }).on('receipt', async function (receipt) {
       // receipt example
       console.log('receipt:', receipt)
       isLoadingInto.value = false
+      await handleSelectChange()
+      await getMetaBalance()
+      successButton()
     }).on('error', function (error) {
       isLoadingInto.value = false
       console.log('error:', error)
+      errorButton()
     })
-    await handleSelectChange()
-    getMetaBalance()
   }
   
   // transfer amount from polka to meta
@@ -361,22 +404,23 @@
       const injector = await web3FromAddress(SENDER);
       const polkadotApi = await buildPolkadotApi();
       polkadotApi.tx.burn.burn(outAmount*1000000000000, metaAccount.value).signAndSend(
-        SENDER, {signer: injector.signer}, (result) => {
+        SENDER, {signer: injector.signer}, async(result) => {
           if (result.status.isInBlock) {
             console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
           } else if (result.status.isFinalized) {
             console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
+            await handleSelectChange()
+            getMetaBalance()
+            successButton()
             isLoadingOut.value = false
           }
         }
       )
-      await handleSelectChange()
-      getMetaBalance()
     } catch(error) {
       console.log('err',error)
-    } finally {
+      errorButton()
       isLoadingOut.value = false
-    }
+    } 
   }
 
   const handleSelectChange = async () => {
@@ -387,7 +431,7 @@
       const { polkadotAddress } = formData
       const polkadotApi = await buildPolkadotApi();
       const { data: balanceData } = await polkadotApi.query.system.account(polkadotAddress);
-      polkaBalance.value = formatBalance(balanceData.free);
+      polkaBalance.value = formatBalance(balanceData.free).split(' ')[0];
     } catch (error) {
       console.log("Error", error)
     } finally {
@@ -483,6 +527,9 @@
   }
   :deep(.ant-tabs-tab){
     color: #807d7c;
+  }
+  :deep(.ant-message .anticon){
+    top: -3px !important;
   }
 
   input {
