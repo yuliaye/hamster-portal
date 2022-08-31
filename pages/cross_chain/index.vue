@@ -262,6 +262,7 @@
       showMetaConnectWallet.value = false
     }
   };
+  
 
   const handleMetaConnectWallet = async() => {
     try {
