@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 on: [push]
 jobs:
   docker-build:
-    if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -16,7 +16,7 @@ jobs:
           docker build -t hamstershare/hamster-portal:latest .
           docker push hamstershare/hamster-portal:latest
   deploy:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     name: deploy
     needs:
       - docker-build
