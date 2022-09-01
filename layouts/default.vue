@@ -1,5 +1,5 @@
 <template>
-  <div :class="[showContent===true?'inline':'hidden']" class="text-white container mx-auto">
+  <div :class="[showContent===true?'inline':'hidden']" class="container mx-auto text-white">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
@@ -84,5 +84,14 @@
   }
   .area-title {
     @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
+  }
+</style>
+<style lang="less">
+  /* about antdv's style*/
+  /*  message error and success*/
+  .ant-message-custom-content {
+    .anticon{
+      vertical-align: text-bottom;
+    }
   }
 </style>

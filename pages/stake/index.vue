@@ -9,9 +9,6 @@
       </div>
     </div>
   </div>
-
-  <Button @click="successButton"></Button>
-  <Button @click="errorButton"></Button>
   
   <div class="bg-color-[#141212] pt-12" v-if="!showHamsterStake">
     <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl">
@@ -237,10 +234,10 @@
   }
 
   const successButton = ()=>{
-    message.success('This is a success message')
+    message.success('This is successed!')
   }
   const errorButton = ()=>{
-    message.error('This is an error message')
+    message.error('This is failed!')
   }
 
   const refreshCount = async() =>{
@@ -579,7 +576,7 @@
   .ant-btn {
     border-radius: 20px;
   }
-  .transferout-button {
+  .ant-btn:hover, .ant-btn:focus {
     background: #cc7219;
     border: unset;
     color: #fff;

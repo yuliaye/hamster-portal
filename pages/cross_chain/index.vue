@@ -10,9 +10,6 @@
     </div>
   </div> 
 
-  <Button @click="successButton"></Button>
-  <Button @click="errorButton"></Button>
-
   <div class="bg-color-[#141212] pt-12" v-if="!showHamsterCross">
     <div class="w-2/3 h-[400px] mx-auto text-center rounded-xl">
       <div class="pt-20">
@@ -43,8 +40,8 @@
         <div class="h-[800px] rounded-2xl contain-part">
           <div class="px-8 pt-8">
             <FormItem name="polkadotAddress">
-              <Select class="w-full" v-model:value="formData.polkadotAddress" option-label-prop="children" @change="handleSelectChange">
-                <SelectOption v-for="option in accountOptions" :key="option.value" class="flex">
+              <Select class="w-full" dropdownClassName="polkadot-select-dropdown" v-model:value="formData.polkadotAddress" option-label-prop="children" @change="handleSelectChange">
+                <SelectOption v-for="option in accountOptions" :key="option.value" class="flex items-center">
                   <img src="~/assets/images/pledge-cross-polka.svg" class="inline-block h-4 mr-1">
                   <span>{{option.label}}</span>
                 </SelectOption>
@@ -205,7 +202,7 @@
           const val = +newIntoAmount
           if (val <= 0) {
             return Promise.reject('The input amount must be greater than 0')
-          } else if (val > +polkaBalance.value) {
+          } else if (val > +metaBalance.value) {
             return Promise.reject('The input amount cannot be greater than the balance')
           } else {
             Promise.resolve()
@@ -221,7 +218,7 @@
           const val = +newOutAmount
           if (val <= 0) {
             return Promise.reject('The input amount must be greater than 0')
-          } else if (val > +metaBalance.value) {
+          } else if (val > +polkaBalance.value) {
             return Promise.reject('The input amount cannot be greater than the balance')
           } else {
             Promise.resolve()
@@ -232,10 +229,10 @@
   }));
 
   const successButton = ()=>{
-    message.success('This is a success message')
+    message.success('This is successed!')
   }
   const errorButton = ()=>{
-    message.error('This is an error message')
+    message.error('This is failed!')
   }
 
   // create apis
@@ -289,7 +286,6 @@
       await getPolkaAccounts()
       handleSelectChange()
       showPolkConnectWallet.value = false
-      showMetaInstallWallet.value = true
       checkIfMetaWalletInstalled()
     }
   }
@@ -305,11 +301,12 @@
   };
 
   const handleMetaConnectWallet = async() => {
+    showMetaConnectWallet.value = true
     try {
       await ethereum.request({ method: 'eth_requestAccounts' })
       connected.value = true
       showMetaInstallWallet.value = false
-      showMetaConnectWallet.value = true
+      showMetaConnectWallet.value = false
       showBodyContain.value = true
 
       getMetaAccounts()
@@ -385,10 +382,12 @@
       await handleSelectChange()
       await getMetaBalance()
       successButton()
+      formData.intoAmount = ''
     }).on('error', function (error) {
       isLoadingInto.value = false
       console.log('error:', error)
       errorButton()
+      formData.intoAmount = ''
     })
   }
   
@@ -404,26 +403,43 @@
       const injector = await web3FromAddress(SENDER);
       const polkadotApi = await buildPolkadotApi();
       polkadotApi.tx.burn.burn(outAmount*1000000000000, metaAccount.value).signAndSend(
-        SENDER, {signer: injector.signer}, async(result) => {
-          if (result.status.isInBlock) {
-            console.log(`Transaction included at blockHash ${result.status.asInBlock}`);
-          } else if (result.status.isFinalized) {
-            console.log(`Transaction finalized at blockHash ${result.status.asFinalized}`);
-            await handleSelectChange()
-            getMetaBalance()
-            successButton()
-            isLoadingOut.value = false
-          }
+        SENDER, {signer: injector.signer}, async({status,dispatchError})=>{
+          if(status.isInBlock){
+            if(dispatchError) {
+              if(dispatchError.isModule) {
+                console.log('dispatchError.isModule',dispatchError.isModule)
+                errorButton()
+                isLoadingOut.value = false
+                formData.outAmount = ''
+              } else {
+                console.log('dispatchError',dispatchError)
+                errorButton()
+                isLoadingOut.value = false
+                formData.outAmount = ''
+              }
+            } else {
+              await handleSelectChange()
+              await getMetaBalance()
+              successButton()
+              isLoadingOut.value = false
+              formData.outAmount = ''
+            }
+          } 
         }
-      )
+      ).catch((error)=> {
+        console.log('err',error)
+        errorButton()
+        isLoadingOut.value = false
+        formData.outAmount = ''
+      })
     } catch(error) {
       console.log('err',error)
       errorButton()
       isLoadingOut.value = false
+      formData.outAmount = ''
     } 
   }
   
-
   const handleSelectChange = async () => {
     polkaBalance.loading = true
     console.log('polkaBalance.loading = true')
@@ -529,10 +545,6 @@
   :deep(.ant-tabs-tab){
     color: #807d7c;
   }
-  :deep(.ant-message .anticon){
-    top: -3px !important;
-  }
-
   input {
     background: unset;
     height: 40px;
@@ -557,5 +569,14 @@
     background: #cc7219;
     border: unset;
     color: #fff;
+  }
+</style>
+
+<style lang="less">
+  .polkadot-select-dropdown {
+    .ant-select-item-option-content{
+      display: flex;
+      align-items: center;
+    }
   }
 </style>
