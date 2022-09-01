@@ -70,7 +70,9 @@
     "menu6": "使用hamster",
     "menu7": "关于我们",
     "menu7-sub1": "新闻",
-    "menu7-sub2": "公司简介"
+    "menu7-sub2": "公司简介",
+    "download": "下载",
+    "docs": "文档",
   },
   "footer": {
     "email": "邮箱",

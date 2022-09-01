@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white container mx-auto">
+  <div :class="[showContent===true?'inline':'hidden']" class="container mx-auto text-white">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta name="description" :content="$t('meta.description')" />
@@ -15,9 +15,14 @@
 </template>
 
 <script setup>
+  import { onMounted } from "vue"
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
   const { getImageURL } = useAssets()
+  const showContent = ref(false)
+  onMounted(() => {
+    showContent.value = true;
+  })
 </script>
 <style>
   body {
@@ -56,6 +61,10 @@
     background: url('~/assets/images/company-top-bg.png') no-repeat top;
     background-size: contain;
   }
+  .download-top-bg{
+    background: url('~/assets/images/download-top.png') no-repeat top;
+    background-size: contain;
+  }
   .bg-div-style{
     @apply flex justify-center items-center h-[180px] sm:h-[280px] md:h-[340px] lg:h-[480px] xl:h-[600px];
   }
@@ -75,5 +84,14 @@
   }
   .area-title {
     @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
+  }
+</style>
+<style lang="less">
+  /* about antdv's style*/
+  /*  message error and success*/
+  .ant-message-custom-content {
+    .anticon{
+      vertical-align: text-bottom;
+    }
   }
 </style>

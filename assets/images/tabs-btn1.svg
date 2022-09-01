@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>按钮</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="download-apps" transform="translate(-422.000000, -1474.000000)" fill="#807D7C" fill-rule="nonzero">
+            <g id="内容" transform="translate(320.000000, 1056.000000)">
+                <g id="按钮" transform="translate(51.000000, 400.000000)">
+                    <g id="编组-4" transform="translate(51.000000, 18.106445)">
+                        <path d="M1,7.52513363 L1,3.65671258 L5.94117647,2.684081 L5.94117647,7.45881784 L1,7.52513363 M15,0.893554688 L15,7.3409231 L6.76470589,7.45144942 L6.76470589,2.52197573 L15,0.893554688 M1,8.26197574 L5.94117647,8.32829153 L5.94117647,13.3461863 L1,12.4988178 L1,8.26197574 M15,8.44618626 L15,14.8935547 L6.76470589,13.4861863 L6.76470589,8.33565994 L15,8.44618626 Z" id="形状"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
