@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 on: [push]
 jobs:
   docker-build:
-    if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -25,10 +25,10 @@ jobs:
       - name: Deploy portal
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.HOST_USERNAME }}
-          password: ${{ secrets.HOST_PASSWORD }}
-          port: ${{ secrets.HOST_PORT }}
+          host: ${{ secrets.HAMSTER_SERVER_HOST }}
+          username: ${{ secrets.HAMSTER_SERVER_USERNAME }}
+          key: ${{ secrets.HAMSTER_SERVER_KEY }}
+          port: ${{ secrets.HAMSTER_SERVER_PORT }}
           script: |
             cd /root/hamster_portal
             docker compose pull
