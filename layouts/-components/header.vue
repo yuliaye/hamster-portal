@@ -8,7 +8,7 @@
             <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
-          
+
           <div class="flex flex-row">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
             <div v-else class="menu sm:pr-8">
@@ -102,7 +102,7 @@ import { computed, ref } from "vue"
     { title: t('header.faucet'), path: "/faucet" },
     { title: t('header.stake'), path: "/stake" },
     { title: t('header.cross_chain'), path: "/cross_chain" },
-    { title: t('header.docs'), path: "https://hamsternet.io/gitbook/" },
+    { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
   ])
 
   const drodownShow = ref(false)
@@ -127,10 +127,10 @@ import { computed, ref } from "vue"
   const isPhone = ref(false);
   const showPhoneMenu = ref(false);
 
-  
+
   function handleScroll() {
     topVal.value = document.body.scrollTop || document.documentElement.scrollTop
-    if (beforeTopVal.value < topVal.value) { // 向下滚动  
+    if (beforeTopVal.value < topVal.value) { // 向下滚动
       scrollDown.value = true;
     } else { //向上滚动
       scrollDown.value = false;
