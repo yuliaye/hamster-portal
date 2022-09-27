@@ -193,15 +193,13 @@
   const connected = ref(false)
 
   const formRules = computed(() => ({
-    polkadotAddress: [{ message: 'this is can not empty', trigger: 'change', required: true }],
     intoAmount: [
-      { message: 'this is can not empty', trigger: 'change', required: true },
       {
         trigger: 'change',
         validator: async (_, newIntoAmount) => {
           const val = +newIntoAmount
           if (val <= 0) {
-            return Promise.reject('The input amount must be greater than 0')
+            return Promise.reject('The input amount must be greater than 0 and can not be empty')
           } else if (val > +metaBalance.value) {
             return Promise.reject('The input amount cannot be greater than the balance')
           } else {
@@ -211,13 +209,12 @@
       }
     ],
     outAmount: [
-      { message: 'this is can not empty', trigger: 'change', required: true },
       {
         trigger: 'change',
         validator: async (_, newOutAmount) => {
           const val = +newOutAmount
           if (val <= 0) {
-            return Promise.reject('The input amount must be greater than 0')
+            return Promise.reject('The input amount must be greater than 0 and can not be empty')
           } else if (val > +polkaBalance.value) {
             return Promise.reject('The input amount cannot be greater than the balance')
           } else {

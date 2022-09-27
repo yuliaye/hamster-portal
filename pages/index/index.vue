@@ -222,6 +222,10 @@ desoription trading and risk management platform.""description": "A decentralize
   const scrollListDown = ref([0])
   const scrollListUp = ref([0])
 
+  definePageMeta({
+    layout: "no-ssr"
+  });
+
   onMounted(async () => {
     if (typeof window !== 'undefined') {
       for (let i = 1; i < asideIdList.value.length - 1; i++) {
@@ -257,7 +261,6 @@ desoription trading and risk management platform.""description": "A decentralize
   }
   function handleScrolls() {
     topVal.value = document.body.scrollTop || document.documentElement.scrollTop
-    
     checkUpDown();
     if (topVal.value >= scrollList.value[8]) {
       curAsideId.value = 9

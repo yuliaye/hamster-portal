@@ -249,13 +249,12 @@
 
   const formRules = computed(() => ({
     stakingAmount: [
-      { message: 'this is can not empty', trigger: 'change', required: true },
       {
         trigger: 'change',
         validator: async (_, newStakingAmount) => {
           const val = +newStakingAmount
           if (val <= 0) {
-            return Promise.reject('The input amount must be greater than 0')
+            return Promise.reject('The input amount must be greater than 0 and can not be empty')
           } else if (val > walletBalance.value) {
             return Promise.reject('The input amount cannot be greater than the balance')
           } else {
@@ -270,15 +269,14 @@
         validator: async (_, newWithdrawAmount) => {
           const val = +newWithdrawAmount
           if (val <= 0) {
-            return Promise.reject('The input amount must be greater than 0')
+            return Promise.reject('The input amount must be greater than 0 and can not be empty')
           } else if (val > stakingAmount.value) {
             return Promise.reject('The input amount cannot be greater than the staking amount')
           } else {
             Promise.resolve()
           }
         }
-      },
-      { message: 'this is can not empty', trigger: 'change', required: true }
+      }
     ],
   }));
 
