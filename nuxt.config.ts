@@ -29,8 +29,8 @@ export default defineNuxtConfig({
     public: {
       hamsterClientPackage: {
         version: 'v1.3.0',
-        windowsLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-windows-amd64.zip',
-        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-darwin-amd64.dmg',
+        windowsLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-windows-amd64.zip',
+        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-darwin-amd64.dmg',
         linuxLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-linux-amd64.tar.gz'
       },
       hamsterProviderPackage: {
