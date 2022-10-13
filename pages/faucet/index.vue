@@ -19,7 +19,7 @@
         <LoadingOutlined v-if="isLoading" />Confirm
       </button>
     </div>
-    <CrossChain />
+    <CrossChain v-if="false"/>
   </div>
 </template>
 
