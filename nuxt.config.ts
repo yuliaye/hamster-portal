@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     "@nuxtjs/eslint-module",
     "@nuxtjs/tailwindcss",
     "@intlify/nuxt3",
-    "floating-vue/nuxt"
+    "floating-vue/nuxt",
   ],
   intlify: {
     localeDir: "locales",
@@ -26,6 +26,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiProxyTarget: "https://cross-chain.authright-test.newtouch.com",
+    dashboardsProxyTarget: "http://183.66.65.207:8003",
     public: {
       hamsterClientPackage: {
         version: 'v1.3.0',
@@ -47,7 +48,9 @@ export default defineNuxtConfig({
         "web3": pathResolve("node_modules/web3/dist/web3.min.js"),
       }
     },
-    plugins: [configStyleImportPlugin()],
+    plugins: [
+      configStyleImportPlugin(),
+    ],
     css: {
       preprocessorOptions: {
         less: {
@@ -60,7 +63,7 @@ export default defineNuxtConfig({
         plugins: [nodePolyfills()]
       },
       transpile: [
-        ["ant-design-vue", "@ant-design/icons-vue"],
+        ["ant-design-vue", "@ant-design/icons-vue",'@antv/g2'],
       ],
     },
     optimizeDeps: {
