@@ -26,7 +26,6 @@ const getNodesData = async () => {
         nodesData.value.push({ item: key, count: res[key], percent: num })
       }
     }
-    console.log(nodesData.value)
   }).catch((err) => {
     console.log(err)
   })

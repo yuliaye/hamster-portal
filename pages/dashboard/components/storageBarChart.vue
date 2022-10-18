@@ -43,6 +43,17 @@ const initChart = () => {
     tickLine: null
   });
 
+  chart.axis('value', {
+    tickLine: null,
+    grid: {
+      line: {
+        style: {
+          stroke: '#807D7C',
+        }
+      }
+    }
+  });
+
   chart.tooltip({
     showMarkers: false
   });
@@ -56,7 +67,13 @@ const initChart = () => {
       return '#57D2B4'
     }
     return '#B835F5';
-  })
+  }).tooltip('item*value', (item, value) => {
+    value = value + 'TB';
+    return {
+      name: item,
+      value: value,
+    };
+  });
 
   chart.render();
 }
