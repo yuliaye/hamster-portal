@@ -39,12 +39,18 @@ const initChart = () => {
     height: 294,
   });
   chart.data(coresData.value);
-  // chart.scale('value', {
-  //   // alias: '销售额(万)',
-  //   nice: true,
-  // });
   chart.axis('item', {
-    tickLine: null
+    tickLine: null,
+  });
+  chart.axis('value', {
+    tickLine: null,
+    grid: {
+      line: {
+        style: {
+          stroke: '#807D7C',
+        }
+      }
+    }
   });
 
   chart.tooltip({
