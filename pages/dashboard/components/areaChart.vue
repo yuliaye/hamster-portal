@@ -8,15 +8,13 @@
 <script setup>
 import { onMounted, onBeforeMount } from 'vue'
 import { Chart } from '@antv/g2';
+import { paseDate } from '../common'
 
 const nodesHistoryData = ref([])
 
 onMounted(async () => {
   await getNodesHistoryData()
   initChart()
-  // const e = document.createEvent('Event')
-  // e.initEvent('resize', true, true)
-  // window.dispatchEvent(e)
 })
 
 const getNodesHistoryData = async () => {
@@ -44,23 +42,6 @@ const getNodesHistoryData = async () => {
   })
 }
 
-
-const paseDate = (val) => {
-  val = val * 1
-  let time = new Date(val)
-  let y = time.getFullYear();
-  let m = time.getMonth() + 1
-  let d = time.getDate()
-  let h = time.getHours()
-  let mm = time.getMinutes()
-  let s = time.getSeconds()
-  return `${y}-${checkAddZero(m)}-${checkAddZero(d)} ${checkAddZero(h)}:${checkAddZero(mm)}:${checkAddZero(s)}`
-}
-
-const checkAddZero = (m) => {
-  return m < 10 ? '0' + m : m
-}
-
 const initChart = () => {
   const chart = new Chart({
     container: 'area-chart',
@@ -85,12 +66,15 @@ const initChart = () => {
     .area()
     .adjust('stack')
     .position('time*value')
-    .color('item', ['l(100) 0:#FF8A00 1:#ffffff', 'l(100) 0:#57D2B4 1:#ffffff', 'l(100) 0:#B835F5 1:#ffffff']);
+    .color('item', ['l(90) 0:rgba(255, 153, 0, 0.45), 1:rgba(46, 42, 40, 0)',
+      'l(90) 0:rgba(0, 255, 163, 0.31) 1:rgba(46, 42, 40, 0)',
+      'l(90) 0:rgba(155, 38, 203, 1) 1:rgba(46, 42, 40, 0.53)']);
   chart
     .line()
     .adjust('stack')
     .position('time*value')
-    .color('item', ['#FF8A00', '#57D2B4', '#B835F5']);
+    .color('item', ['#FF8A00', '#57D2B4', '#B835F5'])
+    .tooltip(false);
 
   chart.interaction('element-highlight');
 

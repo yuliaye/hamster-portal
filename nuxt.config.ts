@@ -63,7 +63,7 @@ export default defineNuxtConfig({
         plugins: [nodePolyfills()]
       },
       transpile: [
-        ["ant-design-vue", "@ant-design/icons-vue",'@antv/g2'],
+        ["ant-design-vue", "@ant-design/icons-vue",'@antv/g2','swiper','vue-awesome-swiper','vue3-carousel-3d'],
       ],
     },
     optimizeDeps: {

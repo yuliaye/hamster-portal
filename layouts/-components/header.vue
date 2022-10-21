@@ -3,14 +3,14 @@
     :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
       <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
-        <div class="flex flex-row items-center justify-between text-white">
-          <div class="logo">
+        <div class="relative flex flex-row items-center justify-between text-center text-white">
+          <div class="absolute logo left-4">
             <nuxt-link to="/" target="_blank">
               <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
 
-          <div class="flex flex-row">
+          <div class="flex flex-row justify-center mx-auto">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
             <div v-else class="menu sm:pr-8">
               <nuxt-link v-for="link in navLinks" :key="link.path"

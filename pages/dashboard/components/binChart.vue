@@ -8,7 +8,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Chart } from '@antv/g2';
-import { number } from '@intlify/core-base';
 
 const nodesData = ref([])
 const totalNodes = ref(0)
@@ -26,7 +25,6 @@ const getNodesData = async () => {
         nodesData.value.push({ item: key, count: res[key], percent: num })
       }
     }
-    console.log(nodesData.value)
   }).catch((err) => {
     console.log(err)
   })
