@@ -10,15 +10,15 @@
             </nuxt-link>
           </div>
 
-          <div class="flex flex-row justify-center mx-auto">
-            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px]" src="~/assets/images/menu.png">
+          <div class="flex flex-row justify-center md:mx-auto">
+            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-60" :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu sm:pr-8">
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
                 target="_blank">
                 {{ link.title }}
               </nuxt-link>
-              <VDropdown :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
+              <!-- <VDropdown :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
                 v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10"
                 popper-class="locale-dropdown">
                 <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
@@ -45,7 +45,7 @@
                     </div>
                   </div>
                 </template>
-              </VDropdown>
+              </VDropdown> -->
             </div>
             <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10"
               popper-class="locale-dropdown">
@@ -78,9 +78,10 @@
   </div>
   <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }"
     class="inset-x-0 top-0 fixed z-[300] p-[20px] bg-black">
-    <div class="flex justify-between">
-      <div class="flex items-center" @click="showPhoneMenu = false;"><img class="h-[24px] mr-2"
-          src="~/assets/images/menu-close.png" />close</div>
+    <div class="flex justify-start">
+      <div class="flex items-center" @click="showPhoneMenu = false;">
+        <img class="h-[24px] mr-2" src="~/assets/images/menu-close.png" />
+      </div>
       <img class="h-[24px]" src="~/assets/images/header.png">
     </div>
     <div class="my-[20px]">
@@ -90,7 +91,7 @@
       <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
         <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu ml-[25px]">{{ link.title }}</div>
       </nuxt-link>
-      <div :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
+      <!-- <div :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
         class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png" />{{
         $t('header.menu7') }}</div>
       <div class="ml-[25px] menu-color">
@@ -100,14 +101,15 @@
         <nuxt-link to="/company" target="_blank">
           <label :class="{'menu-active' : curMenu === 'company'}" class="ml-6">{{ $t('header.menu7-sub2') }}</label>
         </nuxt-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
-
+head-menu-down
 <script setup>
 import { computed, ref } from "vue"
 
+const { getImageURL } = useAssets()
 const route = useRoute();
 const { t, locale, availableLocales } = useI18n()
 const localeOptions = availableLocales.map((lang) => {
@@ -121,6 +123,8 @@ const navLinks = computed(() => [
   // { title: t('header.stake'), path: "/stake" },
   // { title: t('header.cross_chain'), path: "/cross_chain" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
+  { title: 'News', path: "https://medium.com/@Hamsternetio"},
+  { title: 'Abouts', path: "https://hamsternet.io/company"},
 ])
 
 const drodownShow = ref(false)
