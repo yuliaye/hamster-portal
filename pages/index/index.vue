@@ -3,7 +3,8 @@
     <div id="area-div">
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
-          <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{ $t("home.title") }}</div>
+          <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">{{
+          $t("home.title") }}</div>
           <div class="text-[#807D7C] leading-[21px] mt-[16px] mb-10">{{ $t("home.titleDesc") }}</div>
           <nuxt-link to="/download" target="_blank">
             <button class="bg-[#cc7219] text-base rounded-[8px] px-[24px] py-[10px] flex justify-center items-center">
@@ -26,7 +27,7 @@
           <img class="md:absolute img-w" src="~/assets/images/title-img.png">
         </div>
       </div>
-    </div>   
+    </div>
     <div id="area-div1">
       <div class="area-title">Hamster DevOps Solutions</div>
     </div>
@@ -38,132 +39,162 @@
     </div>
     <div id="area-div4">
       <div class="area-title">Hamster Ecology</div>
+      <EcologyModule />
     </div>
     <div id="area-div5">
       <div class="area-title">Roadmap</div>
+      <img src='./images/Roadmap.png' class="mt-[64px]" />
     </div>
     <div id="area-div6">
       <div class="area-title">More about Hamster</div>
-    </div>  
+      <MoreSwiper />
+    </div>
   </div>
 </template>
 
 <script setup>
+import EcologyModule from './components/ecologyModule.vue'
+import MoreSwiper from './components/moreSwiper.vue'
 </script>
 
 <style scoped>
-  .title-img {
-    @apply flex items-center justify-end;
+.title-img {
+  @apply flex items-center justify-end;
+}
+
+.img-show-up {
+  -webkit-animation: bounce 16s infinite;
+  animation: bounce 16s infinite;
+  padding-right: 0;
+  padding-left: 17.5%;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0%);
+    animation-timing-function: ease;
   }
+
+  50% {
+    transform: translateY(105%);
+    animation-timing-function: ease;
+  }
+}
+
+.img-show-up2 {
+  padding-right: 9.6%;
+  -webkit-animation: bounce2 8s infinite;
+  animation: bounce2 8s infinite;
+}
+
+@keyframes bounce2 {
+
+  0%,
+  100% {
+    transform: translateY(-50%);
+    animation-timing-function: ease;
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: ease;
+  }
+}
+
+.text-btn {
+  @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px] hidden;
+}
+
+.text-btn2 {
+  @apply text-[#CC7219] border border-[#807D7C] text-base rounded-[45px] px-[24px] py-[10px] hidden;
+}
+
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+}
+
+* html pre {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.title-h {
+  @apply text-[40px] leading-[50px];
+}
+
+.title-h-en {
+  @apply h-auto;
+}
+
+@screen md {
+  .img-w {
+    @apply w-[450px];
+  }
+
+  .title-h-en {
+    @apply h-[200px];
+  }
+
   .img-show-up {
-    -webkit-animation: bounce 16s infinite;
-    animation: bounce 16s infinite;
-    padding-right: 0;
-    padding-left: 17.5%;
+    padding-right: 37%;
+    padding-left: 0;
   }
+
   @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0%);
-      animation-timing-function: ease;
-    }
-    50% {
-      transform: translateY(105%);
-      animation-timing-function: ease;
-    }
-  }
-  .img-show-up2 {
-    padding-right: 9.6%;
-    -webkit-animation: bounce2 8s infinite;
-    animation: bounce2 8s infinite;
-  }
-  @keyframes bounce2 {
+
     0%,
     100% {
       transform: translateY(-50%);
-      animation-timing-function: ease;
     }
+
     50% {
-      transform: translateY(0);
-      animation-timing-function: ease;
+      transform: translateY(118%);
     }
   }
-  .text-btn {
-    @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px] hidden;
+}
+
+@screen lg {
+  .img-w {
+    @apply w-[600px];
   }
-  .text-btn2 {
-    @apply text-[#CC7219] border border-[#807D7C] text-base rounded-[45px] px-[24px] py-[10px] hidden;
+
+  .title-h {
+    @apply text-[49px] leading-[83px];
   }
-  pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
+
+  .title-h-en {
+    @apply h-[249px];
   }
-  * html pre {
-    word-wrap: break-word;
-    white-space: normal;
+
+  .img-show-up {
+    padding-right: 36.7%;
   }
-  .title-h{
-    @apply text-[40px] leading-[50px];
-  }
-  .title-h-en{
-    @apply h-auto;
-  }
-  
-  @screen md {
-    .img-w{
-      @apply w-[450px];
-    }
-    .title-h-en{
-      @apply h-[200px];
-    }
-    .img-show-up {
-      padding-right: 37%;
-      padding-left: 0;
-    }
-    @keyframes bounce {
-      0%,
-      100% {
-        transform: translateY(-50%);
-      }
-      50% {
-        transform: translateY(118%);
-      }
+
+  @keyframes bounce {
+    50% {
+      transform: translateY(95%);
     }
   }
-  @screen lg {
-    .img-w{
-      @apply w-[600px];
-    }
-    .title-h{
-      @apply text-[49px] leading-[83px];
-    }
-    .title-h-en{
-      @apply h-[249px];
-    }
-    .img-show-up {
-      padding-right: 36.7%;
-    }
-    
-    @keyframes bounce {
-      50% {
-        transform: translateY(95%);
-      }
+}
+
+@screen xl {
+  .title-h {
+    @apply text-[60px] leading-[83px];
+  }
+
+  .img-show-up {
+    padding-right: 9.6%;
+  }
+
+  @keyframes bounce {
+    50% {
+      transform: translateY(85%);
     }
   }
-  @screen xl {
-    .title-h{
-      @apply text-[60px] leading-[83px];
-    }
-    .img-show-up {
-      padding-right: 9.6%;
-    }
-    
-    @keyframes bounce {
-      50% {
-        transform: translateY(85%);
-      }
-    }
-  }
+}
 </style>
