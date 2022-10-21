@@ -92,12 +92,20 @@
     </div>
     <div id="area-div3">
       <div class="area-title">Guidance of participating in Hamster's Computing Power Network</div>
-      <div class="w-[1000px] h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16">
+      <!-- <div class="w-[1000px] h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16">
         <div
           class="w-[974px] h-[540px] border-[0.3px] border-solid border-[#fff] mx-auto rounded-[30px] absolute top-3 left-3">
         </div>
         <div class="download w-[938px] h-[506px] absolute top-12 left-7">
           <iframe width="938" height="490" src="https://www.youtube.com/embed/nX8RXgwd9es?autoplay=1" :rel="0" />
+        </div>
+      </div> -->
+
+      <div
+        class="grid grid-cols-1 md:h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16 circle-line">
+        <div class="download iframe-box">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/nX8RXgwd9es?autoplay=1" :rel="0"
+            class="rounded-[30px]" />
         </div>
       </div>
       <div @mouseover="hoverShowfive=true" @mouseout="hoverShowfive=false" class="w-6 mx-auto">
@@ -311,5 +319,27 @@ pre {
 .area-div1-border {
   border: 1px dashed #4E4A4A;
   border-radius: 50% 50% 16px 16px/ 10% 10% 16px 16px;
+}
+
+.iframe-box {
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  margin: auto;
+  border-radius: 30px;
+  min-height: 300px;
+}
+
+.circle-line {
+  min-height: 300px;
+}
+
+.circle-line::before {
+  content: "";
+  position: absolute;
+  margin: 13px;
+  width: calc(100% - 26px);
+  height: calc(100% - 26px);
+  border: 0.3px solid #fff;
+  border-radius: 30px;
 }
 </style>
