@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     "@nuxtjs/eslint-module",
     "@nuxtjs/tailwindcss",
     "@intlify/nuxt3",
-    "floating-vue/nuxt"
+    "floating-vue/nuxt",
   ],
   intlify: {
     localeDir: "locales",
@@ -26,17 +26,18 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiProxyTarget: "https://cross-chain.authright-test.newtouch.com",
+    dashboardsProxyTarget: "http://183.66.65.207:8003",
     public: {
       hamsterClientPackage: {
         version: 'v1.3.0',
-        windowsLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-windows-amd64.zip',
-        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-darwin-amd64.dmg',
+        windowsLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-windows-amd64.zip',
+        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-darwin-amd64.dmg',
         linuxLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-linux-amd64.tar.gz'
       },
       hamsterProviderPackage: {
         version: 'v1.3.0',
-        windowsLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.0/hamster-provider-v1.3.0.windows-amd64.tar',
-        macLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.0/hamster-provider-v1.3.0-darwin-amd64.tar.gz',
+        windowsLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.2/hamster-provider-v1.3.2-windows-amd64.zip',
+        macLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.2/hamster-provider-v1.3.2-darwin-amd64.dmg',
         linuxLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.0/hamster-provider-v1.3.0-linux-amd64.tar.gz'
       }
     }
@@ -47,7 +48,9 @@ export default defineNuxtConfig({
         "web3": pathResolve("node_modules/web3/dist/web3.min.js"),
       }
     },
-    plugins: [configStyleImportPlugin()],
+    plugins: [
+      configStyleImportPlugin(),
+    ],
     css: {
       preprocessorOptions: {
         less: {
@@ -60,7 +63,7 @@ export default defineNuxtConfig({
         plugins: [nodePolyfills()]
       },
       transpile: [
-        ["ant-design-vue", "@ant-design/icons-vue"],
+        ["ant-design-vue", "@ant-design/icons-vue",'@antv/g2','swiper','vue-awesome-swiper','vue3-carousel-3d'],
       ],
     },
     optimizeDeps: {
