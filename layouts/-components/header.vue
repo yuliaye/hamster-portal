@@ -118,8 +118,8 @@ const localeOptions = availableLocales.map((lang) => {
 const navLinks = computed(() => [
   { title: t('header.faucet'), path: "/faucet" },
   { title: t('header.dashboard'), path: '/dashboard' },
-  { title: t('header.stake'), path: "/stake" },
-  { title: t('header.cross_chain'), path: "/cross_chain" },
+  // { title: t('header.stake'), path: "/stake" },
+  // { title: t('header.cross_chain'), path: "/cross_chain" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
 ])
 
