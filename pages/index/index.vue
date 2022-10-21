@@ -119,7 +119,7 @@
 <script setup>
 import EcologyModule from './components/ecologyModule.vue'
 import MoreSwiper from './components/moreSwiper.vue'
-  import {ref} from 'vue';
+import {ref} from 'vue';
 
   const { getImageURL } = useAssets()
 
