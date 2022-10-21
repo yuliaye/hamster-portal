@@ -76,7 +76,8 @@
     "dashboard": "Dashboard",
     "stake": "Stake",
     "cross_chain": "Cross Chain",
-    "docs": "Docs"
+    "docs": "Docs",
+    "learnMore":"learn more"
   },
   "footer": {
     "email": "Email",
