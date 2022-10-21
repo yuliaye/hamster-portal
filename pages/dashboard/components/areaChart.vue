@@ -32,8 +32,6 @@ const getNodesHistoryData = async () => {
       item.time = paseDate(item.date)
     })
 
-    console.log(arr)
-
     const generalNodes = arr.filter(val => val.item === 'generalNodes')
     const enhancedNodes = arr.filter(val => val.item === 'enhancedNodes')
     const highRankingNodes = arr.filter(val => val.item === 'highRankingNodes')

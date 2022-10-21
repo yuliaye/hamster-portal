@@ -2,7 +2,8 @@
   <div class="main-margin sm:mt-[160px] mt-[120px]">
     <div>
       <div class="text-[40px] mb-[4px] text-center font-bold">HAMSTER Dashboard</div>
-      <div class="area-desc text-[16px]">Explore the latest stats on the HAMSTER network via the HAMSTER dashboard
+      <div class="area-desc text-center text-[16px]">Explore the latest stats on the HAMSTER network via the HAMSTER
+        dashboard
       </div>
     </div>
 

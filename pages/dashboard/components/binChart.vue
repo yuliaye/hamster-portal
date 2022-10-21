@@ -8,7 +8,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Chart } from '@antv/g2';
-import { number } from '@intlify/core-base';
 
 const nodesData = ref([])
 const totalNodes = ref(0)
