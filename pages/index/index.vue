@@ -344,5 +344,6 @@ pre {
   height: calc(100% - 26px);
   border: 0.3px solid #fff;
   border-radius: 30px;
+  z-index: -1;
 }
 </style>
