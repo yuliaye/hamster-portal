@@ -91,9 +91,7 @@
       <div class="w-[1000px] h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16">
         <div class="w-[974px] h-[540px] border-[0.3px] border-solid border-[#fff] mx-auto rounded-[30px] absolute top-3 left-3"></div>
         <div class="download w-[938px] h-[506px] absolute top-12 left-7">
-          <video width="938px" height="506px" controls>
-            <source src="https://www.youtube.com/watch?v=nX8RXgwd9es" type="video/mp4">
-          </video>
+          <iframe width="938" height="490" src="https://www.youtube.com/embed/nX8RXgwd9es?autoplay=1" :rel="0" />
         </div>
       </div>
       <div @mouseover="hoverShowfive=true" @mouseout="hoverShowfive=false" class="w-6 mx-auto">
