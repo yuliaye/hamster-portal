@@ -3,8 +3,10 @@
     <div id="area-div">
       <div class="md:flex flex-row justify-between md:pt-[51px]">
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
-          <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">Hamster empowers projects and developers in web3 to build their dreams</div>
-          <div class="text-[#BABABA] leading-[25px] mt-[16px] w-[200px] md:w-[570px]">One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects </div>
+          <div class="font-bold title-h text-color" :class="{'tracking-tight title-h-en' : $i18n.locale =='en'}">Hamster
+            empowers projects and developers in web3 to build their dreams</div>
+          <div class="text-[#BABABA] leading-[25px] mt-[16px] w-[200px] md:w-[570px]">One-Stop Infrastructure,
+            Development, Operation and Maintenance Service Platform for Blockchain Projects </div>
           <nuxt-link to="/download" target="_blank">
             <div class="w-[126px] h-11 rounded-[8px] download-btn-shallow"></div>
             <button
@@ -36,41 +38,41 @@
       </div>
       <div class="mx-auto w-[600px] md:text-center mt-6">
         <span class="text-[#BABABA] w-[200px] md:w-[100%] inline-block ml-20 md:ml-0">
-          Hamster offers the integrated approach to build , test and run projects in web3. 
+          Hamster offers the integrated approach to build , test and run projects in web3.
           We offer the most flexible platform for developers to turn their blockchain ideas into reality.
         </span>
       </div>
       <div class="mx-auto mt-12 md:flex">
         <div class="h-[415px] flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-first-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]"/>
+          <img src="~/assets/images/home-first-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Decentralized Computing Power Network</span>
           <div @mouseover="hoverShowone=true" @mouseout="hoverShowone=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowone"/>
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowone"/>
+            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowone" />
+            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowone" />
           </div>
         </div>
         <div class="h-[415px] flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-second-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]"/>
+          <img src="~/assets/images/home-second-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Node Service</span>
           <div @mouseover="hoverShowtwo=true" @mouseout="hoverShowtwo=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowtwo"/>
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowtwo"/>
+            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowtwo" />
+            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowtwo" />
           </div>
         </div>
         <div class="h-[415px] flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-third-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]"/>
+          <img src="~/assets/images/home-third-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Development Toolkit</span>
           <div @mouseover="hoverShowthree=true" @mouseout="hoverShowthree=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowthree"/>
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowthree"/>
+            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowthree" />
+            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowthree" />
           </div>
         </div>
         <div class="h-[415px] flex-1 text-center self-center flex flex-col area-div1-border">
           <img src="~/assets/images/home-fourth-devops.png" class="h-[95px] w-[95px] self-center mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Operation and Maintenance Toolkit</span>
           <div @mouseover="hoverShowfour=true" @mouseout="hoverShowfour=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowfour"/>
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowfour"/>
+            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowfour" />
+            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowfour" />
           </div>
         </div>
       </div>
@@ -106,9 +108,11 @@
         </div>
       </div>
       <a href="https://hamsternet.io/docs/" target="_blank">
-        <div class="w-[126px] h-11 rounded-[8px] download-btn-shallow mx-auto"></div>
-        <button class="bg-[#FFEDD4] text-base mx-auto rounded-[8px] px-[24px] py-[10px] flex justify-center items-center text-[#141212] download-btn">
-          {{ $t('header.download') }}
+        <div class="w-[148px] h-11 rounded-[8px] download-btn-shallow mx-auto"></div>
+        <button
+          class="bg-[#FFEDD4] text-base mx-auto rounded-[8px] px-[24px] py-[10px] flex justify-center items-center text-[#141212] download-btn">
+          {{ $t('header.learnMore') }}
+          <img :src="getImageURL('jiantou.svg')" class="self-center w-[13px] ml-[4px]" />
         </button>
       </a>
     </div>
@@ -329,7 +333,7 @@ pre {
 }
 
 .circle-line {
-  min-height: 300px;
+  min-height: 360px;
 }
 
 .circle-line::before {
