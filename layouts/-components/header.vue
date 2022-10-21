@@ -11,7 +11,7 @@
           </div>
 
           <div class="flex flex-row justify-center md:mx-auto">
-            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-60" :src="getImageURL('head-menu-down.svg')">
+            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]" :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu sm:pr-8">
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
@@ -79,10 +79,10 @@
   <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }"
     class="inset-x-0 top-0 fixed z-[300] p-[20px] bg-black">
     <div class="flex justify-start">
-      <div class="flex items-center" @click="showPhoneMenu = false;">
-        <img class="h-[24px] mr-2" src="~/assets/images/menu-close.png" />
-      </div>
       <img class="h-[24px]" src="~/assets/images/header.png">
+      <div class="flex items-center" @click="showPhoneMenu = false;">
+        <img class="h-[24px] ml-[36vw]" src="~/assets/images/menu-close.png" />
+      </div>
     </div>
     <div class="my-[20px]">
       <nuxt-link to="/" target="_blank">
