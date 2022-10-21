@@ -1,24 +1,36 @@
 <template>
   <div class="mt-[64px]">
-    <swiper :modules="[Autoplay]" :slides-per-view="1.5" :space-between="spaceBetween" :autoplay="true"
-      :centered-slides="true" :loop="true">
-      <swiper-slide><img src="../images/swiper1.jpg" /></swiper-slide>
-      <swiper-slide><img src="../images/swiper2.jpg" /></swiper-slide>
-      <swiper-slide><img src="../images/swiper3.jpg" /></swiper-slide>
+    <swiper :slides-per-view="1.5" :space-between="spaceBetween" :autoplay="true" :centered-slides="true" :loop="true"
+      :modules="[Autoplay,Navigation]" autoplay navigation :pagination="{ clickable: true }">
+      <swiper-slide><img src="../images/swiper3.jpg" @click="pathUrl('3')" /></swiper-slide>
+      <swiper-slide><img src="../images/swiper1.jpg" @click="pathUrl('1')" /></swiper-slide>
+      <swiper-slide><img src="../images/swiper2.jpg" @click="pathUrl('2')" /></swiper-slide>
     </swiper>
   </div>
 
 </template>
 <script setup>
-import { Autoplay } from 'swiper'
+import { Autoplay, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
-import { onMounted } from 'vue'
+import 'swiper/css/navigation';
+import { onMounted, ref } from 'vue'
 const spaceBetween = ref(-140)
 
 onMounted(() => {
   spaceBetween.value = document.body.clientWidth > 700 ? -140 : -40
 })
+
+const pathUrl = (val) => {
+  if (val === '1') {
+    window.open("https://medium.com/@Hamsternetio/hamster-entry-free-for-earning-spree-3ed754ab857c")
+  } else if (val === '2') {
+    window.open("https://medium.com/@Hamsternetio/%E5%85%AC%E9%93%BE%E6%88%98%E4%BA%89-%E6%B3%A2%E5%8D%A1%E8%BF%98%E6%98%AFeth-killer%E5%90%97-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E7%AC%AC%E4%B8%80%E6%9C%9F-1450d958757a")
+  } else {
+    window.open("https://medium.com/@Hamsternetio/%E6%B3%A2%E5%8D%A1er%E5%A6%82%E4%BD%95%E6%8B%9B%E6%9E%B6new-l1-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E4%BA%8C%E6%9C%9F-6844d4631da5")
+  }
+
+}
 
 
 </script>
@@ -38,9 +50,18 @@ onMounted(() => {
   opacity: 0.7;
 }
 
+.swiper .swiper-slide img {
+  cursor: pointer;
+}
+
 .swiper .swiper-slide-active {
   z-index: 99;
   opacity: 1;
   transform: scale(1);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #FFEDD4;
 }
 </style> 
