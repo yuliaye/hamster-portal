@@ -78,7 +78,7 @@
       </div>
 
     </div>
-    <div id="area-div2" class="flex mt-[160px]">
+    <div id="area-div2" class="flex flex-wrap mt-[160px]">
       <div class="flex-1 mr-[150px] self-center">
         <span class="block mb-6 text-5xl font-bold">Hamster DevOps Solutions</span>
         <span class="text-lg text-[#BABABA]">
@@ -330,7 +330,7 @@ pre {
 }
 
 .circle-line {
-  min-height: 300px;
+  min-height: 360px;
 }
 
 .circle-line::before {
