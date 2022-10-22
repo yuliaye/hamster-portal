@@ -11,7 +11,8 @@
           </div>
 
           <div class="flex flex-row justify-center md:mx-auto">
-            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]" :src="getImageURL('head-menu-down.svg')">
+            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
+              :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu sm:pr-8">
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
@@ -123,8 +124,8 @@ const navLinks = computed(() => [
   // { title: t('header.stake'), path: "/stake" },
   // { title: t('header.cross_chain'), path: "/cross_chain" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
-  { title: 'News', path: "https://medium.com/@Hamsternetio"},
-  { title: 'Abouts', path: "https://hamsternet.io/company"},
+  { title: 'News', path: "https://medium.com/@Hamsternetio" },
+  { title: 'About', path: "https://hamsternet.io/company" },
 ])
 
 const drodownShow = ref(false)

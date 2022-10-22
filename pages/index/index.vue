@@ -6,7 +6,7 @@
           <div class="font-bold title-h text-color">Hamster
             empowers projects and developers in web3 to build their dreams</div>
           <div class="text-[#BABABA] leading-[25px] mt-[16px] md:w-[570px]">One-Stop Infrastructure,
-            Development, Operation and Maintenance Service Platform for Blockchain Projects </div>
+            Development, Operation and Maintenance Service Platform for Projects in Web3.0 </div>
           <nuxt-link to="/download" target="_blank">
             <div class="w-[126px] h-11 rounded-[8px] download-btn-shallow"></div>
             <button
@@ -36,15 +36,16 @@
         <span class="title-h">Hamster DevOps Solutions</span>
         <img src="~/assets/images/home-star.png" class="hidden last-star md:inline-block" />
       </div>
-      <div class="mx-auto md:w-[600px] text-center mt-6">
+      <div class="mx-auto md:w-[640px] text-center mt-6">
         <span class="text-[#BABABA] md:w-[100%] md:ml-0">
-          Hamster offers the integrated approach to build , test and run projects in web3.
-          We offer the most flexible platform for developers to turn their blockchain ideas into reality.
+          <div>Hamster offers the integrated approach to build , test and run projects in web3.</div>
+          <div>We provide the most flexible platform for developers to turn their blockchain ideas into reality.</div>
         </span>
       </div>
       <div class="grid grid-cols-2 gap-4 mx-auto mt-12 md:grid-cols-4">
         <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-first-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
+          <img src="~/assets/images/home-first-devops.png"
+            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Decentralized Computing Power Network</span>
           <div @mouseover="hoverShowone=true" @mouseout="hoverShowone=false" class="w-6 mx-auto" v-if="false">
             <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowone" />
@@ -52,7 +53,8 @@
           </div>
         </div>
         <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-second-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
+          <img src="~/assets/images/home-second-devops.png"
+            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Node Service</span>
           <div @mouseover="hoverShowtwo=true" @mouseout="hoverShowtwo=false" class="w-6 mx-auto" v-if="false">
             <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowtwo" />
@@ -60,7 +62,8 @@
           </div>
         </div>
         <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-third-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
+          <img src="~/assets/images/home-third-devops.png"
+            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Development Toolkit</span>
           <div @mouseover="hoverShowthree=true" @mouseout="hoverShowthree=false" class="w-6 mx-auto" v-if="false">
             <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowthree" />
@@ -68,7 +71,8 @@
           </div>
         </div>
         <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-fourth-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
+          <img src="~/assets/images/home-fourth-devops.png"
+            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Operation and Maintenance Toolkit</span>
           <div @mouseover="hoverShowfour=true" @mouseout="hoverShowfour=false" class="w-6 mx-auto" v-if="false">
             <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowfour" />
