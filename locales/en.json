@@ -92,7 +92,19 @@
     "otherSub1": "Chart",
     "otherSub2": "Security",
     "otherSub3": "Cooperation Request",
-    "otherSub4": "Privacy Policy"
+    "otherSub4": "Privacy Policy",
+    "siteLinks": "Site links",
+    "about": "ABOUT",
+    "parachains": "PARACHAINS",
+    "community": "COMMUNITY",
+    "grant": "GRANT",
+    "careers": "CAREERS",
+    "news": "NEWS",
+    "docs": "DOCS",
+    "github": "GITHUB",
+    "mediaAssets": "MEDIA ASSETS",
+    "imprint":"IMPRINT",
+    "privacy": "PRIVACY"
   },
   "news": {
     "newsDetails": "New Details",
