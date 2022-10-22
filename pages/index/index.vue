@@ -42,8 +42,8 @@
           We offer the most flexible platform for developers to turn their blockchain ideas into reality.
         </span>
       </div>
-      <div class="mx-auto mt-12 md:flex">
-        <div class="md:h-[365px] h-[255px] md:flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
+      <div class="grid grid-cols-2 gap-4 mx-auto mt-12 md:grid-cols-4">
+        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
           <img src="~/assets/images/home-first-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Decentralized Computing Power Network</span>
           <div @mouseover="hoverShowone=true" @mouseout="hoverShowone=false" class="w-6 mx-auto" v-if="false">
@@ -51,7 +51,7 @@
             <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowone" />
           </div>
         </div>
-        <div class="md:h-[365px] h-[255px] md:flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
+        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
           <img src="~/assets/images/home-second-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Node Service</span>
           <div @mouseover="hoverShowtwo=true" @mouseout="hoverShowtwo=false" class="w-6 mx-auto" v-if="false">
@@ -59,7 +59,7 @@
             <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowtwo" />
           </div>
         </div>
-        <div class="md:h-[365px] h-[255px] md:flex-1 md:mr-6 text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
+        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
           <img src="~/assets/images/home-third-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Development Toolkit</span>
           <div @mouseover="hoverShowthree=true" @mouseout="hoverShowthree=false" class="w-6 mx-auto" v-if="false">
@@ -67,7 +67,7 @@
             <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowthree" />
           </div>
         </div>
-        <div class="md:h-[365px] h-[255px] md:flex-1 text-center self-center flex flex-col area-div1-border">
+        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
           <img src="~/assets/images/home-fourth-devops.png" class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
           <span class="px-[28px] mt-[20px]">Hamster Operation and Maintenance Toolkit</span>
           <div @mouseover="hoverShowfour=true" @mouseout="hoverShowfour=false" class="w-6 mx-auto" v-if="false">
