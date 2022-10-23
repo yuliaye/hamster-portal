@@ -11,8 +11,8 @@
             <img class="h-[32px]" src="~/assets/images/header.png">
           </nuxt-link>
         </div>
-        <div>{{ $t("footer.email") }}: hamster@hamsternet.io</div>
-        <div class="mb-8">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
+        <div class="font-family-style">{{ $t("footer.email") }}: hamster@hamsternet.io</div>
+        <div class="mb-8 font-family-style">{{ $t("footer.address") }}: {{ $t("footer.addressValue") }}</div>
         <div class="flex">
           <!-- <img class="h-[24px] mr-[20px]" src="~/assets/images/wechat.png">
           <img class="h-[24px] mr-[20px]" src="~/assets/images/weibo.png"> -->
@@ -34,15 +34,15 @@
           <div class="footer-sub">{{ $t("footer.resourceSub2") }}</div>
           <div class="footer-sub">{{ $t("footer.resourceSub3") }}</div>
           <div class="footer-sub">{{ $t("footer.resourceSub4") }}</div> -->
-          <div class="leading-8 text-white">{{ $t("footer.siteLinks") }}</div>
-          <div class="leading-8 text-white cursor-pointer" @click="skipNewUrl('about')">{{ $t("footer.about") }}
+          <div class="leading-8 text-white font-site-links">{{ $t("footer.siteLinks") }}</div>
+          <div class="leading-8 text-[#BABABA] cursor-pointer font-family-style" @click="skipNewUrl('about')">{{ $t("footer.about") }}
             <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
           </div>
-          <div class="leading-8 text-white">{{ $t("footer.parachains") }}</div>
-          <div class="leading-8 text-white">{{ $t("footer.community") }}</div>
-          <div class="leading-8 text-white">{{ $t("footer.grant") }}</div>
-          <div class="leading-8 text-white">{{ $t("footer.careers") }}</div>
-          <div class="leading-8 text-white cursor-pointer" @click="skipNewUrl('news')">{{ $t("footer.news") }}
+          <!-- <div class="leading-8 text-white font-family-style">{{ $t("footer.parachains") }}</div> -->
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.community") }}</div>
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.grant") }}</div>
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.careers") }}</div>
+          <div class="leading-8 text-[#BABABA] cursor-pointer font-family-style" @click="skipNewUrl('news')">{{ $t("footer.news") }}
             <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
           </div>
         </div>
@@ -52,16 +52,16 @@
           <div class="footer-sub">{{ $t("footer.otherSub2") }}</div>
           <div class="footer-sub">{{ $t("footer.otherSub3") }}</div>
           <div class="footer-sub">{{ $t("footer.otherSub4") }}</div> -->
-          <div class="leading-8 text-white cursor-pointer" @click="skipNewUrl('docs')">{{ $t("footer.docs") }}
+          <div class="leading-8 text-[#BABABA] cursor-pointer font-family-style" @click="skipNewUrl('docs')">{{ $t("footer.docs") }}
             <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
           </div>
-          <div class="leading-8 text-white cursor-pointer" @click="skipNewUrl('github')">{{ $t("footer.github") }}
+          <div class="leading-8 text-[#BABABA] cursor-pointer font-family-style" @click="skipNewUrl('github')">{{ $t("footer.github") }}
             <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
           </div>
-          <div class="leading-8 text-white">{{ $t("footer.mediaAssets") }}
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.mediaAssets") }}
           </div>
-          <div class="leading-8 text-white">{{ $t("footer.imprint") }}</div>
-          <div class="leading-8 text-white">{{ $t("footer.privacy") }}</div>
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.imprint") }}</div>
+          <div class="leading-8 text-[#BABABA] font-family-style">{{ $t("footer.privacy") }}</div>
         </div>
       </div>
     </div>
@@ -84,8 +84,17 @@ const skipNewUrl = (val) => {
 }
 
 </script>
-<style>
-.footer-sub {
-  @apply text-[#807D7C] leading-8;
-}
+
+<style scoped>
+  .font-site-links{
+    font-family: 'Open Sans' !important;
+    font-weight: 700;
+  }
+  .font-family-style {
+    font-family: 'Open Sans' !important;
+    font-weight: 400;
+  }
+  .footer-sub {
+    @apply text-[#807D7C] leading-8;
+  }
 </style>
