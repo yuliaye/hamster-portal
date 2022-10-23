@@ -5,8 +5,8 @@
         <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
           <div class="font-bold title-h text-color">Hamster
             empowers projects and developers in web3 to build their dreams</div>
-          <div class="text-[#BABABA] leading-[25px] mt-[16px] md:w-[570px]">One-Stop Infrastructure,
-            Development, Operation and Maintenance Service Platform for Projects in Web3.0 </div>
+          <div class="text-[#BABABA] leading-[25px] mt-[16px] md:w-[570px]">One-Stop infrastructure,
+            development, operation and maintenance service platform for projects in Web3.0 </div>
           <nuxt-link to="/download" target="_blank">
             <div class="w-[126px] h-11 rounded-[8px] download-btn-shallow"></div>
             <button
