@@ -107,7 +107,7 @@
       <div
         class="grid grid-cols-1 md:h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16 circle-line">
         <div class="download iframe-box">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/nX8RXgwd9es?autoplay=1" :rel="0"
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1yEDWEz9upI?autoplay=1" :rel="0"
             class="rounded-[30px]" />
         </div>
       </div>
