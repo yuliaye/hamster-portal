@@ -22,7 +22,7 @@
               src="~/assets/images/twitter.png"></nuxt-link>
           <nuxt-link target='_blank' to='https://discord.gg/MrJWxRwXpb'><img class="h-[24px] mr-[20px]"
               src="~/assets/images/discord.png"></nuxt-link>
-          <nuxt-link target='_blank' to='https://medium.com/@Hamsternetio'><img class="h-[24px] mr-[20px]"
+          <nuxt-link target='_blank' to='https://hamsternet.medium.com/@Hamsternetio'><img class="h-[24px] mr-[20px]"
               src="~/assets/images/medium.png"></nuxt-link>
 
         </div>
@@ -77,7 +77,7 @@ const skipNewUrl = (val) => {
   } else if (val === 'about') {
     window.open('https://hamsternet.io/company')
   } else if (val === 'news') {
-    window.open('https://medium.com/@Hamsternetio')
+    window.open('https://hamsternet.medium.com/@Hamsternetio')
   } else {
     window.open('https://hamsternet.io/docs/')
   }
