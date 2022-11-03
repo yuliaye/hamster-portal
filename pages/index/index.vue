@@ -84,12 +84,11 @@
     </div>
     <div id="area-div2" class="md:flex mt-[160px]">
       <div class="flex-1 md:mr-[150px] self-center text-center md:text-left">
-        <span class="block mb-6 font-bold title-h">Hamster Semi-Customized Service for Enterprises</span>
+        <span class="block mb-6 font-bold title-h">Hamster Solutions - Semi-Customized Service</span>
         <span class="text-lg text-[#BABABA]">
-          For enterprises (traditional enterprises and web3.0 enterprises) having specific customized needs,
-          Hamster offers semi-customized service based on the four hamster standard solutions.
-          This charged service provides enterprises endless scalability for their blockchain products’ deployment,
-          development, operation and maintenance.
+          For enterprises (traditional enterprises and web3.0 enterprises) having specific customized needs, Hamster offers semi-customized service based on the four hamster standard solutions.
+          <br/>
+          This service provides enterprises endless scalability for their blockchain products’ deployment, development, operation and maintenance.
         </span>
       </div>
       <img src="~/assets/images/home-devops-solution.png" class="h-[406px] flex-1" />
