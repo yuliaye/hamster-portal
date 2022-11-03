@@ -29,16 +29,16 @@ export default defineNuxtConfig({
     dashboardsProxyTarget: "http://183.66.65.207:8003",
     public: {
       hamsterClientPackage: {
-        version: 'v1.3.0',
+        version: 'v1.3.3',
         windowsLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-windows-amd64.zip',
-        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.2/hamster-client-v1.3.2-darwin-amd64.dmg',
+        macLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.3/hamster-client-v1.3.3-darwin-amd64.dmg',
         linuxLink: 'https://github.com/hamster-shared/hamster-client/releases/download/v1.3.0/hamster-client-v1.3.0-linux-amd64.tar.gz'
       },
       hamsterProviderPackage: {
-        version: 'v1.3.0',
+        version: 'v1.3.3',
         windowsLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.2/hamster-provider-v1.3.2-windows-amd64.zip',
-        macLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.2/hamster-provider-v1.3.2-darwin-amd64.dmg',
-        linuxLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.0/hamster-provider-v1.3.0-linux-amd64.tar.gz'
+        macLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.3/hamster-provider-v1.3.3-darwin-amd64.dmg',
+        linuxLink: 'https://github.com/hamster-shared/hamster-provider/releases/download/v1.3.3/hamster-provider-v1.3.3-linux-amd64.tar.gz'
       }
     }
   },
