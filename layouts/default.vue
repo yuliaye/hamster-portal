@@ -33,6 +33,7 @@
       { name: 'twitter:title', content: 'Hamster' },
       { name: 'twitter:description', content: t('meta.introduced') },
       { name: 'twitter:image', content: getImageURL('show-search.jpg') },
+      { name: 'twitter:url', content: 'https://hamsternet.io/' },
       { property: 'og:description', content: t('meta.introduced') },
       { property: 'og:url', content: 'https://hamsternet.io/' },
       { property: 'og:type', content: 'website' },
