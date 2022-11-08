@@ -28,6 +28,8 @@
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
       { itemprop: 'image', content: getImageURL('show-search.jpg') },
       { name: 'twitter:card', content: getImageURL('show-search.jpg') },
+      { name: 'twitter:title', content: 'Hamster' },
+      { name: 'twitter:description', content: t('meta.introduced') },
       { property: 'og:description', content: t('meta.introduced') },
       { property: 'og:url', content: 'https://hamsternet.io/' },
       { property: 'og:type', content: 'website' },
