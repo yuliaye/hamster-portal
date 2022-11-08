@@ -17,6 +17,7 @@
   import { onMounted } from "vue"
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
+  import showJpg from '../assets/images/show-search.jpg'
 
   const { getImageURL } = useAssets()
   const { t } = useI18n()
@@ -26,12 +27,12 @@
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: '../assets/images/show-search.jpg' },
-      { name: 'twitter:card', content: '../assets/images/show-search.jpg'},
+      { itemprop: 'image', content: showJpg },
+      { name: 'twitter:card', content: showJpg},
       { property: 'og:description', content: t('meta.introduced') },
       { property: 'og:url', content: 'https://hamsternet.io/' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:image', content: '../assets/images/show-search.jpg' },
+      { property: 'og:image', content: showJpg },
       { property: 'og:image:width', content: 1200 },
       { property: 'og:image:height', content: 627 },
       { property: 'og:title', content: 'Hamster' },
