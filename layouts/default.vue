@@ -26,12 +26,12 @@
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: '../assets/images/show-search.jpg' },
-      { name: 'twitter:card', content: '../assets/images/show-search.jpg'},
+      { itemprop: 'image', content: getImageURL('show-search.jpg') },
+      { name: 'twitter:card', content: getImageURL('show-search.jpg') },
       { property: 'og:description', content: t('meta.introduced') },
       { property: 'og:url', content: 'https://hamsternet.io/' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:image', content: '../assets/images/show-search.jpg' },
+      { property: 'og:image', content: getImageURL('show-search.jpg') },
       { property: 'og:image:width', content: 1200 },
       { property: 'og:image:height', content: 627 },
       { property: 'og:title', content: 'Hamster' },
