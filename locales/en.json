@@ -4,7 +4,8 @@
   },
   "meta": {
     "title": "Hamster",
-    "description": "Hamster"
+    "description": "Hamster",
+    "introduced": "One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects"
   },
   "home": {
     "helloWorld": "Hello World",

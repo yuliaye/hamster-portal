@@ -23,11 +23,11 @@ onMounted(() => {
 
 const pathUrl = (val) => {
   if (val === '1') {
-    window.open("https://hamsternet.medium.com/hamster-entry-free-for-earning-spree-3ed754ab857c")
+    window.open("https://hamsternetcn.medium.com/%E5%90%8E2049%E6%97%B6%E4%BB%A3%E5%8D%8E%E4%BA%BA%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E7%AB%8B%E8%B6%B3web3%E6%96%B0%E6%B5%AA%E6%BD%AE-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E7%AC%AC%E4%B8%89%E6%9C%9F-31ea5b3b7460")
   } else if (val === '2') {
-    window.open("https://hamsternet.medium.com/%E5%85%AC%E9%93%BE%E6%88%98%E4%BA%89-%E6%B3%A2%E5%8D%A1%E8%BF%98%E6%98%AFeth-killer%E5%90%97-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E7%AC%AC%E4%B8%80%E6%9C%9F-1450d958757a")
+    window.open("https://hamsternetcn.medium.com/%E5%85%AC%E9%93%BE%E6%88%98%E4%BA%89-%E6%B3%A2%E5%8D%A1%E8%BF%98%E6%98%AFeth-killer%E5%90%97-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E7%AC%AC%E4%B8%80%E6%9C%9F-1a3297bbce94")
   } else {
-    window.open("https://hamsternet.medium.com/%E6%B3%A2%E5%8D%A1er%E5%A6%82%E4%BD%95%E6%8B%9B%E6%9E%B6new-l1-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E4%BA%8C%E6%9C%9F-6844d4631da5")
+    window.open("https://hamsternetcn.medium.com/%E6%B3%A2%E5%8D%A1er%E5%A6%82%E4%BD%95%E6%8B%9B%E6%9E%B6new-l1-hamster%E5%9C%86%E6%A1%8C%E8%AE%A8%E8%AE%BA%E4%BA%8C%E6%9C%9F-2025cf3c0556")
   }
 
 }

@@ -2,7 +2,6 @@
   <div :class="[showContent===true?'inline':'hidden']" class="container mx-auto text-white">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
-      <Meta name="description" :content="$t('meta.description')" />
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
     </Head>
@@ -18,12 +17,32 @@
   import { onMounted } from "vue"
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
+
   const { getImageURL } = useAssets()
+  const { t } = useI18n()
+
   const showContent = ref(false)
+
+  useHead({
+    meta: [
+      { name: 'description', itemprop: 'description', content: t('meta.introduced') },
+      { itemprop: 'image', content: '../assets/images/show-search.jpg' },
+      { name: 'twitter:card', content: '../assets/images/show-search.jpg'},
+      { property: 'og:description', content: t('meta.introduced') },
+      { property: 'og:url', content: 'https://hamsternet.io/' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: '../assets/images/show-search.jpg' },
+      { property: 'og:image:width', content: 1200 },
+      { property: 'og:image:height', content: 627 },
+      { property: 'og:title', content: 'Hamster' },
+    ]
+  })
+
   onMounted(() => {
     showContent.value = true;
   })
 </script>
+
 <style>
   body {
     @apply text-[14px];
