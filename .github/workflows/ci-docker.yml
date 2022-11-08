@@ -33,6 +33,7 @@ jobs:
           port: ${{ secrets.HAMSTER_SERVER_PORT }}
           script: |
             cd /root/hamster_portal
-            docker images | grep hamstershare/hamster-portal | grep none | awk '{print "docker rmi " $3}'| sh
+            docker images | grep hamstershare/hamster-portal | grep latest | awk '{print "docker tag " $3 " hamstershare/hamster-portal:rollback"}' | sh
             docker compose pull
             docker compose up -d
+            docker images | grep hamstershare/hamster-portal | grep none | awk '{print "docker rmi " $3}'| sh
