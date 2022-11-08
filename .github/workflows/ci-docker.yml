@@ -33,5 +33,6 @@ jobs:
           port: ${{ secrets.HAMSTER_SERVER_PORT }}
           script: |
             cd /root/hamster_portal
+            docker images | grep none | awk '{print "docker rmi " $3}' | sh
             docker compose pull
             docker compose up -d
