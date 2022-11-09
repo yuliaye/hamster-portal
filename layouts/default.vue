@@ -3,12 +3,6 @@
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <Meta name="twitter:card" content="summary_large_image" />
-      <Meta name="twitter:site" content="@Hamsternetio" />
-      <Meta name="twitter:title" content="Hamster" />
-      <Meta name="twitter:description" content="One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects" />
-      <Meta name="twitter:image" :content="getImageURL('search-show.jpg')" />
-      <Meta name="twitter:url" content="https://hamsternet.io/" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
     </Head>
     <Header  />
@@ -40,7 +34,7 @@
       { property: 'twitter:url', content: 'https://hamsternet.io/' },
       { property: 'twitter:title', content: 'Hamster' },
       { property: 'twitter:description', content: 'One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects' },
-      { property: 'twitter:image', content: getImageURL('search-show.jpg') },
+      { property: 'twitter:image', content: 'https://mycryptoprofile.io/image.png' },
       { hid: 'og-url', property: 'og:url', content: 'https://hamsternet.io/' },
       { hid: 'og-title', property: 'og:title', content: 'Hamster' },
       { hid: 'og-desc', property: 'og:description', content: t('meta.introduced') },
