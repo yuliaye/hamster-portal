@@ -26,14 +26,14 @@
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: getImageURL('show-search.jpg') },
+      { itemprop: 'image', content: getImageURL('logo.png') },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@Hamsternetio' },
       { name: 'twitter:creator', content: '@Hamsternetio' },
       { property: 'og:description', content: t('meta.introduced') },
       { property: 'og:url', content: 'https://hamsternet.io/' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:image', content: getImageURL('show-search.jpg') },
+      { property: 'og:image', content: getImageURL('logo.png') },
       { property: 'og:image:alt', content: t('meta.introduced') },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '627' },
