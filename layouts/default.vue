@@ -26,7 +26,7 @@
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: getImageURL('search-show.jpg') },
+      { itemprop: 'image', content: '/images/search-show.jpg' },
       { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
       // { name: 'twitter:site', content: '@Hamsternetio' },
       // { name: 'twitter:creator', content: '@Hamsternetio' },
@@ -34,12 +34,12 @@
       { property: 'twitter:url', content: 'https://hamsternet.io/' },
       { property: 'twitter:title', content: 'Hamster' },
       { property: 'twitter:description', content: 'One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects' },
-      { property: 'twitter:image', content: 'https://mycryptoprofile.io/image.png' },
+      { property: 'twitter:image', content: '/images/search-show.jpg' },
       { hid: 'og-url', property: 'og:url', content: 'https://hamsternet.io/' },
       { hid: 'og-title', property: 'og:title', content: 'Hamster' },
       { hid: 'og-desc', property: 'og:description', content: t('meta.introduced') },
       { hid: 'og-type', property: 'og:type', content: 'website' },
-      { hid: 'og-image', property: 'og:image', content: getImageURL('search-show.jpg') },
+      { hid: 'og-image', property: 'og:image', content: '/images/search-show.jpg' },
       { property: 'og:image:alt', content: t('meta.introduced') },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '627' },
