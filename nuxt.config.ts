@@ -7,8 +7,42 @@ import path from "path"
 
 const pathResolve = (dir: string) => path.resolve(process.cwd(), '.', dir);
 
+
+const { getImageURL } = useAssets()
+const { t } = useI18n()
+
+// For metas
+const { host } = useRequestHeaders()
+const websiteBaseUrl = host ? (host.startsWith("localhost") ? "http://" : "https://") + host : ""
+const metaImage = websiteBaseUrl + getImageURL('search-show.jpg')
+
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  target: 'static',
+  app: {
+    head: {
+      charset: 'utf-16',
+      viewport: 'width=device-width, initial-scale=1', 
+      meta: [
+        { name: 'description', itemprop: 'description', content: t('meta.introduced') },
+        { itemprop: 'image', content: metaImage },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@hamsternetio' },
+        { name: 'twitter:creator', content: '@hamsternetio' },
+        { name: 'twitter:image', content: metaImage },
+        { name: 'twitter:image:alt', content: t('meta.introduced') },
+        { property: 'og:description', content: t('meta.introduced') },
+        { property: 'og:url', content: 'https://hamsternet.io/' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:image', content: metaImage },
+        { property: 'og:image:alt', content: t('meta.introduced') },
+        { property: 'og:locale', content: 'en' },
+        { property: 'og:site_name', content: 'Hamster' },
+        { property: 'og:title', content: 'Hamster' },
+      ],
+    }
+  },
   buildModules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/tailwindcss",

@@ -19,34 +19,34 @@
   import Footer from "./-components/footer.vue"
 
   const { getImageURL } = useAssets()
-  const { t } = useI18n()
+  // const { t } = useI18n()
 
   const showContent = ref(false)
 
   // For metas
-  const { host } = useRequestHeaders()
-  const websiteBaseUrl = host ? (host.startsWith("localhost") ? "http://" : "https://") + host : ""
-  const metaImage = websiteBaseUrl + getImageURL('search-show.jpg')
+  // const { host } = useRequestHeaders()
+  // const websiteBaseUrl = host ? (host.startsWith("localhost") ? "http://" : "https://") + host : ""
+  // const metaImage = websiteBaseUrl + getImageURL('search-show.jpg')
 
-  useHead({
-    meta: [
-      { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: metaImage },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@hamsternetio' },
-      { name: 'twitter:creator', content: '@hamsternetio' },
-      { name: 'twitter:image', content: metaImage },
-      { name: 'twitter:image:alt', content: t('meta.introduced') },
-      { property: 'og:description', content: t('meta.introduced') },
-      { property: 'og:url', content: 'https://hamsternet.io/' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:image', content: metaImage },
-      { property: 'og:image:alt', content: t('meta.introduced') },
-      { property: 'og:locale', content: 'en' },
-      { property: 'og:site_name', content: 'Hamster' },
-      { property: 'og:title', content: 'Hamster' },
-    ]
-  })
+  // useHead({
+  //   meta: [
+  //     { name: 'description', itemprop: 'description', content: t('meta.introduced') },
+  //     { itemprop: 'image', content: metaImage },
+  //     { name: 'twitter:card', content: 'summary_large_image' },
+  //     { name: 'twitter:site', content: '@hamsternetio' },
+  //     { name: 'twitter:creator', content: '@hamsternetio' },
+  //     { name: 'twitter:image', content: metaImage },
+  //     { name: 'twitter:image:alt', content: t('meta.introduced') },
+  //     { property: 'og:description', content: t('meta.introduced') },
+  //     { property: 'og:url', content: 'https://hamsternet.io/' },
+  //     { property: 'og:type', content: 'website' },
+  //     { property: 'og:image', content: metaImage },
+  //     { property: 'og:image:alt', content: t('meta.introduced') },
+  //     { property: 'og:locale', content: 'en' },
+  //     { property: 'og:site_name', content: 'Hamster' },
+  //     { property: 'og:title', content: 'Hamster' },
+  //   ]
+  // })
 
   onMounted(() => {
     showContent.value = true;
