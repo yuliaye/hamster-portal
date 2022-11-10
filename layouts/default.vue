@@ -40,8 +40,6 @@
       { property: 'og:type', content: 'website' },
       { property: 'og:image', content: metaImage },
       { property: 'og:image:alt', content: t('meta.introduced') },
-      { property: 'og:image:width', content: '1200' },
-      { property: 'og:image:height', content: '627' },
       { property: 'og:locale', content: 'en' },
       { property: 'og:site_name', content: 'Hamster' },
       { property: 'og:title', content: 'Hamster' },
