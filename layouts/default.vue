@@ -23,31 +23,28 @@
 
   const showContent = ref(false)
 
+  // For metas
+  const { host } = useRequestHeaders()
+  const websiteBaseUrl = host ? (host.startsWith("localhost") ? "http://" : "https://") + host : ""
+  const metaImage = websiteBaseUrl + getImageURL('search-show.jpg')
+
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
-      { itemprop: 'image', content: '/images/search-show.jpg' },
-      { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
-      // { name: 'twitter:site', content: '@Hamsternetio' },
-      // { name: 'twitter:creator', content: '@Hamsternetio' },
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:url', content: 'https://hamsternet.io/' },
-      { property: 'twitter:title', content: 'Hamster' },
-      { property: 'twitter:description', content: 'One-Stop Infrastructure, Development, Operation and Maintenance Service Platform for Blockchain Projects' },
-      { property: 'twitter:image', content: '/images/search-show.jpg' },
-      { hid: 'og-url', property: 'og:url', content: 'https://hamsternet.io/' },
-      { hid: 'og-title', property: 'og:title', content: 'Hamster' },
-      { hid: 'og-desc', property: 'og:description', content: t('meta.introduced') },
-      { hid: 'og-type', property: 'og:type', content: 'website' },
-      { hid: 'og-image', property: 'og:image', content: '/images/search-show.jpg' },
+      { itemprop: 'image', content: metaImage },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@Hamsternetio' },
+      { name: 'twitter:creator', content: '@Hamsternetio' },
+      { property: 'og:description', content: t('meta.introduced') },
+      { property: 'og:url', content: 'https://hamsternet.io/' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: metaImage },
       { property: 'og:image:alt', content: t('meta.introduced') },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '627' },
       { property: 'og:locale', content: 'en' },
       { property: 'og:site_name', content: 'Hamster' },
-      { name: 'robots', content:'index,follow'},
-      { hid: 'og-title', property: 'og:title', content: 'Hamster' },
-      { name: 'next-head-count', content: '18' },
+      { property: 'og:title', content: 'Hamster' },
     ]
   })
 
