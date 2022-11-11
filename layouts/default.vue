@@ -31,6 +31,7 @@
   useHead({
     meta: [
       { name: 'description', itemprop: 'description', content: t('meta.introduced') },
+      { name: 'keywords', content: ' hamster, hamsternet, hamster network, hamster block, hamster blockchain' },
       { itemprop: 'image', content: metaImage },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@Hamsternetio' },
@@ -44,7 +45,7 @@
       { property: 'og:image:alt', content: t('meta.introduced') },
       { property: 'og:locale', content: 'en' },
       { property: 'og:site_name', content: 'Hamster' },
-      { property: 'og:title', content: 'Hamster' },
+      { property: 'og:title', content: t('meta.title') },
     ]
   })
 
