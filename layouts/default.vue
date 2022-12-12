@@ -1,12 +1,12 @@
 <template>
-  <div :class="[showContent===true?'inline':'hidden']" class="container mx-auto text-white">
+  <div :class="[showContent===true?'block':'hidden']" class="container mx-auto text-white">
     <Head>
       <Title>{{ $t('meta.title') }}</Title>
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
     </Head>
     <Header  />
-    <div class="container max-w-screen-xl mx-auto">
+    <div>
       <slot />
     </div>
     <Footer />

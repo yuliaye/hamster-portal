@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-screen-xl mx-auto my-20 main-margin">
+  <div class="container mx-auto my-20">
     <!-- <div class="mb-10 logo">
       <img :src="getImageURL(`logo-${$i18n.locale}.png`)" class="h-8">
     </div> -->
