@@ -2,18 +2,18 @@
   <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50"
     :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
-      <div class="py-4 mx-4 xl:mx-8 xxl:mx-16">
+      <div class="container py-4 mx-auto">
         <div class="relative flex flex-row items-center justify-between text-center text-white">
-          <div class="absolute logo left-4">
+          <div class="absolute logo">
             <nuxt-link to="/" target="_blank">
               <img class="h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
 
-          <div class="flex flex-row justify-center md:mx-auto">
+          <div class="flex flex-row justify-center md:ml-auto">
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
               :src="getImageURL('head-menu-down.svg')">
-            <div v-else class="menu sm:pr-8">
+            <div v-else class="menu">
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
                 target="_blank">

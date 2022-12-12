@@ -1,352 +1,195 @@
 <template>
-  <div class="main-margin sm:mt-[160px] mt-[120px] div-bg">
-    <div id="area-div">
-      <div class="md:flex flex-row justify-between md:pt-[51px]">
-        <div class="md:w-3/5" :class="[$i18n.locale =='en' ? 'pl-[10px] md:h-[370px]' : 'pl-[36px]']">
-          <div class="font-bold title-h text-color">Hamster
-            empowers projects and developers in web3 to build their dreams</div>
-          <div class="text-[#BABABA] leading-[25px] mt-[16px] md:w-[570px]">One-Stop infrastructure,
-            development, operation and maintenance service platform for projects in Web3.0 </div>
-          <nuxt-link to="/download" target="_blank">
-            <div class="w-[126px] h-11 rounded-[8px] download-btn-shallow"></div>
-            <button
-              class="bg-[#FFEDD4] text-base rounded-[8px] px-[24px] py-[10px] flex justify-center items-center text-[#141212] download-btn">
-              {{ $t('header.download') }}
-            </button>
-          </nuxt-link>
+  <div class="mt-[106px]">
+    <div class="area-div1">
+      <div class="flex flex-row justify-between">
+        <div class="w-3/5">
+          <div class="text-[54px] font-bold leading-[74px]">Hamster empowers projects and developers in <span class="text-[#27FFB8]">web3</span> to build their dreams</div>
+          <div class="mt-5 mb-6 text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
+          <div class="mb-6">
+            <button class="border border-[#FFFFFF] w-[148px] h-[54px]">Start Building</button>
+            <button class="border border-[#27FFB8] bg-[#27FFB8] w-[148px] h-[54px] ml-6 text-[#131313]">Download</button>
+          </div>
+          <div>
+            <span class="text-[#738A92] text-base font-bold">Investors</span>
+            <img src="./images/waterdrip.png" class="w-[84px] h-[36px] inline-block ml-14"/>
+            <img src="./images/stratified.png" class="w-[101px] h-[36px] inline-block ml-6"/>
+          </div>
         </div>
-        <div class="md:w-2/5">
-          <div class="img-center" :class="[$i18n.locale === 'en' ? 'img-show-up' : 'img-show-up2']">
-            <img class="w-[40px] sm:w-[80px]" src="~/assets/images/title-img2.png">
+        <div class="w-2/5">
+          <div ref="animation1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-6 area-div2 mt-[120px]">
+      <div class="col-span-5 mr-4">
+        <div class="text-[54px] font-bold leading-[74px]">Hamster DevOps Solutions</div>
+        <div class="text-2xl text-[#738A92] mt-6">Hamster offers the integrated approach to build , test and run projects in web3.
+            We provide the most flexible platform for developers to turn their blockchain ideas into reality.
+        </div>
+      </div>
+      <div class="col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
+        <img src="./images/devops-one.png" class="h-[105px] w-[132px] mt-[45px] mb-[19px] mx-auto"/>
+        <span class="mb-2 text-2xl font-bold">Hamster Development Toolkit</span>
+        <span class="text-base text-[#738A92] pr-[46px]">Multiple development tools, faster code check, easier contract deployment and more</span>
+        <div class="flex mt-[32px]">
+          <span class="text-base font-bold text-[#27FFB8] mr-2">Learn more</span>
+          <img :src="getImageURL('learnmore-arrow.svg')" />
+        </div>
+      </div>
+      <div class="col-span-4">
+        <div class="relative h-[210px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
+          <img src="./images/devops-three.png" class="h-[95px] absolute right-6 top-[88px] opacity-10"/>
+          <span class="mt-6 mb-2 text-base font-bold">Hamster Node Service</span>
+          <span class="text-base text-[#738A92] pr-[46px]">Enjoy the smooth and safe RPC service on multichains</span>
+          <div class="flex mt-[76px]">
+            <span class="text-base font-bold text-[#27FFB8] mr-2">Learn more</span>
+            <img :src="getImageURL('learnmore-arrow.svg')" />
+          </div>
+        </div>
+        <div class="relative h-[210px] border border-[#203E42] flex flex-col pl-6 pb-7 mt-[12px] devops-bg">
+          <img src="./images/devops-four.png" class="h-[115px] absolute right-6 top-[66px] opacity-10"/>
+          <span class="mt-6 mb-2 text-base font-bold">Hamster Decentralized Computing Power Network</span>
+          <span class="text-base text-[#738A92] pr-[15px]">Aggregated check of the security risks for exsiting contracts, tokens, NFTs and dApps and more</span>
+          <div class="flex mt-[22px]">
+            <span class="text-base font-bold text-[#27FFB8] mr-2">Check now</span>
+            <img :src="getImageURL('learnmore-arrow.svg')" />
           </div>
         </div>
       </div>
-      <div class="flex-row md:flex">
-        <div class="mt-[32px] w-1/3" :class="[$i18n.locale =='en' ? 'pl-[10px]' : 'pl-[36px]']">
-          <button class="text-btn">{{ $t("home.btnText") }}</button>
-        </div>
-        <div class="md:w-2/3 title-img xl:mb-[5%]">
-          <img class="md:absolute img-w" src="~/assets/images/title-img.png">
-        </div>
-      </div>
     </div>
-    <div id="area-div1" class="flex flex-col items-center">
-      <div class="inline-block area-title div1-title">
-        <img src="~/assets/images/home-star.png" class="hidden first-star md:inline-block" />
-        <span class="title-h">Hamster DevOps Solutions</span>
-        <img src="~/assets/images/home-star.png" class="hidden last-star md:inline-block" />
+    <div class="flex justify-between area-div3 mt-[200px]">
+      <div>
+        <img src="./images/ecology.png" class="w-[507px] h-[511px]"/>
       </div>
-      <div class="mx-auto md:w-[640px] text-center mt-6">
-        <span class="text-[#BABABA] md:w-[100%] md:ml-0">
-          <div>Hamster offers the integrated approach to build , test and run projects in web3.</div>
-          <div>We provide the most flexible platform for developers to turn their blockchain ideas into reality.</div>
-        </span>
-      </div>
-      <div class="grid grid-cols-2 gap-4 mx-auto mt-12 md:grid-cols-4">
-        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-first-devops.png"
-            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
-          <span class="px-[28px] mt-[20px]">Hamster Decentralized Computing Power Network</span>
-          <div @mouseover="hoverShowone=true" @mouseout="hoverShowone=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowone" />
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowone" />
+      <div>
+        <span class="text-[54px] font-bold leading-[72px]">Hamster Ecology</span>
+        <div class="flex justify-between mt-16">
+          <div class="flex flex-col">
+            <span class="text-[54px] font-bold leading-[74px]">16</span>
+            <span class="text-[#AFC6C8] text-base mt-2 mb-6">Supported Ecosystems</span>
+            <img :src="getImageURL('green-line.svg')" class="w-8"/>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[54px] font-bold leading-[74px]">xx GT</span>
+            <span class="text-[#AFC6C8] text-base mt-2 mb-6">Decentralized computing power</span>
+            <img :src="getImageURL('green-line.svg')" class="w-8"/>
           </div>
         </div>
-        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-second-devops.png"
-            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
-          <span class="px-[28px] mt-[20px]">Hamster Node Service</span>
-          <div @mouseover="hoverShowtwo=true" @mouseout="hoverShowtwo=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowtwo" />
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowtwo" />
+        <div class="flex justify-between mt-16">
+          <div class="flex flex-col">
+            <span class="text-[54px] font-bold leading-[74px]">16</span>
+            <span class="text-[#AFC6C8] text-base mt-2 mb-6">Integrated Web3.0 Projects</span>
+            <img :src="getImageURL('green-line.svg')" class="w-8"/>
           </div>
-        </div>
-        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-third-devops.png"
-            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
-          <span class="px-[28px] mt-[20px]">Hamster Development Toolkit</span>
-          <div @mouseover="hoverShowthree=true" @mouseout="hoverShowthree=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="hoverShowthree" />
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[82px]" v-if="!hoverShowthree" />
-          </div>
-        </div>
-        <div class="md:h-[365px] h-[265px] text-center self-center flex flex-col area-div1-border mb-4 md:mb-0">
-          <img src="~/assets/images/home-fourth-devops.png"
-            class="h-[95px] w-[95px] self-center mt-[58px] md:mt-[98px]" />
-          <span class="px-[28px] mt-[20px]">Hamster Operation and Maintenance Toolkit</span>
-          <div @mouseover="hoverShowfour=true" @mouseout="hoverShowfour=false" class="w-6 mx-auto" v-if="false">
-            <img :src="getImageURL('orange-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="hoverShowfour" />
-            <img :src="getImageURL('black-arrow.svg')" class="self-center w-5 mt-[60px]" v-if="!hoverShowfour" />
+          <div class="flex flex-col">
+            <span class="text-[54px] font-bold leading-[74px]">143days</span>
+            <span class="text-[#AFC6C8] text-base mt-2 mb-6">RPC service without error</span>
+            <img :src="getImageURL('green-line.svg')" class="w-8"/>
           </div>
         </div>
       </div>
-
     </div>
-    <div id="area-div2" class="md:flex mt-[160px]">
-      <div class="flex-1 md:mr-[150px] self-center text-center md:text-left">
-        <span class="block mb-6 font-bold title-h">Hamster Solutions - Semi-Customized Service</span>
-        <span class="text-lg text-[#BABABA]">
-          For enterprises (traditional enterprises and web3.0 enterprises) having specific customized needs, Hamster offers semi-customized service based on the four hamster standard solutions.
-          <br/>
-          This service provides enterprises endless scalability for their blockchain products’ deployment, development, operation and maintenance.
-        </span>
-      </div>
-      <img src="~/assets/images/home-devops-solution.png" class="h-[406px] flex-1" />
-    </div>
-    <div id="area-div3">
-      <div class="area-title">Guidance of participating in Hamster's Computing Power Network</div>
-      <!-- <div class="w-[1000px] h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16">
-        <div
-          class="w-[974px] h-[540px] border-[0.3px] border-solid border-[#fff] mx-auto rounded-[30px] absolute top-3 left-3">
+    <div class="area-div4 mt-[200px]">
+      <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
+      <div class="flex justify-between mt-16">
+        <div>
+          <img src="./images/usinghamster-one.png" class="w-[545px] h-[498px]"/>
         </div>
-        <div class="download w-[938px] h-[506px] absolute top-12 left-7">
-          <iframe width="938" height="490" src="https://www.youtube.com/embed/nX8RXgwd9es?autoplay=1" :rel="0" />
-        </div>
-      </div> -->
-      <div
-        class="grid grid-cols-1 md:h-[565px] border border-solid border-[#fff] mx-auto rounded-[30px] relative mt-16 circle-line">
-        <div class="download iframe-box">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1yEDWEz9upI?autoplay=1" :rel="0"
-            class="rounded-[30px]" />
+        <div class="flex flex-col justify-between h-110">
+          <div class="text-2xl">No info</div>
+          <div>
+            <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
+            <span class="text-base text-[#AFC6C8]">Head Of Business Development at SubQuery & OnFinality</span>
+          </div>
         </div>
       </div>
-      <a href="https://hamsternet.io/docs/" target="_blank">
-        <div class="w-[148px] h-11 rounded-[8px] download-btn-shallow mx-auto"></div>
-        <button
-          class="bg-[#FFEDD4] text-base mx-auto rounded-[8px] px-[24px] py-[10px] flex justify-center items-center text-[#141212] download-btn">
-          {{ $t('header.learnMore') }}
-          <img :src="getImageURL('jiantou.svg')" class="self-center w-[13px] ml-[4px]" />
-        </button>
-      </a>
     </div>
-    <div id="area-div4">
-      <div class="area-title">Hamster Ecology</div>
-      <EcologyModule />
-    </div>
-    <div id="area-div5">
-      <div class="area-title">Roadmap</div>
-      <img src='./images/Roadmap.png' class="mt-[64px]" />
-    </div>
-    <div id="area-div6">
-      <div class="area-title">More about Hamster</div>
-      <MoreSwiper />
+    <div class="area-div5 mt-[200px]">
+      <span class="text-[54px] font-bold leading-[74px]">Trending News</span>
+      <div class="grid grid-cols-12 gap-6 my-12">
+        <div class="h-[310px] col-span-3">
+          <img src="./images/trending-one.png" />
+          <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+            <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+            <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+          </div>
+        </div>
+        <div class="h-[310px] col-span-3">
+          <img src="./images/trending-two.png" />
+          <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+            <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+            <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+          </div>
+        </div>
+        <div class="h-[310px] col-span-3">
+          <img src="./images/trending-three.png" />
+          <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+            <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+            <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+          </div>
+        </div>
+        <div class="h-[310px] col-span-3">
+          <img src="./images/trending-four.png" />
+          <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+            <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+            <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex inline-block pt-12">
+        <input type="text" placeholder="Enter your email to get latest Hamster News!" class="flex-1 h-[64px]"/>
+        <button class="border border-[#27FFB8] bg-[#27FFB8] w-[200px] h-[64px] ml-3 text-[#131313]">Subscribe</button>
+      </div>
+      <div class="relative mt-12 w-[100%]">
+        <img src="./images/moon.png" class="w-[100%]"/>
+        <div class="absolute top-[44%] left-[43%]">
+            <img src="./images/pole.png" class="w-6 h-[80px] inline-block"/>
+            <img src="./images/flag.png" class="w-[60px] inline-block flag-show"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import EcologyModule from './components/ecologyModule.vue'
-import MoreSwiper from './components/moreSwiper.vue'
-import { ref } from 'vue';
+  import { ref, onMounted } from 'vue'
+  import lottie from "lottie-web"
+  import json001 from "../../assets/json/ufo.json"
 
-const { getImageURL } = useAssets()
+  const animation1 = ref(null)
 
-const hoverShowone = ref(false)
-const hoverShowtwo = ref(false)
-const hoverShowthree = ref(false)
-const hoverShowfour = ref(false)
-const hoverShowfive = ref(false)
+  const { getImageURL } = useAssets()
 
+  onMounted(()=>{
+    lottie.loadAnimation({
+        container: animation1.value,//选择渲染dom
+        renderer: "svg",//渲染格式
+        loop: false,//循环播放
+        autoplay: true,//是否i自动播放,
+        animationData: json001,//渲染动效json
+    });
+  })
 </script>
 
-<style scoped>
-.title-img {
-  @apply flex items-center justify-end;
-}
-
-.img-show-up {
-  -webkit-animation: bounce 16s infinite;
-  animation: bounce 16s infinite;
-  padding-right: 0;
-  padding-left: 17.5%;
-}
-
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translateY(0%);
-    animation-timing-function: ease;
+<style lang="less" scoped>
+  .devops-bg{
+    background: radial-gradient(111.94% 125.64% at -11.86% 57.81%, rgba(109, 197, 160, 0.1147) 0%, rgba(14, 14, 19, 0) 100%);
   }
-
-  50% {
-    transform: translateY(105%);
-    animation-timing-function: ease;
+  .trending-bg{
+    background: linear-gradient(180deg, #21342B 0%, #141414 100%);
   }
-}
-
-.img-show-up2 {
-  padding-right: 9.6%;
-  -webkit-animation: bounce2 8s infinite;
-  animation: bounce2 8s infinite;
-}
-
-@keyframes bounce2 {
-
-  0%,
-  100% {
-    transform: translateY(-50%);
-    animation-timing-function: ease;
+  input{
+    background: linear-gradient(180deg, #131C17 0%, #151616 100%);
+    color: #AFC6C8;
+    font-size: 16px;
+    padding-left: 24px;
+    border: 1px solid #203E42;
   }
-
-  50% {
-    transform: translateY(0);
-    animation-timing-function: ease;
+  input:focus-visible {
+    outline: none;
   }
-}
-
-.text-btn {
-  @apply bg-[#CC7219] text-base rounded-[45px] px-[24px] py-[10px] hidden;
-}
-
-.text-btn2 {
-  @apply text-[#CC7219] border border-[#807D7C] text-base rounded-[45px] px-[24px] py-[10px] hidden;
-}
-
-pre {
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-}
-
-* html pre {
-  word-wrap: break-word;
-  white-space: normal;
-}
-
-.title-h {
-  @apply text-[40px] leading-[50px];
-}
-
-.title-h-en {
-  @apply h-auto;
-}
-
-@screen md {
-  .img-w {
-    @apply w-[450px];
+  .flag-show{
+    margin-left: -14px;
+    margin-top: -50px;
   }
-
-  .title-h-en {
-    @apply h-[200px];
-  }
-
-  .img-show-up {
-    padding-right: 37%;
-    padding-left: 0;
-  }
-
-  @keyframes bounce {
-
-    0%,
-    100% {
-      transform: translateY(-50%);
-    }
-
-    50% {
-      transform: translateY(118%);
-    }
-  }
-}
-
-@screen lg {
-  .img-w {
-    @apply w-[600px];
-  }
-
-  .title-h {
-    @apply text-[40px] leading-[47px];
-  }
-
-  .title-h-en {
-    @apply h-[249px];
-  }
-
-  .img-show-up {
-    padding-right: 36.7%;
-  }
-
-  @keyframes bounce {
-    50% {
-      transform: translateY(95%);
-    }
-  }
-}
-
-@screen xl {
-  .title-h {
-    @apply text-[40px] leading-[47px];
-  }
-
-  .img-show-up {
-    padding-right: 9.6%;
-  }
-
-  @keyframes bounce {
-    50% {
-      transform: translateY(85%);
-    }
-  }
-}
-
-.download-btn {
-  position: relative;
-  z-index: 100;
-}
-
-.download-btn-shallow {
-  border: 1px solid #FFEDD4;
-  position: relative;
-  z-index: 80;
-  top: 53px;
-  left: 8px;
-}
-
-.div1-title {
-  position: relative;
-  font-size: 50px;
-}
-
-.first-star {
-  width: 50px;
-  position: absolute;
-  top: -15px;
-  left: -70px;
-}
-
-.last-star {
-  width: 50px;
-  position: absolute;
-  top: 20px;
-  right: -70px;
-}
-
-.area-div1-border {
-  border: 1px dashed #4E4A4A;
-  border-radius: 50% 50% 16px 16px/ 10% 10% 16px 16px;
-}
-
-.iframe-box {
-  width: calc(100% - 60px);
-  height: calc(100% - 60px);
-  margin: auto;
-  border-radius: 30px;
-  min-height: 300px;
-}
-
-.circle-line {
-  min-height: 360px;
-}
-
-.circle-line::before {
-  content: "";
-  position: absolute;
-  margin: 13px;
-  width: calc(100% - 26px);
-  height: calc(100% - 26px);
-  border: 0.3px solid #fff;
-  border-radius: 30px;
-  z-index: -1;
-}
 </style>
