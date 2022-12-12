@@ -93,7 +93,7 @@
       <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
       <div class="flex justify-between mt-16">
         <div>
-          <img src="./images/usinghamster-one.png" class="w-[545px] h-[498px]"/>
+          <img src="./images/usinghamster-one.png" class=" h-[498px]"/>
         </div>
         <div class="flex flex-col justify-between h-110">
           <div class="text-2xl">No info</div>
