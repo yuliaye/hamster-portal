@@ -8505,11 +8505,6 @@ svg-tags@^1.0.0:
   resolved "https://registry.npmmirror.com/svg-tags/-/svg-tags-1.0.0.tgz"
   integrity sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==
 
-svgaplayerweb@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/svgaplayerweb/-/svgaplayerweb-2.3.2.tgz#15595b8dcc20cf4de4adc3103970b7cf5ae19a84"
-  integrity sha512-QuTvNIgy3W6Mi4h74SczEHUtAwb8m3ax7Ai7xRLUuN6hjJh49RGtWOWq1IuF2I7ECcl0HAYn8FcTn99UDz9UiQ==
-
 svgo@^2.7.0:
   version "2.8.0"
   resolved "https://registry.npmmirror.com/svgo/-/svgo-2.8.0.tgz"
@@ -9305,6 +9300,11 @@ vue3-carousel-3d@^1.0.4:
   integrity sha512-MqoaEYo94hfnHrs8UJzzeJX+30fbcHyn1qiSIzCdKefYcmSNmsssk8ahw/zL9D6zdrRySHTD5+vN+zGENPwlJw==
   dependencies:
     vue "^3.2.38"
+
+vue3-carousel@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.2.9.tgz#cecb02c34f987f959dae9c056b1377326236ddcf"
+  integrity sha512-JSU3rjWNfMq6uLjO7mD0/qQL7EsD0qyGUhSw/1F9ir7ObhdcJdRxbiAGIx+iyxR3v0Zoec5JrQdxSmn4ItKVrw==
 
 vue3-video-play@^1.3.1-beta.6:
   version "1.3.1-beta.6"

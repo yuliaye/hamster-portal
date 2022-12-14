@@ -14,39 +14,12 @@
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
               :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu">
+              <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
                 target="_blank">
                 {{ link.title }}
               </nuxt-link>
-              <!-- <VDropdown :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
-                v-model:shown="drodownShow7" auto-hide :triggers="[]" :skidding="-2" :distance="10"
-                popper-class="locale-dropdown">
-                <div class="relative cursor-pointer select-none" @click="drodownShow7 = !drodownShow7">
-                  <div class="px-[16px] h-[32px] flex justify-center items-center">
-                    <div> {{ $t('header.menu7') }}</div>
-                    <img v-if="curMenu === 'news' || curMenu === 'company'" src="~/assets/images/menu-down-hover.png"
-                      class="w-4 ml-2" :class="{'rotate-dropdown-icon': drodownShow7}" />
-                    <img v-else src="~/assets/images/menu-down.png" class="w-4 ml-2"
-                      :class="{'rotate-dropdown-icon': drodownShow7}" />
-                  </div>
-                </div>
-                <template #popper>
-                  <div class="to-top"
-                    :class="[{'top-active' : curSubMenu === 'news'},{'top-focus' : focusVal === 'news'}]"></div>
-                  <div class="h-[80px] drop-bg text-white cursor-pointer">
-                    <div v-for="option in aboutUsOptions" :key="option.value"
-                      class="choose-locale px-4 text-center leading-[40px] hover:bg-[#A05E1C] hover:text-white"
-                      :class="{'choose-locale-active': curSubMenu == option.value}" @mouseover="focusVal = option.value"
-                      @mouseleave="focusVal=false"
-                      @click="curSubMenu = option.value; drodownShow7 = false;focusVal=false">
-                      <nuxt-link :to="`/${option.value}`" target="_blank">
-                        <div>{{ option.label}}</div>
-                      </nuxt-link>
-                    </div>
-                  </div>
-                </template>
-              </VDropdown> -->
             </div>
             <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10"
               popper-class="locale-dropdown">
@@ -92,17 +65,6 @@
       <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
         <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu ml-[25px]">{{ link.title }}</div>
       </nuxt-link>
-      <!-- <div :class="{'menu-active' : (curMenu === 'news' || curMenu === 'company')}"
-        class="flex items-center phone-menu"><img class="h-[20px] mr-[5px]" src="~/assets/images/menu-sub.png" />{{
-        $t('header.menu7') }}</div>
-      <div class="ml-[25px] menu-color">
-        <nuxt-link to="/news" target="_blank">
-          <label :class="{'menu-active' : curMenu === 'news'}">{{ $t('header.menu7-sub1') }}</label>
-        </nuxt-link>
-        <nuxt-link to="/company" target="_blank">
-          <label :class="{'menu-active' : curMenu === 'company'}" class="ml-6">{{ $t('header.menu7-sub2') }}</label>
-        </nuxt-link>
-      </div> -->
     </div>
   </div>
 </template>
@@ -214,11 +176,12 @@ onUnmounted(() => {
 }
 
 .menu {
-  @apply cursor-pointer text-[#807D7C] leading-[32px] flex;
+  @apply cursor-pointer text-[white] leading-[32px] flex;
 }
 
 .menu-active {
   @apply text-white !important;
+  border: 1px solid white;
 }
 
 .to-top {

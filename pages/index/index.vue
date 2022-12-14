@@ -57,11 +57,11 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-between area-div3 mt-[200px]">
+    <div class="grid grid-cols-2 area-div3 mt-[200px]">
       <div>
         <img src="./images/ecology.png" class="w-[507px] h-[511px]"/>
       </div>
-      <div>
+      <div class="justify-self-end">
         <span class="text-[54px] font-bold leading-[72px]">Hamster Ecology</span>
         <div class="flex justify-between mt-16">
           <div class="flex flex-col">
@@ -91,11 +91,33 @@
     </div>
     <div class="area-div4 mt-[200px]">
       <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
-      <div class="flex justify-between mt-16">
-        <div>
-          <img src="./images/usinghamster-one.png" class=" h-[498px]"/>
+      <div class="grid grid-cols-2 gap-[84px] mt-16">
+        <div class="relative">
+          <div class="absolute h-[650px] using-imgbg"></div>
+          <Carousel>
+            <Slide v-for="slide in carousels" :key="slide">
+              <img :src="slide" class="carousel__item h-[498px]" />
+            </Slide>  
+            <template #addons="slideData">
+              <Pagination/>
+              <div class="flex justify-between mt-6 custom-carousel-navigation">
+                <div class="flex text-center">
+                  <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
+                    <img :src="getImageURL('using-left-arrow.svg')" @click="handlePrev(slideData)" class="m-auto"/>
+                  </div>
+                  <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
+                    <img :src="getImageURL('using-right-arrow.svg')" @click="handleNext(slideData)" class="m-auto "/>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-[34px]">{{`${slideData.currentSlide+1}`}}</span>
+                  <span class="text-base">{{` / ${slideData.slidesCount}`}}</span>
+                </div>
+              </div>
+            </template>
+          </Carousel>
         </div>
-        <div class="flex flex-col justify-between h-110">
+        <div class="flex flex-col justify-between h-[620px]">
           <div class="text-2xl">No info</div>
           <div>
             <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
@@ -152,13 +174,33 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, reactive, onMounted } from 'vue'
+  import { Carousel, Pagination, Slide } from 'vue3-carousel'
   import lottie from "lottie-web"
   import json001 from "../../assets/json/ufo.json"
-
-  const animation1 = ref(null)
+  import 'vue3-carousel/dist/carousel.css'
 
   const { getImageURL } = useAssets()
+
+  const animation1 = ref(null)
+  const carousels = reactive([getImageURL('usinghamster-one.png'), getImageURL('usinghamster-two.png'), getImageURL('usinghamster-three.png')])
+
+  const handlePrev = (slideData)=>{
+    const { currentSlide, slidesCount, slideTo, prev } = slideData
+    if(currentSlide == 0){
+      slideTo(slidesCount)
+    }else{
+      prev()
+    }
+  }
+  const handleNext = (slideData)=>{
+    const { currentSlide, slidesCount, slideTo, next } = slideData
+    if(currentSlide+1 == slidesCount){
+      slideTo(0)
+    }else{
+      next()
+    }
+  }
 
   onMounted(()=>{
     lottie.loadAnimation({
@@ -191,5 +233,67 @@
   .flag-show{
     margin-left: -14px;
     margin-top: -50px;
+  }
+
+  .using-imgbg{
+    background: linear-gradient(180deg, #1E2723 0%, #161817 100%);
+    width: 100%;
+  }
+
+  :deep(.carousel) {
+    padding: 24px;
+    .carousel__item {
+      min-height: 200px;
+      width: 100%;
+      background-color: var(--vc-clr-primary);
+      color: var(--vc-clr-white);
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .carousel__pagination {
+      margin-top: 30px;
+    }
+    .carousel__pagination-button::after {
+      background-color: #48514B;
+      width: 100%;
+    }
+    .carousel__pagination-button:hover::after , 
+    .carousel__pagination-button--active::after {
+      background-color: #27FFB8 !important;
+      width: 100%;
+    }
+    .carousel__pagination-item {
+      width: 33%;
+      .carousel__pagination-button {
+        width: 100%;
+      }
+    }
+    .carousel__slide  {
+      
+    }
+    .carousel__prev ,
+    .carousel__next  {
+      box-sizing: content-box;
+      color: white;
+      background: #27392D;
+      height: 49px;
+      width: 40px;
+    }
+  }
+
+  .using-navigation {
+    position: absolute;
+    top: 102%;
+    left: 18px;
+    width: 100px;
+  }
+  .using-numprogress{
+    position: absolute;
+    bottom: -3px;
+    right: 20px;
+    z-index: 100;
+    color: red !important;
   }
 </style>
