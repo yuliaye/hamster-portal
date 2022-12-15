@@ -14,7 +14,9 @@
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
               :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu">
-              <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
+              <nuxt-link to="/" target="_blank">
+                <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
+              </nuxt-link>
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
                 target="_blank">

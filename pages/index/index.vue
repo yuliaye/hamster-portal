@@ -58,10 +58,34 @@
       </div>
     </div>
     <div class="grid grid-cols-2 area-div3 mt-[200px]">
-      <div>
-        <img src="./images/ecology.png" class="w-[507px] h-[511px]"/>
+      <div class="w-[100%] h-[100%] relative select-none">
+        <div class="w-[202px] h-[202px] flex flex-col justify-center items-center ecology-center">
+          <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
+          <img :src="getImageURL('ecology-close.svg')" class="h-[24px] inline-block my-[10px]"/>
+          <span class="text-base font-bold">Infrastructure</span>
+        </div>
+        <div class="w-[354px] h-[354px] ecology-level-one">
+          <div class="w-[100%] h-[100%] relative animation-rotate">
+            <img :src="getImageURL('ecology-inner-one.svg')" class="absolute left-[120px] top-[-20px] h-[48px]"/>
+            <img :src="getImageURL('ecology-inner-two.svg')" class="absolute left-[320px] top-[100px] h-[48px]"/>
+            <img :src="getImageURL('ecology-inner-three.svg')" class="absolute left-[280px] top-[270px] h-[48px]"/>
+            <img :src="getImageURL('ecology-inner-four.svg')" class="absolute left-[-20px] top-[200px] h-[48px]"/>
+          </div>
+        </div>
+        <div class="w-[490px] h-[490px] ecology-level-two">
+          <div class="w-[100%] h-[100%] relative animation-rotate">
+            <img :src="getImageURL('ecology-out-one.svg')" class="absolute left-[300px] top-[-16px] h-[48px]"/>
+            <img :src="getImageURL('ecology-out-two.svg')" class="absolute left-[410px] top-[60px] h-[48px]"/>
+            <img :src="getImageURL('ecology-out-three.svg')" class="absolute left-[450px] top-[280px] h-[48px]"/>
+            <img :src="getImageURL('ecology-out-four.svg')" class="absolute left-[330px] top-[440px] h-[48px]"/>
+            <img :src="getImageURL('ecology-out-five.svg')" class="absolute left-[130px] top-[440px] h-[48px]"/>
+            <img :src="getImageURL('ecology-out-six.svg')" class="absolute left-[20px] top-[360px] h-[34px]"/>
+            <img :src="getImageURL('ecology-out-seven.svg')" class="absolute top-[110px] h-[48px]"/>
+          </div>
+        </div>
       </div>
-      <div class="justify-self-end">
+
+      <div class="justify-self-center">
         <span class="text-[54px] font-bold leading-[72px]">Hamster Ecology</span>
         <div class="flex justify-between mt-16">
           <div class="flex flex-col">
@@ -238,6 +262,54 @@
   .using-imgbg{
     background: linear-gradient(180deg, #1E2723 0%, #161817 100%);
     width: 100%;
+  }
+
+  .ecology-center{
+    border: 0.3px solid rgba(255, 255, 255, 0.7);
+    filter: drop-shadow(0px 0px 17px rgba(29, 60, 45, 0.25));
+    border-radius: 50%;
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%)
+  }
+  .ecology-level-one{
+    border: 0.3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 0px 23px rgba(27, 41, 36, 0.25);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 90;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    .animation-rotate{
+      animation: rotation 6s linear infinite;
+    }
+  }
+  
+  .ecology-level-two{
+    border: 0.3px solid rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(0px 4px 15px rgba(32, 64, 27, 0.25));
+    border-radius: 50%;
+    position: absolute;
+    z-index: 80;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    .animation-rotate{
+      animation: rotation 6s linear infinite;
+    }
+  }
+  @keyframes rotation { 
+    0% {
+      -webkit-transform: rotate(0deg); 
+      transform:rotate(0deg); 
+    }
+    100% { 
+      -webkit-transform: rotate(360deg); 
+      transform:rotate(360deg); 
+    } 
   }
 
   :deep(.carousel) {
