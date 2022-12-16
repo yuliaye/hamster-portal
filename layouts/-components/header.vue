@@ -14,7 +14,9 @@
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
               :src="getImageURL('head-menu-down.svg')">
             <div v-else class="menu">
-              <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
+              <nuxt-link to="/" target="_blank">
+                <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
+              </nuxt-link>
               <nuxt-link v-for="link in navLinks" :key="link.path"
                 :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
                 target="_blank">
@@ -68,9 +70,35 @@
     </div>
   </div>
 </template>
-head-menu-down
+
 <script setup>
-import { computed, ref } from "vue"
+import { computed, ref, defineProps, watch } from "vue"
+
+const props = defineProps({ 
+  showHeader: {
+    type: Boolean,
+    default: true
+  },
+  showHeaderBg: {
+    type: Boolean,
+    default: false
+  },
+})
+
+watch(() => props.showHeader, (newVal)=>{
+  if (newVal) { 
+    scrollDown.value = false;
+  } else{
+    scrollDown.value = true;
+  }
+})
+watch(() => props.showHeaderBg, (newVal)=>{
+  if (newVal) {
+    topBgShow.value = true
+  } else{
+    topBgShow.value = false
+  }
+})
 
 const { getImageURL } = useAssets()
 const route = useRoute();
