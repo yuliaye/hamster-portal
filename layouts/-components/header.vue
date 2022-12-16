@@ -70,9 +70,35 @@
     </div>
   </div>
 </template>
-head-menu-down
+
 <script setup>
-import { computed, ref } from "vue"
+import { computed, ref, defineProps, watch } from "vue"
+
+const props = defineProps({ 
+  showHeader: {
+    type: Boolean,
+    default: true
+  },
+  showHeaderBg: {
+    type: Boolean,
+    default: false
+  },
+})
+
+watch(() => props.showHeader, (newVal)=>{
+  if (newVal) { 
+    scrollDown.value = false;
+  } else{
+    scrollDown.value = true;
+  }
+})
+watch(() => props.showHeaderBg, (newVal)=>{
+  if (newVal) {
+    topBgShow.value = true
+  } else{
+    topBgShow.value = false
+  }
+})
 
 const { getImageURL } = useAssets()
 const route = useRoute();

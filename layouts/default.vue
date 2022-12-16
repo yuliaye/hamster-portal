@@ -5,18 +5,33 @@
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
     </Head>
-    <Header  />
+    <Header :showHeader="showHeader" :showHeaderBg="showHeaderBg" />
     <div>
       <slot />
     </div>
-    <Footer />
+    <Footer v-if="showFooter" />
   </div>
 </template>
 
 <script setup>
-  import { onMounted } from "vue"
+  import { onMounted, defineProps } from "vue"
   import Header from "./-components/header.vue"
   import Footer from "./-components/footer.vue"
+
+  defineProps({ 
+    showFooter: {
+      type: Boolean,
+      default: true
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    showHeaderBg: {
+      type: Boolean,
+      default: false
+    },
+  })
 
   const { getImageURL } = useAssets()
   const { t } = useI18n()
@@ -114,6 +129,9 @@
   }
   .area-title {
     @apply font-bold text-[40px] leading-[47px] mt-[164px] text-center mb-[16px];
+  }
+  .fp-watermark{
+    display: none;
   }
 </style>
 <style lang="less">

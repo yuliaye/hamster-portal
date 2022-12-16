@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@intlify/nuxt3",
     "floating-vue/nuxt",
+    "./modules/fullpage/fullpage.module"
   ],
   intlify: {
     localeDir: "locales",
