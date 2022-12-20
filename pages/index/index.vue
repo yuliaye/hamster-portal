@@ -8,7 +8,9 @@
             <div class="mt-5 mb-6 text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
             <div class="mb-6">
               <button class="border border-[#FFFFFF] w-[148px] h-[54px]">Start Building</button>
-              <button class="border border-[#27FFB8] bg-[#27FFB8] w-[148px] h-[54px] ml-6 text-[#131313]">Download</button>
+              <nuxt-link to="/download" target="_blank">
+                <button class="border border-[#27FFB8] bg-[#27FFB8] w-[148px] h-[54px] ml-6 text-[#131313]">Download</button>
+              </nuxt-link>
             </div>
             <div>
               <span class="text-[#738A92] text-base font-bold">Investors</span>
@@ -17,7 +19,7 @@
             </div>
           </div>
           <div class="w-2/5">
-            <div ref="animation1"></div>
+            <div ref="ufoRef"></div>
           </div>
         </div>
       </div>
@@ -63,7 +65,7 @@
       </div>
       
       <div class="section">
-        <div class="grid grid-cols-2 h-[600px] overflow-hidden">
+        <div class="grid grid-cols-1 h-[600px] md:grid-cols-2 overflow-hidden">
           <div class="relative select-none">
             <div class="w-[202px] h-[202px] flex flex-col justify-center items-center ecology-center">
               <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
@@ -93,26 +95,32 @@
 
           <div class="flex flex-col justify-center w-[575px] justify-self-center">
             <span class="text-[54px] font-bold leading-[72px]">Hamster Ecology</span>
-            <div class="flex justify-between mt-16">
+            <div class="grid grid-cols-2 gap-[20px] xl:gap-[50px] mt-[50px]">
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">16</span>
+                <span class="text-[54px] font-bold leading-[74px]">
+                  <span ref="numberRollerRef1">0</span>
+                </span>
                 <span class="text-[#AFC6C8] text-base mt-2 mb-6">Supported Ecosystems</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">xx GT</span>
+                <span class="text-[54px] font-bold leading-[74px]">
+                  <span ref="numberRollerRef2">0</span>GT
+                </span>
                 <span class="text-[#AFC6C8] text-base mt-2 mb-6">Decentralized computing power</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
-            </div>
-            <div class="flex justify-between mt-16">
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">16</span>
+                <span class="text-[54px] font-bold leading-[74px]">
+                  <span ref="numberRollerRef3">0</span>
+                </span>
                 <span class="text-[#AFC6C8] text-base mt-2 mb-6">Integrated Web3.0 Projects</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">143days</span>
+                <span class="text-[54px] font-bold leading-[74px]">
+                  <span ref="numberRollerRef4">0</span>days
+                </span>
                 <span class="text-[#AFC6C8] text-base mt-2 mb-6">RPC service without error</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
@@ -198,11 +206,11 @@
       </div>
       
       <div class="section fp-auto-height">
-        <div class="relative mt-12 w-[100%]">
+        <div class="relative mt-12 w-[100%]" @mouseover="handleFlagRaise">
           <img src="./images/moon.png" class="w-[100%]"/>
-          <div class="absolute top-[44%] left-[43%]">
+          <div class="absolute top-0 md:top-[10%] xl:top-[44%] left-[43%]">
               <img src="./images/pole.png" class="w-6 h-[80px] inline-block"/>
-              <img src="./images/flag.png" class="w-[60px] inline-block flag-show"/>
+              <img src="./images/flag.png" class="flag" ref="flagRef"/>
           </div>
         </div>
         <Footer />
@@ -215,9 +223,10 @@
   import { ref, reactive, onMounted } from 'vue'
   import { Carousel, Pagination, Slide } from 'vue3-carousel'
   import lottie from "lottie-web"
+  import anime from 'animejs/lib/anime.es.js';
   import DefaultLayout from "~/layouts/default.vue"
   import Footer from "~/layouts/-components/footer.vue"
-  import json001 from "../../assets/json/ufo.json"
+  import ufojson from "../../assets/json/ufo.json"
   import 'vue3-carousel/dist/carousel.css'
 
   definePageMeta({
@@ -228,15 +237,53 @@
 
   const showHeader = ref(true)
   const showHeaderBg = ref(false)
+
+  const numberRollerRef1 = ref(null)
+  const numberRollerRef2 = ref(null)
+  const numberRollerRef3 = ref(null)
+  const numberRollerRef4 = ref(null)
+  const numberRollerNumber1 = ref(16)
+  const numberRollerNumber2 = ref(73)
+  const numberRollerNumber3 = ref(20)
+  const numberRollerNumber4 = ref(143)
+
   const fullpageOptions = { 
     beforeLeave( origin, destination, direction, trigger ) {
       showHeader.value = direction === 'up'
       showHeaderBg.value = !destination.isFirst
+    },
+    afterLoad(origin, destination, direction, trigger) {
+      // handle fullpage scroll
+      // number roller section index is：2
+      if (destination.index === 2) {
+        [
+          { ref: numberRollerRef1, number: numberRollerNumber1 },
+          { ref: numberRollerRef2, number: numberRollerNumber2 },
+          { ref: numberRollerRef3, number: numberRollerNumber3 },
+          { ref: numberRollerRef4, number: numberRollerNumber4 }
+        ].forEach(item => {
+          const number = item.number.value
+          const renderedNumber = parseInt(item.ref.value.textContent)
+          // Skip animation when number renderer
+          if (!renderedNumber && number !== renderedNumber) {
+            anime({
+              targets: item.ref.value,
+              innerHTML: [0, number],
+              round: 1,
+              easing: 'easeInOutExpo'
+            })
+          }
+        })
+      }
     }
   }
 
-  const animation1 = ref(null)
-  const carousels = reactive([getImageURL('usinghamster-one.png'), getImageURL('usinghamster-two.png'), getImageURL('usinghamster-three.png')])
+  const ufoRef = ref(null)
+  const carousels = reactive([
+    getImageURL('usinghamster-one.png'), 
+    getImageURL('usinghamster-two.png'), 
+    getImageURL('usinghamster-three.png')
+  ])
 
   const handlePrev = (slideData)=>{
     const { currentSlide, slidesCount, slideTo, prev } = slideData
@@ -255,13 +302,19 @@
     }
   }
 
+  const flagRef = ref(null)
+  const handleFlagRaise = () => {
+    flagRef.value.classList.add("flag-show")
+    setTimeout(() => flagRef.value.classList.add("flag-raise"), 500)
+  }
+
   onMounted(()=>{
     lottie.loadAnimation({
-        container: animation1.value,//选择渲染dom
+        container: ufoRef.value,//选择渲染dom
         renderer: "svg",//渲染格式
         loop: false,//循环播放
         autoplay: true,//是否i自动播放,
-        animationData: json001,//渲染动效json
+        animationData: ufojson,//渲染动效json
     });
   })
 </script>
@@ -283,9 +336,23 @@
   input:focus-visible {
     outline: none;
   }
-  .flag-show{
+
+  .flag {
+    width: 60px;
+    display: inline-block;
     margin-left: -14px;
+    margin-top: 0;
+    opacity: 0;
+  }
+
+  .flag-show {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+
+  .flag-raise {
     margin-top: -50px;
+    transition: margin-top 1000ms;
   }
 
   .using-imgbg{

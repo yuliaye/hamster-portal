@@ -30,6 +30,7 @@
     "@polkadot/api": "^8.14.1",
     "@polkadot/extension-dapp": "^0.44.2",
     "@types/dplayer": "^1.25.2",
+    "animejs": "^3.2.1",
     "ant-design-vue": "^3.2.11",
     "dplayer": "^1.27.0",
     "http-proxy-middleware": "^2.0.6",
