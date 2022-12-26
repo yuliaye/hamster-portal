@@ -1,5 +1,9 @@
 <template>
   <DefaultLayout :showFooter="false" :showHeader="showHeader" :showHeaderBg="showHeaderBg">
+    <div class="fixed hidden text-center" ref="animateUfoRef">
+      <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
+      <img src="~/assets/images/ufo-light.png" id="ufo-light-image" class="absolute top-0 left-0 w-full opacity-0"/>
+    </div>
     <full-page :options="fullpageOptions" id="fullpage">
       <div class="section">
         <div class="flex flex-row items-center justify-between">
@@ -133,10 +137,10 @@
         <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
         <div class="grid grid-cols-2 gap-[84px] mt-16">
           <div class="relative">
-            <div class="absolute h-[650px] using-imgbg"></div>
+            <div class="absolute h-[600px] using-imgbg"></div>
             <Carousel>
               <Slide v-for="slide in carousels" :key="slide">
-                <img :src="slide" class="carousel__item h-[498px]" />
+                <img :src="slide" class="carousel__item h-[438px]" />
               </Slide>  
               <template #addons="slideData">
                 <Pagination/>
@@ -157,7 +161,7 @@
               </template>
             </Carousel>
           </div>
-          <div class="flex flex-col justify-between h-[620px]">
+          <div class="flex flex-col justify-between h-[560px]">
             <div class="text-2xl">No info</div>
             <div>
               <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
@@ -226,6 +230,7 @@
   import anime from 'animejs/lib/anime.es.js';
   import DefaultLayout from "~/layouts/default.vue"
   import Footer from "~/layouts/-components/footer.vue"
+  import { handleUfoAnimate } from "~/utils/animateUtil/ufoAnimation"
   import ufojson from "../../assets/json/ufo.json"
   import 'vue3-carousel/dist/carousel.css'
 
@@ -251,6 +256,13 @@
     beforeLeave( origin, destination, direction, trigger ) {
       showHeader.value = direction === 'up'
       showHeaderBg.value = !destination.isFirst
+
+      handleUfoAnimate(
+        animateUfoRef.value,
+        ufoRef.value,
+        origin.index,
+        destination.index
+      )
     },
     afterLoad(origin, destination, direction, trigger) {
       // handle fullpage scroll
@@ -279,6 +291,7 @@
   }
 
   const ufoRef = ref(null)
+  const animateUfoRef = ref(null)
   const carousels = reactive([
     getImageURL('usinghamster-one.png'), 
     getImageURL('usinghamster-two.png'), 
@@ -463,6 +476,10 @@
     right: 20px;
     z-index: 100;
     color: red !important;
+  }
+
+  .ufo-onepage{
+    margin-top: -220px;
   }
 </style>
     
