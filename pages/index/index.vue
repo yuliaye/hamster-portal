@@ -1,10 +1,12 @@
 <template>
   <DefaultLayout :showFooter="false" :showHeader="showHeader" :showHeaderBg="showHeaderBg">
-    <div class="fixed hidden text-center" ref="animateUfoRef">
-      <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
-      <img src="~/assets/images/ufo-light.png" id="ufo-light-image" class="absolute top-0 left-0 w-full opacity-0"/>
-    </div>
     <full-page :options="fullpageOptions" id="fullpage">
+      <div class="absolute transparent" ref="animateUfoRef">
+        <div class="relative text-center">
+          <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
+          <img src="~/assets/images/ufo-light.png" id="ufo-light-image" class="absolute top-0 left-0 w-full transparent"/>
+        </div>
+      </div>
       <div class="section">
         <div class="flex flex-row items-center justify-between">
           <div class="w-3/5">
@@ -172,7 +174,7 @@
       </div>
 
       <div class="section">
-        <span class="text-[54px] font-bold leading-[74px]">Trending News</span>
+        <span class="text-[54px] font-bold leading-[74px]" id="newsTitle">Trending News</span>
         <div class="grid grid-cols-12 gap-6 my-12">
           <div class="h-[310px] col-span-3">
             <img src="./images/trending-one.png" />
@@ -260,8 +262,9 @@
       handleUfoAnimate(
         animateUfoRef.value,
         ufoRef.value,
-        origin.index,
-        destination.index
+        origin,
+        destination,
+        direction
       )
     },
     afterLoad(origin, destination, direction, trigger) {
@@ -333,6 +336,10 @@
 </script>
 
 <style lang="less" scoped>
+  .transparent {
+    opacity: 0
+  }
+
   .devops-bg{
     background: radial-gradient(111.94% 125.64% at -11.86% 57.81%, rgba(109, 197, 160, 0.1147) 0%, rgba(14, 14, 19, 0) 100%);
   }
