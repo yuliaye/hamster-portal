@@ -1,6 +1,7 @@
 export default function useAssets () {
   const allAssets = {
-    images: import.meta.globEager("../assets/images/*.*")
+    images: import.meta.globEager("../assets/images/*.*"),
+    ecology: import.meta.globEager("../assets/ecology/**/*.*"),
   }
 
   const assetsMapping: Record<string, Record<string, {}>> = {}
@@ -9,7 +10,7 @@ export default function useAssets () {
     assetsMapping[assetType] = {}
 
     Object.entries(assets).forEach(([path, imported]) => {
-      const fileName = path.split("/").slice(-1)[0]
+      const fileName = path.replace(/.+(\/|\\)assets(\/|\\)\w+(\/|\\)/, "")
       assetsMapping[assetType][fileName] = imported.default
     })
   })

@@ -7,13 +7,13 @@
           <img src="~/assets/images/ufo-light.png" id="ufo-light-image" class="absolute top-0 left-0 w-full transparent"/>
         </div>
       </div>
-      <div class="section">
+      <div class="overflow-hidden section">
         <div class="flex flex-row items-center justify-between">
           <div class="w-3/5">
             <div class="text-[54px] font-bold leading-[74px]">Hamster empowers projects and developers in <span class="text-[#27FFB8]">web3</span> to build their dreams</div>
             <div class="mt-5 mb-6 text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
             <div class="mb-6">
-              <button class="border border-[#FFFFFF] w-[148px] h-[54px]">Start Building</button>
+              <button class="border border-[#FFFFFF] w-[148px] h-[54px] hover:bg-[#27FFB8] hover:text-[#131313] hover:border-[#27FFB8]">Start Building</button>
               <nuxt-link to="/download" target="_blank">
                 <button class="border border-[#27FFB8] bg-[#27FFB8] w-[148px] h-[54px] ml-6 text-[#131313]">Download</button>
               </nuxt-link>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="section">
+      <div class="overflow-hidden section">
         <div class="grid grid-cols-12 gap-6">
           <div class="col-span-5 mr-4">
             <div class="text-[54px] font-bold leading-[74px]">Hamster DevOps Solutions</div>
@@ -70,31 +70,53 @@
         </div>
       </div>
       
-      <div class="section">
+      <div class="overflow-hidden section">
         <div class="grid grid-cols-1 h-[600px] md:grid-cols-2 overflow-hidden">
           <div class="relative select-none">
             <div class="w-[202px] h-[202px] flex flex-col justify-center items-center ecology-center">
               <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
               <img :src="getImageURL('ecology-close.svg')" class="h-[24px] inline-block my-[10px]"/>
-              <span class="text-base font-bold">Infrastructure</span>
+              <span class="text-base font-bold">{{currentEcologyType}}</span>
             </div>
             <div class="w-[354px] h-[354px] ecology-level-one">
               <div class="w-[100%] h-[100%] relative animation-rotate">
-                <img :src="getImageURL('ecology-inner-one.svg')" class="absolute left-[120px] top-[-20px] h-[48px]"/>
-                <img :src="getImageURL('ecology-inner-two.svg')" class="absolute left-[320px] top-[100px] h-[48px]"/>
-                <img :src="getImageURL('ecology-inner-three.svg')" class="absolute left-[280px] top-[270px] h-[48px]"/>
-                <img :src="getImageURL('ecology-inner-four.svg')" class="absolute left-[-20px] top-[200px] h-[48px]"/>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[0]" class="absolute left-[120px] top-[-20px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[1]" class="absolute left-[320px] top-[100px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[2]" class="absolute left-[280px] top-[270px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[3]" class="absolute left-[-20px] top-[200px] h-[48px]"/>
+                </transition>
               </div>
             </div>
             <div class="w-[490px] h-[490px] ecology-level-two">
               <div class="w-[100%] h-[100%] relative animation-rotate">
-                <img :src="getImageURL('ecology-out-one.svg')" class="absolute left-[300px] top-[-16px] h-[48px]"/>
-                <img :src="getImageURL('ecology-out-two.svg')" class="absolute left-[410px] top-[60px] h-[48px]"/>
-                <img :src="getImageURL('ecology-out-three.svg')" class="absolute left-[450px] top-[280px] h-[48px]"/>
-                <img :src="getImageURL('ecology-out-four.svg')" class="absolute left-[330px] top-[440px] h-[48px]"/>
-                <img :src="getImageURL('ecology-out-five.svg')" class="absolute left-[130px] top-[440px] h-[48px]"/>
-                <img :src="getImageURL('ecology-out-six.svg')" class="absolute left-[20px] top-[360px] h-[34px]"/>
-                <img :src="getImageURL('ecology-out-seven.svg')" class="absolute top-[110px] h-[48px]"/>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[4]" class="absolute left-[300px] top-[-16px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[5]" class="absolute left-[410px] top-[60px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[6]" class="absolute left-[450px] top-[280px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[7]" class="absolute left-[330px] top-[440px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[8]" class="absolute left-[130px] top-[440px] h-[48px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[9]" class="absolute left-[20px] top-[360px] h-[34px]"/>
+                </transition>
+                <transition name="ecology-fade" mode="in-out">
+                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[10]" class="absolute top-[110px] h-[48px]"/>
+                </transition>
               </div>
             </div>
           </div>
@@ -135,7 +157,7 @@
         </div>
       </div>
 
-      <div class="section">
+      <div class="overflow-hidden section">
         <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
         <div class="grid grid-cols-2 gap-[84px] mt-16">
           <div class="relative">
@@ -173,7 +195,7 @@
         </div>
       </div>
 
-      <div class="section">
+      <div class="overflow-hidden section">
         <span class="text-[54px] font-bold leading-[74px]" id="newsTitle">Trending News</span>
         <div class="grid grid-cols-12 gap-6 my-12">
           <div class="h-[310px] col-span-3">
@@ -240,7 +262,7 @@
     layout: false
   })
 
-  const { getImageURL } = useAssets()
+  const { getImageURL, getAssets } = useAssets()
 
   const showHeader = ref(true)
   const showHeaderBg = ref(false)
@@ -255,6 +277,8 @@
   const numberRollerNumber4 = ref(143)
 
   const fullpageOptions = { 
+    scrollBar: true,
+    licenseKey: "gplv3-license",
     beforeLeave( origin, destination, direction, trigger ) {
       showHeader.value = direction === 'up'
       showHeaderBg.value = !destination.isFirst
@@ -269,14 +293,20 @@
     },
     afterLoad(origin, destination, direction, trigger) {
       // handle fullpage scroll
-      // number roller section index is：2
+      // ecology and number roller section index is：2
       if (destination.index === 2) {
-        [
+        // handle ecology
+        handleEcologyExhibit()
+
+        // handle number roller
+        const numberRollers = [
           { ref: numberRollerRef1, number: numberRollerNumber1 },
           { ref: numberRollerRef2, number: numberRollerNumber2 },
           { ref: numberRollerRef3, number: numberRollerNumber3 },
           { ref: numberRollerRef4, number: numberRollerNumber4 }
-        ].forEach(item => {
+        ]
+
+        numberRollers.forEach(item => {
           const number = item.number.value
           const renderedNumber = parseInt(item.ref.value.textContent)
           // Skip animation when number renderer
@@ -316,6 +346,37 @@
     }else{
       next()
     }
+  }
+
+  // handle ecology
+  const ecologyTimer = ref(null)
+  const ecologyTypes = ["Infrastructure", "Defi", "GameFi", "NFT"]
+  const currentEcologyTypeIndex = ref(0)
+  const currentEcologyType = computed(() => ecologyTypes[currentEcologyTypeIndex.value])
+  const currentEcologyImages = computed(() => {
+    const allEcologyAssets = getAssets("ecology")
+    const currentEcologyAssets = []
+
+    Object.entries(allEcologyAssets).forEach(([key, asset]) => {
+      if (key.startsWith(currentEcologyType.value)) {
+        currentEcologyAssets.push(asset)
+      }
+    })
+
+    return currentEcologyAssets
+  })
+  const handleEcologyExhibit = () => {
+    if (ecologyTimer.value) { return }
+
+    const handler = () => {
+      const newEcologyTypeIndex = currentEcologyTypeIndex.value + 1
+      currentEcologyTypeIndex.value =
+        newEcologyTypeIndex < ecologyTypes.length
+        ? newEcologyTypeIndex
+        : 0
+    }
+
+    ecologyTimer.value = setInterval(handler, 5000)
   }
 
   const flagRef = ref(null)
@@ -417,6 +478,22 @@
       animation: rotation 6s linear infinite;
     }
   }
+
+  .ecology-fade-enter-active,
+  .ecology-fade-leave-active {
+      transition: opacity 1s ease;
+  }
+
+  .ecology-fade-leave,
+  .ecology-fade-enter-to {
+      opacity: 1;
+  }
+
+  .ecology-fade-enter-from,
+  .ecology-fade-leave-to {
+      opacity: 0;
+  }
+
   @keyframes rotation { 
     0% {
       -webkit-transform: rotate(0deg); 
@@ -490,3 +567,13 @@
   }
 </style>
     
+<style lang="less">
+  html.fp-enabled {
+    body {
+      background: url(~/assets/images/index-bg-body.png) center top no-repeat, #141212;
+    }
+    body.fp-viewing-1 {
+      background: url(~/assets/images/index-bg-top.png) left top no-repeat, #141212;
+    }
+  }
+</style>
