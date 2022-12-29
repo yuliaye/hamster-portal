@@ -57,7 +57,7 @@ export function handleUfoAnimate(
       scale: scale,
       left: newLeft - fullpageLeft,
       top: baseTop + 20,
-      easing: 'easeInOutSine',
+      easing: 'easeInOutQuad',
       duration: 600,
     })
   }
@@ -65,7 +65,7 @@ export function handleUfoAnimate(
   if (step === "1->2") {
     const { fullpageWidth, width } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
-    const scale = 0.8
+    const scale = 0.6
 
     anime({
       targets: animateUfoElement,
@@ -73,7 +73,7 @@ export function handleUfoAnimate(
       top: baseTop + 50,
       rotate: 45,
       easing: 'easeInOutSine',
-      duration: 500,
+      duration: 400,
     })
 
     anime({
@@ -111,11 +111,11 @@ export function handleUfoAnimate(
 
     const { fullpageLeft, height } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
-    const newTop = baseTop + titleTop + titlePosition.height - height*0.3 - 50
+    const newTop = baseTop + titleTop + titlePosition.height - height*0.3 - 60
 
     anime({
       targets: animateUfoElement,
-      left: titlePosition.width - fullpageLeft,
+      left: titlePosition.width - fullpageLeft*0.8,
       top: newTop,
       opacity: 1,
       rotate: 0,
@@ -133,16 +133,11 @@ export function handleUfoAnimate(
 
     anime({
       targets: animateUfoElement,
-      keyframes: [
-        {scale: 0.6, duration: 300},
-        {scale: 0.2, duration: 300},
-        {
-          top: pageTop + 100,
-          left: newLeft,
-          duration: 500,
-        }
-      ],
-      easing: 'easeInOutSine',
+      scale: 0.2,
+      top: pageTop + 100,
+      left: newLeft,
+      duration: 500,
+      easing: 'easeInOutQuad',
     })
   }
 }
