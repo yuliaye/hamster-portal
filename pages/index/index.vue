@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout :showFooter="false" :showHeader="showHeader" :showHeaderBg="showHeaderBg">
-    <full-page :options="fullpageOptions" id="fullpage">
+    <full-page :options="fullpageOptions" id="fullpage" class="mx-6 md:mx-auto">
       <div class="absolute transparent" ref="animateUfoRef">
         <div class="relative text-center">
           <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
@@ -8,37 +8,43 @@
         </div>
       </div>
       <div class="overflow-hidden section">
-        <div class="flex flex-row items-center justify-between">
-          <div class="w-3/5">
-            <div class="text-[54px] font-bold leading-[74px]">Hamster empowers projects and developers in <span class="text-[#27FFB8]">web3</span> to build their dreams</div>
-            <div class="mt-5 mb-6 text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
+        <div class="md:flex md:items-center">
+          <div class="md:w-3/5">
+            <div class="text-2xl font-bold md:text-[54px] md:leading-[74px]">Hamster empowers projects and developers in <span class="text-[#27FFB8]">web3</span> to build their dreams</div>
+            <div class="mt-5 mb-6 text-sm md:text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
             <div class="mb-6">
-              <button class="border border-[#FFFFFF] w-[148px] h-[54px] hover:bg-[#27FFB8] hover:text-[#131313] hover:border-[#27FFB8]">Start Building</button>
+              <button class="border border-[#FFFFFF] w-[120px] h-[43px] md:w-[148px] md:h-[54px] hover:bg-[#27FFB8] hover:text-[#131313] hover:border-[#27FFB8]">Start Building</button>
               <nuxt-link to="/download" target="_blank">
-                <button class="border border-[#27FFB8] bg-[#27FFB8] w-[148px] h-[54px] ml-6 text-[#131313]">Download</button>
+                <button class="border border-[#27FFB8] bg-[#27FFB8] w-[120px] h-[43px] ml-4 md:w-[148px] md:h-[54px] md:ml-6 text-[#131313]">Download</button>
               </nuxt-link>
             </div>
-            <div>
+            <div class="hidden md:block">
               <span class="text-[#738A92] text-base font-bold">Investors</span>
               <img src="./images/waterdrip.png" class="w-[84px] h-[36px] inline-block ml-14"/>
               <img src="./images/stratified.png" class="w-[101px] h-[36px] inline-block ml-6"/>
             </div>
           </div>
-          <div class="w-2/5">
+          <div class="md:w-2/5">
             <div ref="ufoRef"></div>
+          </div>
+          <div class="flex justify-between px-6 md:hidden">
+            <span class="text-[#738A92] text-base font-bold">Investors</span>
+            <img src="./images/waterdrip.png" class="w-[84px] h-[36px]"/>
+            <img src="./images/stratified.png" class="w-[101px] h-[36px]"/>
           </div>
         </div>
       </div>
 
       <div class="overflow-hidden section">
-        <div class="grid grid-cols-12 gap-6">
-          <div class="col-span-5 mr-4">
-            <div class="text-[54px] font-bold leading-[74px]">Hamster DevOps Solutions</div>
-            <div class="text-2xl text-[#738A92] mt-6">Hamster offers the integrated approach to build , test and run projects in web3.
+        <div class="grid gap-6 md:grid-cols-12">
+          <div class="md:col-span-5">
+            <div class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Hamster DevOps Solutions</div>
+            <div class="text-base mt-3 text-[#738A92] md:text-2xl md:mt-6">
+              Hamster offers the integrated approach to build , test and run projects in web3.
               We provide the most flexible platform for developers to turn their blockchain ideas into reality.
             </div>
           </div>
-          <div id="ufo-point--toolkit" class="col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
+          <div id="ufo-point--toolkit" class="md:col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
             <img src="./images/devops-one.png" class="h-[105px] w-[132px] mt-[45px] mb-[19px] mx-auto"/>
             <span class="mb-2 text-2xl font-bold">Hamster Development Toolkit</span>
             <span class="text-base text-[#738A92] pr-[46px]">Multiple development tools, faster code check, easier contract deployment and more</span>
@@ -47,7 +53,7 @@
               <img :src="getImageURL('learnmore-arrow.svg')" />
             </div>
           </div>
-          <div class="col-span-4">
+          <div class="md:col-span-4">
             <div class="relative h-[210px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
               <img src="./images/devops-three.png" class="h-[95px] absolute right-6 top-[88px] opacity-10"/>
               <span class="mt-6 mb-2 text-base font-bold">Hamster Node Service</span>
@@ -71,85 +77,86 @@
       </div>
       
       <div class="overflow-hidden section">
-        <div class="grid grid-cols-1 h-[600px] md:grid-cols-2 overflow-hidden">
-          <div class="relative select-none">
-            <div class="w-[202px] h-[202px] flex flex-col justify-center items-center ecology-center">
-              <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
-              <img :src="getImageURL('ecology-close.svg')" class="h-[24px] inline-block my-[10px]"/>
-              <span class="text-base font-bold">{{currentEcologyType}}</span>
-            </div>
-            <div class="w-[354px] h-[354px] ecology-level-one">
-              <div class="w-[100%] h-[100%] relative animation-rotate">
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[0]" class="absolute left-[120px] top-[-20px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[1]" class="absolute left-[320px] top-[100px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[2]" class="absolute left-[280px] top-[270px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[3]" class="absolute left-[-20px] top-[200px] h-[48px]"/>
-                </transition>
+        <div class="grid grid-cols-1 gap-8 overflow-hidden md:grid-cols-2">
+          <div class="flex justify-center select-none order-2 py-[20px] md:order-1">
+            <div class="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+              <div class="w-[40%] h-[40%] flex flex-col justify-center items-center ecology-center">
+                <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
+                <img :src="getImageURL('ecology-close.svg')" class="h-[24px] inline-block my-1 md:my-[10px]"/>
+                <span class="text-xs font-bold md:text-base">{{currentEcologyType}}</span>
               </div>
-            </div>
-            <div class="w-[490px] h-[490px] ecology-level-two">
-              <div class="w-[100%] h-[100%] relative animation-rotate">
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[4]" class="absolute left-[300px] top-[-16px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[5]" class="absolute left-[410px] top-[60px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[6]" class="absolute left-[450px] top-[280px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[7]" class="absolute left-[330px] top-[440px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[8]" class="absolute left-[130px] top-[440px] h-[48px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[9]" class="absolute left-[20px] top-[360px] h-[34px]"/>
-                </transition>
-                <transition name="ecology-fade" mode="in-out">
-                  <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[10]" class="absolute top-[110px] h-[48px]"/>
-                </transition>
+              <div class="w-[70%] h-[70%] ecology-level-one">
+                <div class="w-[100%] h-[100%] relative animation-rotate">
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[0]" class="absolute h-[30px] left-[38%] top-[-15px] md:h-[48px] md:top-[-20px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[1]" class="absolute h-[30px] left-[93%] top-[35%] md:h-[48px] md:left-[320px] md:top-[100px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[2]" class="absolute h-[30px] left-[80%] top-[78%] md:h-[48px] md:left-[280px] md:top-[270px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[3]" class="absolute h-[30px] top-[65%] left-[-2%] md:h-[48px] md:left-[-20px] md:top-[200px]"/>
+                  </transition>
+                </div>
+              </div>
+              <div class="w-[100%] h-[100%] ecology-level-two">
+                <div class="w-[100%] h-[100%] relative animation-rotate">
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[4]" class="absolute h-[30px] left-[65%] md:h-[48px] md:left-[300px] md:top-[-16px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[5]" class="absolute h-[30px] left-[88%] top-[20%]  md:h-[48px] md:left-[410px md:top-[60px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[6]" class="absolute h-[30px] left-[93%] top-[60%] md:h-[48px] md:left-[450px] md:top-[280px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[7]" class="absolute h-[30px] left-[70%] top-[90%] md:h-[48px] md:left-[330px] md:top-[440px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[8]" class="absolute h-[30px] left-[30%] top-[95%] md:h-[48px] md:left-[130px] md:top-[440px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[9]" class="absolute h-[20px] left-[5%] top-[76%] md:left-[20px] md:top-[360px] h-[34px]"/>
+                  </transition>
+                  <transition name="ecology-fade" mode="in-out">
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[10]" class="absolute h-[30px] top-[20%] md:h-[48px] md:top-[110px]"/>
+                  </transition>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="flex flex-col justify-center w-[575px] justify-self-center">
-            <span class="text-[54px] font-bold leading-[72px]">Hamster Ecology</span>
-            <div class="grid grid-cols-2 gap-[20px] xl:gap-[50px] mt-[50px]">
+          <div class="flex flex-col justify-center md:w-[575px] justify-self-center order-1 md:order-2">
+            <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[72px]">Hamster Ecology</span>
+            <div class="grid grid-cols-2 gap-[20px] mt-8 xl:gap-[50px] md:mt-[50px]">
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef1">0</span>
                 </span>
-                <span class="text-[#AFC6C8] text-base mt-2 mb-6">Supported Ecosystems</span>
+                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Supported Ecosystems</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef2">0</span>GT
                 </span>
-                <span class="text-[#AFC6C8] text-base mt-2 mb-6">Decentralized computing power</span>
+                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Decentralized computing power</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef3">0</span>
                 </span>
-                <span class="text-[#AFC6C8] text-base mt-2 mb-6">Integrated Web3.0 Projects</span>
+                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Integrated Web3.0 Projects</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
-                <span class="text-[54px] font-bold leading-[74px]">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef4">0</span>days
                 </span>
-                <span class="text-[#AFC6C8] text-base mt-2 mb-6">RPC service without error</span>
+                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">RPC service without error</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
             </div>
@@ -158,14 +165,27 @@
       </div>
 
       <div class="overflow-hidden section">
-        <span class="text-[54px] font-bold leading-[74px]">Who’s using Hamster</span>
-        <div class="grid grid-cols-2 gap-[84px] mt-16">
-          <div class="relative">
-            <div class="absolute h-[600px] using-imgbg"></div>
-            <Carousel>
-              <Slide v-for="slide in carousels" :key="slide">
-                <img :src="slide" class="carousel__item h-[438px]" />
-              </Slide>  
+        <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Who’s using Hamster</span>
+        <div class="grid mt-8 md:gap-[84px] md:grid-cols-2 md:mt-16">
+          <div class="relative using-imgbg">
+            <Carousel class="md:p-6">
+              <Slide v-for="(slide, slideIndex) in carousels" :key="slideIndex">
+                <div class="carousel__item">
+                  <img :src="slide.src" class="h-[438px] hidden md:block" />
+                  <div class="p-3 text-left md:hidden">
+                    <div class="h-[300px] text-base text-[#FFFFFF]">{{slide.comment}}</div>
+                    <div>
+                      <div class="flex align-center">
+                        <div class="rounded-full h-[32px] w-[32px]">
+                          <img :src="slide.src" class="object-cover rounded-full" />
+                        </div>
+                        <div class="text-base font-bold text-[#FFFFFF] ml-3">{{slide.name}}</div>
+                      </div>
+                      <div class="text-sm text-[#AFC6C8] mt-1">{{slide.desc}}</div>
+                    </div>
+                  </div>
+                </div>
+              </Slide>
               <template #addons="slideData">
                 <Pagination/>
                 <div class="flex justify-between mt-6 custom-carousel-navigation">
@@ -185,60 +205,66 @@
               </template>
             </Carousel>
           </div>
-          <div class="flex flex-col justify-between h-[560px]">
-            <div class="text-2xl">No info</div>
-            <div>
-              <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
-              <span class="text-base text-[#AFC6C8]">Head Of Business Development at SubQuery & OnFinality</span>
+          <div class="hidden md:block">
+            <div class="flex flex-col justify-between h-[560px]">
+              <div class="text-2xl">No info</div>
+              <div>
+                <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
+                <span class="text-base text-[#AFC6C8]">Head Of Business Development at SubQuery & OnFinality</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="overflow-hidden section">
-        <span class="text-[54px] font-bold leading-[74px]" id="ufo-point--news-title">Trending News</span>
-        <div class="grid grid-cols-12 gap-6 my-12">
-          <div class="h-[310px] col-span-3">
-            <img src="./images/trending-one.png" />
-            <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-              <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-              <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+        <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]" id="ufo-point--news-title">
+          Trending News
+        </span>
+        <div class="my-6 overflow-x-auto md:my-12">
+          <div class="flex gap-6 md:grid md:grid-cols-12">
+            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-one.png" />
+              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+              </div>
             </div>
-          </div>
-          <div class="h-[310px] col-span-3">
-            <img src="./images/trending-two.png" />
-            <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-              <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-              <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-two.png" />
+              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+              </div>
             </div>
-          </div>
-          <div class="h-[310px] col-span-3">
-            <img src="./images/trending-three.png" />
-            <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-              <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-              <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-three.png" />
+              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+              </div>
             </div>
-          </div>
-          <div class="h-[310px] col-span-3">
-            <img src="./images/trending-four.png" />
-            <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-              <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-              <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-four.png" />
+              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
+                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="flex inline-block pt-12">
-          <input type="text" placeholder="Enter your email to get latest Hamster News!" class="flex-1 h-[64px]"/>
-          <button class="border border-[#27FFB8] bg-[#27FFB8] w-[200px] h-[64px] ml-3 text-[#131313]">Subscribe</button>
+        <div class="grid grid-cols-1 gap-3 mt-5 md:grid-cols-12 md:mt-auto">
+          <input type="text" placeholder="Enter your email to get latest Hamster News!" class="subscription col-span-1 pl-4 h-[43px] md:pl-6 md:col-span-10 md:h-[64px]"/>
+          <button class="block border border-[#27FFB8] bg-[#27FFB8] md:h-[64px] col-span-1 h-[43px] md:col-span-2 text-[#131313]">Subscribe</button>
         </div>
       </div>
       
       <div class="section fp-auto-height">
-        <div class="relative mt-12 w-[100%]" @mouseover="handleFlagRaise">
-          <img src="./images/moon.png" class="w-[100%]"/>
+        <div class="relative mt-3 md:mt-12 w-[100%] md:h-auto" @mouseover="handleFlagRaise">
+          <img src="./images/moon.png" class="w-[100%] flag-planet"/>
           <div class="absolute top-0 md:top-[10%] xl:top-[44%] left-[43%]">
-              <img src="./images/pole.png" class="w-6 h-[80px] inline-block"/>
-              <img src="./images/flag.png" class="flag" ref="flagRef"/>
+            <img src="./images/pole.png" class="w-6 h-[80px] inline-block"/>
+            <img src="./images/flag.png" class="flag" ref="flagRef"/>
           </div>
         </div>
         <Footer />
@@ -325,11 +351,26 @@
 
   const ufoRef = ref(null)
   const animateUfoRef = ref(null)
-  const carousels = reactive([
-    getImageURL('usinghamster-one.png'), 
-    getImageURL('usinghamster-two.png'), 
-    getImageURL('usinghamster-three.png')
-  ])
+  const carousels = [
+    {
+      name: "James Bayly",
+      desc: "Head Of Business Development at SubQuery & OnFinality",
+      comment: "No information available",
+      src: getImageURL('usinghamster-one.png')
+    },
+    {
+      name: "Zhangsan",
+      desc: "abcdefg",
+      comment: "No information available",
+      src: getImageURL('usinghamster-two.png')
+    },
+    {
+      name: "Lisi",
+      desc: "hijklmn",
+      comment: "No information available",
+      src: getImageURL('usinghamster-three.png')
+    }
+  ]
 
   const handlePrev = (slideData)=>{
     const { currentSlide, slidesCount, slideTo, prev } = slideData
@@ -407,23 +448,26 @@
   .trending-bg{
     background: linear-gradient(180deg, #21342B 0%, #141414 100%);
   }
-  input{
+  .subscription {
     background: linear-gradient(180deg, #131C17 0%, #151616 100%);
     color: #AFC6C8;
     font-size: 16px;
-    padding-left: 24px;
     border: 1px solid #203E42;
-  }
-  input:focus-visible {
-    outline: none;
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   .flag {
     width: 60px;
     display: inline-block;
     margin-left: -14px;
-    margin-top: 0;
-    opacity: 0;
+    margin-top: -50px;
+    opacity: 1;
+    @media screen and (min-width: 768px) {
+      margin-top: 0;
+      opacity: 0;
+    }
   }
 
   .flag-show {
@@ -436,7 +480,14 @@
     transition: margin-top 1000ms;
   }
 
-  .using-imgbg{
+  .flag-planet {
+    transform: scale(2);
+    @media screen and (min-width: 768px) {
+      transform: scale(1);
+    }
+  }
+
+  .using-imgbg {
     background: linear-gradient(180deg, #1E2723 0%, #161817 100%);
     width: 100%;
   }
@@ -506,7 +557,6 @@
   }
 
   :deep(.carousel) {
-    padding: 24px;
     .carousel__item {
       min-height: 200px;
       width: 100%;
@@ -568,7 +618,7 @@
 </style>
     
 <style lang="less">
-  html.fp-enabled {
+  html.fp-enabled:not(.is-mobile) {
     body {
       background: url(~/assets/images/index-bg-top.png) left top no-repeat,
                   url(~/assets/images/index-bg-body.png) center center no-repeat,

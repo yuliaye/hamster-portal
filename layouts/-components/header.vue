@@ -2,17 +2,17 @@
   <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50"
     :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
     <div class="m-auto">
-      <div class="container py-4 mx-auto">
+      <div class="container py-4 mx-6 md:mx-auto">
         <div class="relative flex flex-row items-center justify-between text-center text-white">
           <div class="absolute logo">
             <nuxt-link to="/" target="_blank">
-              <img class="h-[24px]" src="~/assets/images/header.png">
+              <img class="h-[16px] md:h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
 
           <div class="flex flex-row justify-center md:ml-auto">
-            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[24px] ml-[82vw]"
-              :src="getImageURL('head-menu-down.svg')">
+            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[16px] ml-[82vw]"
+              src="~/assets/images/head-menu-down.svg">
             <div v-else class="menu">
               <nuxt-link to="/" target="_blank">
                 <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
@@ -53,19 +53,25 @@
     </div>
   </div>
   <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }"
-    class="inset-x-0 top-0 fixed z-[300] p-[20px] bg-black">
-    <div class="flex justify-start">
-      <img class="h-[24px]" src="~/assets/images/header.png">
-      <div class="flex items-center" @click="showPhoneMenu = false;">
-        <img class="h-[24px] ml-[36vw]" src="~/assets/images/menu-close.png" />
+    class="inset-x-0 top-0 fixed z-[300] py-4 px-6 bg-black">
+    <div class="relative flex justify-start">
+      <img class="h-[16px] md:h-[24px]" src="~/assets/images/header.png">
+      <div class="absolute right-[-1px] top-0" @click="showPhoneMenu = false;">
+        <img class="h-[24px] ml-[36vw]" src="~/assets/images/menu-close.svg" />
       </div>
     </div>
     <div class="my-[20px]">
       <nuxt-link to="/" target="_blank">
-        <div :class="{'menu-active' : curMenu === ''}" class="phone-menu ml-[25px]">{{ $t('header.menu1') }}</div>
+        <div :class="{'menu-active' : curMenu === ''}" class="phone-menu">
+          <span>{{ $t('header.menu1') }}</span>
+          <img src="~/assets/images/chervon-right.svg" />
+        </div>
       </nuxt-link>
       <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
-        <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu ml-[25px]">{{ link.title }}</div>
+        <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
+          <span>{{ link.title }}</span>
+          <img src="~/assets/images/chervon-right.svg" />
+        </div>
       </nuxt-link>
     </div>
   </div>
@@ -140,6 +146,12 @@ const topBgShow = ref(false)
 const isPhone = ref(false);
 const showPhoneMenu = ref(false);
 
+// Add `is-phone` class to <html> tag
+watch(isPhone, (newVal) => {
+  if (newVal) {
+    document.querySelector("html").classList.add("is-phone")
+  }
+})
 
 function handleScroll() {
   topVal.value = document.body.scrollTop || document.documentElement.scrollTop
@@ -209,7 +221,12 @@ onUnmounted(() => {
 
 .menu-active {
   @apply text-white !important;
-  border: 1px solid white;
+}
+
+@screen md {
+  .menu-active {
+    border: 1px solid white;
+  }
 }
 
 .to-top {
@@ -230,7 +247,7 @@ onUnmounted(() => {
 }
 
 .phone-menu {
-  @apply text-[20px] my-[20px] text-[#807D7C];
+  @apply text-base md:text-[20px] my-[20px] flex justify-between items-center;
 }
 
 .menu-color {
