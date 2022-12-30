@@ -1,22 +1,24 @@
 <template>
   <div class="container mx-auto my-20">
-    <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-[54px] gap-[8px]">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-[54px]">
       <div>
-        <img class="h-[32px]" src="~/assets/images/header.png">
-        <span class="inline-block text-base md:mr-20 mt-7 mb-9">One-Stop infrastructure, 
+        <img class="h-[20px] md:h-[32px]" src="~/assets/images/header.png">
+        <span class="inline-block mt-3 mb-3 text-sm md:text-base md:mr-20 md:mt-7 md:mb-9">
+          One-Stop infrastructure,
           <br>
-          development, operation and maintenance service platform for projects in Web3.0</span>
-        <img class="h-[75px]" src="~/assets/images/web3_foundation.png" />
+          development, operation and maintenance service platform for projects in Web3.0
+        </span>
+        <img class="h-[64px] md:h-[75px]" src="~/assets/images/web3_foundation.png" />
       </div>
 
-      <div class="flex justify-between md:px-16">
+      <div class="flex md:justify-between md:px-16">
         <div class="flex flex-col text-base">
           <span class="inline-block mb-5 font-bold">About</span>
           <span>Grant</span>
           <span class="inline-block my-5">Careers</span>
           <span>Roadmap</span>
         </div>
-        <div class="flex flex-col text-base">
+        <div class="flex flex-col text-base ml-[40px] md:ml-0">
           <span class="inline-block mb-5 font-bold">Docs</span>
           <span class="inline-block mb-5">Github</span>
           <span>News</span>
@@ -24,13 +26,12 @@
       </div>
 
       <div class="flex flex-col md:justify-self-end">
-        <span class="inline-block mb-5 text-2xl font-bold">Hamster Ltd.</span>
-        <span class="text-base">Harbour Plaza, 103 South Church Street
-          <br>
-          Grand Cayman, Cayman Islands
+        <span class="inline-block mb-5 text-base font-bold md:text-2xl">Hamster Ltd.</span>
+        <span class="text-sm md:text-base">
+          Harbour Plaza, 103 South Church Street Grand Cayman, Cayman Islands
         </span>
-        <span class="inline-block my-5 text-base">+4917647082974</span>
-        <span class="text-base">Email: hamster@hamsternet.io</span>
+        <span class="inline-block my-5 text-sm md:text-base">+4917647082974</span>
+        <span class="text-sm md:text-base">Email: hamster@hamsternet.io</span>
       </div>
     </div>
   </div>

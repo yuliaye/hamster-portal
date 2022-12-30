@@ -1,5 +1,5 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="4" y1="11" x2="20.001" y2="11" stroke="#FFDAB4" stroke-width="2" stroke-linecap="round"/>
-<line x1="4" y1="4.89699" x2="20.001" y2="4.89699" stroke="#FFDAB4" stroke-width="2" stroke-linecap="round"/>
-<line x1="4" y1="17.103" x2="20.001" y2="17.103" stroke="#FFDAB4" stroke-width="2" stroke-linecap="round"/>
+<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 2.19696H0V0.19696H16V2.19696Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 8.19696H0V6.19696H16V8.19696Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 14.197H0V12.197H16V14.197Z" fill="white"/>
 </svg>
