@@ -38,7 +38,7 @@
               We provide the most flexible platform for developers to turn their blockchain ideas into reality.
             </div>
           </div>
-          <div class="col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
+          <div id="ufo-point--toolkit" class="col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
             <img src="./images/devops-one.png" class="h-[105px] w-[132px] mt-[45px] mb-[19px] mx-auto"/>
             <span class="mb-2 text-2xl font-bold">Hamster Development Toolkit</span>
             <span class="text-base text-[#738A92] pr-[46px]">Multiple development tools, faster code check, easier contract deployment and more</span>
@@ -196,7 +196,7 @@
       </div>
 
       <div class="overflow-hidden section">
-        <span class="text-[54px] font-bold leading-[74px]" id="newsTitle">Trending News</span>
+        <span class="text-[54px] font-bold leading-[74px]" id="ufo-point--news-title">Trending News</span>
         <div class="grid grid-cols-12 gap-6 my-12">
           <div class="h-[310px] col-span-3">
             <img src="./images/trending-one.png" />
@@ -570,10 +570,9 @@
 <style lang="less">
   html.fp-enabled {
     body {
-      background: url(~/assets/images/index-bg-body.png) center top no-repeat, #141212;
-    }
-    body.fp-viewing-1 {
-      background: url(~/assets/images/index-bg-top.png) left top no-repeat, #141212;
+      background: url(~/assets/images/index-bg-top.png) left top no-repeat,
+                  url(~/assets/images/index-bg-body.png) center center no-repeat,
+                  #141212;
     }
   }
 </style>
