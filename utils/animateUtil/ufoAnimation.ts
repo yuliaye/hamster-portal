@@ -45,32 +45,38 @@ export function handleUfoAnimate(
     animateUfoElement.style.cssText = `top: ${top}px; left: ${left - fullpageLeft}px; width: ${width}px;`
 
     const { height } = animateUfoElement.getBoundingClientRect()
+    Object.assign(ufoAnimationContext, { width, height, left, top, fullpageWidth, fullpageLeft })
+
+    const toolkitElement = document.querySelector("#ufo-point--toolkit")
+    const toolkitPosition = toolkitElement.getBoundingClientRect()
+    const toolkitTop = toolkitElement.offsetTop
 
     const scale = 0.6
-    const newLeft = (fullpageWidth- width*scale)/2
+    const newLeft = toolkitPosition.left + toolkitPosition.width/2 - fullpageLeft - width/2
     const baseTop = toPageIndex * window.innerHeight
-
-    Object.assign(ufoAnimationContext, { width, height, left, top, fullpageWidth, fullpageLeft })
+    const newTop = baseTop + toolkitTop - 20 - height
 
     anime({
       targets: animateUfoElement,
       scale: scale,
-      left: newLeft - fullpageLeft,
-      top: baseTop + 20,
+      left: newLeft,
+      top: newTop,
       easing: 'easeInOutQuad',
       duration: 600,
     })
   }
 
   if (step === "1->2") {
-    const { fullpageWidth, width } = ufoAnimationContext
+    const { fullpageWidth, fullpageLeft, width } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
     const scale = 0.6
+    const newLeft = (fullpageWidth - scale*width)/2 - fullpageLeft
 
     anime({
       targets: animateUfoElement,
       scale: scale,
       top: baseTop + 50,
+      left: newLeft,
       rotate: 45,
       easing: 'easeInOutSine',
       duration: 400,
@@ -105,17 +111,17 @@ export function handleUfoAnimate(
   if (step === "3->4") {
     animateUfoElement.querySelector<HTMLElement>("#ufo-light-image").style.opacity = "0"
 
-    const titleElement = document.querySelector("#newsTitle")
+    const titleElement = document.querySelector("#ufo-point--news-title")
     const titlePosition = titleElement.getBoundingClientRect()
     const titleTop = titleElement.offsetTop
 
     const { fullpageLeft, height } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
-    const newTop = baseTop + titleTop + titlePosition.height - height*0.3 - 60
+    const newTop = baseTop + titleTop + titlePosition.height/2 - height/2
 
     anime({
       targets: animateUfoElement,
-      left: titlePosition.width - fullpageLeft*0.8,
+      left: titlePosition.width - fullpageLeft/2,
       top: newTop,
       opacity: 1,
       rotate: 0,
