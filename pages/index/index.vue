@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="overflow-hidden section">
+      <div class="section fp-auto-height-responsive">
         <div class="grid gap-6 md:grid-cols-12">
           <div class="md:col-span-5">
             <div class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Hamster DevOps Solutions</div>
@@ -44,30 +44,36 @@
               We provide the most flexible platform for developers to turn their blockchain ideas into reality.
             </div>
           </div>
-          <div id="ufo-point--toolkit" class="md:col-span-3 h-[430px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
-            <img src="./images/devops-one.png" class="h-[105px] w-[132px] mt-[45px] mb-[19px] mx-auto"/>
-            <span class="mb-2 text-2xl font-bold">Hamster Development Toolkit</span>
-            <span class="text-base text-[#738A92] pr-[46px]">Multiple development tools, faster code check, easier contract deployment and more</span>
-            <div class="flex mt-[32px]">
+          <div id="ufo-point--toolkit" class="md:col-span-3 md:h-[430px] border border-[#203E42] flex flex-col p-6 devops-bg">
+            <div class="flex-1">
+              <img src="./images/devops-one.png" class="h-[105px] w-[132px] mb-[19px] mx-auto"/>
+              <div class="mb-2 text-2xl font-bold">Hamster Development Toolkit</div>
+              <div class="text-base text-[#738A92]">Multiple development tools, faster code check, easier contract deployment and more</div>
+            </div>
+            <div class="flex mt-3">
               <span class="text-base font-bold text-[#27FFB8] mr-2">Learn more</span>
               <img :src="getImageURL('learnmore-arrow.svg')" />
             </div>
           </div>
           <div class="md:col-span-4">
-            <div class="relative h-[210px] border border-[#203E42] flex flex-col pl-6 pb-7 devops-bg">
-              <img src="./images/devops-three.png" class="h-[95px] absolute right-6 top-[88px] opacity-10"/>
-              <span class="mt-6 mb-2 text-base font-bold">Hamster Node Service</span>
-              <span class="text-base text-[#738A92] pr-[46px]">Enjoy the smooth and safe RPC service on multichains</span>
-              <div class="flex mt-[76px]">
+            <div class="relative md:h-[210px] border border-[#203E42] flex flex-col p-6 devops-bg">
+              <div class="flex-1">
+                <img src="./images/devops-three.png" class="h-[95px] absolute right-6 top-[88px] opacity-10"/>
+                <div class="mb-2 text-base font-bold">Hamster Node Service</div>
+                <div class="text-base text-[#738A92]">Enjoy the smooth and safe RPC service on multichains</div>
+              </div>
+              <div class="flex mt-3">
                 <span class="text-base font-bold text-[#27FFB8] mr-2">Learn more</span>
                 <img :src="getImageURL('learnmore-arrow.svg')" />
               </div>
             </div>
-            <div class="relative h-[210px] border border-[#203E42] flex flex-col pl-6 pb-7 mt-[12px] devops-bg">
-              <img src="./images/devops-four.png" class="h-[115px] absolute right-6 top-[66px] opacity-10"/>
-              <span class="mt-6 mb-2 text-base font-bold">Hamster Decentralized Computing Power Network</span>
-              <span class="text-base text-[#738A92] pr-[15px]">Aggregated check of the security risks for exsiting contracts, tokens, NFTs and dApps and more</span>
-              <div class="flex mt-[22px]">
+            <div class="relative md:h-[210px] border border-[#203E42] flex flex-col p-6 mt-[12px] devops-bg">
+              <div class="flex-1">
+                <img src="./images/devops-four.png" class="h-[115px] absolute right-6 top-[66px] opacity-10"/>
+                <div class="mb-2 text-base font-bold">Hamster Decentralized Computing Power Network</div>
+                <div class="text-base text-[#738A92]">Aggregated check of the security risks for exsiting contracts, tokens, NFTs and dApps and more</div>
+              </div>
+              <div class="flex mt-3">
                 <span class="text-base font-bold text-[#27FFB8] mr-2">Check now</span>
                 <img :src="getImageURL('learnmore-arrow.svg')" />
               </div>
@@ -77,11 +83,12 @@
       </div>
       
       <div class="overflow-hidden section">
-        <div class="grid grid-cols-1 gap-8 overflow-hidden md:grid-cols-2">
-          <div class="flex justify-center select-none order-2 py-[20px] md:order-1">
+        <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Hamster Ecology</span>
+        <div class="grid grid-cols-1 gap-8 overflow-hidden md:grid-cols-12">
+          <div class="flex justify-center select-none order-2 py-[20px] md:py-[50px] md:order-1 md:col-span-5">
             <div class="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
               <div class="w-[40%] h-[40%] flex flex-col justify-center items-center ecology-center">
-                <img :src="getImageURL('ecology-hamster.svg')" class="h-[36px]"/>
+                <img :src="getImageURL('ecology-hamster.svg')" class="h-[24px] md:h-[36px]"/>
                 <img :src="getImageURL('ecology-close.svg')" class="h-[24px] inline-block my-1 md:my-[10px]"/>
                 <span class="text-xs font-bold md:text-base">{{currentEcologyType}}</span>
               </div>
@@ -107,7 +114,7 @@
                     <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[4]" class="absolute h-[30px] left-[65%] md:h-[48px] md:left-[300px] md:top-[-16px]"/>
                   </transition>
                   <transition name="ecology-fade" mode="in-out">
-                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[5]" class="absolute h-[30px] left-[88%] top-[20%]  md:h-[48px] md:left-[410px md:top-[60px]"/>
+                    <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[5]" class="absolute h-[30px] left-[88%] top-[20%]  md:h-[48px] md:left-[400px md:top-[70px]"/>
                   </transition>
                   <transition name="ecology-fade" mode="in-out">
                     <img :key="currentEcologyTypeIndex" :src="currentEcologyImages[6]" class="absolute h-[30px] left-[93%] top-[60%] md:h-[48px] md:left-[450px] md:top-[280px]"/>
@@ -128,35 +135,48 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col justify-center md:w-[575px] justify-self-center order-1 md:order-2">
-            <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[72px]">Hamster Ecology</span>
+          <div class="flex flex-col justify-center md:w-[575px] justify-self-center order-1 md:order-2 md:col-span-7">
             <div class="grid grid-cols-2 gap-[20px] mt-8 xl:gap-[50px] md:mt-[50px]">
               <div class="flex flex-col">
                 <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef1">0</span>
                 </span>
-                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Supported Ecosystems</span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Supported Ecosystems</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
                 <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef2">0</span>GT
                 </span>
-                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Decentralized computing power</span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Decentralized computing power</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
                 <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef3">0</span>
                 </span>
-                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Integrated Web3.0 Projects</span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Integrated Web3.0 Projects</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
                 <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef4">0</span>days
                 </span>
-                <span class="text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">RPC service without error</span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">RPC service without error</span>
+                <img :src="getImageURL('green-line.svg')" class="w-8"/>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
+                  <span ref="numberRollerRef5">0</span>
+                </span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Integrated Web3.0 Projects</span>
+                <img :src="getImageURL('green-line.svg')" class="w-8"/>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-2xl font-bold md:text-[54px] md:leading-[74px]">
+                  <span ref="numberRollerRef6">0</span>days
+                </span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">RPC service without error</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
             </div>
@@ -166,16 +186,20 @@
 
       <div class="overflow-hidden section">
         <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Who’s using Hamster</span>
-        <div class="grid mt-8 md:gap-[84px] md:grid-cols-2 md:mt-16">
-          <div class="relative using-imgbg">
-            <Carousel class="md:p-6">
+        <div class="grid mt-8 md:gap-[84px] md:grid-cols-2 md:mt-12">
+          <div class="relative p-3 overflow-hidden using-imgbg md:p-6">
+            <Carousel :autoplay="carouselsAutoPlay" :wrap-around="true" @slide-start="handleSlideStart">
               <Slide v-for="(slide, slideIndex) in carousels" :key="slideIndex">
-                <div class="carousel__item">
-                  <img :src="slide.src" class="h-[438px] hidden md:block" />
-                  <div class="p-3 text-left md:hidden">
+                <div class="w-full">
+                  <div class="hidden md:block">
+                    <div class="carousel__item">
+                      <img :src="slide.src" class="h-[438px]" />
+                    </div>
+                  </div>
+                  <div class="text-left md:hidden">
                     <div class="h-[300px] text-base text-[#FFFFFF]">{{slide.comment}}</div>
                     <div>
-                      <div class="flex align-center">
+                      <div class="flex items-center">
                         <div class="rounded-full h-[32px] w-[32px]">
                           <img :src="slide.src" class="object-cover rounded-full" />
                         </div>
@@ -191,10 +215,10 @@
                 <div class="flex justify-between mt-6 custom-carousel-navigation">
                   <div class="flex text-center">
                     <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
-                      <img :src="getImageURL('using-left-arrow.svg')" @click="handlePrev(slideData)" class="m-auto"/>
+                      <img :src="getImageURL('using-left-arrow.svg')" @click="handleSlidePrev(slideData)" class="m-auto"/>
                     </div>
                     <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
-                      <img :src="getImageURL('using-right-arrow.svg')" @click="handleNext(slideData)" class="m-auto "/>
+                      <img :src="getImageURL('using-right-arrow.svg')" @click="handleSlideNext(slideData)" class="m-auto"/>
                     </div>
                   </div>
                   <div>
@@ -206,11 +230,11 @@
             </Carousel>
           </div>
           <div class="hidden md:block">
-            <div class="flex flex-col justify-between h-[560px]">
-              <div class="text-2xl">No info</div>
+            <div class="flex flex-col h-[100%] py-7">
+              <div class="flex-1 text-2xl">{{carouselsCurrentSlide.comment}}</div>
               <div>
-                <div class="text-[54px] font-bold leading-[74px]">James Bayly</div>
-                <span class="text-base text-[#AFC6C8]">Head Of Business Development at SubQuery & OnFinality</span>
+                <div class="text-[54px] font-bold leading-[74px] mb-2">{{carouselsCurrentSlide.name}}</div>
+                <span class="text-base text-[#AFC6C8]">{{carouselsCurrentSlide.desc}}</span>
               </div>
             </div>
           </div>
@@ -297,12 +321,27 @@
   const numberRollerRef2 = ref(null)
   const numberRollerRef3 = ref(null)
   const numberRollerRef4 = ref(null)
+  const numberRollerRef5 = ref(null)
+  const numberRollerRef6 = ref(null)
   const numberRollerNumber1 = ref(16)
   const numberRollerNumber2 = ref(73)
   const numberRollerNumber3 = ref(20)
   const numberRollerNumber4 = ref(143)
+  const numberRollerNumber5 = ref(24)
+  const numberRollerNumber6 = ref(162)
 
+  const device = useDevice()
+  const fullpagePhoneOptions = {
+    // autoScrolling: false,
+    // fitToSection: false,
+    // scrollOverflow: false,
+    verticalCentered: false,
+    paddingTop: "4rem",
+  }
+
+  const fullpageExtraOptions = device.value.isMobile ? fullpagePhoneOptions : {}
   const fullpageOptions = { 
+    ...fullpageExtraOptions,
     scrollBar: true,
     licenseKey: "gplv3-license",
     beforeLeave( origin, destination, direction, trigger ) {
@@ -329,7 +368,9 @@
           { ref: numberRollerRef1, number: numberRollerNumber1 },
           { ref: numberRollerRef2, number: numberRollerNumber2 },
           { ref: numberRollerRef3, number: numberRollerNumber3 },
-          { ref: numberRollerRef4, number: numberRollerNumber4 }
+          { ref: numberRollerRef4, number: numberRollerNumber4 },
+          { ref: numberRollerRef5, number: numberRollerNumber5 },
+          { ref: numberRollerRef6, number: numberRollerNumber6 },
         ]
 
         numberRollers.forEach(item => {
@@ -351,6 +392,12 @@
 
   const ufoRef = ref(null)
   const animateUfoRef = ref(null)
+
+  // carousels
+  // autoplay interval
+  const carouselsAutoPlay = ref(5000)
+  const carouselsCurrentIndex = ref(0)
+  const carouselsCurrentSlide = computed(() => carousels[carouselsCurrentIndex.value] || {})
   const carousels = [
     {
       name: "James Bayly",
@@ -361,30 +408,35 @@
     {
       name: "Zhangsan",
       desc: "abcdefg",
-      comment: "No information available",
+      comment: "No information available 2",
       src: getImageURL('usinghamster-two.png')
     },
     {
       name: "Lisi",
       desc: "hijklmn",
-      comment: "No information available",
+      comment: "No information available 3",
       src: getImageURL('usinghamster-three.png')
     }
   ]
 
-  const handlePrev = (slideData)=>{
+  // carousels autoplay interval is 3000ms
+  const handleSlideStart = (slideData) => {
+    const { slidingToIndex, slidesCount } = slideData
+    carouselsCurrentIndex.value = slidesCount > slidingToIndex ? slidingToIndex : 0
+  }
+  const handleSlidePrev = (slideData) => {
     const { currentSlide, slidesCount, slideTo, prev } = slideData
-    if(currentSlide == 0){
+    if (currentSlide == 0) {
       slideTo(slidesCount)
-    }else{
+    } else {
       prev()
     }
   }
-  const handleNext = (slideData)=>{
+  const handleSlideNext = (slideData) => {
     const { currentSlide, slidesCount, slideTo, next } = slideData
-    if(currentSlide+1 == slidesCount){
+    if (currentSlide + 1 == slidesCount) {
       slideTo(0)
-    }else{
+    } else {
       next()
     }
   }
@@ -512,7 +564,7 @@
     left: 50%;
     transform:translate(-50%,-50%);
     .animation-rotate{
-      animation: rotation 6s linear infinite;
+      animation: rotation 8s linear infinite;
     }
   }
   
@@ -526,7 +578,7 @@
     left: 50%;
     transform:translate(-50%,-50%);
     .animation-rotate{
-      animation: rotation 6s linear infinite;
+      animation: rotation 8s linear infinite;
     }
   }
 
@@ -618,7 +670,7 @@
 </style>
     
 <style lang="less">
-  html.fp-enabled:not(.is-mobile) {
+  html.fp-enabled:not(.is-phone) {
     body {
       background: url(~/assets/images/index-bg-top.png) left top no-repeat,
                   url(~/assets/images/index-bg-body.png) center center no-repeat,
