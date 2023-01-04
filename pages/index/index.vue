@@ -214,10 +214,10 @@
                 <Pagination/>
                 <div class="flex justify-between mt-6 custom-carousel-navigation">
                   <div class="flex text-center">
-                    <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
+                    <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px] cursor-pointer">
                       <img :src="getImageURL('using-left-arrow.svg')" @click="handleSlidePrev(slideData)" class="m-auto"/>
                     </div>
-                    <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px]">
+                    <div class="w-[55px] bg-[#27392D] h-[49px] py-[13px] cursor-pointer">
                       <img :src="getImageURL('using-right-arrow.svg')" @click="handleSlideNext(slideData)" class="m-auto"/>
                     </div>
                   </div>
@@ -247,32 +247,32 @@
         </span>
         <div class="my-6 overflow-x-auto md:my-12">
           <div class="flex gap-6 md:grid md:grid-cols-12">
-            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
-              <img src="./images/trending-one.png" />
-              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex flex-col flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-one.jpg" />
+              <div class="flex flex-col flex-1 pb-6 pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px] flex-1" title="Mokshya x Hamster—to liberate developers with smart contracts, making it easier to access Web3 World">Mokshya x Hamster—to liberate developers with smart contracts, making it easier to access Web3 World</span>
+                <span class="text-[#27FFB8]">Read article</span>
               </div>
             </div>
-            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
-              <img src="./images/trending-two.png" />
-              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex flex-col flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-two.jpg"/>
+              <div class="flex flex-col flex-1 pb-6 pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px] flex-1" title="Vote of THANKS for the Aptos Grant — a gratitude note from Hamster teamt">Vote of THANKS for the Aptos Grant — a gratitude note from Hamster teamt</span>
+                <span class="text-[#27FFB8]">Read article</span>
               </div>
             </div>
-            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
-              <img src="./images/trending-three.png" />
-              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex flex-col flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-three.jpg"/>
+              <div class="flex flex-col flex-1 pb-6 pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px] flex-1" title="Hamster Network Bi-Weekly Report.">Hamster Network Bi-Weekly Report.</span>
+                <span class="text-[#27FFB8]">Read article</span>
               </div>
             </div>
-            <div class="w-[214px] flex-shrink-0 md:w-auto md:h-auto col-span-3">
-              <img src="./images/trending-four.png" />
-              <div class="flex flex-col pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
-                <span class="mt-[37px] mb-[19px]">Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant</span>
-                <span class="text-[#27FFB8] pb-[21px]">Read article</span>
+            <div class="w-[214px] flex flex-col flex-shrink-0 md:w-auto md:h-auto col-span-3">
+              <img src="./images/trending-four.jpg"/>
+              <div class="flex flex-col flex-1 pb-6 pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
+                <span class="mt-[37px] mb-[19px] flex-1" title="Rebase x Hamster — Hamster supports Rebase Hackathon to help more Developers build their Dreams">Rebase x Hamster — Hamster supports Rebase Hackathon to help more Developers build their Dreams</span>
+                <span class="text-[#27FFB8]">Read article</span>
               </div>
             </div>
           </div>
