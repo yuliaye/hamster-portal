@@ -13,15 +13,15 @@
 
       <div class="flex md:justify-between md:px-16">
         <div class="flex flex-col text-base">
-          <span class="inline-block mb-5 font-bold">About</span>
+          <span class="inline-block mb-5 font-bold cursor-pointer" @click="skipNewUrl('about')">About</span>
           <span>Grant</span>
           <span class="inline-block my-5">Careers</span>
           <span>Roadmap</span>
         </div>
         <div class="flex flex-col text-base ml-[40px] md:ml-0">
-          <span class="inline-block mb-5 font-bold">Docs</span>
-          <span class="inline-block mb-5">Github</span>
-          <span>News</span>
+          <span class="inline-block mb-5 font-bold cursor-pointer" @click="skipNewUrl('docs')">Docs</span>
+          <span class="inline-block mb-5 cursor-pointer" @click="skipNewUrl('github')">Github</span>
+          <span class="cursor-pointer" @click="skipNewUrl('news')">News</span>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ const skipNewUrl = (val) => {
   } else if (val === 'about') {
     window.open('https://hamsternet.io/company')
   } else if (val === 'news') {
-    window.open('https://hamsternet.medium.com')
+    window.open('https://hamsternet.medium.com/')
   } else {
     window.open('https://hamsternet.io/docs/')
   }

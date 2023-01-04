@@ -14,14 +14,14 @@
             <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[16px] ml-[82vw]"
               src="~/assets/images/head-menu-down.svg">
             <div v-else class="menu">
-              <nuxt-link to="/" target="_blank">
-                <div class="px-[16px]" :class="{'menu-active' : curMenu == ''}">Home</div>
-              </nuxt-link>
-              <nuxt-link v-for="link in navLinks" :key="link.path"
-                :class="{'menu-active' : `/${curMenu}` === link.path}" class="px-[16px]" :to="link.path"
-                target="_blank">
-                {{ link.title }}
-              </nuxt-link>
+              <div>
+                <nuxt-link v-for="link in navLinks" :key="link.path"
+                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-[16px]" :to="link.path"
+                  target="_blank">
+                  {{ link.title }}
+                </nuxt-link>
+              </div>
+              <button class="mx-[16px] start-today">{{ $t('header.menu1') }}</button>
             </div>
             <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10"
               popper-class="locale-dropdown">
@@ -61,18 +61,15 @@
       </div>
     </div>
     <div class="my-[20px]">
-      <nuxt-link to="/" target="_blank">
-        <div :class="{'menu-active' : curMenu === ''}" class="phone-menu">
-          <span>{{ $t('header.menu1') }}</span>
-          <img src="~/assets/images/chervon-right.svg" />
-        </div>
-      </nuxt-link>
-      <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
-        <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
-          <span>{{ link.title }}</span>
-          <img src="~/assets/images/chervon-right.svg" />
-        </div>
-      </nuxt-link>
+      <div>
+        <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
+          <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
+            <span>{{ link.title }}</span>
+            <img src="~/assets/images/chervon-right.svg" />
+          </div>
+        </nuxt-link>
+      </div>
+      <button class="start-today w-[100%] mt-6">{{ $t('header.menu1') }}</button>
     </div>
   </div>
 </template>
@@ -115,13 +112,16 @@ const localeOptions = availableLocales.map((lang) => {
 })
 
 const navLinks = computed(() => [
-  { title: t('header.faucet'), path: "/faucet" },
+  { title: 'Solutions', path: "/solutions" }, //
   { title: t('header.dashboard'), path: '/dashboard' },
+  { title: 'Grant', path: "/grant" }, //
+  { title: 'Pricing', path: "/pricing" }, //
+  { title: 'About', path: "https://hamsternet.io/company" },
+  { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
+  // { title: t('header.faucet'), path: "/faucet" },
   // { title: t('header.stake'), path: "/stake" },
   // { title: t('header.cross_chain'), path: "/cross_chain" },
-  { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
-  { title: 'News', path: "https://medium.com/@Hamsternetio" },
-  { title: 'About', path: "https://hamsternet.io/company" },
+  { title: 'News', path: "https://hamsternet.medium.com/" },
 ])
 
 const drodownShow = ref(false)
@@ -216,16 +216,22 @@ onUnmounted(() => {
 }
 
 .menu {
-  @apply cursor-pointer text-[white] leading-[32px] flex;
+  @apply cursor-pointer text-[white] leading-[32px] flex items-center;
 }
 
 .menu-active {
   @apply text-white !important;
 }
 
+.start-today{
+  border: 1px solid white;
+  padding: 5px 18px;
+}
+
 @screen md {
   .menu-active {
-    border: 1px solid white;
+    border-bottom: 2px solid white;
+    padding: 5px 0;
   }
 }
 
