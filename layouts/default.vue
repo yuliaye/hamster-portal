@@ -4,6 +4,7 @@
       <Title>{{ $t('meta.title') }}</Title>
       <Meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <Link rel="shortcut icon" type="image/png" :href="getImageURL('logo.png')" />
+      <Link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'/>
     </Head>
     <Header :showHeader="showHeader" :showHeaderBg="showHeaderBg" />
     <div>
@@ -135,6 +136,20 @@
   }
 </style>
 <style lang="less">
+  // Base style
+  html {
+    font-family: "Noto Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 
+                 "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", 
+                 "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    
+  }
+
+  @screen lg {
+    .container {
+      max-width: 1216px;
+    }
+  }
+
   /* about antdv's style*/
   /*  message error and success*/
   .ant-message-custom-content {

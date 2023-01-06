@@ -58,7 +58,7 @@ export function handleUfoAnimate(
     const scale = 0.6
     const newLeft = toolkitPosition.left + toolkitPosition.width/2 - fullpageLeft - width/2
     const baseTop = toPageIndex * window.innerHeight
-    const newTop = baseTop + toolkitTop - 20 - height
+    const newTop = baseTop + toolkitTop - height
 
     anime({
       targets: animateUfoElement,
@@ -74,14 +74,14 @@ export function handleUfoAnimate(
     const { fullpageWidth, fullpageLeft, width } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
     const scale = 0.6
-    const newLeft = (fullpageWidth - scale*width)/2 - fullpageLeft
+    const newLeft = fullpageWidth/2 - scale*width
 
     anime({
       targets: animateUfoElement,
       scale: scale,
       top: baseTop + 50,
       left: newLeft,
-      rotate: 45,
+      rotate: 50,
       easing: 'easeInOutSine',
       duration: 400,
     })
@@ -135,7 +135,7 @@ export function handleUfoAnimate(
   }
 
   if (step === "4->5") {
-    animateUfoElement.style.zIndex = "100"
+    animateUfoElement.style.zIndex = "10"
 
     const { fullpageWidth, fullpageLeft, width } = ufoAnimationContext
     const pageTop = toPage.item.offsetTop
