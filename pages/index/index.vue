@@ -1,13 +1,13 @@
 <template>
   <DefaultLayout :showFooter="false" :showHeader="showHeader" :showHeaderBg="showHeaderBg">
-    <full-page :options="fullpageOptions" id="fullpage" class="mx-6 md:mx-auto">
+    <full-page :options="fullpageOptions" :id="home-fullpage" class="mx-6 md:mx-auto">
       <div class="absolute transparent" ref="animateUfoRef">
         <div class="relative text-center">
           <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
           <img src="~/assets/images/ufo-light.png" id="ufo-light-image" class="absolute top-0 left-0 w-full transparent"/>
         </div>
       </div>
-      <div class="overflow-hidden section">
+      <div :class="fullPageSectionClass">
         <div class="md:flex md:items-center">
           <div class="md:w-3/5">
             <!-- <div class="text-2xl font-bold md:text-[54px] md:leading-[74px]">Hamster empowers projects and developers in <span class="text-[#27FFB8]">web3</span> to build their dreams</div> -->
@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <div class="section fp-auto-height-responsive">
+      <div :class="fullPageSectionClass">
         <div class="grid gap-6 md:grid-cols-12">
           <div class="md:col-span-5">
             <div class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Hamster DevOps Solutions</div>
@@ -59,7 +59,7 @@
           <div class="md:col-span-4">
             <div class="relative md:h-[204px] border border-[#203E42] flex flex-col p-6 devops-bg">
               <div class="flex-1">
-                <img src="./images/devops-three.png" class="h-[95px] absolute right-6 top-[88px] opacity-10"/>
+                <img src="./images/devops-three.png" class="h-[95px] absolute right-6 bottom-[20px] opacity-10"/>
                 <div class="mb-2 text-base font-bold">Hamster Node Service</div>
                 <div class="text-base text-[#738A92]">Enjoy the smooth and safe RPC service on multichains</div>
               </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="relative md:h-[204px] border border-[#203E42] flex flex-col p-6 mt-[24px] devops-bg">
               <div class="flex-1">
-                <img src="./images/devops-four.png" class="h-[115px] absolute right-6 top-[66px] opacity-10"/>
+                <img src="./images/devops-four.png" class="h-[115px] absolute right-6 bottom-[20px] opacity-10"/>
                 <div class="mb-2 text-base font-bold">Hamster Decentralized Computing Power Network</div>
                 <div class="text-base text-[#738A92]">Aggregated check of the security risks for exsiting contracts, tokens, NFTs and dApps and more</div>
               </div>
@@ -83,7 +83,7 @@
         </div>
       </div>
       
-      <div class="overflow-hidden section">
+      <div :class="fullPageSectionClass">
         <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Hamster Ecology</span>
         <div class="grid grid-cols-1 gap-8 mt-8 overflow-hidden md:mt-0 md:grid-cols-12">
           <div class="flex justify-center select-none order-2 py-[20px] md:py-[50px] md:order-1 md:col-span-6">
@@ -185,7 +185,7 @@
         </div>
       </div>
 
-      <div class="overflow-hidden section">
+      <div :class="fullPageSectionClass">
         <span class="text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]">Who’s using Hamster</span>
         <div class="grid mt-8 md:gap-[84px] md:grid-cols-2 md:mt-12">
           <div class="relative p-3 overflow-hidden using-imgbg md:p-6 md:h-[502px] md:w-[455px]">
@@ -242,7 +242,7 @@
         </div>
       </div>
 
-      <div class="z-20 -mx-6 overflow-hidden section md:mx-0">
+      <div :class="fullPageSectionClass" class="z-20 -mx-6 md:mx-0">
         <span class="mx-6 md:mx-0 text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]" id="ufo-point--news-title">
           Trending News
         </span>
@@ -312,15 +312,15 @@
   const numberRollerNumber6 = ref(162)
 
   const device = useDevice()
-  const fullpagePhoneOptions = {
-    // autoScrolling: false,
-    // fitToSection: false,
-    // scrollOverflow: false,
+  const fullpageMobileOptions = {
+    autoScrolling: false,
+    fitToSection: false,
+    scrollOverflow: false,
     verticalCentered: false,
     paddingTop: "4rem",
   }
 
-  const fullpageExtraOptions = device.value.isMobile ? fullpagePhoneOptions : {}
+  const fullpageExtraOptions = device.value.isMobile ? fullpageMobileOptions : {}
   const fullpageOptions = { 
     ...fullpageExtraOptions,
     scrollBar: true,
@@ -370,6 +370,9 @@
       }
     }
   }
+  const fullPageSectionClass = computed(() => 
+    device.value.isMobile ? "section fp-auto-height" : "section overflow-hidden"
+  )
 
   const ufoRef = ref(null)
   const animateUfoRef = ref(null)
@@ -678,11 +681,16 @@
 </style>
     
 <style lang="less">
-  html.fp-enabled:not(.is-phone) {
+  // html.fp-enabled:not(.is-mobile) {
+  //   body {
+  //     background: url(~/assets/images/index-bg-top.png) left top no-repeat,
+  //                 url(~/assets/images/index-bg-body.png) center center no-repeat,
+  //                 #141212;
+  //   }
+  // }
+  html.fp-enabled:not(.is-mobile) {
     body {
-      background: url(~/assets/images/index-bg-top.png) left top no-repeat,
-                  url(~/assets/images/index-bg-body.png) center center no-repeat,
-                  #141212;
+      background: url(~/assets/images/home-background.jpg) no-repeat #141212;
     }
   }
 </style>

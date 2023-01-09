@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50"
-    :class="{ 'hidden': scrollDown === true },{'bg-black': topBgShow === true}">
+    :class="{ 'hidden': !isMobile && scrollDown, 'bg-black': topBgShow}">
     <div class="m-auto">
       <div class="container py-4 mx-6 md:mx-auto">
         <div class="relative flex flex-row items-center justify-between text-center text-white">
@@ -11,12 +11,12 @@
           </div>
 
           <div class="flex flex-row justify-center md:ml-auto">
-            <img @click="showPhoneMenu = true;" v-if="isPhone === true" class="h-[16px] ml-[82vw]"
+            <img @click="showPhoneMenu = true;" v-if="isMobile" class="h-[16px] ml-[82vw]"
               src="~/assets/images/head-menu-down.svg">
             <div v-else class="menu">
               <div>
                 <nuxt-link v-for="link in navLinks" :key="link.path"
-                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-[16px]" :to="link.path"
+                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-[16px] hover:text-[#27FFB8]" :to="link.path"
                   target="_blank">
                   {{ link.title }}
                 </nuxt-link>
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown === true }"
+  <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown }"
     class="inset-x-0 top-0 fixed z-[300] py-4 px-6 bg-black">
     <div class="relative flex justify-start">
       <img class="h-[16px] md:h-[24px]" src="~/assets/images/header.png">
@@ -143,13 +143,18 @@ const curSubMenu = ref()
 const scrollDown = ref(false)
 const beforeTopVal = ref(0)
 const topBgShow = ref(false)
-const isPhone = ref(false);
+
+const device = useDevice()
+const isMobile = device.value.isMobile
 const showPhoneMenu = ref(false);
 
-// Add `is-phone` class to <html> tag
-watch(isPhone, (newVal) => {
-  if (newVal) {
-    document.querySelector("html").classList.add("is-phone")
+// Add `is-mobile` class to <html> tag
+onMounted(() => {
+  const rootClassList = document.querySelector("html").classList
+  if (isMobile) {
+    rootClassList.add("is-mobile")
+  } else {
+    rootClassList.remove("is-mobile")
   }
 })
 
@@ -173,11 +178,6 @@ function setTopBgValue() {
 onMounted(() => {
   window.addEventListener("scroll", handleScroll)
   handleScroll();
-
-  const flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-  if (flag) {
-    isPhone.value = true;
-  }
 
   curMenu.value = route.path.substring(1);
 })

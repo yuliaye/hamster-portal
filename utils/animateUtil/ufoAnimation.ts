@@ -17,9 +17,9 @@ export function handleUfoAnimate(
   toPage: { index: number, item: HTMLElement },
   direction: "up" | "down"
 ) {
-  // Prevent ufo animation when is-phone
-  const isPhoneElement = document.querySelector("html.is-phone")
-  if (isPhoneElement) { return }
+  // Prevent ufo animation when is-mobile
+  const isMobileRootElement = document.querySelector("html.is-mobile")
+  if (isMobileRootElement) { return }
 
   const fromPageIndex = fromPage.index
   const toPageIndex = toPage.index
