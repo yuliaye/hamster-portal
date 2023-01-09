@@ -13,15 +13,15 @@
 
       <div class="flex md:justify-between md:px-16">
         <div class="flex flex-col text-base">
-          <span class="inline-block mb-5 font-bold cursor-pointer" @click="skipNewUrl('about')">About</span>
-          <span>Grant</span>
-          <span class="inline-block my-5">Careers</span>
-          <span>Roadmap</span>
+          <span class="inline-block mb-5 font-bold cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('about')">About</span>
+          <span class="hover:text-[#27FFB8] cursor-pointer">Grant</span>
+          <span class="inline-block my-5 hover:text-[#27FFB8] cursor-pointer">Careers</span>
+          <span class="hover:text-[#27FFB8] cursor-pointer">Roadmap</span>
         </div>
         <div class="flex flex-col text-base ml-[40px] md:ml-0">
-          <span class="inline-block mb-5 font-bold cursor-pointer" @click="skipNewUrl('docs')">Docs</span>
-          <span class="inline-block mb-5 cursor-pointer" @click="skipNewUrl('github')">Github</span>
-          <span class="cursor-pointer" @click="skipNewUrl('news')">News</span>
+          <span class="inline-block mb-5 font-bold cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('docs')">Docs</span>
+          <span class="inline-block mb-5 cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('github')">Github</span>
+          <span class="cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('news')">News</span>
         </div>
       </div>
 
