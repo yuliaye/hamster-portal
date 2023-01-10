@@ -13,15 +13,24 @@
 
       <div class="flex md:justify-between md:px-16">
         <div class="flex flex-col text-base">
-          <span class="inline-block mb-5 font-bold cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('about')">About</span>
-          <span class="hover:text-[#27FFB8] cursor-pointer">Grant</span>
-          <span class="inline-block my-5 hover:text-[#27FFB8] cursor-pointer">Careers</span>
-          <span class="hover:text-[#27FFB8] cursor-pointer">Roadmap</span>
+          <span class="inline-block mb-5 font-bold cursor-pointer md:hover:text-[#27FFB8]" @click="skipNewUrl('about')">About</span>
+          <span class="md:hover:text-[#27FFB8] cursor-pointer">Grant</span>
+          <span class="inline-block my-5 md:hover:text-[#27FFB8] cursor-pointer">Careers</span>
+          <span class="md:hover:text-[#27FFB8] cursor-pointer">Roadmap</span>
         </div>
         <div class="flex flex-col text-base ml-[40px] md:ml-0">
-          <span class="inline-block mb-5 font-bold cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('docs')">Docs</span>
-          <span class="inline-block mb-5 cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('github')">Github</span>
-          <span class="cursor-pointer hover:text-[#27FFB8]" @click="skipNewUrl('news')">News</span>
+          <div class="inline-block mb-5 font-bold cursor-pointer md:hover:text-[#27FFB8]" @click="skipNewUrl('docs')">
+            Docs
+            <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
+          </div>
+          <div class="inline-block mb-5 cursor-pointer md:hover:text-[#27FFB8]" @click="skipNewUrl('github')">
+            Github
+            <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
+          </div>
+          <div class="cursor-pointer md:hover:text-[#27FFB8]" @click="skipNewUrl('news')">
+            News
+            <img class="w-[18px] inline-block" :src="getImageURL('transmit.svg')" />
+          </div>
         </div>
       </div>
 
@@ -30,7 +39,7 @@
         <span class="text-sm md:text-base">
           Harbour Plaza, 103 South Church Street Grand Cayman, Cayman Islands
         </span>
-        <span class="inline-block my-5 text-sm md:text-base">+4917647082974</span>
+        <span class="inline-block my-5 text-sm md:text-base">+49 17647 082974</span>
         <span class="text-sm md:text-base">Email: hamster@hamsternet.io</span>
       </div>
     </div>

@@ -94,26 +94,26 @@ export function handleUfoAnimate(
     })
   }
 
-  if (step === "2->3") {
-    const { fullpageWidth, width } = ufoAnimationContext
-    const baseTop = toPageIndex * window.innerHeight
-    const scale = 0.3
+  // if (step === "2->3") {
+  //   const { fullpageWidth, width } = ufoAnimationContext
+  //   const baseTop = toPageIndex * window.innerHeight
+  //   const scale = 0.3
 
-    animateUfoElement.querySelector<HTMLElement>("#ufo-light-image").style.opacity = "0"
+  //   animateUfoElement.querySelector<HTMLElement>("#ufo-light-image").classList.add("force-transparent")
 
-    anime({
-      targets: animateUfoElement,
-      left: fullpageWidth,
-      scale: scale,
-      top: baseTop + 50,
-      opacity: 0,
-      easing: 'easeInOutSine',
-      duration: 500,
-    })
-  }
+  //   anime({
+  //     targets: animateUfoElement,
+  //     left: fullpageWidth,
+  //     scale: scale,
+  //     top: baseTop + 50,
+  //     opacity: 0,
+  //     easing: 'easeInOutSine',
+  //     duration: 500,
+  //   })
+  // }
 
-  if (step === "3->4") {
-    animateUfoElement.querySelector<HTMLElement>("#ufo-light-image").style.opacity = "0"
+   if (step === "2->3") {
+    animateUfoElement.querySelector<HTMLElement>("#ufo-light-image").classList.add("force-transparent")
 
     const titleElement = document.querySelector("#ufo-point--news-title")
     const titlePosition = titleElement.getBoundingClientRect()
@@ -122,10 +122,12 @@ export function handleUfoAnimate(
     const { fullpageLeft, height } = ufoAnimationContext
     const baseTop = toPageIndex * window.innerHeight
     const newTop = baseTop + titleTop + titlePosition.height/2 - height/2
+    const scale = 0.3
 
     anime({
       targets: animateUfoElement,
       left: titlePosition.width - fullpageLeft/2,
+      scale: scale,
       top: newTop,
       opacity: 1,
       rotate: 0,
@@ -134,7 +136,7 @@ export function handleUfoAnimate(
     })
   }
 
-  if (step === "4->5") {
+  if (step === "3->4") {
     animateUfoElement.style.zIndex = "10"
 
     const { fullpageWidth, fullpageLeft, width } = ufoAnimationContext

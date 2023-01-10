@@ -6,28 +6,67 @@
         <div class="relative flex flex-row items-center justify-between text-center text-white">
           <div class="absolute logo">
             <nuxt-link to="/" target="_blank">
-              <img class="h-[16px] md:h-[24px]" src="~/assets/images/header.png">
+              <img class="h-4 md:h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
 
           <div class="flex flex-row justify-center md:ml-auto">
-            <img @click="showPhoneMenu = true;" v-if="isMobile" class="h-[16px] ml-[82vw]"
+            <img @click="showPhoneMenu = true;" v-if="isMobile" class="h-4 ml-[82vw]"
               src="~/assets/images/head-menu-down.svg">
             <div v-else class="menu">
+              <VDropdown 
+                auto-hide 
+                v-model:shown="subMenuDropdownShow"
+                :distance="10" 
+                placement="bottom-start" 
+                popper-class="locale-dropdown"
+                :skidding="16"
+              >
+                <div class="cursor-pointer select-none">
+                  <div
+                    class="px-4 h-[32px] text-base flex justify-center items-center hover:color-[#27FFB8]"
+                    :class="{'menu-dropdown-opened': subMenuDropdownShow}"
+                  >
+                    <div>Solutions</div>
+                    <div class="h-2 ml-2" :class="{'rotate-dropdown-icon': subMenuDropdownShow}">
+                      <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.81261 0.348328L7.05525 5.59097L5.99459 6.65163L0.751953 1.40899L1.81261 0.348328Z" fill="white"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.9452 5.59096L10.1878 0.348323L11.2485 1.40898L6.00586 6.65162L4.9452 5.59096Z" fill="white"/>
+                      </svg>   
+                    </div>
+                  </div>
+                </div>
+                <template #popper>
+                  <div class="bg-[white] py-4 rounded-[2px] max-w-[400px]">
+                    <div class="px-6 py-4">
+                      <img src="~/assets/images/development-toolkit.png" class="inline-block w-4 h-4" />
+                      <span class="text-base align-middle"> Development Toolkit</span>
+                    </div>
+                    <div class="px-6 py-4">
+                      <img src="~/assets/images/node-service.png" class="inline-block w-4 h-4" />
+                      <span class="text-base align-middle"> Node Service</span>
+                    </div>
+                    <div class="px-6 py-4">
+                      <img src="~/assets/images/decentralized-computing.png" class="inline-block w-4 h-4" />
+                      <span class="text-base align-middle"> Decentralized Computing Power Network</span>
+                    </div>
+                  </div>
+                </template>
+              </VDropdown>
               <div>
                 <nuxt-link v-for="link in navLinks" :key="link.path"
-                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-[16px] hover:text-[#27FFB8]" :to="link.path"
+                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-4 hover:text-[#27FFB8]" :to="link.path"
                   target="_blank">
                   {{ link.title }}
                 </nuxt-link>
               </div>
-              <button class="mx-[16px] start-today">{{ $t('header.menu1') }}</button>
+              <button class="mx-4 start-today hover:bg-[#27FFB8] hover:text-[#131313] hover:border-[#27FFB8]">{{ $t('header.menu1') }}</button>
             </div>
             <VDropdown class="hidden" v-model:shown="drodownShow" auto-hide :triggers="[]" :skidding="-2" :distance="10"
               popper-class="locale-dropdown">
               <div class="relative cursor-pointer select-none" @click="drodownShow = !drodownShow">
                 <div
-                  class="px-[16px] h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
+                  class="px-4 h-[32px] flex justify-center items-center border border-solid box-border rounded-[71px] hover:bg-[#0c0e2f]">
                   <div>{{ selectedLocale.name }}</div>
                   <img src="~/assets/images/drop-down.png" class="w-4 h-4 ml-2"
                     :class="{'rotate-dropdown-icon': drodownShow}">
@@ -55,13 +94,35 @@
   <div v-if="showPhoneMenu" :class="{ 'hidden': scrollDown }"
     class="inset-x-0 top-0 fixed z-[300] py-4 px-6 bg-black">
     <div class="relative flex justify-start">
-      <img class="h-[16px] md:h-[24px]" src="~/assets/images/header.png">
+      <img class="h-4 md:h-[24px]" src="~/assets/images/header.png">
       <div class="absolute right-[-1px] top-0" @click="showPhoneMenu = false;">
         <img class="h-[24px] ml-[36vw]" src="~/assets/images/menu-close.svg" />
       </div>
     </div>
     <div class="my-[20px]">
       <div>
+        <div class="relative cursor-pointer select-none" @click="subMenuDropdownShow = !subMenuDropdownShow">
+          <div
+            class="h-[32px] text-base flex justify-between items-center hover:color-[#27FFB8]">
+            <div>Solutions</div>
+            <img src="~/assets/images/chervon-right.svg" class="w-6 h-6 ml-2"
+              :class="{'rotate-dropdown-icon-mobile': subMenuDropdownShow}">
+          </div>
+          <div class="text-[#CECFD0] w-[100%]" v-if="subMenuDropdownShow">
+            <div class="my-4">
+              <img src="~/assets/images/development-toolkit-mobile.png" class="inline-block w-4 h-4"/>
+              <span class="text-sm align-middle"> Development Toolkit</span>
+            </div>
+            <div class="my-4">
+              <img src="~/assets/images/node-service-mobile.png" class="inline-block w-4 h-4"/>
+              <span class="text-sm align-middle"> Node Service</span>
+            </div>
+            <div class="my-4">
+              <img src="~/assets/images/decentralized-computing-mobile.png" class="inline-block w-4 h-4"/>
+              <span class="text-sm align-middle"> Decentralized Computing Power Network</span>
+            </div>
+          </div>
+        </div>
         <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
           <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
             <span>{{ link.title }}</span>
@@ -112,11 +173,11 @@ const localeOptions = availableLocales.map((lang) => {
 })
 
 const navLinks = computed(() => [
-  { title: 'Solutions', path: "/solutions" }, //
+  // { title: 'Solutions', path: "/solutions", children: [] },
   { title: t('header.dashboard'), path: '/dashboard' },
   { title: 'Grant', path: "/grant" }, //
   { title: 'Pricing', path: "/pricing" }, //
-  { title: 'About', path: "https://hamsternet.io/company" },
+  { title: 'About', path: "/company" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
   // { title: t('header.faucet'), path: "/faucet" },
   // { title: t('header.stake'), path: "/stake" },
@@ -125,6 +186,7 @@ const navLinks = computed(() => [
 ])
 
 const drodownShow = ref(false)
+const subMenuDropdownShow = ref(false)
 const drodownShow7 = ref(false)
 const selectedLocale = computed(() => {
   return localeOptions.find(option => option.value === locale.value)
@@ -159,6 +221,7 @@ onMounted(() => {
 })
 
 function handleScroll() {
+  subMenuDropdownShow.value = false
   topVal.value = document.body.scrollTop || document.documentElement.scrollTop
   if (beforeTopVal.value < topVal.value) { // 向下滚动
     scrollDown.value = true;
@@ -209,6 +272,9 @@ onUnmounted(() => {
 .rotate-dropdown-icon {
   @apply rotate-180;
 }
+.rotate-dropdown-icon-mobile {
+  @apply -rotate-90;
+}
 
 .drop-bg {
   background: rgba(255, 255, 255, 0.30141);
@@ -223,6 +289,13 @@ onUnmounted(() => {
   @apply text-white !important;
 }
 
+.menu-dropdown-opened {
+  color:#27FFB8;
+  svg path {
+    fill: #27FFB8;
+  }
+}
+
 .start-today{
   border: 1px solid white;
   padding: 5px 18px;
@@ -230,8 +303,8 @@ onUnmounted(() => {
 
 @screen md {
   .menu-active {
-    border-bottom: 2px solid white;
-    padding: 5px 0;
+    color: #27FFB8 !important;
+    font-weight: 700;    
   }
 }
 

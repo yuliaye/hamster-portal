@@ -28,7 +28,7 @@
           <img class="rounded-full w-[128px]" :src="getImageURL(`advantage-sub-img${subId}.png`)">
         </div>
         <div class="font-bold text-base leading-[19px] text-center mb-[16px]">{{ $t(`company.advantageSub${subId}`) }}</div>
-        <div class="area-desc overflow-y-auto">{{ $t(`company.advantageSubDesc${subId}`) }}</div>
+        <div class="overflow-y-auto area-desc">{{ $t(`company.advantageSubDesc${subId}`) }}</div>
       </div>
     </div>
   </div>
