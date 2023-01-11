@@ -3,11 +3,15 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-[54px]">
       <div>
         <img class="h-[20px] md:h-[32px]" src="~/assets/images/header.png">
-        <span class="inline-block mt-3 mb-3 text-sm md:text-base md:mr-20 md:mt-7 md:mb-9">
+        <span class="inline-block mt-4 mb-4 text-sm md:text-base md:mr-20 md:mt-7 md:mb-8">
           One-Stop infrastructure,
           <br>
           development, operation and maintenance service platform for projects in Web3.0
         </span>
+        <div class="mb-5">
+          <img :src="getImageURL('green-line.svg')" class="w-5"/>
+          <span class="text-2xl font-bold">aptos grant<br>program</span>
+        </div>
         <img class="h-[64px] md:h-[75px]" src="~/assets/images/web3_foundation.png" />
       </div>
 
@@ -53,7 +57,7 @@ const skipNewUrl = (val) => {
   if (val === 'github') {
     window.open('https://github.com/hamster-shared')
   } else if (val === 'about') {
-    window.open('https://hamsternet.io/company')
+    window.open('/company')
   } else if (val === 'news') {
     window.open('https://hamsternet.medium.com/')
   } else {

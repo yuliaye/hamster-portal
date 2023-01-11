@@ -40,16 +40,16 @@
                   <div class="bg-[white] py-4 rounded-[2px] max-w-[400px]">
                     <div class="px-6 py-4">
                       <img src="~/assets/images/development-toolkit.png" class="inline-block w-4 h-4" />
-                      <span class="text-base align-middle"> Development Toolkit</span>
+                      <span class="text-base align-middle"> Developer Toolkit</span>
                     </div>
                     <div class="px-6 py-4">
                       <img src="~/assets/images/node-service.png" class="inline-block w-4 h-4" />
                       <span class="text-base align-middle"> Node Service</span>
                     </div>
-                    <div class="px-6 py-4">
+                    <!-- <div class="px-6 py-4">
                       <img src="~/assets/images/decentralized-computing.png" class="inline-block w-4 h-4" />
                       <span class="text-base align-middle"> Decentralized Computing Power Network</span>
-                    </div>
+                    </div> -->
                   </div>
                 </template>
               </VDropdown>
@@ -111,16 +111,16 @@
           <div class="text-[#CECFD0] w-[100%]" v-if="subMenuDropdownShow">
             <div class="my-4">
               <img src="~/assets/images/development-toolkit-mobile.png" class="inline-block w-4 h-4"/>
-              <span class="text-sm align-middle"> Development Toolkit</span>
+              <span class="text-sm align-middle"> Developer Toolkit</span>
             </div>
             <div class="my-4">
               <img src="~/assets/images/node-service-mobile.png" class="inline-block w-4 h-4"/>
               <span class="text-sm align-middle"> Node Service</span>
             </div>
-            <div class="my-4">
+            <!-- <div class="my-4">
               <img src="~/assets/images/decentralized-computing-mobile.png" class="inline-block w-4 h-4"/>
               <span class="text-sm align-middle"> Decentralized Computing Power Network</span>
-            </div>
+            </div> -->
           </div>
         </div>
         <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
@@ -177,7 +177,7 @@ const navLinks = computed(() => [
   { title: t('header.dashboard'), path: '/dashboard' },
   { title: 'Grant', path: "/grant" }, //
   { title: 'Pricing', path: "/pricing" }, //
-  { title: 'About', path: "/company" },
+  { title: 'About', path: "" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
   // { title: t('header.faucet'), path: "/faucet" },
   // { title: t('header.stake'), path: "/stake" },

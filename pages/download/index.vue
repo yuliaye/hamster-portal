@@ -2,8 +2,8 @@
   <div class="download-top-bg main-margin">
     <div class="bg-div-style"></div>
     <div class="flex justify-center items-center text-center sm:text-[20px] -mt-[30px]">
-      <div @click="setType('client')" :class="[activeType === 'client'?'bg-[#CC731A] text-[#FFFFFF]':'bg-[#FFFFFF] text-[#807D7C]']" class="rounded-l-[8px] download-tab-title">{{ $t('download.client') }}</div>
-      <div @click="setType('provider')" :class="[activeType === 'provider'?'bg-[#CC731A] text-[#FFFFFF]':'bg-[#FFFFFF] text-[#807D7C]']" class="rounded-r-[8px] download-tab-title">{{ $t('download.provider') }}</div>
+      <div @click="setType('client')" :class="[activeType === 'client'?'bg-[#27FFB8] text-[#FFFFFF]':'bg-[#FFFFFF] text-[#807D7C]']" class="rounded-l-[8px] download-tab-title">{{ $t('download.client') }}</div>
+      <div @click="setType('provider')" :class="[activeType === 'provider'?'bg-[#27FFB8] text-[#FFFFFF]':'bg-[#FFFFFF] text-[#807D7C]']" class="rounded-r-[8px] download-tab-title">{{ $t('download.provider') }}</div>
     </div>
     <div class="mt-[50px] lg:mx-[100px]">
       <Tabs v-model:activeKey="activeKey">
@@ -22,7 +22,7 @@
               <div class="my-[20px]" v-if="activeType === 'provider'">{{ $t(`download.${activeType}TabContent`) }}</div>
               <div @click="download(i)" class="group px-[16px] h-[40px] w-[160px] flex justify-center items-center rounded-[8px] bg-white text-[#807D7C] cursor-pointer hover:text-white  hover:bg-[#cc7219]">
                 <img :src="getImageURL(`tabs-btn${i}.svg`)" class="w-4 mr-2 group-hover:hidden">
-                <img :src="getImageURL(`tabs${i}.svg`)" class="w-4 mr-2 hidden group-hover:inline">
+                <img :src="getImageURL(`tabs${i}.svg`)" class="hidden w-4 mr-2 group-hover:inline">
                 {{ $t('header.download') }}
               </div>
               <div v-if="activeType === 'client'" class="text-[#807D7C] mt-[10px]">{{ $t('download.versions') }}</div>
@@ -97,15 +97,15 @@
   @apply justify-center w-1/3;
 }
 .ant-tabs-tab:hover{
-  @apply !text-[#CC731A]
+  @apply !text-[#27FFB8]
 }
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
-  @apply !text-[#CC731A]
+  @apply !text-[#27FFB8]
 }
 .ant-tabs-tab.ant-tabs-tab-disabled {
   @apply !text-gray-500;
 }
 .ant-tabs-ink-bar{
-  @apply !bg-[#CC731A]
+  @apply !bg-[#27FFB8]
 }
 </style>

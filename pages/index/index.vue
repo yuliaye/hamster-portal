@@ -48,7 +48,7 @@
           <div id="ufo-point--toolkit" class="md:col-span-3 md:h-[430px] border border-[#203E42] flex flex-col px-6 pt-6 pb-4 devops-bg">
             <div class="flex-1">
               <img src="./images/devops-one.png" class="h-[105px] w-[132px] mb-[19px] mx-auto"/>
-              <div class="mb-2 text-2xl font-bold">Hamster Development Toolkit</div>
+              <div class="mb-2 text-2xl font-bold">Hamster Developer Toolkit</div>
               <div class="text-base text-[#738A92]">Multiple development tools, faster code check, easier contract deployment and more</div>
             </div>
             <div class="flex mt-3">
@@ -151,7 +151,7 @@
                 <span class="text-2xl font-bold md:text-[54px] md:leading-[74px]">
                   <span ref="numberRollerRef2">0</span>
                 </span>
-                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Supported Chain Network</span>
+                <span class="flex-1 text-xs mb-3 mt-2 text-[#AFC6C8] md:text-base md:mt-2 md:mb-6">Supported Chain Networks</span>
                 <img :src="getImageURL('green-line.svg')" class="w-8"/>
               </div>
               <div class="flex flex-col">
@@ -255,16 +255,18 @@
               <div class="flex flex-col flex-1 pb-6 pl-6 pr-5 border-x border-b border-[#203E42] trending-bg">
                 <span class="mt-[37px] mb-[19px] flex-1" :title="newsItem.title">{{ newsItem.title }}</span>
                 <nuxt-link :to="newsItem.url" target="_blank">
-                  <span class="text-[#27FFB8]">Read article</span>
+                  <span class="text-[#27FFB8]">More</span>
                 </nuxt-link>
               </div>
             </div>
           </div>
         </div>
         <div class="grid grid-cols-1 gap-3 mx-6 mt-5 md:mx-0 md:grid-cols-12 md:mt-auto">
-          <input type="text" v-if="!$device.isMobile" placeholder="Enter your email to get latest Hamster News!" class="subscription col-span-1 pl-4 md:pl-6 md:col-span-10 md:h-[64px]"/>
-          <textarea v-if="$device.isMobile" placeholder="Enter your email to get latest Hamster News!" class="subscription-mobile col-span-1 pl-4 pt-3 h-[109px]"></textarea>
-          <button class="block border border-[#27FFB8] bg-[#27FFB8] md:h-[64px] col-span-1 h-[43px] md:col-span-2 text-[#131313]">Subscribe</button>
+          <input type="text" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-if="!$device.isMobile" v-model="emailInfo" placeholder="get the latest" class="subscription col-span-1 pl-4 md:pl-6 md:col-span-10 md:h-[64px]"/>
+          <textarea v-if="$device.isMobile" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-model="emailInfo" placeholder="get the latest" class="subscription-mobile col-span-1 pl-4 pt-3 h-[109px]"></textarea>
+          <span v-if="$device.isMobile" class="w-[100%] text-[red]">{{wrongEmailInfo}}</span>
+          <button @click="hamsterSendEmail" class="block border border-[#27FFB8] bg-[#27FFB8] md:h-[64px] col-span-1 h-[43px] md:col-span-2 text-[#131313]">Subscribe</button>
+          <span v-if="!$device.isMobile" class="w-[500px] text-[red]">{{wrongEmailInfo}}</span>
         </div>
       </div>
       
@@ -483,6 +485,37 @@
       title: 'Rebase x Hamster — Hamster supports Rebase Hackathon to help more Developers build their Dreams',
     }
   ]
+
+  const emailInfo = ref('')
+
+  const sendEmail = async () => {
+    const url = '/hamster/email'
+    const data = {
+      "email": emailInfo.value
+    }
+    await $fetch(url, {
+      method: "POST",
+      body: data
+    }).then((res) => {
+      console.log('res:', res)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
+  const wrongEmailInfo = ref('')
+  const hamsterSendEmail = ()=>{
+    let myreg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+    if (myreg.test(emailInfo.value)){
+      sendEmail()
+      wrongEmailInfo.value = ''
+    } else if(emailInfo.value == ''){
+      wrongEmailInfo.value = 'This field cannot be empty'
+    } else{
+      wrongEmailInfo.value = 'Please enter the correct format of email'
+    }
+  }
 
   const flagRef = ref(null)
   const handleFlagRaise = () => {
