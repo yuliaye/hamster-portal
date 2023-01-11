@@ -26,7 +26,6 @@
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "@antv/g2": "^4.2.8",
-    "@fullpage/nuxt-fullpage": "^0.2.3",
     "@polkadot/api": "^8.14.1",
     "@polkadot/extension-dapp": "^0.44.2",
     "@types/dplayer": "^1.25.2",
@@ -39,6 +38,7 @@
     "nuxt-video-player": "^1.0.17",
     "swiper": "^8.4.4",
     "vue-awesome-swiper": "^5.0.1",
+    "vue-fullpage.js": "^0.2.9",
     "vue3-carousel": "^0.2.9",
     "vue3-carousel-3d": "^1.0.4",
     "vue3-video-play": "^1.3.1-beta.6",

@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout :showFooter="false" :showHeader="showHeader" :showHeaderBg="showHeaderBg">
-    <full-page :options="fullpageOptions" :id="home-fullpage" class="mx-6 md:mx-auto">
+    <full-page :options="fullpageOptions" :skip-init="true" ref="fullpageRef" class="mx-6 md:mx-auto">
       <div class="absolute transparent" ref="animateUfoRef">
         <div class="relative text-center">
           <img src="~/assets/images/ufo.png" id="ufo-image" class="w-full" />
@@ -15,7 +15,7 @@
             <div class="mt-5 mb-6 text-sm md:text-2xl">One-Stop infrastructure, development, operation and maintenance service platform for projects in Web3.0</div>
             <div class="mb-6">
               <button class="border border-[#FFFFFF] w-[120px] h-[43px] md:w-[148px] md:h-[54px] md:hover:bg-[#27FFB8] md:hover:text-[#131313] md:hover:border-[#27FFB8]">Start Building</button>
-              <nuxt-link to="/download" target="_blank">
+              <nuxt-link to="/download">
                 <button class="border border-[#27FFB8] bg-[#27FFB8] w-[120px] h-[43px] ml-4 md:w-[148px] md:h-[54px] md:ml-6 text-[#131313]">Download</button>
               </nuxt-link>
             </div>
@@ -75,7 +75,7 @@
                 <div class="text-base text-[#738A92]">Aggregated check of the security risks for exsiting contracts, tokens, NFTs and dApps and more</div>
               </div>
               <div class="flex mt-3">
-                <nuxt-link to="/download" target="_blank">
+                <nuxt-link to="/download">
                   <span class="text-base font-bold text-[#27FFB8] mr-2">Learn more</span>
                   <img :src="getImageURL('learnmore-arrow.svg')" class="inline-block"/>
                 </nuxt-link>
@@ -262,11 +262,11 @@
           </div>
         </div>
         <div class="grid grid-cols-1 gap-3 mx-6 mt-5 md:mx-0 md:grid-cols-12 md:mt-auto">
-          <input type="text" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-if="!$device.isMobile" v-model="emailInfo" placeholder="get the latest" class="subscription col-span-1 pl-4 md:pl-6 md:col-span-10 md:h-[64px]"/>
-          <textarea v-if="$device.isMobile" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-model="emailInfo" placeholder="get the latest" class="subscription-mobile col-span-1 pl-4 pt-3 h-[109px]"></textarea>
-          <span v-if="$device.isMobile" class="w-[100%] text-[red]">{{wrongEmailInfo}}</span>
+          <input type="text" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-if="!$device.isMobile" v-model="emailInfo" placeholder="Enter your email to get the latest Hamster News！" class="subscription col-span-1 pl-4 md:pl-6 md:col-span-10 md:h-[64px]"/>
+          <textarea v-if="$device.isMobile" @keyup="emailInfo = emailInfo.replace(/\s/g, '')" v-model="emailInfo" placeholder="Enter your email to get the latest Hamster News！" class="subscription-mobile col-span-1 pl-4 pt-3 h-[109px]"></textarea>
+          <span v-if="$device.isMobile" class="w-[100%] text-[red]">{{alertEmailInfo}}</span>
           <button @click="hamsterSendEmail" class="block border border-[#27FFB8] bg-[#27FFB8] md:h-[64px] col-span-1 h-[43px] md:col-span-2 text-[#131313]">Subscribe</button>
-          <span v-if="!$device.isMobile" class="w-[500px] text-[red]">{{wrongEmailInfo}}</span>
+          <span v-if="!$device.isMobile" class="w-[500px] text-[red]">{{alertEmailInfo}}</span>
         </div>
       </div>
       
@@ -319,6 +319,7 @@
   const numberRollerNumber6 = ref(162)
 
   const device = useDevice()
+  const fullpageRef = ref()
   const fullpageMobileOptions = {
     autoScrolling: false,
     fitToSection: false,
@@ -503,17 +504,17 @@
     })
   }
 
-  const wrongEmailInfo = ref('')
+  const alertEmailInfo = ref('')
   const hamsterSendEmail = ()=>{
     let myreg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
     if (myreg.test(emailInfo.value)){
       sendEmail()
-      wrongEmailInfo.value = ''
+      alertEmailInfo.value = 'Thank you for your attention'
     } else if(emailInfo.value == ''){
-      wrongEmailInfo.value = 'This field cannot be empty'
+      alertEmailInfo.value = 'This field cannot be empty'
     } else{
-      wrongEmailInfo.value = 'Please enter the correct format of email'
+      alertEmailInfo.value = 'Please enter the correct format of email'
     }
   }
 
@@ -524,6 +525,14 @@
   }
 
   onMounted(()=>{
+    // Init fullpage
+    try {
+      fullpageRef.value.init()
+    } catch (error) {
+      console.log("Fullpage init error", error)
+    }
+    
+    // Run lottie animation
     lottie.loadAnimation({
         container: ufoRef.value,//选择渲染dom
         renderer: "svg",//渲染格式

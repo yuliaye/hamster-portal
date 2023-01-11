@@ -5,7 +5,7 @@
       <div class="container py-4 mx-6 md:mx-auto">
         <div class="relative flex flex-row items-center justify-between text-center text-white">
           <div class="absolute logo">
-            <nuxt-link to="/" target="_blank">
+            <nuxt-link to="/">
               <img class="h-4 md:h-[24px]" src="~/assets/images/header.png">
             </nuxt-link>
           </div>
@@ -56,7 +56,7 @@
               <div>
                 <nuxt-link v-for="link in navLinks" :key="link.path"
                   :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-4 hover:text-[#27FFB8]" :to="link.path"
-                  target="_blank">
+                 >
                   {{ link.title }}
                 </nuxt-link>
               </div>
@@ -175,8 +175,8 @@ const localeOptions = availableLocales.map((lang) => {
 const navLinks = computed(() => [
   // { title: 'Solutions', path: "/solutions", children: [] },
   { title: t('header.dashboard'), path: '/dashboard' },
-  { title: 'Grant', path: "/grant" }, //
-  { title: 'Pricing', path: "/pricing" }, //
+  { title: 'Grant', path: "" }, //
+  { title: 'Pricing', path: "" }, //
   { title: 'About', path: "" },
   { title: t('header.docs'), path: "https://hamsternet.io/docs/" },
   // { title: t('header.faucet'), path: "/faucet" },
