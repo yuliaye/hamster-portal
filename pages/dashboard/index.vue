@@ -8,37 +8,37 @@
     </div>
 
     <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-[64px] xl:gap-[24px] gap-[8px]">
-      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <BinChart />
       </div>
-      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <AreaChart />
       </div>
     </div>
 
     <div class="mt-[24px] grid sm:grid-cols-1 md:grid-cols-3 xl:gap-[24px] gap-[8px]">
-      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <BarChart />
       </div>
-      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <CPUHistoryChart />
       </div>
     </div>
 
     <div class=" mt-[24px] grid sm:grid-cols-1 md:grid-cols-3 xl:gap-[24px] gap-[8px]">
-      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <RAMBarChart />
       </div>
-      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <RAMHistoryChart />
       </div>
     </div>
 
     <div class="mt-[24px] grid sm:grid-cols-1 md:grid-cols-3 xl:gap-[24px] gap-[8px]">
-      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-1 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <StorageBarChart />
       </div>
-      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#2E2A28] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
+      <div class="flex flex-col sm:col-span-1 md:col-span-2 bg-[#191F1C] rounded-[16px] h-[418px] sm:h-auto p-[30px]">
         <StorageHistoryChart />
       </div>
     </div>
