@@ -9,7 +9,7 @@
           development, operation and maintenance service platform for projects in Web3.0
         </span>
         <div class="flex items-center">
-          <img :src="getImageURL('aptos-grant.png')" class="h-[64px] md:h-[67px] mr-12"/>
+          <img :src="getImageURL('aptos-grant.png')" class="h-[64px] md:h-[67px] mr-8 md:mr-12"/>
           <img class="h-[64px] md:h-[75px]" src="~/assets/images/web3_foundation.png" />
         </div>
       </div>
@@ -44,6 +44,11 @@
         </span>
         <span class="inline-block my-5 text-sm md:text-base">+49 17647 082974</span>
         <span class="text-sm md:text-base">Email: hamster@hamsternet.io</span>
+        <div class="flex mt-5">
+          <img src="~/assets/images/footer-twitter.png" @click="skipNewUrl('twitter')" class="h-6 cursor-pointer" />
+          <img src="~/assets/images/footer-discord.png" @click="skipNewUrl('discord')" class="h-6 mx-5 cursor-pointer" />
+          <img src="~/assets/images/footer-telegram.png" @click="skipNewUrl('telegram')" class="h-6 cursor-pointer" />
+        </div>
       </div>
     </div>
   </div>
@@ -59,6 +64,12 @@ const skipNewUrl = (val) => {
     // window.open('/company')
   } else if (val === 'news') {
     window.open('https://hamsternet.medium.com/')
+  }else if (val === 'twitter') {
+    window.open('http://twitter.com/Hamsternetio')
+  }else if (val === 'discord') {
+    window.open('https://discord.gg/qMWUvs7jkV')
+  }else if (val === 'telegram') {
+    window.open('https://t.me/hamsternetio')
   } else {
     window.open('https://hamsternet.io/docs/')
   }

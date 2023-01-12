@@ -123,7 +123,7 @@
             </div> -->
           </div>
         </div>
-        <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path" target="_blank">
+        <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path">
           <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
             <span>{{ link.title }}</span>
             <img src="~/assets/images/chervon-right.svg" />
