@@ -54,11 +54,14 @@
                 </template>
               </VDropdown>
               <div>
-                <nuxt-link v-for="link in navLinks" :key="link.path"
-                  :class="{'menu-active' : `/${curMenu}` === link.path}" class="mx-4 hover:text-[#27FFB8]" :to="link.path"
+                <a v-for="link in navLinks" 
+                  :key="link.path" 
+                  :class="{'menu-active' : `/${curMenu}` === link.path}" 
+                  class="mx-4 hover:text-[#27FFB8]" 
+                  :href="link.path"
                  >
                   {{ link.title }}
-                </nuxt-link>
+                </a>
               </div>
               <button class="mx-4 start-today hover:bg-[#27FFB8] hover:text-[#131313] hover:border-[#27FFB8]">{{ $t('header.menu1') }}</button>
             </div>
@@ -123,12 +126,12 @@
             </div> -->
           </div>
         </div>
-        <nuxt-link v-for="link in navLinks" :key="link.path" :to="link.path">
+        <a v-for="link in navLinks" :key="link.path" :href="link.path">
           <div :class="{'menu-active' : `/${curMenu}` === link.path}" class="phone-menu">
             <span>{{ link.title }}</span>
             <img src="~/assets/images/chervon-right.svg" />
           </div>
-        </nuxt-link>
+        </a>
       </div>
       <button class="start-today w-[100%] mt-6">{{ $t('header.menu1') }}</button>
     </div>
