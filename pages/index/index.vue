@@ -292,7 +292,7 @@
   import anime from 'animejs/lib/anime.es.js';
   import DefaultLayout from "~/layouts/default.vue"
   import Footer from "~/layouts/-components/footer.vue"
-  import { handleUfoAnimate } from "~/utils/animateUtil/ufoAnimation"
+  import { UfoAnimation } from "~/utils/animateUtil/ufoAnimation"
   import ufojson from "../../assets/json/ufo.json"
   import 'vue3-carousel/dist/carousel.css'
 
@@ -337,13 +337,8 @@
       showHeader.value = direction === 'up'
       showHeaderBg.value = !destination.isFirst
 
-      handleUfoAnimate(
-        animateUfoRef.value,
-        ufoRef.value,
-        origin,
-        destination,
-        direction
-      )
+      // Run UFO animation by fullpage
+      ufoAnimation.animate(origin, destination, direction)
     },
     afterLoad(origin, destination, direction, trigger) {
       // handle fullpage scroll
@@ -384,6 +379,7 @@
 
   const ufoRef = ref(null)
   const animateUfoRef = ref(null)
+  const ufoAnimation = new UfoAnimation(animateUfoRef, ufoRef)
 
   // carousels
   // autoplay interval

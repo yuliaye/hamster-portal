@@ -1,13 +1,23 @@
-# hamster-portal
+<!-- vscode-markdown-toc -->
+* 1. [Required](#Required)
+* 2. [Setup](#Setup)
+* 3. [Development Server](#DevelopmentServer)
+* 4. [Production](#Production)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc --># hamster-portal
 
 hamster 官网
 
-## Required
+##  1. <a name='Required'></a>Required
 
 - Node.js >= v16
 - Nuxt >= 3
 
-## Setup
+##  2. <a name='Setup'></a>Setup
 
 Make sure to install the dependencies:
 
@@ -17,7 +27,7 @@ Make sure to install the dependencies:
 yarn install
 ```
 
-## Development Server
+##  3. <a name='DevelopmentServer'></a>Development Server
 
 Start the development server on http://localhost:3000
 
@@ -25,7 +35,7 @@ Start the development server on http://localhost:3000
 yarn dev
 ```
 
-## Production
+##  4. <a name='Production'></a>Production
 
 Set Env variables:
 
