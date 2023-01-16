@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-x-0 top-0 z-10 bg-opacity-50"
+  <div class="fixed inset-x-0 top-0 z-[100] md:z-[1000] bg-opacity-50"
     :class="{ 'hidden': !isMobile && scrollDown, 'bg-black': topBgShow}">
     <div class="m-auto">
       <div class="container py-4 mx-6 md:mx-auto">
@@ -262,7 +262,7 @@ onUnmounted(() => {
 
   .v-popper__arrow-container {
     @apply hidden;
-  }
+  } 
 
   .v-popper__inner {
     background: unset;

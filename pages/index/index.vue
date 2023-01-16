@@ -244,7 +244,7 @@
         </div>
       </div> -->
 
-      <div :class="fullPageSectionClass" class="z-20 -mx-6 md:mx-0">
+      <div :class="fullPageSectionClass" class="z-[100] -mx-6 md:mx-0">
         <span class="mx-6 md:mx-0 text-[32px] leading-[44px] font-bold md:text-[54px] md:leading-[74px]" id="ufo-point--news-title">
           Trending News
         </span>
