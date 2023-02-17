@@ -744,7 +744,7 @@
   // }
   html.fp-enabled:not(.is-mobile) {
     body {
-      background: url(~/assets/images/home-background.jpg) no-repeat #141212;
+      background: url(~/assets/images/home-background.jpg) no-repeat #131313;
     }
   }
 </style>
